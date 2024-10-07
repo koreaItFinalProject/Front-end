@@ -6,6 +6,7 @@ import UserSignuppage from './page/UserSignuppage/UserSignuppage';
 import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
+import MapPage from './page/MapPage/MapPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path='/signup' element={<UserSignuppage/>}/>
         <Route path='/signin' element={<UserSigninpage/>}/>
         <Route path='/list' element={<ListPage/>}/>
+        <Route path='/map' element={<MapPage/>}/>
       </Routes>
     </div>
   );
