@@ -5,8 +5,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css'
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
 
-function CafeBoardPage(props) {
+function BoardPage(props) {
+
+    const navigate = useNavigate();
+
+
     return (
         <div css={s.layout}>
             <div css={s.boardHeader}>
@@ -18,7 +23,6 @@ function CafeBoardPage(props) {
                 <div css={s.swiperContainer}>
                     <Swiper
                         modules={[Pagination]}
-                        spaceBetween={50}
                         slidesPerView={4}
                         pagination={{ clickable: true }}
                         onSwiper={(swiper) => console.log(swiper)}
@@ -32,34 +36,40 @@ function CafeBoardPage(props) {
                         <SwiperSlide>Slide 6</SwiperSlide>
                         <SwiperSlide>Slide 7</SwiperSlide>
                         <SwiperSlide>Slide 8</SwiperSlide>
-                        <SwiperSlide>Slide 9</SwiperSlide>
-                        <SwiperSlide>Slide 10</SwiperSlide>
                     </Swiper>
                 </div>
             </div>
             <div css={s.boardListLayout}>
                 <div css={s.boardListHeader}>
-                    <h1>자유게시판</h1>
+                    <h2>자유게시판</h2>
                     <div css={s.headerInputs}>
+                        <h3>총 100,000,000개</h3>
                         <select name="filter" id="">
-                            <option value="제목"></option>
-                            <option value="작성자"></option>
+                            <option value="제목">제목</option>
+                            <option value="작성자">작성자</option>
                         </select>
                         <div>
                             <input type="text" placeholder='검색' />
                             <button>검색</button>
                         </div>
-                        <button>게시물 작성하기</button>
+                        <button onClick={() => navigate("/board/write")}>게시물 작성하기</button>
                     </div>
                 </div>
                 <div css={s.boardList}>
                     <thead>
-                        <li>
-
-                        </li>
+                        <tr>
+                            <th>번호</th>
+                            <th>제목</th>
+                            <th>작성자</th>
+                            <th>추천수</th>
+                            <th>조회수</th>
+                            <th>작성일</th>
+                        </tr>
                     </thead>
                     <tbody>
-
+                        <tr>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </div>
             </div>
@@ -67,4 +77,4 @@ function CafeBoardPage(props) {
     );
 }
 
-export default CafeBoardPage;
+export default BoardPage;
