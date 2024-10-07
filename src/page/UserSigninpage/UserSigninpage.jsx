@@ -1,22 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../../components/Header/Header';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import UserSignin from '../../components/UserSignin/UserSignin';
+import OwnerSignin from '../../components/OwnerSignin/OwnerSignin';
 
 
 function UserSigninpage(props) {
+
+    const [loginState , setLoginState] = useState(false);
+
+    const handleLoginStateOnClick = () => {
+        setLoginState(false);
+        console.log(loginState);
+    }
+
+    const handleOwnerStateOnClick = () => {
+        setLoginState(true);
+        console.log(loginState);
+    }
+
     return (
         <div>
             <Header/>
             <div css={s.layout}>
-                로그인
-                <div css={s.selectMember}>
-                    <div>개인 회원</div>
-                    <div>기업 회원</div>
+                <div css={s.loginMain}>
+                        <div css={s.selectMember}>
+                            <button onClick={()=> handleLoginStateOnClick()}>개인 회원</button>
+                            <button onClick={()=> handleOwnerStateOnClick()}>기업 회원</button>
+                        </div>
+                    <div css={s.togleLogin}>
+                    {
+                        !loginState 
+                        ? <UserSignin/> 
+                        : <OwnerSignin/>
+                    }
+                    </div>
                 </div>
-                {
-                    
-                }
             </div>
         </div>
     );

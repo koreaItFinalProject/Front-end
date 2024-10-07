@@ -25,4 +25,8 @@ export const reset = css`
         border: none;
         background: transparent; 
     }
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
 `;
