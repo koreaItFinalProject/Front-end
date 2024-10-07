@@ -1,13 +1,16 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './page/HomePage';
-import UserSigninpage from './page/UserSigninpage';
-import UserSignuppage from './page/UserSignuppage';
+import HomePage from './page/HomePage/HomePage';
+import UserSigninpage from './page/UserSigninpage/UserSigninpage';
+import UserSignuppage from './page/UserSignuppage/UserSignuppage';
 import ListPage from './page/ListPage';
+import { Global } from '@emotion/react';
+import { reset } from './Global/global';
 
 function App() {
   return (
     <div className="App">
+      <Global styles={reset}/>
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signup' element={<UserSignuppage/>}/>
