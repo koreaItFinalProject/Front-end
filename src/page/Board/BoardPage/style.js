@@ -14,7 +14,6 @@ export const boardHeader = css`
 export const noticeLayout = css`
     display: flex;
     flex-direction: column;
-    margin-bottom: ;
 `;
 
 export const swiperContainer = css`
@@ -51,6 +50,7 @@ export const boardListLayout = css`
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: 50px;
 `;
 
 export const boardListHeader = css`
@@ -69,7 +69,7 @@ export const headerInputs = css`
     align-items: center;
     padding: 5px 10px;
     width: 60%;
-    height: ;
+    height: 50px;
 
     & select {
         width: 150px;

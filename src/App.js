@@ -7,6 +7,7 @@ import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import BoardPage from './page/Board/BoardPage/BoardPage';
+import WritePage from './page/Board/WritePage/WritePage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/signin' element={<UserSigninpage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/board' element={<BoardPage/>}/>
+        <Route path='/board/write' element={<WritePage/>}/>
       </Routes>
     </div>
   );
