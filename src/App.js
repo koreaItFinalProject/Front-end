@@ -7,6 +7,7 @@ import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import CafeBoardPage from './page/CafeBoardPage/CafeBoardPage';
+import EventPage from './page/EventPage/EventPage';
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         <Route path='/signup' element={<UserSignuppage/>}/>
         <Route path='/signin' element={<UserSigninpage/>}/>
         <Route path='/list' element={<ListPage/>}/>
-        <Route path='/board' element={<CafeBoardPage/>}
+        <Route path='/board' element={<CafeBoardPage/>}/>
+        <Route path='/event' element={<EventPage />}/>
       </Routes>
     </div>
   );
