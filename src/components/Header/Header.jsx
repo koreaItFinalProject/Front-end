@@ -24,7 +24,7 @@ function Header() {
                 <button onClick={signup}>회원가입</button>
             </div>
             <div css={s.logo}>
-                <button onClick={navigate("/")}>로고</button>
+                {/* <button onClick={navigate("/")}>로고</button> */}
             </div>
         </div>
     );
