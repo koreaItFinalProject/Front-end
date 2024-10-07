@@ -6,7 +6,7 @@ import UserSignuppage from './page/UserSignuppage/UserSignuppage';
 import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
-import CafeBoardPage from './page/CafeBoardPage/CafeBoardPage';
+import BoardPage from './page/Board/BoardPage/BoardPage';
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route path='/signup' element={<UserSignuppage/>}/>
         <Route path='/signin' element={<UserSigninpage/>}/>
         <Route path='/list' element={<ListPage/>}/>
-        <Route path='/board' element={<CafeBoardPage/>}
+        <Route path='/board' element={<BoardPage/>}/>
       </Routes>
     </div>
   );
