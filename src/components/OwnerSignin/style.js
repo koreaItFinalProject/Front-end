@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 100%;
+    height: 240px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -16,7 +16,8 @@ export const login = css`
     height: 144px;
     width: 480px;
     border: 1px solid black;
-    border-radius: 10px;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
     margin-bottom: 10px;
     & input{
         width: 300px;

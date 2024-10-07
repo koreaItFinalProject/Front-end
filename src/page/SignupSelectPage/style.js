@@ -17,9 +17,21 @@ export const layoutMain = css`
 `;
 
 export const userlogin = css`
-    height: 100%;
-    & button {
-        padding: 0;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+    width: 500px;
+    border: 1px solid black;
+    margin-right: 20px;
+    & > button {
+        padding: 10px 50px;
+        font-size: 30px;
+        font-weight: 600; 
+        border:1px solid black;
+        margin-bottom: 15px;
     }
     & > div{
         
@@ -27,11 +39,27 @@ export const userlogin = css`
 `;
 
 export const ownerlogin = css`
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 60%;
+    width: 500px;
+    border: 1px solid black;
+    margin-left: 20px;
     & button {
-        padding: 0;
+        padding: 20px 50px;
+        font-size: 30px;
+        font-weight: 600; 
+        border:1px solid black;
+
     }
     & > div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
         
     }
 `;

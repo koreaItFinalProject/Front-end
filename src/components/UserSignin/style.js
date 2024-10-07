@@ -16,7 +16,8 @@ export const login = css`
     height: 100%;
     width: 480px;
     border: 1px solid black;
-    border-radius: 10px;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
     margin-bottom: 10px;
     & input{
         width: 300px;
