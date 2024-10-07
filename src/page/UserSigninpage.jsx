@@ -1,6 +1,6 @@
 import React from 'react';
 
-function header() {
+function UserSigninpage(props) {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function header() {
     );
 }
 
-export default header;
+export default UserSigninpage;
