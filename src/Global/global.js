@@ -25,4 +25,9 @@ export const reset = css`
         border: none;
         background: transparent; 
     }
+
+    .App {
+        width: 100%;
+        height: 100%;
+    }
 `;
