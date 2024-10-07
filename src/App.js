@@ -6,6 +6,7 @@ import UserSignuppage from './page/UserSignuppage/UserSignuppage';
 import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
+import CafeBoardPage from './page/CafeBoardPage/CafeBoardPage';
 
 function App() {
   return (
