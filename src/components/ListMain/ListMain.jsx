@@ -4,8 +4,10 @@ import * as s from './style';
 
 function ListMain(props) {
     return (
-        <div>
-            
+        <div css={mainBox}>
+            <div css={adornmentBox}></div>
+            <div css={searchBox}>검색</div>
+            <div></div>
         </div>
     );
 }
