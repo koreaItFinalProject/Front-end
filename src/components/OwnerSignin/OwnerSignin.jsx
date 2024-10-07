@@ -27,7 +27,7 @@ function OwnerSignin(props) {
                                 :
                                 <RiCheckboxCircleLine/> 
                             }
-                            아이디 저장 사장님
+                            아이디 저장
                         </span>
                     </div>
                 </div>

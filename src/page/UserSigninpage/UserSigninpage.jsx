@@ -9,6 +9,7 @@ import OwnerSignin from '../../components/OwnerSignin/OwnerSignin';
 function UserSigninPage(props) {
 
     const [loginState , setLoginState] = useState(false);
+    
 
     const handleLoginStateOnClick = () => {
         setLoginState(false);
@@ -26,8 +27,17 @@ function UserSigninPage(props) {
             <div css={s.layout}>
                 <div css={s.loginMain}>
                         <div css={s.selectMember}>
-                            <button onClick={()=> handleLoginStateOnClick()}>개인 회원</button>
-                            <button onClick={()=> handleOwnerStateOnClick()}>기업 회원</button>
+                            <button onClick={()=> handleLoginStateOnClick()}
+                                css={
+                                    !loginState ? s.userButton: ''
+                                }
+                            >개인 회원</button>
+                            <button 
+                                onClick={()=> handleOwnerStateOnClick()}
+                                css={
+                                    loginState ? s.ownerButton: ''
+                                }
+                            >기업 회원</button>
                         </div>
                     <div css={s.togleLogin}>
                     {
