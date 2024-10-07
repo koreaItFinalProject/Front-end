@@ -2,11 +2,9 @@ import React from 'react';
 import Header from '../../components/Header/Header';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import naver from '../../asset/btnG_아이콘원형.png'
-import kakao from '../../asset/Kakao.png'
-import google from '../../asset/Google.png'
+import { naver, kakao, google } from '../../assets/image';
 
-function UserSignuppage(props) {
+function SignupSelectPage(props) {
     return (
         <div>
             <Header/>
@@ -39,4 +37,4 @@ function UserSignuppage(props) {
     );
 }
 
-export default UserSignuppage;
+export default SignupSelectPage;
