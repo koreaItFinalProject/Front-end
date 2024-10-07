@@ -50,6 +50,7 @@ export const boardListLayout = css`
     display: flex;
     flex-direction: column;
     width: 100%;
+    margin-top: 50px;
 `;
 
 export const boardListHeader = css`
@@ -58,21 +59,25 @@ export const boardListHeader = css`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-
-    & > option {
-        width: 20px;
-        height: 100%;
-    }
+    height: 50px;
 `;
 
 export const headerInputs = css`
     display: flex;
     flex-direction: row;
-    width: 50%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    width: 60%;
+    height: 50px;
+
+    & select {
+        width: 150px;
+    }
 `;
 
 export const boardList = css`
-    
+    width: 100%;
 `;
 
 
