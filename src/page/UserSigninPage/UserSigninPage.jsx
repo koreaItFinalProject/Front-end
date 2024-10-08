@@ -6,7 +6,7 @@ import UserSignin from '../../components/UserSignin/UserSignin';
 import OwnerSignin from '../../components/OwnerSignin/OwnerSignin';
 
 
-function UserSigninPage(props) {
+function UserSignInPage(props) {
 
     const [loginState , setLoginState] = useState(false);
     
@@ -20,7 +20,6 @@ function UserSigninPage(props) {
         setLoginState(true);
         console.log(loginState);
     }
-    //sadfasdfasdf
     return (
         <div>
             <Header/>
@@ -52,4 +51,4 @@ function UserSigninPage(props) {
     );
 }
 
-export default UserSigninPage;
+export default UserSignInPage;
