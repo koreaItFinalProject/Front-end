@@ -13,7 +13,8 @@ import WritePage from './page/Board/WritePage/WritePage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
-import ManagerPage from './page/ManagerPage/ManagerPage';
+import ManagerPage from './page/Manager/ManagerPage/ManagerPage';
+import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfilePage';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path='/user/signup' element={<UserSignupPage/>}/>
         <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
         <Route path='/manager' element={<ManagerPage/>}/>
+        <Route path='/manager/profile' element={<ManagerProfilePage/>}/>
         <Route path='/signin' element={<UserSigninPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
