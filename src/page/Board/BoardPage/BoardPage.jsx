@@ -6,6 +6,7 @@ import 'swiper/css'
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../../components/Header/Header';
 
 function BoardPage(props) {
 
@@ -14,6 +15,7 @@ function BoardPage(props) {
 
     return (
         <div css={s.layout}>
+            <Header/>
             <div css={s.boardHeader}>
                 <h1>커뮤니티</h1>
                 <div>카페에 대한 이야기를 나누세요.</div>
