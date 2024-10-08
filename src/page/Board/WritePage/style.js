@@ -10,7 +10,7 @@ export const editorLayout = css`
     box-sizing: border-box;
     margin-bottom: 42px;
     width: 100%;
-    height: 700px;
+    height: 600px;
 `;
 
 export const buttonLayout = css`
