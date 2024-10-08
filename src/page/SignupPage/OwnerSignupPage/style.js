@@ -8,6 +8,16 @@ export const layout = css`
     justify-content: center;
     align-items: center;
     
+    & > div {
+        width: 600px;
+        height: 640px;
+        border: 1px solid black;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
     
 `;
@@ -19,18 +29,61 @@ export const Info = css`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 10px 0px;
+        margin: 5px 0px;
         & input {
             height: 35px;
             width: 320px;
             border-radius: 10px;
             padding-left: 20px;
+            font-size: 18px;
         }
     }
+
+    & div:nth-last-child(1){
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        
+        & input {
+            height: 30px;
+            width: 220px;
+            font-size: 15px;
+            padding-left: 5px;
+        }
+    }
+    & div:nth-last-child(2){
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        box-sizing: border-box;
+        & input {
+            height: 30px;
+            width: 220px;
+            font-size: 15px;
+            padding-left: 15px;
+        }
+
+        & button {
+            border: 1px solid black;
+            width: 50px;
+            height: 36px;
+            border-radius: 10px;
+            margin-left: 20px;
+            &:hover{
+                background-color: #dbdbdb;
+                box-shadow: 2px 2px 1px inset;
+            }
+
+            &:active{
+                background-color: #dbdbdb;
+                box-sizing: 3px 3px 2px inset;
+            }
+        }
+    }
+
     & p {
-        width: 100px;
-        margin-right: 10px;
-        padding: 10px;
+        width: 120px;
+        padding-right: 15px;
     }
 `;
 

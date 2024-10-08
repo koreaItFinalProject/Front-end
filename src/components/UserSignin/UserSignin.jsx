@@ -17,7 +17,7 @@ function UserSignin(props) { // 로그인
             <div css={s.login}>
                 <div css={s.loginInput}>
                     <input type="text" placeholder='아이디'/>
-                    <input type="text" placeholder='비밀번호'/>
+                    <input type="password" placeholder='비밀번호'/>
                     <div css={s.checkbox}>
                         <span id='checkbox' onClick={handleSaveOnChange}>
                             <input type="checkbox" id='checkboxt' />

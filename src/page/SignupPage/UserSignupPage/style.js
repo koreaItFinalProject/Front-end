@@ -8,7 +8,16 @@ export const layout = css`
     justify-content: center;
     align-items: center;
     
-
+    & > div {
+        width: 600px;
+        height: 500px;
+        border: 1px solid black;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     
 `;
 
@@ -25,6 +34,7 @@ export const Info = css`
             width: 320px;
             border-radius: 10px;
             padding-left: 20px;
+            font-size: 18px;
         }
     }
     & p {
@@ -32,6 +42,8 @@ export const Info = css`
         margin-right: 10px;
         padding: 10px;
     }
+
+    
 `;
 
 export const addressInfo = css`
