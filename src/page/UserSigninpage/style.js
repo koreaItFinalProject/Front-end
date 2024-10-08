@@ -31,7 +31,7 @@ export const selectMember = css`
         border: 1px solid black;
         border-bottom: none;
         box-sizing: border-box;
-        padding: 18px 80.5px;
+        padding: 18px 80px;
         font-size: 20px;
         font-weight: 600;
     }
@@ -57,9 +57,6 @@ export const ownerButton = css`
     background-color: #dbdbdb ;
     box-shadow: 2px 2px 3px #757575 inset;
 `;
-
-
-
 
 export const togleLogin = css`
     display: flex;

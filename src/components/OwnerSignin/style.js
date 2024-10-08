@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 240px;
+    height: 241px;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -13,8 +13,8 @@ export const login = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 144px;
-    width: 480px;
+    height: 100%;
+    width: 491px;
     border: 1px solid black;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
