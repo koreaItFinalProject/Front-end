@@ -4,30 +4,23 @@ export const layout = css`
     display: flex;
     margin: 0px;
     width: 100%;
-    height: 100vh;
+    height: 100%;
 `
 
 export const box = css`
     display: flex;
     box-sizing: border-box;
-    border: 1px blue;
-    height: 100%;
-    width: 25%;
-`
-
-export const searchbox = css`
-    display: flex;
     flex-direction: column; /* 세로 방향으로 정렬 */
-    justify-content: flex-start; /* 세로 중앙 정렬 */
-    width: 100%;
-    height: 100%;
-    background-color: blue;
+    border: 1px blue;
+    height: 953px;
+    width: 25%;
 `
 
 export const header = css`
     box-sizing: border-box;
     padding: 10px;
     background-color: lightblue; /* 배경 색상 */
+    height: 100px;
 `
 
 export const logobox = css`
@@ -52,13 +45,33 @@ export const radiobutton = css`
 `
 
 export const content = css`
-    flex: 1; /* 남은 공간을 차지 */
+    flex-grow: 1;
     background: lightgreen; /* 배경 색상 */
     padding: 10px;
+    border: 1px solid #dbdbdb;
+    overflow-y: scroll;
+    height: 100%;
+`
+
+export const contentlist = css`
+    box-sizing: border-box;
+    ul{
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li{
+        box-sizing: border-box;
+        background: #f9f9f9;
+        margin: 5px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+    }
 `
 
 export const map = css`
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 953px;
 `
