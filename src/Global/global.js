@@ -26,6 +26,8 @@ export const reset = css`
         background: transparent; 
     }
 
+    ::-webkit-scrollbar{
+        display: none;
     .App {
         width: 100%;
         height: 100%;
