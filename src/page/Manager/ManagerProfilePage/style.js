@@ -61,3 +61,16 @@ export const list = css`
         }
     }
 `;
+
+export const buttonBox = css`
+    display: flex;
+    justify-content: center;
+
+    & > button:nth-of-type(1) {
+        margin-right: 40px;
+    }
+
+    & > button {
+        font-size: 16px;
+    }
+`;
