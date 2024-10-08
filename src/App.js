@@ -11,6 +11,8 @@ import EventPage from './page/EventPage/EventPage';
 import BoardPage from './page/Board/BoardPage/BoardPage';
 import WritePage from './page/Board/WritePage/WritePage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
+import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
+import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signup' element={<SignupSelectPage/>}/>
+        <Route path='/user/signup' element={<UserSignupPage/>}/>
+        <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
         <Route path='/signin' element={<UserSigninPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
