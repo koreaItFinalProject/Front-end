@@ -19,7 +19,7 @@ export const progressEvent = css`
 `;
 
 export const searchBox = css`
-    margin-left: 1200px;
+
    
     & > input {
         box-sizing: border-box;
