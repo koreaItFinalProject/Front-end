@@ -26,24 +26,24 @@ function MapPage(props) {
                             <input type="text" />
                             <button>확인</button>
                             <fieldset css={s.radiobutton}>
-                            <label>
-                                    <input type="radio" name="select"/>
+                                <label>
+                                    <input type="radio" name="select" />
                                     전체
                                 </label>
                                 <label>
-                                    <input type="radio" name="select"/>
+                                    <input type="radio" name="select" />
                                     선택1
                                 </label>
                                 <label>
-                                    <input type="radio" name="select"/>
+                                    <input type="radio" name="select" />
                                     선택2
                                 </label>
                                 <label>
-                                    <input type="radio" name="select"/>
+                                    <input type="radio" name="select" />
                                     선택3
                                 </label>
                                 <label>
-                                    <input type="radio" name="select"/>
+                                    <input type="radio" name="select" />
                                     선택4
                                 </label>
                             </fieldset>
@@ -55,15 +55,6 @@ function MapPage(props) {
             <Map css={s.map} center={center}></Map>
         </div>
     )
-import React from 'react';
-import { Map } from 'react-kakao-maps-sdk';
-
-function MapPage(props) {
-    return (
-        <div>
-            
-        </div>
-    );
 }
 
 export default MapPage;

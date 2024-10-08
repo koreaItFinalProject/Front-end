@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { RiCheckboxCircleFill , RiCheckboxCircleLine } from "react-icons/ri";
-import naver from '../../asset/btnG_아이콘원형.png'
-import kakao from '../../asset/Kakao.png'
-import google from '../../asset/Google.png'
+import { naver, kakao, google } from '../../assets/image';
 
 function UserSignin(props) { // 로그인
     const [save , isSave] = useState(false);
