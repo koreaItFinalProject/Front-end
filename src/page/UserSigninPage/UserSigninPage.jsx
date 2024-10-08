@@ -6,7 +6,7 @@ import UserSignin from '../../components/UserSignin/UserSignin';
 import OwnerSignin from '../../components/OwnerSignin/OwnerSignin';
 
 
-function UserSignInPage(props) {
+function UserSigninPage(props) {
 
     const [loginState , setLoginState] = useState(false);
     
@@ -51,4 +51,4 @@ function UserSignInPage(props) {
     );
 }
 
-export default UserSignInPage;
+export default UserSigninPage;
