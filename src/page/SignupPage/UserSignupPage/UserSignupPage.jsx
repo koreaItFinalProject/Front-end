@@ -39,45 +39,47 @@ function UserSignupPage(props) {
         <div>
             <Header/>
             <div css={s.layout}>
-                <div css={s.Info}>
-                    <div>
-                        <p>아이디</p>
-                        <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                <div>
+                    <div css={s.Info}>
+                        <div>
+                            <p>아이디</p>
+                            <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                        </div>
+                        <div>
+                            <p>비밀번호</p>
+                            <input type="password" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                        </div>
+                        <div>
+                            <p>비밀번호 확인</p>
+                            <input type="password" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                        </div>
+                        <div>
+                            <p>이메일</p>
+                            <input type="email" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                        </div>
+                        <div>
+                            <p>닉네임</p>
+                            <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
+                        </div>
                     </div>
-                    <div>
-                        <p>비밀번호</p>
-                        <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
-                    </div>
-                    <div>
-                        <p>비밀번호 확인</p>
-                        <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
-                    </div>
-                    <div>
-                        <p>이메일</p>
-                        <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
-                    </div>
-                    <div>
-                        <p>닉네임</p>
-                        <input type="text" name='userId' value={loginState.userId} onChange={handleInputOnChange} placeholder='' />
-                    </div>
-                </div>
-                <div css={s.addressInfo}>
-                    <p>주소</p>
-                    <div css={s.addressStyle}>
-                        <input 
-                            value={isAddress.zonecode} 
-                            disabled 
-                            placeholder='우편번호'/>
-                        <input 
-                            value={isAddress.address} 
-                            disabled placeholder='주소'/>
-                        <input 
-                            value={isAddress.buildingName} 
-                            disabled placeholder='참고항목'/>
-                        <input 
-                            value={isText.textAddress} 
-                            onChange={handleAddressInputOnChange} placeholder='상세주소'/>
-                        <SearchAdress setAddress={setAddress}/>
+                    <div css={s.addressInfo}>
+                        <p>주소</p>
+                        <div css={s.addressStyle}>
+                            <input 
+                                value={isAddress.zonecode} 
+                                disabled 
+                                placeholder='우편번호'/>
+                            <input 
+                                value={isAddress.address} 
+                                disabled placeholder='주소'/>
+                            <input 
+                                value={isAddress.buildingName} 
+                                disabled placeholder='참고항목'/>
+                            <input 
+                                value={isText.textAddress} 
+                                onChange={handleAddressInputOnChange} placeholder='상세주소'/>
+                            <SearchAdress setAddress={setAddress}/>
+                        </div>
                     </div>
                 </div>
             </div>
