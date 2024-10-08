@@ -45,7 +45,11 @@ function ManagerProfilePage(props) {
                             <p>카페 주소:</p>
                             <input type="text" />
                         </div>
-                        
+
+                        <div css={s.buttonBox}>
+                            <button>수정</button>
+                            <button>취소</button>
+                        </div>
                     </div>
                 </div>
             </div>
