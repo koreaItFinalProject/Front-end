@@ -25,15 +25,17 @@ export const selectMember = css`
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 65px;
+    height: 64px;
 
     & button {
         border: 1px solid black;
         border-bottom: none;
         box-sizing: border-box;
-        padding: 18px 80px;
+        width: 246.5px;
+        padding: 18px;
         font-size: 20px;
         font-weight: 600;
+
     }
     
     & button:nth-last-of-type(2){
