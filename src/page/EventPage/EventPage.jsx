@@ -13,13 +13,18 @@ function EventPage(props) {
                 <div css={s.progressEvent}></div>
 
                 <div css={s.eventPost}>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-            </div>
+                    <div css={s.searchBox}>
+                        검색:
+                        <input type="text" />
+                    </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+             </div>
+
         </div>
 
 

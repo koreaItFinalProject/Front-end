@@ -15,23 +15,40 @@ export const eventImageBox = css`
 export const progressEvent = css`
     box-sizing: border-box;
     width: 100%;
-    height: 15px;
+    height: 120px;
+`;
+
+export const searchBox = css`
+    margin-left: 1200px;
+   
+    & > input {
+        box-sizing: border-box;
+        margin-bottom: 30px;
+        height: 40px;
+        border: none;
+        outline: none;
+        color: black;
+        width: 65%;
+        font-size: 40px;    
+        background-color: white;
+        border-bottom: 1px solid #8f8282;
+    }
 `;
 
 export const eventPost = css`
-    /* display: flex;
+    display: flex;
     justify-content: center;
     flex-wrap: wrap;
     box-sizing: border-box;
     border-top: 1px solid black;
     width: 100%;
-    height: 40%; */
+    height: 450px;
 
     & > div {
-        /* box-sizing: border-box;
+        box-sizing: border-box;
         border: 1px solid black;
-        width: 50%;
-        height: 100px; */
+        width: 49%;
+        height: 100px;
 
     }
 `;
