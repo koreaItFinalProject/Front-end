@@ -14,7 +14,7 @@ export const login = css`
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: 480px;
+    width: 491px;
     border: 1px solid black;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
