@@ -4,10 +4,11 @@ import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAdress';
 import axios from 'axios';
+import { signupApi } from '../../../apis/loginApis/signupApi';
 
 
 function OwnerSignupPage(props) {
-
+    const num = 2;
     const [loginState , setLoginState] = useState({
         ownerId: '',
         password:'',
@@ -89,6 +90,11 @@ const handleInputChange = (e) => {
     }
     };
 
+    const handlesignuppageOnClick = () => {
+        signupApi(loginState, num);
+        console.log(loginState);
+    }
+
     return (
         <div>
             <Header/>
@@ -149,6 +155,9 @@ const handleInputChange = (e) => {
                                 onChange={handleAddressInputOnChange} placeholder='상세주소'/>
                             <SearchAdress setAddress={setAddress}/>
                         </div>
+                    </div>
+                    <div css={s.signupbutton}>
+                        <button onClick={() =>handlesignuppageOnClick(loginState, num)}>가입하기</button>
                     </div>
                 </div>
             </div>

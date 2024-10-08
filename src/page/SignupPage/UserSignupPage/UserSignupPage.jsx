@@ -3,10 +3,11 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAdress';
+import { signupApi } from '../../../apis/loginApis/signupApi';
 
 
 function UserSignupPage(props) {
-
+    const num = 1;
     const [loginState , setLoginState] = useState({
         userId: '',
         password:'',
@@ -33,6 +34,10 @@ function UserSignupPage(props) {
 
     const handleAddressInputOnChange = (e) => {
         setText(e.target.value);
+    }
+
+    const handlesignuppageOnClick = () => {
+        signupApi(loginState, num);
     }
 
     return (
@@ -80,6 +85,9 @@ function UserSignupPage(props) {
                                 onChange={handleAddressInputOnChange} placeholder='상세주소'/>
                             <SearchAdress setAddress={setAddress}/>
                         </div>
+                    </div>
+                    <div css={s.signupbutton}>
+                        <button onClick={() =>handlesignuppageOnClick()}>가입하기</button>
                     </div>
                 </div>
             </div>
