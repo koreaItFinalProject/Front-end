@@ -10,7 +10,7 @@ import MapPage from './page/MapPage/MapPage';
 import EventPage from './page/EventPage/EventPage';
 import BoardPage from './page/Board/BoardPage/BoardPage';
 import WritePage from './page/Board/WritePage/WritePage';
-import UserSigninPage from './page/UserSigninPage/UserSigninPage';
+import UserSignInPage from './page/UserSignInPage/UserSignInPage';
 
 function App() {
   return (
@@ -19,10 +19,9 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/signup' element={<SignupSelectPage/>}/>
-        <Route path='/signin' element={<UserSigninPage/>}/>
+        <Route path='/signin' element={<UserSignInPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
-        {/* <Route path='/board' element={<CafeBoardPage/>}/> */}
         <Route path='/event' element={<EventPage />}/>
         <Route path='/board' element={<BoardPage/>}/>
         <Route path='/board/write' element={<WritePage/>}/>
