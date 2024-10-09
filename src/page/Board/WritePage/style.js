@@ -19,3 +19,12 @@ export const buttonLayout = css`
     justify-content: center;
     align-items: center;
 `;
+
+export const boardHeader = css`
+    margin-bottom: 10px;
+
+    & input {
+        width: 1300px;
+        
+    }
+`;

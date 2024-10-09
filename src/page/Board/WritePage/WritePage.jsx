@@ -5,10 +5,10 @@ import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import ImageResize from 'quill-image-resize';
 import { Link, useNavigate } from 'react-router-dom';
-import { instance } from '../../../apis/util/instance';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from "uuid";
+import { writeBoardApi } from '../../../apis/writeBoardApi';
 Quill.register("modules/imageResize", ImageResize);
 
 function WritePage(props) {
@@ -24,13 +24,6 @@ function WritePage(props) {
 
     const [isUploading, setUploading] = useState(false);
 
-    const handleQuillValueOnChange = (value) => {
-        setBoard(board => ({
-            ...board,
-            content: quillRef.current.getEditor().getText().trim() === "" ? "" : value,
-        }));
-    }
-
     const handleTitleInputOnChange = (e) => {
         setBoard(board => ({
             ...board,
@@ -38,30 +31,15 @@ function WritePage(props) {
         }));
     }
 
-    const handleWriteSubmitOnClick = async () => {
-        try {
-            const response = await instance.post("/board", board); // await은 promise 앞에 그리고 async 함수에만 사용가능
-            console.log(response);
-            alert("작성이 완료되었습니다.");
-            navigate(`/board/detail/${response.data.boardId}`);
-        } catch (error) {
-            console.error(error);
-            console.log(error);
-            const fieldErrors = error.response.data;
+    const handleQuillValueOnChange = (value) => {
+        setBoard(board => ({
+            ...board,
+            content: quillRef.current.getEditor().getText().trim() === "" ? "" : value,
+        }));
+    }
 
-            for (let fieldError of fieldErrors) {
-                if (fieldError.field === "title") {
-                    alert(fieldError.defaultMessage);
-                    return;
-                }
-            }
-            for (let fieldError of fieldErrors) {
-                if (fieldError.field === "content") {
-                    alert(fieldError.defaultMessage);
-                    return;
-                }
-            }
-        }
+    const handleWriteSubmitOnClick = async () => {
+        await writeBoardApi(board, navigate);
     }
 
     const handleImageLoad = useCallback(() => {
@@ -96,7 +74,6 @@ function WritePage(props) {
                 }
             );
         }
-
     }, []);
 
     const toolbarOptions = useMemo(() => [
@@ -112,9 +89,11 @@ function WritePage(props) {
 
     return (
         <div css={s.layout}>
-            <Link to={"/board"}><h1>게시판</h1></Link>
-            <h2>글쓰기</h2>
-            <span>제목<input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' /></span>
+            <Link to={"/board"}><h3>게시판</h3></Link>
+            <div css={s.boardHeader}>
+                <h2>글쓰기</h2>
+                <span>제목<input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' /></span>
+            </div>
             <div css={s.editorLayout}>
                 <ReactQuill
                     ref={quillRef}
@@ -127,6 +106,9 @@ function WritePage(props) {
                     modules={{
                         toolbar: {
                             container: toolbarOptions,
+                            handlers: {
+                                image: handleImageLoad
+                            }
                         },
                         imageResize: {
                             parchment: Quill.import("parchment")
