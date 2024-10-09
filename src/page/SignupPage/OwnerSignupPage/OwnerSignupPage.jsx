@@ -4,7 +4,6 @@ import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAdress';
 import axios from 'axios';
-import { signupApi } from '../../../apis/loginApis/signupApi';
 
 
 function OwnerSignupPage(props) {
@@ -91,7 +90,7 @@ const handleInputChange = (e) => {
     };
 
     const handlesignuppageOnClick = () => {
-        signupApi(loginState, num);
+        // signupApi(loginState, num);
         console.log(loginState);
     }
 
