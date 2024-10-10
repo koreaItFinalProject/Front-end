@@ -18,7 +18,9 @@ import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfile
 import ManagerDashBoardPage from './page/Manager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerManagementPage';
 import DetailPage from './page/Board/DetailPage/DetailPage';
+import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
 import ModifyPage from './page/Board/ModifyPage/ModifyPage';
+
 
 
 function App() {
@@ -34,6 +36,7 @@ function App() {
         <Route path='/manager/profile' element={<ManagerProfilePage/>}/>
         <Route path='/manager/dashboard' element={<ManagerDashBoardPage/>}/>
         <Route path='/manager/management' element={<ManagerManagementPage/>}/>
+        <Route path='/manager/storemanagement' element={<ManagerStoreManagementPage/>}/>
         <Route path='/signin' element={<UserSigninPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
