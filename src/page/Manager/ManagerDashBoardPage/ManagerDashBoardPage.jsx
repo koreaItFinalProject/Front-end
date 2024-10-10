@@ -21,7 +21,7 @@ function ManagerDashBoardPage(props) {
 
                 <div css={s.mainBox}>
                     <div css={s.contentBox}></div>
-
+                    
                     <div css={s.box}>
                         <div></div>
                         <div></div>
