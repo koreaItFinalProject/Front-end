@@ -22,6 +22,6 @@ export const usersignupApi = async (loginState) => {
         console.error(error);
     }
 
-    return usersignupApi;
+    return signupData;
 }
 
