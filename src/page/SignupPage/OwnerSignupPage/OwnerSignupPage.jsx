@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
-import SearchAdress from '../../../apis/SearchAdress';
+import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
 import axios from 'axios';
-import { usersignupApi } from '../../../apis/signInApis/usersignupApi';
+import { ownersignupApi } from '../../../apis/ownersignupApi/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
     const [loginState , setLoginState] = useState({
-        ownerId: '',
+        username: '',
         password:'',
         checkPassword:'',
         email:'',
-        cafeName:'',
-        ownerName:'',
-        ownerImage:''
+        name:'', 
+        nickname:'',
     })
 
     const [isAddress , setAddress] = useState({
@@ -95,7 +94,7 @@ const handleInputChange = (e) => {
     };
 
     const handlesignuppageOnClick = async() => {
-        const signupData = await usersignupApi(loginState, isAddress);
+        const signupData = await ownersignupApi(loginState, isAddress);
         alert("가입 성공");
         navigate("/owner/signin");
     }

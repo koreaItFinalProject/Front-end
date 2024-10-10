@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
-import { usersignupApi } from '../../../apis/signInApis/usersignupApi';
+import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -13,8 +13,8 @@ function UserSignupPage(props) {
         password:'',
         checkPassword:'',
         email:'',
-        nickname:'',
         name:'',
+        nickname:'',
     })
 
     const handleInputOnChange =(e)=> {
@@ -29,9 +29,12 @@ function UserSignupPage(props) {
         console.log(loginState);
         const signupData = await usersignupApi(loginState);
         console.log(signupData);
-
-        // alert("가입 성공");
-        // navigate("/user/signin");
+        if(!signupData.isSuceess){
+            alert("회원가입 실패");       
+        }else{
+            alert("가입 성공");
+            navigate("/signin");
+        }
     }
 
     return (

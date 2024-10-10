@@ -1,6 +1,6 @@
 import { instance } from "../util/instance";
 
-export const ownersignInApi = async (loginState, isAddress, isText) => {
+export const ownersignupApi = async (loginState, isAddress, isText) => {
     let signupData = {
         isSuceess : false,
         ok: {
@@ -37,6 +37,6 @@ export const ownersignInApi = async (loginState, isAddress, isText) => {
                         defaultMessage: fieldError.defaultMessage
                     })),
                 }
-            return ownersignInApi;
+            return ownersignupApi;
         }
     }
