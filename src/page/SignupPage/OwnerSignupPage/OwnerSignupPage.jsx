@@ -4,10 +4,12 @@ import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAdress';
 import axios from 'axios';
+import { usersignupApi } from '../../../apis/signInApis/usersignupApi';
+import { useNavigate } from 'react-router-dom';
 
 
 function OwnerSignupPage(props) {
-    const num = 2;
+    const navigate = useNavigate();
     const [loginState , setLoginState] = useState({
         ownerId: '',
         password:'',
@@ -22,9 +24,8 @@ function OwnerSignupPage(props) {
         zonecode:'',
         address:'',
         buildingName:'',
-    })
-
-    const [isText, setText] = useState('');
+        isText:''
+    });
 
     const [businessNumber, setBusinessNumber] = useState('');
     const [businessInfo, setBusinessInfo] = useState("");
@@ -40,7 +41,11 @@ function OwnerSignupPage(props) {
     }
 
     const handleAddressInputOnChange = (e) => {
-        setText(e.target.value);
+        setAddress({
+            ...isAddress,
+            isText :e.target.value
+        });
+        console.log(isAddress.isText);
     }
 
 const handleInputChange = (e) => {
@@ -89,9 +94,10 @@ const handleInputChange = (e) => {
     }
     };
 
-    const handlesignuppageOnClick = () => {
-        // signupApi(loginState, num);
-        console.log(loginState);
+    const handlesignuppageOnClick = async() => {
+        const signupData = await usersignupApi(loginState, isAddress);
+        alert("가입 성공");
+        navigate("/owner/signin");
     }
 
     return (
@@ -136,7 +142,7 @@ const handleInputChange = (e) => {
                             <input type="file" name='ownerImage' value={loginState.ownerImage} onChange={handleInputOnChange} placeholder='' />
                         </div>
                     </div>
-                    <div css={s.addressInfo}>     
+                    <div css={s.addressInfo}>
                         <p>카페 주소</p>
                         <div css={s.addressStyle}>
                             <input 
@@ -150,13 +156,13 @@ const handleInputChange = (e) => {
                                 value={isAddress.buildingName} 
                                 disabled placeholder='참고항목'/>
                             <input 
-                                value={isText.textAddress} 
+                                value={isAddress.isText} 
                                 onChange={handleAddressInputOnChange} placeholder='상세주소'/>
                             <SearchAdress setAddress={setAddress}/>
                         </div>
                     </div>
                     <div css={s.signupbutton}>
-                        <button onClick={() =>handlesignuppageOnClick(loginState, num)}>가입하기</button>
+                        <button onClick={ handlesignuppageOnClick}>가입하기</button>
                     </div>
                 </div>
             </div>

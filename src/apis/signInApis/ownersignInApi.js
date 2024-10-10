@@ -16,6 +16,10 @@ export const ownersignInApi = async (loginState, isAddress, isText) => {
     }
     console.log(signupData);
         try {
+            const requestData = {
+                ...loginState,
+                address: isAddress.address + (isAddress.isText ? isAddress.isText : '')
+            };
             const response = await instance.post(`/user/signup`);
             console.log(response);
             signupData = {
