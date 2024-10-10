@@ -54,52 +54,170 @@ export const boardListLayout = css`
 `;
 
 export const boardListHeader = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
     width: 100%;
-    height: 50px;
+    height: 40px;
 `;
 
 export const headerInputs = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 10px;
-    width: 60%;
-    height: 50px;
-
+    width: 47%;
+    height: 100%;
+    
     & select {
-        width: 150px;
+        box-sizing: border-box;
+        width: 100px;
+        height: 100%;
+        padding: 5px 5px;
+        border-radius: 5px;
     }
+`;
+
+export const searchBox = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+
+    & input {
+        padding: 5px 5px;
+        border: 1px solid #333447;
+        border-right: none;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    & button {
+        width: 60px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-color: #333447;
+    }
+`;
+
+export const writeButton = css`
+    box-sizing: border-box;
+    width: 150px;
+    height: 100%;
+    padding: 3px 3px;
+    border-radius: 5px;
+    background-color: #333447;
+    color: white;
 `;
 
 export const boardList = css`
     display: flex;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
+    height: 1000px;
 `;
 
 export const thead = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border-top: 10px solid black;
+    
+    
+    & span {
+        font-size: 18px;
+        font-weight: 600;
+    }
 
+    & span:nth-child(1) {
+        width: 100px;
+        margin-right: 5px;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
+
+    & span:nth-child(2) {
+        width: 1000px;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
+
+    & span:nth-child(3) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
+
+    & span:nth-child(4) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
+
+    & span:nth-child(5) {
+        width: 20%;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
 `;
 
 
 export const tbody = css`
+    margin-bottom: 10px;
+    & span {
+        margin: 3px 0px;
+    }
 
+    & span:nth-child(1) {
+        width: 100px;
+        margin-right: 5px;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
+
+    & span:nth-child(2) {
+        width: 1000px;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
+
+    & span:nth-child(3) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
+
+    & span:nth-child(4) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
+
+    & span:nth-child(5) {
+        width: 20%;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
 `;
 
 export const tr = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-
-    & span {
-        margin: 0px 10px 0px 0px;
-    }
+    text-align: center;
 
     :hover {
         cursor: pointer;
@@ -107,6 +225,10 @@ export const tr = css`
 `;
 
 export const paginateContainer = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
     & > ul {
         list-style-type: none;
         display: flex;
