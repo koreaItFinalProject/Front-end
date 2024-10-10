@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    margin: 0px 200px;
+    margin: 0px 340px;
     display: flex;
     flex-direction: column;
 `;
@@ -77,7 +77,61 @@ export const headerInputs = css`
 `;
 
 export const boardList = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
+`;
+
+export const thead = css`
+
+`;
+
+
+export const tbody = css`
+
+`;
+
+export const tr = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & span {
+        margin: 0px 10px 0px 0px;
+    }
+`;
+
+export const paginateContainer = css`
+    & > ul {
+        list-style-type: none;
+        display: flex;
+
+        & > li {
+            margin: 0px 5px;
+        }
+
+        & a {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #dbdbdb;
+            border-radius: 32px;
+            padding: 0px 5px;
+            min-width: 32px;
+            height: 32px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        & .active {
+            border-radius: 32px;
+            background-color: #bbbbbb;
+            color: #ffffff;
+        }
+    }
 `;
 
 

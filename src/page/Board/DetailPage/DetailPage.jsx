@@ -1,6 +1,25 @@
 import React from 'react';
+function DetailPage(props) {
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { instance } from '../../../apis/util/instance';
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 function DetailPage(props) {
+    const params = useParams();
+    const boardId = params.boardId;
+
+    const board = useQuery(
+        ["boardQuery", boardId],
+        async () => {
+            return await instance.get(`/board/${boardId}`);
+        },
+        {
+            refetchOnWindowFocus: false,
+            retry: 0,
+        }
+    );
+
     return (
         <div css={layout}>
             <Link to={"/"}><h1>사이트 로고</h1></Link>
