@@ -1,4 +1,5 @@
 import React from 'react';
+function DetailPage(props) {
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
