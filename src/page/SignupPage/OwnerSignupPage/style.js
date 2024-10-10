@@ -114,3 +114,7 @@ export const addressStyle = css`
     }
     
 `;
+
+export const signupbutton = css`
+
+`;

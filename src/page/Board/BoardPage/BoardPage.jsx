@@ -12,7 +12,6 @@ function BoardPage(props) {
 
     const navigate = useNavigate();
 
-
     return (
         <div css={s.layout}>
             <Header/>
