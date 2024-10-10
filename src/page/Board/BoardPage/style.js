@@ -100,6 +100,10 @@ export const tr = css`
     & span {
         margin: 0px 10px 0px 0px;
     }
+
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const paginateContainer = css`

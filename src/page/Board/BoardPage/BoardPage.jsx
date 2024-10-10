@@ -31,11 +31,11 @@ function BoardPage(props) {
         }
     );
 
-    console.log(boardList);
-
     const handlePageOnChange = (event) => {
         navigate(`/board?page=${event.selected + 1}`); // 페이지를 넘길때 마다 useNavigate로 페이지 이동, index가 0부터 시작하기 떄문에 + 1, 렌더링 되는 컴포넌트는 그대로이지만 page 번호만 바뀐다.
     }
+
+    console.log(boardList);
 
     return (
         <div css={s.layout}>

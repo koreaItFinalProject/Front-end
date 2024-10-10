@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import ImageResize from 'quill-image-resize';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { writeBoardApi } from '../../../apis/writeBoardApi';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from "uuid";
-import { writeBoardApi } from '../../../apis/writeBoardApi';
+import ReactQuill, { Quill } from 'react-quill';
+import ImageResize from 'quill-image-resize';
+import 'react-quill/dist/quill.snow.css';
 Quill.register("modules/imageResize", ImageResize);
 
 function WritePage(props) {
@@ -107,7 +107,7 @@ function WritePage(props) {
                         toolbar: {
                             container: toolbarOptions,
                             handlers: {
-                                image: handleImageLoad
+                                image: handleImageLoad,
                             }
                         },
                         imageResize: {
