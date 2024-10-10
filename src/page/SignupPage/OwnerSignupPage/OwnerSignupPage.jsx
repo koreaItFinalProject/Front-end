@@ -4,12 +4,16 @@ import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
 import axios from 'axios';
-import { ownersignupApi } from '../../../apis/ownersignupApi/ownersignupApi';
+import { ownersignupApi } from '../../../apis/signUpApis/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
+    const [coordinates, setCoordinates] = useState({ 
+        latitude: null,
+        longitude: null
+     });
     const [loginState , setLoginState] = useState({
         username: '',
         password:'',
@@ -23,7 +27,8 @@ function OwnerSignupPage(props) {
         zonecode:'',
         address:'',
         buildingName:'',
-        isText:''
+        isText:'',
+        coord:''
     });
 
     const [businessNumber, setBusinessNumber] = useState('');
@@ -38,6 +43,17 @@ function OwnerSignupPage(props) {
 
         console.log(e.target.value);
     }
+
+    const handleCoordinatesChange = ({latitude, longitude}) => {
+        console.log(latitude , longitude);
+        setCoordinates({ 
+            latitude, longitude });
+        setAddress({
+            coord: latitude , longitude
+        })
+        console.log(coordinates);
+        console.log(isAddress);
+    };
 
     const handleAddressInputOnChange = (e) => {
         setAddress({
@@ -95,6 +111,8 @@ const handleInputChange = (e) => {
 
     const handlesignuppageOnClick = async() => {
         const signupData = await ownersignupApi(loginState, isAddress);
+        console.log(isAddress);
+        console.log(loginState);
         alert("가입 성공");
         navigate("/owner/signin");
     }
@@ -157,7 +175,7 @@ const handleInputChange = (e) => {
                             <input 
                                 value={isAddress.isText} 
                                 onChange={handleAddressInputOnChange} placeholder='상세주소'/>
-                            <SearchAdress setAddress={setAddress}/>
+                            <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
                         </div>
                     </div>
                     <div css={s.signupbutton}>

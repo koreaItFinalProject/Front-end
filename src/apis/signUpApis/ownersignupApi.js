@@ -1,6 +1,6 @@
 import { instance } from "../util/instance";
 
-export const ownersignupApi = async (loginState, isAddress, isText) => {
+export const ownersignupApi = async (loginState, isAddress) => {
     let signupData = {
         isSuceess : false,
         ok: {
@@ -15,6 +15,8 @@ export const ownersignupApi = async (loginState, isAddress, isText) => {
         ]
     }
     console.log(signupData);
+    console.log(loginState);
+    console.log(isAddress);
         try {
             const requestData = {
                 ...loginState,
@@ -37,6 +39,6 @@ export const ownersignupApi = async (loginState, isAddress, isText) => {
                         defaultMessage: fieldError.defaultMessage
                     })),
                 }
-            return ownersignupApi;
+            return signupData;
         }
     }
