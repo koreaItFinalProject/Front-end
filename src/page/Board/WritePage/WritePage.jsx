@@ -118,7 +118,7 @@ function WritePage(props) {
             </div>
             <div css={s.buttonLayout}>
                 <button onClick={handleWriteSubmitOnClick}>등록하기</button>
-                <button>취소</button>
+                <button onClick={() => navigate("/board?page=1")}>취소</button>
             </div>
         </div>
     );

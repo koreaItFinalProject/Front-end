@@ -18,6 +18,7 @@ import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfile
 import ManagerDashBoardPage from './page/Manager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerManagementPage';
 import DetailPage from './page/Board/DetailPage/DetailPage';
+import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Route path='/board' element={<BoardPage/>}/>
         <Route path='/board/write' element={<WritePage/>}/>
         <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
+        <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
       </Routes>
     </div>
   );
