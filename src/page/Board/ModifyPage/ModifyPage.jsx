@@ -28,7 +28,12 @@ function ModifyPage(props) {
     });
 
     const handleModifySubmitOnClick = async () => {
-        await modifyBoardApi(modifyBoard, boardId, navigate);
+        const selection = window.confirm("게시글을 수정하시겠습니까?");
+        if(selection) {
+            await modifyBoardApi(modifyBoard, boardId, navigate);
+        } else {
+            navigate(`/board/modify/${boardId}`);
+        }
     }
 
     const handleTitleInputOnChange = (e) => {
@@ -48,6 +53,7 @@ function ModifyPage(props) {
     const handleImageLoad = useCallback(() => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
         input.click();
 
         input.onchange = () => {
@@ -95,12 +101,12 @@ function ModifyPage(props) {
         <div css={s.layout}>
             <Link to={"/board"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <h2>글쓰기</h2>
-                <span>제목<input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' /></span>
+                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 <ReactQuill
                     ref={quillRef}
+                    theme='snow'
                     value={modifyBoard.content}
                     onChange={handleQuillValueOnChange}
                     style={{

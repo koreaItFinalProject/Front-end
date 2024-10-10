@@ -91,12 +91,12 @@ function WritePage(props) {
         <div css={s.layout}>
             <Link to={"/board"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <h2>글쓰기</h2>
-                <span>제목<input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' /></span>
+                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 <ReactQuill
                     ref={quillRef}
+                    theme="snow"
                     onChange={handleQuillValueOnChange}
                     style={{
                         boxSizing: "border-box",
