@@ -1,11 +1,12 @@
-import React from 'react';
-function DetailPage(props) {
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+/** @jsxImportSource @emotion/react */
+import * as s from "./style";
+import { useMutation, useQuery } from 'react-query';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 function DetailPage(props) {
+    const navigate = useNavigate();
     const params = useParams();
     const boardId = params.boardId;
 
@@ -20,8 +21,22 @@ function DetailPage(props) {
         }
     );
 
+    const deleteBoardMutation = useMutation(
+        async() => await instance.delete(`/board/${boardId}`),
+        {
+            onSuccess: response => {
+                alert("게시글을 삭제하였습니다.");
+                navigate("/board?page=1");
+            }
+        }
+    )
+
+    const handleDeleteBoardOnClick = () => {
+        deleteBoardMutation.mutateAsync();
+    }
+
     return (
-        <div css={layout}>
+        <div css={s.layout}>
             <Link to={"/"}><h1>사이트 로고</h1></Link>
             {
                 board.isLoading && <></>
@@ -32,47 +47,29 @@ function DetailPage(props) {
             {
                 board.isSuccess &&
                 <>
-                    <div css={header}>
-                        <div css={titleAndLike}>
+                    <div css={s.header}>
+                        <div css={s.titleAndLike}>
                             <h1>{board.data.data.title}</h1>
-                            <div>
-                                {
-                                    !!boardLike?.data?.data?.boardLikeId
-                                        ?
-                                        <button onClick={handleDislikeOnClick}>
-                                            <IoMdHeart />
-                                        </button>
-                                        :
-                                        <button onClick={handleLikeOnClick}>
-                                            <IoMdHeartEmpty />
-                                        </button>
-                                }
-                            </div>
                         </div>
-                        <div css={boardInfoContainer}>
+                        <div css={s.boardInfoContainer}>
                             <div>
                                 <span>
-                                    작성자: {board.data.data.writerUsername}
+                                    작성일: {board.data.data.writeDate}
                                 </span>
                                 <span>
                                     조회수: {board.data.data.viewCount}
                                 </span>
                                 <span>
-                                    추천: {boardLike?.data?.data.likeCount}
+                                    추천: 5
                                 </span>
                             </div>
                             <div>
-                                {
-                                    board.data.data.writerId === userInfoData?.data.userId &&
-                                    <>
-                                        <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                        <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                    </>
-                                }
+                                <button>수정</button>
+                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
                             </div>
                         </div>
                     </div>
-                    <div css={contentBox} dangerouslySetInnerHTML={{
+                    <div css={s.contentBox} dangerouslySetInnerHTML={{
                         __html: board.data.data.content
                     }}>
                     </div>
