@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 
 export const mainLayout = css`
     display: flex;
-    
 `;
 
 export const layout = css`
@@ -33,8 +32,6 @@ export const listBox = css`
         justify-content: space-between;
     }
     
-
-
 `;
 
 export const list = css`

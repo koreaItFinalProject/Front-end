@@ -16,6 +16,7 @@ import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
 import ManagerPage from './page/Manager/ManagerPage/ManagerPage';
 import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfilePage';
 import ManagerDashBoardPage from './page/Manager/ManagerDashBoardPage/ManagerDashBoardPage';
+import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerManagementPage';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path='/manager' element={<ManagerPage/>}/>
         <Route path='/manager/profile' element={<ManagerProfilePage/>}/>
         <Route path='/manager/dashboard' element={<ManagerDashBoardPage/>}/>
+        <Route path='/manager/management' element={<ManagerManagementPage/>}/>
         <Route path='/signin' element={<UserSigninPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
