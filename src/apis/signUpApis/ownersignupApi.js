@@ -1,6 +1,7 @@
 import { instance } from "../util/instance";
 
 export const ownersignupApi = async (loginState) => {
+    
     let signupData = {
         isSuccess : false,
         ok: {
