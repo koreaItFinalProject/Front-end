@@ -1,5 +1,9 @@
 import { css } from "@emotion/react";
 
+export const mainLayout = css`
+    display: flex;
+`;
+
 export const layout = css`
     display: flex;
     flex-direction: column;

@@ -3,8 +3,9 @@ import { instance } from "./util/instance"
 export const writeBoardApi = async (board, navigate) => {
     try {
         const response = await instance.post("/board", board);
+        console.log(response.data);
         alert("게시글이 작성되었습니다.")
-        navigate(`/board/detail/${response.data.boardId}`);
+        navigate(`/board/detail/${response.data}`);
     } catch (error) {
         const fieldErrors = error.response.data;
         for (let fieldError of fieldErrors) {

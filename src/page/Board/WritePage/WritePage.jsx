@@ -1,14 +1,14 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import ImageResize from 'quill-image-resize';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { writeBoardApi } from '../../../apis/writeBoardApi';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from "uuid";
-import { writeBoardApi } from '../../../apis/writeBoardApi';
+import ReactQuill, { Quill } from 'react-quill';
+import ImageResize from 'quill-image-resize';
+import 'react-quill/dist/quill.snow.css';
 Quill.register("modules/imageResize", ImageResize);
 
 function WritePage(props) {
@@ -89,14 +89,14 @@ function WritePage(props) {
 
     return (
         <div css={s.layout}>
-            <Link to={"/board"}><h3>게시판</h3></Link>
+            <Link to={"/board?page=1"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <h2>글쓰기</h2>
-                <span>제목<input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' /></span>
+                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 <ReactQuill
                     ref={quillRef}
+                    theme="snow"
                     onChange={handleQuillValueOnChange}
                     style={{
                         boxSizing: "border-box",
@@ -107,7 +107,7 @@ function WritePage(props) {
                         toolbar: {
                             container: toolbarOptions,
                             handlers: {
-                                image: handleImageLoad
+                                image: handleImageLoad,
                             }
                         },
                         imageResize: {
@@ -118,7 +118,7 @@ function WritePage(props) {
             </div>
             <div css={s.buttonLayout}>
                 <button onClick={handleWriteSubmitOnClick}>등록하기</button>
-                <button>취소</button>
+                <button onClick={() => navigate("/board?page=1")}>취소</button>
             </div>
         </div>
     );

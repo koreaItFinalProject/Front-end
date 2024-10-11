@@ -8,18 +8,17 @@ import OwnerSignin from '../../components/OwnerSignin/OwnerSignin';
 
 function UserSigninPage(props) {
 
-    const [loginState , setLoginState] = useState(false);
-    
-
+    const [login , setLogin] = useState(false);
     const handleLoginStateOnClick = () => {
-        setLoginState(false);
-        console.log(loginState);
+        setLogin(false);
+        console.log(login);
     }
 
     const handleOwnerStateOnClick = () => {
-        setLoginState(true);
-        console.log(loginState);
+        setLogin(true);
+        console.log(login);
     }
+  
     return (
         <div>
             <Header/>
@@ -28,19 +27,19 @@ function UserSigninPage(props) {
                         <div css={s.selectMember}>
                             <button onClick={()=> handleLoginStateOnClick()}
                                 css={
-                                    !loginState ? s.userButton: ''
+                                    !login ? s.userButton: ''
                                 }
                             >개인 회원</button>
                             <button 
                                 onClick={()=> handleOwnerStateOnClick()}
                                 css={
-                                    loginState ? s.ownerButton: ''
+                                    login ? s.ownerButton: ''
                                 }
                             >기업 회원</button>
                         </div>
                     <div css={s.togleLogin}>
                     {
-                        !loginState 
+                        !login 
                         ? <UserSignin/> 
                         : <OwnerSignin/>
                     }

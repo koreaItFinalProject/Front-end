@@ -20,6 +20,11 @@ export const layout = css`
     }
 `;
 
+export const mainBox = css`
+    width: 100%;
+    height: 100%;
+`;
+
 export const contentBox = css`
     box-sizing: border-box;
     border: 1px solid #000000;
@@ -41,7 +46,3 @@ export const box = css`
     }
 `;
 
-export const mainBox = css`
-    width: 100%;
-    height: 100%;
-`;
