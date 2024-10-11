@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useState } from "react";
-import { Map, MapTypeControl, ZoomControl, useKakaoLoader } from "react-kakao-maps-sdk";
+import { Map, MapTypeControl, ZoomControl } from "react-kakao-maps-sdk";
 import { instance } from "../../apis/util/instance";
 import { useQuery } from "react-query";
 
@@ -10,9 +10,6 @@ function MapPage(props) {
     const [inputdata, setInputdata] = useState("");
     const [inputvalue, setInputvalue] = useState("");
     const [cafeList, setCafeList] = useState([]);
-    const [loading, error] = useKakaoLoader({
-        appkey: process.env.REACT_APP_KAKAOMAP_API_KEY, // 발급 받은 APPKEY
-    });
     const [center, setCenter] = useState({
         lat: 35.156359,
         lng: 129.0631410,
