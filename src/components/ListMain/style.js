@@ -70,8 +70,6 @@ export const spanBox = css`
     & > span {
         padding-bottom: 10px;
     }
-
-    
 `;
 
 

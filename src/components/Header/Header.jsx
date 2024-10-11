@@ -23,7 +23,7 @@ function Header() {
                 </div>
                 <div css={s.manubar}>
 
-                    <button onClick={() => navigate('/board')}>게시판</button>
+                    <button onClick={() => navigate('/board?page=1')}>게시판</button>
                     <button onClick={() => navigate('/list')}>리스트</button>
                     <button onClick={() => navigate('/map')}>지도</button>
                     <button onClick={() => navigate('/event')}>이벤트</button>

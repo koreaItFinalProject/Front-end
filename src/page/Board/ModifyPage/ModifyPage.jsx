@@ -1,50 +1,59 @@
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { writeBoardApi } from '../../../apis/writeBoardApi';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
-import { v4 as uuid } from "uuid";
 import ReactQuill, { Quill } from 'react-quill';
-import ImageResize from 'quill-image-resize';
-import 'react-quill/dist/quill.snow.css';
-Quill.register("modules/imageResize", ImageResize);
+import { v4 as uuid } from "uuid";
+import { modifyBoardApi } from '../../../apis/modifyBoardApi';
 
-function WritePage(props) {
+function ModifyPage(props) {
+    const params = useParams();
+    const boardId = params.boardId;
+    const queryClient = useQueryClient();
+    const boardData = queryClient.getQueryData(['boardQuery', boardId]);
 
     const navigate = useNavigate();
-
-    const [board, setBoard] = useState({
-        title: "",
-        content: "",
-    });
 
     const quillRef = useRef(null);
 
     const [isUploading, setUploading] = useState(false);
 
+    const [modifyBoard, setModifyBoard] = useState({
+        boardId,
+        title: boardData?.data?.title,
+        content: boardData?.data?.content,
+    });
+
+    const handleModifySubmitOnClick = async () => {
+        const selection = window.confirm("게시글을 수정하시겠습니까?");
+        if(selection) {
+            await modifyBoardApi(modifyBoard, boardId, navigate);
+        } else {
+            navigate(`/board/modify/${boardId}`);
+        }
+    }
+
     const handleTitleInputOnChange = (e) => {
-        setBoard(board => ({
+        setModifyBoard(board => ({
             ...board,
-            [e.target.name]: e.target.value,
+            title: e.target.value,
         }));
     }
 
     const handleQuillValueOnChange = (value) => {
-        setBoard(board => ({
+        setModifyBoard(board => ({
             ...board,
             content: quillRef.current.getEditor().getText().trim() === "" ? "" : value,
         }));
     }
 
-    const handleWriteSubmitOnClick = async () => {
-        await writeBoardApi(board, navigate);
-    }
-
     const handleImageLoad = useCallback(() => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
         input.click();
 
         input.onchange = () => {
@@ -67,13 +76,14 @@ function WritePage(props) {
                     editor.setSelection(editPoint.index + 1); // 이미지 위치보다 커서를 +1칸 이동
                     editor.insertText(editPoint.index + 1, "\n"); // 이미지 다음줄로 넘어감
                     setUploading(false);
-                    setBoard(board => ({
+                    setModifyBoard(board => ({
                         ...board,
                         content: editor.root.innerHTML
                     }));
                 }
             );
         }
+
     }, []);
 
     const toolbarOptions = useMemo(() => [
@@ -91,12 +101,13 @@ function WritePage(props) {
         <div css={s.layout}>
             <Link to={"/board"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
+                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 <ReactQuill
                     ref={quillRef}
-                    theme="snow"
+                    theme='snow'
+                    value={modifyBoard.content}
                     onChange={handleQuillValueOnChange}
                     style={{
                         boxSizing: "border-box",
@@ -117,11 +128,11 @@ function WritePage(props) {
                 />
             </div>
             <div css={s.buttonLayout}>
-                <button onClick={handleWriteSubmitOnClick}>등록하기</button>
-                <button onClick={() => navigate("/board?page=1")}>취소</button>
+                <button onClick={handleModifySubmitOnClick}>수정하기</button>
+                <button onClick={() => navigate(`/board/detail/${boardId}`)}>취소</button>
             </div>
         </div>
     );
 }
 
-export default WritePage;
+export default ModifyPage;
