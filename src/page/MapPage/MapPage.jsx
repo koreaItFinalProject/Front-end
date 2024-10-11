@@ -1,10 +1,12 @@
-/*global kakao*/
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useState } from "react";
 import { Map, MapTypeControl, ZoomControl, useKakaoLoader } from "react-kakao-maps-sdk";
+import { useQuery } from "react-query";
+import { instance } from "../../apis/util/instance";
 
 function MapPage(props) {
+    const [ check, setCheck ] = useState("전체");
     const [loading, error] = useKakaoLoader({
         appkey: process.env.REACT_APP_KAKAOMAP_API_KEY, // 발급 받은 APPKEY
     })
@@ -12,6 +14,25 @@ function MapPage(props) {
         lat: 35.156359,
         lng: 129.0631410,
     });
+
+    const cafe = useQuery(
+        ["cafeQuery", check],
+        async () => {
+            return instance.get(`/cafe/get/${check}`);
+        },
+        {
+            onSuccess: response => console.log(response),
+            refetchOnWindowFocus: false,
+            retry: 0,
+        }
+    )
+
+    
+
+    const handleOnChange = (e) => {
+        setCheck(e.target.value);
+        console.log(e.target.value); // 변경된 value를 확인
+    };
 
     return (
         <div css={s.layout}>
@@ -26,24 +47,24 @@ function MapPage(props) {
                         <button>확인</button>
                         <fieldset css={s.radiobutton}>
                             <label>
-                                <input type="radio" name="select" />
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"전체"} checked={check === "전체"} />
                                 전체
                             </label>
                             <label>
-                                <input type="radio" name="select" />
-                                선택1
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"브런치"} checked={check === "브런치"}/>
+                                브런치
                             </label>
                             <label>
-                                <input type="radio" name="select" />
-                                선택2
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"분위기"} checked={check === "분위기"}/>
+                                분위기
                             </label>
                             <label>
-                                <input type="radio" name="select" />
-                                선택3
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"베이커리"} checked={check === "베이커리"}/>
+                                베이커리
                             </label>
                             <label>
-                                <input type="radio" name="select" />
-                                선택4
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"디저트"} checked={check === "디저트"}/>
+                                디저트
                             </label>
                         </fieldset>
                     </div>
@@ -51,84 +72,15 @@ function MapPage(props) {
                 <div css={s.content}>카페리스트
                     <div css={s.contentlist}>
                         <ul>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
-                            <li>
-                                <p>카페이름</p>
-                                <p>평점</p>
-                                <p>주소</p>
-                                <p>카테고리/ 리뷰수</p>
-                            </li>
+                            {
+                                cafe.data?.data.map((result, index) => (
+                                    <li key={index}>
+                                        <p>카페이름: {result.cafeName}</p>
+                                        <p>평점</p>
+                                        <p>주소: {result.address}</p>
+                                        <p>카테고리/ 리뷰수: {result.category}</p>
+                                    </li>
+                                ))}
                         </ul>
                     </div>
                 </div>
