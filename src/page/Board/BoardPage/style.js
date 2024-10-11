@@ -101,6 +101,7 @@ export const searchBox = css`
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         background-color: #333447;
+        color: white;
     }
 `;
 
