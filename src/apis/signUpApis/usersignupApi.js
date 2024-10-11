@@ -2,7 +2,7 @@ import { instance } from "../util/instance";
 
 export const usersignupApi = async (loginState) => {
     let signupData = {
-        isSuceess:false,
+        isSuccess:false,
         ok : {
             message : "",
             user : null
@@ -15,7 +15,7 @@ export const usersignupApi = async (loginState) => {
         const response = await instance.post("/user/signup" , loginState)
         console.log(response);
         signupData = {
-            isSuceess: true ,
+            isSuccess: true ,
             ok: response.data
         }
         }catch(error){

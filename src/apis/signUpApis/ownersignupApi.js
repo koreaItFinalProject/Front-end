@@ -1,8 +1,8 @@
 import { instance } from "../util/instance";
 
-export const ownersignupApi = async (loginState, isAddress) => {
+export const ownersignupApi = async (loginState) => {
     let signupData = {
-        isSuceess : false,
+        isSuccess : false,
         ok: {
             message : "",
             user : null
@@ -13,26 +13,24 @@ export const ownersignupApi = async (loginState, isAddress) => {
                 defaultMessage: ""
             }
         ]
-    }
-    console.log(signupData);
-    console.log(loginState);
-    console.log(isAddress);
+        }
+        console.log(signupData);
         try {
-            const requestData = {
-                ...loginState,
-                address: isAddress.address + (isAddress.isText ? isAddress.isText : '')
-            };
-            const response = await instance.post(`/user/signup`);
+            const response = await instance.post("/owner/signup",loginState);
             console.log(response);
             signupData = {
-                isSuceess : true,
+                isSuccess : true,
                 ok: response.data
-            }
+                }
+            console.log(signupData);
+            console.log(response.data.user.id);
+            // console.log(signupData.ok.id);
+            return signupData;
         }catch(error){
             console.error(error);
             const response = error.response;
             signupData = {
-                isSuceess:false,
+                isSuccess:false,
                 fieldErrors:response.data.map(
                     fieldError => ({
                         field : fieldError.field,
