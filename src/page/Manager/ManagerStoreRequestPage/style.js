@@ -20,17 +20,9 @@ export const layout = css`
     }
 `;
 
-export const container = css`
-    display: flex;
-`;
-
-export const mainBox = css`
+export const columnBox = css`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    width: 50%;
-    /* height: 457.6px;  */
-    height: 1000px;
 `;
 
 export const titleBox = css`
@@ -39,28 +31,46 @@ export const titleBox = css`
     align-items: center;
     box-sizing: border-box;
     border: 1px solid #000000;
-    /* border-top: none; */
-    width: 100%;
-    height: 15%;
-    font-size: 25px;
+    border-top: none;
+    border-left: none;
+    width: 1290px;
+    height:90px;
+
+    & > a {
+        font-size: 25px;
+    }
+    
 `;
 
-export const secondTitleBox = css`
+export const titleButtonBox = css`
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
-    font-size: 18px;
-`;
-
-export const contentBox = css`
-    box-sizing: border-box;
-    border: 1px solid #000000;
-    /* border-top: none; */
     width: 100%;
-    height: 85%;
+    height: 90px;
+
+    & > :nth-of-type(1) {
+        margin-left: 1000px;
+    }
 `;
 
+export const buttonBox = css`
+
+   
+   & > button {
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    width: 60px;
+    height: 40px;
+
+   }
+
+   & > :nth-of-type(1) {
+    margin-right: 10px;
+   }
+    
 
 
-
+`;
