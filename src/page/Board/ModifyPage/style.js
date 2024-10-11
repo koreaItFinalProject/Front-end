@@ -33,7 +33,22 @@ export const boardHeader = css`
 export const editorLayout = css`
     box-sizing: border-box;
     margin-bottom: 42px;
-    height: 600px;
+    width: 100%;
+    height: 700px;
+`;
+
+export const loadingLayout = css`
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #00000066;
 `;
 
 export const buttonLayout = css`
