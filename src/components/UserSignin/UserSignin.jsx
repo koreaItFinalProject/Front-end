@@ -87,7 +87,7 @@ function UserSignin(props) { // 로그인
                 <ol>
                     <li><button>아이디 찾기</button></li>
                     <li><button>비밀번호 찾기</button></li>
-                    <li><button>회원가입 찾기</button></li>
+                    <li><button>회원가입</button></li>
                 </ol>
             </div>
         </div>
