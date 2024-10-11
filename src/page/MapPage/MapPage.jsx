@@ -1,24 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Map, MapTypeControl, ZoomControl, useKakaoLoader } from "react-kakao-maps-sdk";
-import { useQuery } from "react-query";
 import { instance } from "../../apis/util/instance";
+import { useQuery } from "react-query";
 
 function MapPage(props) {
-    const [ check, setCheck ] = useState("전체");
+    const [check, setCheck] = useState("전체");
+    const [inputdata, setInputdata] = useState("");
+    const [inputvalue, setInputvalue] = useState("");
+    const [cafeList, setCafeList] = useState([]);
     const [loading, error] = useKakaoLoader({
         appkey: process.env.REACT_APP_KAKAOMAP_API_KEY, // 발급 받은 APPKEY
-    })
+    });
     const [center, setCenter] = useState({
         lat: 35.156359,
         lng: 129.0631410,
     });
 
     const cafe = useQuery(
-        ["cafeQuery", check],
+        ["cafeQuery", check, inputvalue],
         async () => {
-            return instance.get(`/cafe/get/${check}`);
+            return instance.get(`/cafe/get/${check}/${inputvalue}`);
         },
         {
             onSuccess: response => console.log(response),
@@ -27,11 +30,16 @@ function MapPage(props) {
         }
     )
 
-    
-
     const handleOnChange = (e) => {
         setCheck(e.target.value);
-        console.log(e.target.value); // 변경된 value를 확인
+    };
+
+    const handleInputOnChange = (e) => {
+        setInputdata(e.target.value);
+    };
+
+    const handleSearchOnClick = async () => {
+        setInputvalue(inputdata);
     };
 
     return (
@@ -43,27 +51,27 @@ function MapPage(props) {
                         LOGO
                     </div>
                     <div css={s.inputbox}>
-                        <input type="text" />
-                        <button>확인</button>
+                        <input type="text" value={inputdata} onChange={handleInputOnChange} />
+                        <button onClick={handleSearchOnClick}>확인</button>
                         <fieldset css={s.radiobutton}>
                             <label>
                                 <input type="radio" name="menu" onChange={handleOnChange} value={"전체"} checked={check === "전체"} />
                                 전체
                             </label>
                             <label>
-                                <input type="radio" name="menu" onChange={handleOnChange} value={"브런치"} checked={check === "브런치"}/>
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"브런치"} checked={check === "브런치"} />
                                 브런치
                             </label>
                             <label>
-                                <input type="radio" name="menu" onChange={handleOnChange} value={"분위기"} checked={check === "분위기"}/>
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"분위기"} checked={check === "분위기"} />
                                 분위기
                             </label>
                             <label>
-                                <input type="radio" name="menu" onChange={handleOnChange} value={"베이커리"} checked={check === "베이커리"}/>
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"베이커리"} checked={check === "베이커리"} />
                                 베이커리
                             </label>
                             <label>
-                                <input type="radio" name="menu" onChange={handleOnChange} value={"디저트"} checked={check === "디저트"}/>
+                                <input type="radio" name="menu" onChange={handleOnChange} value={"디저트"} checked={check === "디저트"} />
                                 디저트
                             </label>
                         </fieldset>
@@ -80,7 +88,8 @@ function MapPage(props) {
                                         <p>주소: {result.address}</p>
                                         <p>카테고리/ 리뷰수: {result.category}</p>
                                     </li>
-                                ))}
+                                ))
+                            }
                         </ul>
                     </div>
                 </div>
@@ -90,7 +99,7 @@ function MapPage(props) {
                 <ZoomControl position={"RIGHT"} />
             </Map>
         </div>
-    )
+    );
 }
 
 export default MapPage;
