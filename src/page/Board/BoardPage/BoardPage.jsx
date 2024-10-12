@@ -23,14 +23,17 @@ function BoardPage(props) {
 
     const boardList = useQuery(
         ["boardListQuery", searchParams.get("page"), isClick === true],
-        async () => await instance.get(`/board/list?page=${searchParams.get("page")}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`),
+        async () => {
+            const response = await instance.get(`/board/list?page=${searchParams.get("page")}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`);
+            return response.data;
+        },
         {
             retry: 0,
             onSuccess: response => {
                 setTotalPageCount(
-                    response?.data?.totalCount % limit === 0
-                        ? response?.data?.totalCount / limit
-                        : Math.floor(response?.data?.totalCount / limit) + 1,
+                    response.totalCount % limit === 0
+                        ? response.totalCount / limit
+                        : Math.floor(response.totalCount / limit) + 1,
                 )
                 setIsClick(false);
             }
@@ -49,9 +52,17 @@ function BoardPage(props) {
         setSearchValue(e.target.value);
     }
 
-    const handleSearchOnClick = async (e) => {
+    const handleSearchOnClick = (e) => {
         setIsClick(true);
     }
+
+    const handleEnterInput = (e) => {
+        if(e.key === "Enter") {
+            setIsClick(true);
+        }
+    }
+
+    console.log(boardList);
 
     return (
         <div css={s.layout}>
@@ -83,7 +94,7 @@ function BoardPage(props) {
                 <div css={s.boardListHeader}>
                     <h2>자유게시판</h2>
                     <div css={s.headerInputs}>
-                        <h3>총 {boardList.data?.totalCount}개</h3>
+                        <h3>총 {boardList.totalCount}개</h3>
                         <select name="searchFilter" onChange={handleFilterOnChange}>
                             <option name="title" value={"title"}>제목</option>
                             <option name="writer" value={"writer"}>작성자</option>
@@ -93,6 +104,7 @@ function BoardPage(props) {
                                 type="text"
                                 placeholder='검색'
                                 onChange={handleSearchInputOnChange}
+                                onKeyDown={handleEnterInput}
                                 name=""
                                 value={searchValue}
                             />
@@ -106,6 +118,7 @@ function BoardPage(props) {
                         <div css={s.tr}>
                             <span>번호</span>
                             <span>제목</span>
+                            <span>작성자</span>
                             <span>추천수</span>
                             <span>조회수</span>
                             <span>작성일</span>
@@ -117,10 +130,11 @@ function BoardPage(props) {
                                 ?
                                 <></>
                                 :
-                                boardList.data?.data?.boards.map(board =>
+                                boardList.data?.boards.map(board =>
                                     <div css={s.tr} key={board.id} onClick={() => navigate(`/board/detail/${board.id}`)}>
                                         <span>{board.id}</span>
                                         <span>{board.title}</span>
+                                        <span>{board.nickname}</span>
                                         <span>{board.likeCount}</span>
                                         <span>{board.viewCount}</span>
                                         <span>{board.writeDate}</span>
