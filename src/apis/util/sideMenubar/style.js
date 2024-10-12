@@ -14,7 +14,7 @@ export const layout = css`
     font-weight: 600;
     margin: 0px;
     padding: 0px;
-    width: 300px;
+    width: 250px;
     height: 50px;
     & svg{
       font-size: 26px;

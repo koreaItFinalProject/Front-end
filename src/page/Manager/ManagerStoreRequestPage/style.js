@@ -5,22 +5,10 @@ export const mainLayout = css`
 `;
 
 export const layout = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    box-sizing: border-box;
-    border: 1px solid #898484;
-    border-top: none;
-    width: 300px;
-    height: 1000px;
-
-    & > span {
-        margin-left: 50px;
-        font-size: 25px;
-    }
 `;
 
 export const columnBox = css`
+    width: 100%;
     display: flex;
     flex-direction: column;
 `;
@@ -33,7 +21,7 @@ export const titleBox = css`
     border: 1px solid #000000;
     border-top: none;
     border-left: none;
-    width: 1290px;
+    width: 100%;
     height:90px;
 
     & > a {
