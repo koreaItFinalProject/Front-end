@@ -11,6 +11,6 @@ export const layout = css`
     justify-content: space-evenly;
     box-sizing: border-box;
     border: 1px solid #898484;
-    width: 300px;
-    height: 900px;
+    width: 200px;
+    height: 950px;
 `;

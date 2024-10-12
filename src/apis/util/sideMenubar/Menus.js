@@ -37,12 +37,12 @@ export const Menus = [
   {
     title: '점포 등록',
     icon:<GiArchiveRegister/>,
-    path: "/manager/registerstoremanagement"
+    path: "/manager/registerstore"
   },
   {
     title: '요청 관리',
     icon:<VscGitPullRequestGoToChanges/>,
-    path: "/manager/requestmanagement"
+    path: "/manager/storerequest"
   },
   {
     title: '설정',
@@ -52,7 +52,7 @@ export const Menus = [
   {
     title: '로그아웃',
     icon:<RiLogoutBoxLine/>,
-    path: "/manager/logout"
+    path: "/manager/login"
   },
 
 ]

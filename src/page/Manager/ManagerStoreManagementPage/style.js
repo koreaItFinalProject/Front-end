@@ -105,7 +105,6 @@ export const button = css`
 export const buttonBox = css`
     display: flex;
     justify-content: center;
-    margin-top: 260px;
     
     & > button {
         box-sizing: border-box;
