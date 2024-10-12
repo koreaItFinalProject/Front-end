@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import Comments from "../../../components/Comments/Comments";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -50,6 +51,8 @@ function DetailPage(props) {
         navigate(`/board/modify/${params.boardId}`);
     }
 
+    console.log(board);
+
     return (
         <div css={s.layout}>
             <Link to={"/board?page=1"}><h1>게시판</h1></Link>
@@ -69,10 +72,13 @@ function DetailPage(props) {
                         <div css={s.boardInfoContainer}>
                             <div>
                                 <span>
-                                    작성일: {board.data.data.writeDate}
+                                    작성자: {board.data.data.nickname}
                                 </span>
                                 <span>
-                                    조회수: {board.data.data.viewCount}
+                                    작성일: {board?.data?.data.writeDate}
+                                </span>
+                                <span>
+                                    조회수: {board?.data?.data.viewCount}
                                 </span>
                                 <span>
                                     추천: 5
@@ -90,6 +96,7 @@ function DetailPage(props) {
                     </div>
                 </>
             }
+            <Comments/>
         </div>
     );
 }

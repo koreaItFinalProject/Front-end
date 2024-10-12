@@ -1,39 +1,56 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
-import Header from '../../../components/Header/Header';
+import { Link } from 'react-router-dom';
+import SideBar from '../../../components/SideBar/SideBar';
 
 function ManagerStoreManagementPage(props) {
     return (
-        <div>
-            <Header />
-            <div css={s.outBox}>
-                <div css={s.mainLayout}>
-                    <div css={s.layout}>
-                        <span>프로필</span>
-                        <span>대시보드</span>
-                        <span>사용자 관리</span>
-                        <span>점포 관리</span>
-                        <span>점포 등록</span>
-                        <span>요청 관리</span>
-                        <span>설정</span>
-                        <span>로그아웃</span>
+        <div css={s.mainLayout}>
+            <SideBar/>
+            <div css={s.mainBox}>
+                <div css={s.box}>
+                    <div css={s.ibBox}>
+                        <div css={s.inputSection}>
+                            <p>조회:</p>
+                            <input type="text" />
+                        </div>
+                        <button css={s.button}>검색</button>
+                    </div>
+
+                    <div>
+                        <div css={s.layoutBox}>
+                            <div>
+                                <Link to="/particular/store">점포 리스트</Link>
+                                <button css={s.deleteButton}>삭제</button>
+                            </div>
+                            <div>
+                                <Link to="/particular/store">점포 리스트</Link>
+                                <button css={s.deleteButton}>삭제</button>
+                            </div>
+                            <div>
+                                <Link to="/particular/store">점포 리스트</Link>
+                                <button css={s.deleteButton}>삭제</button>
+                            </div>
+                            <div>
+                                <Link to="/particular/store">점포 리스트</Link>
+                                <button css={s.deleteButton}>삭제</button>
+                            </div>
+                            <div>
+                                <Link to="/particular/store">점포 리스트</Link>
+                                <button css={s.deleteButton}>삭제</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div css={s.buttonBox}>
+                        <button>점포 추가하기</button>
                     </div>
                 </div>
 
-                <div css={s.mainBox}>
-                    <div css={s.columnBox}>
-                        <div css={s.pictureBox}>카페사진</div>
-                        <button css={s.imgChangeButton}>사진 바꾸기</button>
-                    </div>
-                       
-                    <div css={s.showBox}>
 
-                       
-                    </div>
-
-                </div>
             </div>
+
+
 
         </div>
     );

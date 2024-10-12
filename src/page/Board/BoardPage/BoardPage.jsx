@@ -15,26 +15,51 @@ import { useQuery } from "react-query";
 function BoardPage(props) {
     const [searchParams] = useSearchParams();
     const [totalPageCount, setTotalPageCount] = useState(1);
+    const [searchValue, setSearchValue] = useState("");
+    const [searchFilter, setSearchFilter] = useState("title");
+    const [isClick, setIsClick] = useState(false);
     const limit = 20;
     const navigate = useNavigate();
 
     const boardList = useQuery(
-        ["boardListQuery", searchParams.get("page")],
-        async () => await instance.get(`/board/list?page=${searchParams.get("page")}&limit=${limit}`),
+        ["boardListQuery", searchParams.get("page"), isClick === true],
+        async () => {
+            const response = await instance.get(`/board/list?page=${searchParams.get("page")}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`);
+            return response.data;
+        },
         {
             retry: 0,
-            onSuccess: response => setTotalPageCount(
-                response.data.totalCount % limit === 0
-                    ? response.data.totalCount / limit
-                    : Math.floor(response.data.totalCount / limit) + 1,
-            )
+            onSuccess: response => {
+                setTotalPageCount(
+                    response.totalCount % limit === 0
+                        ? response.totalCount / limit
+                        : Math.floor(response.totalCount / limit) + 1,
+                )
+                setIsClick(false);
+            }
         }
     );
 
-    console.log(boardList);
-
     const handlePageOnChange = (event) => {
         navigate(`/board?page=${event.selected + 1}`); // 페이지를 넘길때 마다 useNavigate로 페이지 이동, index가 0부터 시작하기 떄문에 + 1, 렌더링 되는 컴포넌트는 그대로이지만 page 번호만 바뀐다.
+    }
+
+    const handleFilterOnChange = (e) => {
+        setSearchFilter(e.target.value);
+    }
+
+    const handleSearchInputOnChange = (e) => {
+        setSearchValue(e.target.value);
+    }
+
+    const handleSearchOnClick = (e) => {
+        setIsClick(true);
+    }
+
+    const handleEnterInput = (e) => {
+        if(e.key === "Enter") {
+            setIsClick(true);
+        }
     }
 
     console.log(boardList);
@@ -53,8 +78,6 @@ function BoardPage(props) {
                         modules={[Pagination]}
                         slidesPerView={4}
                         pagination={{ clickable: true }}
-                        onSwiper={(swiper) => console.log(swiper)}
-                        onSlideChange={() => console.log('slide change')}
                     >
                         <SwiperSlide>Slide 1</SwiperSlide>
                         <SwiperSlide>Slide 2</SwiperSlide>
@@ -71,14 +94,21 @@ function BoardPage(props) {
                 <div css={s.boardListHeader}>
                     <h2>자유게시판</h2>
                     <div css={s.headerInputs}>
-                        <h3>총 {boardList?.data?.data.totalCount}개</h3>
-                        <select name="filter" id="">
-                            <option value="제목">제목</option>
-                            <option value="작성자">작성자</option>
+                        <h3>총 {boardList.totalCount}개</h3>
+                        <select name="searchFilter" onChange={handleFilterOnChange}>
+                            <option name="title" value={"title"}>제목</option>
+                            <option name="writer" value={"writer"}>작성자</option>
                         </select>
                         <div css={s.searchBox}>
-                            <input type="text" placeholder='검색' />
-                            <button>검색</button>
+                            <input
+                                type="text"
+                                placeholder='검색'
+                                onChange={handleSearchInputOnChange}
+                                onKeyDown={handleEnterInput}
+                                name=""
+                                value={searchValue}
+                            />
+                            <button onClick={handleSearchOnClick}>검색</button>
                         </div>
                         <button css={s.writeButton} onClick={() => navigate("/board/write")}>게시물 작성하기</button>
                     </div>
@@ -88,6 +118,7 @@ function BoardPage(props) {
                         <div css={s.tr}>
                             <span>번호</span>
                             <span>제목</span>
+                            <span>작성자</span>
                             <span>추천수</span>
                             <span>조회수</span>
                             <span>작성일</span>
@@ -99,10 +130,11 @@ function BoardPage(props) {
                                 ?
                                 <></>
                                 :
-                                boardList.data.data.boards.map(board =>
+                                boardList.data?.boards.map(board =>
                                     <div css={s.tr} key={board.id} onClick={() => navigate(`/board/detail/${board.id}`)}>
                                         <span>{board.id}</span>
                                         <span>{board.title}</span>
+                                        <span>{board.nickname}</span>
                                         <span>{board.likeCount}</span>
                                         <span>{board.viewCount}</span>
                                         <span>{board.writeDate}</span>
@@ -110,21 +142,21 @@ function BoardPage(props) {
                                 )
                         }
                     </div>
-                <div css={s.paginateContainer}>
-                    <ReactPaginate
-                        breakLabel="..."
-                        previousLabel={<><IoMdArrowDropleft /></>}
-                        nextLabel={<><IoMdArrowDropright /></>}
-                        pageCount={totalPageCount} // 총 페이지 수, 
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        activeClassName='active'
-                        onPageChange={handlePageOnChange}
-                        forcePage={parseInt(searchParams.get("page")) - 1}
-                    // forcePage: 현재 활성화된 페이지를 강제로 설정, url의 page 파라미터를 가져와서 현재 페이지로 설정한다, 
-                    // 이때 -1을 해주는 이유는 페이지네이션의 인덱스가 0부터 시작하기 때문이다.
-                    />
-                </div>
+                    <div css={s.paginateContainer}>
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel={<><IoMdArrowDropleft /></>}
+                            nextLabel={<><IoMdArrowDropright /></>}
+                            pageCount={totalPageCount} // 총 페이지 수, 
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            activeClassName='active'
+                            onPageChange={handlePageOnChange}
+                            forcePage={parseInt(searchParams.get("page")) - 1}
+                        // forcePage: 현재 활성화된 페이지를 강제로 설정, url의 page 파라미터를 가져와서 현재 페이지로 설정한다, 
+                        // 이때 -1을 해주는 이유는 페이지네이션의 인덱스가 0부터 시작하기 때문이다.
+                        />
+                    </div>
                 </div>
             </div>
         </div>

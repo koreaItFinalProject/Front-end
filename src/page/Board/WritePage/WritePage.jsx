@@ -89,7 +89,7 @@ function WritePage(props) {
 
     return (
         <div css={s.layout}>
-            <Link to={"/board"}><h3>게시판</h3></Link>
+            <Link to={"/board?page=1"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
                 <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>

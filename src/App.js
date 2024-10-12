@@ -20,7 +20,11 @@ import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerM
 import DetailPage from './page/Board/DetailPage/DetailPage';
 import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
 import ModifyPage from './page/Board/ModifyPage/ModifyPage';
-
+import ParticularStorePage from './page/Particular/ParticularStorePage/ParticularStorePage';
+import ManagerStoreRequestPage from './page/Manager/ManagerStoreRequestPage/ManagerStoreRequestPage';
+import ParticularRequestPage from './page/Particular/ParticularRequestPage/ParticularRequestPage';
+import ManagerRegisterStore from './page/Manager/ManagerRegisterStore/ManagerRegisterStore';
+import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
 
 
 function App() {
@@ -37,6 +41,12 @@ function App() {
         <Route path='/manager/dashboard' element={<ManagerDashBoardPage/>}/>
         <Route path='/manager/management' element={<ManagerManagementPage/>}/>
         <Route path='/manager/storemanagement' element={<ManagerStoreManagementPage/>}/>
+        <Route path='/manager/storerequest' element={<ManagerStoreRequestPage/>}/>
+        <Route path='/manager/registerstore' element={<ManagerRegisterStore/>}/>
+        <Route path='/manager/storerequest' element={<ManagerStoreRequestPage/>}/>
+        <Route path='/manager/setting' element={<ManagerSetting/>}/>
+        <Route path='/particular/store' element={<ParticularStorePage/>}/>
+        <Route path='/particular/request' element={<ParticularRequestPage/>}/>
         <Route path='/signin' element={<UserSigninPage/>}/>
         <Route path='/list' element={<ListPage/>}/>
         <Route path='/map' element={<MapPage/>}/>
@@ -45,6 +55,7 @@ function App() {
         <Route path='/board/write' element={<WritePage/>}/>
         <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
         <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
+        
       </Routes>
     </div>
   );

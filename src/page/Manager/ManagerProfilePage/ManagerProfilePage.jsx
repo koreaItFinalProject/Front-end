@@ -2,23 +2,14 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
 import Header from '../../../components/Header/Header';
+import { Link } from 'react-router-dom';
+import SideBar from '../../../components/SideBar/SideBar';
 
 function ManagerProfilePage(props) {
     return (
-        <div>
-            <Header />
-            <div css={s.mainLayout}>
-                <div css={s.layout}>
-                    <span>프로필</span>
-                    <span>대시보드</span>
-                    <span>사용자 관리</span>
-                    <span>점포 관리</span>
-                    <span>점포 등록</span>
-                    <span>요청 관리</span>
-                    <span>설정</span>
-                    <span>로그아웃</span>
-                </div>
-
+        <div css={s.mainLayout}>
+            <SideBar />
+            <div css={s.layout}>
                 <div css={s.listBox}>
                     <div css={s.list}>
                         <div>

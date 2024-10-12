@@ -8,7 +8,7 @@ function ListMain(props) {
             <div css={s.adornmentBox}></div>
             <div css={s.box}>
                 <div css={s.inputSection}>
-                    <span>검색:</span>
+                    <p>검색:</p>
                     <input type="text" />
                 </div>
                 <label css={s.searchOption}>
@@ -25,14 +25,14 @@ function ListMain(props) {
                 <div css={s.showBox}>
 
                     <div css={s.viewBox}>
-                        <span>조회수</span>
-                        <span>추천수</span>
+                        <p>조회수</p>
+                        <p>추천수</p>
                     </div>
 
                     <div css={s.spanBox}>
-                        <span>카페 이름:</span>
-                        <span>카테고리:</span>
-                        <span>주소:</span>
+                        <p>카페 이름:</p>
+                        <p>카테고리:</p>
+                        <p>주소:</p>
                     </div>
                     
                 </div>
@@ -43,14 +43,14 @@ function ListMain(props) {
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
                     <div css={s.viewBox}>
-                        <span>조회수</span>
-                        <span>추천수</span>
+                        <p>조회수</p>
+                        <p>추천수</p>
                     </div>
 
                     <div css={s.spanBox}>
-                        <span>카페 이름:</span>
-                        <span>카테고리:</span>
-                        <span>주소:</span>
+                        <p>카페 이름:</p>
+                        <p>카테고리:</p>
+                        <p>주소:</p>
                     </div>
                 </div>
             </div>
@@ -59,14 +59,14 @@ function ListMain(props) {
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
                     <div css={s.viewBox}>
-                        <span>조회수</span>
-                        <span>추천수</span>
+                        <p>조회수</p>
+                        <p>추천수</p>
                     </div>
 
                     <div css={s.spanBox}>
-                        <span>카페 이름:</span>
-                        <span>카테고리:</span>
-                        <span>주소:</span>
+                        <p>카페 이름:</p>
+                        <p>카테고리:</p>
+                        <p>주소:</p>
                     </div>
                 </div>
             </div>
@@ -75,14 +75,14 @@ function ListMain(props) {
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
                     <div css={s.viewBox}>
-                        <span>조회수</span>
-                        <span>추천수</span>
+                        <p>조회수</p>
+                        <p>추천수</p>
                     </div>
 
                     <div css={s.spanBox}>
-                        <span>카페 이름:</span>
-                        <span>카테고리:</span>
-                        <span>주소:</span>
+                        <p>카페 이름:</p>
+                        <p>카테고리:</p>
+                        <p>주소:</p>
                     </div>
                 </div>
             </div>

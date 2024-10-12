@@ -89,7 +89,7 @@ export const searchBox = css`
     height: 40px;
 
     & input {
-        padding: 5px 5px;
+        padding: 10px;
         border: 1px solid #333447;
         border-right: none;
         border-top-left-radius: 5px;
@@ -101,6 +101,7 @@ export const searchBox = css`
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
         background-color: #333447;
+        color: white;
     }
 `;
 
@@ -164,6 +165,13 @@ export const thead = css`
     }
 
     & span:nth-child(5) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 3px solid black;
+    }
+
+    & span:nth-child(6) {
         width: 20%;
         line-height: 35px;
         border-bottom: 3px solid black;
@@ -173,6 +181,7 @@ export const thead = css`
 
 export const tbody = css`
     margin-bottom: 10px;
+
     & span {
         margin: 3px 0px;
     }
@@ -206,6 +215,13 @@ export const tbody = css`
     }
 
     & span:nth-child(5) {
+        width: 10%;
+        margin: 0px 5px;
+        line-height: 35px;
+        border-bottom: 1px solid black;
+    }
+
+    & span:nth-child(6) {
         width: 20%;
         line-height: 35px;
         border-bottom: 1px solid black;

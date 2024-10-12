@@ -1,5 +1,9 @@
 import { css } from "@emotion/react";
 
+export const mainBox = css`
+    display: flex;
+`;
+
 export const mainLayout = css`
     display: flex;
 `;
@@ -11,9 +15,8 @@ export const layout = css`
     box-sizing: border-box;
     border: 1px solid #898484;
     border-top: none;
-    width: 100%;
-    height: 950px;
-    border-left: none;
+    width: 300px;
+    height: 1135px;
 
     & > span {
         margin-left: 50px;
@@ -39,7 +42,7 @@ export const list = css`
 
     & > div {
         display: flex;
-        margin: 20px 0;
+        margin-top: 20px; 
 
         & > p {
             margin-right: 8px;
@@ -60,15 +63,40 @@ export const list = css`
     }
 `;
 
-export const buttonBox = css`
+export const title = css`
+    display: flex;
+`;
+
+export const titleBox = css`
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
+    font-size: 30px;
+`;
+
+export const registeredPhoto = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    width: 550px;
+    height: 600px;
+`;
+
+export const buttonBox = css`
+    margin-left: 200px;
 
     & > button:nth-of-type(1) {
-        margin-right: 40px;
+        margin-right: 60px;
     }
 
     & > button {
+        box-sizing: border-box;
+        border: 1px solid #dbdbdb;
+        width: 60px;
+        height: 40px;
         font-size: 16px;
     }
 `;

@@ -1,13 +1,17 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from '../../../firebase/firebase';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import ReactQuill, { Quill } from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import ImageResize from 'quill-image-resize';
 import { v4 as uuid } from "uuid";
+import { storage } from '../../../firebase/firebase';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { modifyBoardApi } from '../../../apis/modifyBoardApi';
+import { useQueryClient } from 'react-query';
+import { RingLoader } from "react-spinners";
+Quill.register("modules/imageResize", ImageResize);
 
 function ModifyPage(props) {
     const params = useParams();
@@ -29,7 +33,7 @@ function ModifyPage(props) {
 
     const handleModifySubmitOnClick = async () => {
         const selection = window.confirm("게시글을 수정하시겠습니까?");
-        if(selection) {
+        if (selection) {
             await modifyBoardApi(modifyBoard, boardId, navigate);
         } else {
             navigate(`/board/modify/${boardId}`);
@@ -53,17 +57,17 @@ function ModifyPage(props) {
     const handleImageLoad = useCallback(() => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
-        input.setAttribute("accept", "image/*");
         input.click();
 
         input.onchange = () => {
-            const editor = quillRef.current.getEditor(); // getEditor(): quill 내장 메소드, editor 객체를 가져옴
+            const editor = quillRef.current.getEditor();
             const files = Array.from(input.files);
             const imgFile = files[0];
 
             const editPoint = editor.getSelection(true);
 
             const storageRef = ref(storage, `board/img/${uuid()}_${imgFile.name}`);
+            console.log(storageRef);
             const task = uploadBytesResumable(storageRef, imgFile);
             setUploading(true);
             task.on(
@@ -72,9 +76,9 @@ function ModifyPage(props) {
                 () => { },
                 async () => {
                     const url = await getDownloadURL(storageRef);
-                    editor.insertEmbed(editPoint.index, "image", url); // 이미지를 quill editor에 띄운다.
-                    editor.setSelection(editPoint.index + 1); // 이미지 위치보다 커서를 +1칸 이동
-                    editor.insertText(editPoint.index + 1, "\n"); // 이미지 다음줄로 넘어감
+                    editor.insertEmbed(editPoint.index, "image", url);
+                    editor.setSelection(editPoint.index + 1);
+                    editor.insertText(editPoint.index + 1, "\n");
                     setUploading(false);
                     setModifyBoard(board => ({
                         ...board,
@@ -99,11 +103,17 @@ function ModifyPage(props) {
 
     return (
         <div css={s.layout}>
-            <Link to={"/board"}><h3>게시판</h3></Link>
+            <Link to={"/board?page=1"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
                 <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
+                {
+                    isUploading &&
+                    <div css={s.loadingLayout}>
+                        <RingLoader />
+                    </div>
+                }
                 <ReactQuill
                     ref={quillRef}
                     theme='snow'

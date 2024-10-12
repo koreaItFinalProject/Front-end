@@ -11,26 +11,22 @@ export const layout = css`
     box-sizing: border-box;
     border: 1px solid #898484;
     border-top: none;
-    width: 300px;
-    height: 1000px;
-
-    & > span {
-        margin-left: 50px;
-        font-size: 25px;
-    }
+    width: 100%;
+    height: 950px;
 `;
 
 export const container = css`
     display: flex;
+    width: 100%;
 `;
 
 export const mainBox = css`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 50%;
+    width: 100%;
     /* height: 457.6px;  */
-    height: 1000px;
+    height: 100%;
 `;
 
 export const titleBox = css`
@@ -42,7 +38,7 @@ export const titleBox = css`
     /* border-top: none; */
     width: 100%;
     height: 15%;
-    font-size: 45px;
+    font-size: 25px;
 `;
 
 export const secondTitleBox = css`
@@ -50,7 +46,7 @@ export const secondTitleBox = css`
     justify-content: space-between;
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
-    font-size: 25px;
+    font-size: 18px;
 `;
 
 export const contentBox = css`
