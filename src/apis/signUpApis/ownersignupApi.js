@@ -1,6 +1,7 @@
 import { instance } from "../util/instance";
 
 export const ownersignupApi = async (loginState) => {
+    
     let signupData = {
         isSuccess : false,
         ok: {
@@ -14,7 +15,6 @@ export const ownersignupApi = async (loginState) => {
             }
         ]
         }
-        console.log(signupData);
         try {
             const response = await instance.post("/owner/signup",loginState);
             console.log(response);
@@ -22,9 +22,6 @@ export const ownersignupApi = async (loginState) => {
                 isSuccess : true,
                 ok: response.data
                 }
-            console.log(signupData);
-            console.log(response.data.user.id);
-            // console.log(signupData.ok.id);
             return signupData;
         }catch(error){
             console.error(error);

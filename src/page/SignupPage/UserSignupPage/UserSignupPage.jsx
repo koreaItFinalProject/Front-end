@@ -29,7 +29,7 @@ function UserSignupPage(props) {
         console.log(loginState);
         const signupData = await usersignupApi(loginState);
         console.log(signupData);
-        if(!signupData.isSuceess){
+        if(!signupData.isSuccess){
             alert("회원가입 실패");       
         }else{
             alert("가입 성공");

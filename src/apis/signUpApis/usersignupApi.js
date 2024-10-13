@@ -7,7 +7,12 @@ export const usersignupApi = async (loginState) => {
             message : "",
             user : null
         },
-        
+        fieldErrors: [
+            {
+                field: "",
+                defaultMessage: ""
+            }
+        ]
     }
     console.log(loginState);
 
@@ -20,6 +25,15 @@ export const usersignupApi = async (loginState) => {
         }
         }catch(error){
         console.error(error);
+        const response = error.response;
+        signupData = {
+            isSuceess:false,
+            // field랑 defaultMessage를 사용하겠다
+            fieldErrors: response.data.map(fieldError => ({
+                field : fieldError.field,
+                defaultMessage : fieldError.defaultMessage
+            })),
+        }
     }
 
     return signupData;

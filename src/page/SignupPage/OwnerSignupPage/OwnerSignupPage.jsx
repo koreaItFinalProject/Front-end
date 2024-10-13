@@ -8,14 +8,14 @@ import { ownersignupApi } from '../../../apis/signUpApis/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
+import ShowFiledError from '../../../apis/ShowFiledError/ShowFiledErrorApi';
 
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
-    const mutate = useMutation();
     const [coordinates, setCoordinates] = useState({ 
-        lat: null,
-        lng: null
+        latitude: '',
+        longitude: ''
      });
     const [loginState , setLoginState] = useState({
         username: '',
@@ -32,9 +32,21 @@ function OwnerSignupPage(props) {
         buildingName:'',
         address:'',
         });
+        
     const [isCafe , setCafe] = useState({
-        cafeName:'',
-    })
+        cafename:'',
+    });
+
+    const [fieldErrorMessages, setFieldErrorMessages] = useState({
+        username: <></>,
+        password: <></>,
+        checkPassword: <></>,
+        name: <></>,
+        email: <></>,
+        nickname:<></>,
+        address:<></>,
+        cafename:<></>
+    });
 
     const [businessNumber, setBusinessNumber] = useState('');
     const [businessInfo, setBusinessInfo] = useState("");
@@ -59,14 +71,16 @@ function OwnerSignupPage(props) {
 
     const handleCoordinatesChange = (latitude, longitude) => {
         setCoordinates({
-            latitude, longitude });
-        console.log(coordinates);
-        console.log(isAddress);
+            latitude: latitude,
+            longitude: longitude 
+        })
+        console.log("latitude " +coordinates.latitude);
+        console.log("longitude " +coordinates.longitude);
     };
 
 
-const handleInputChange = (e) => {
-    setBusinessNumber(e.target.value);
+    const handleInputChange = (e) => {
+        setBusinessNumber(e.target.value);
     };
 
     const handleCheckBusiness = async () => {
@@ -104,60 +118,52 @@ const handleInputChange = (e) => {
         setError('등록된 사업자가 없습니다.');
         alert(`${response.data.data[0].tax_type}`)
         }
-    } catch (error) {
-        console.error('Error:', error);
-        setError('조회 중 오류가 발생했습니다.');
-        setBusinessInfo(null);
-    }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('조회 중 오류가 발생했습니다.');
+            setBusinessInfo(null);
+        }
     };
 
     const handlesignuppageOnClick = useMutation(
         async () => {
-            return await ownersignupApi(loginState);
+                const response = await ownersignupApi(loginState);
+                
+                return response 
             },
             {
             onSuccess: async(response) =>{
                     console.log(response);
-                    const data = {param:{
+                    console.log(coordinates);
+                    const data = {
                         ownerId: response.ok.user.id ,
-                        address:isAddress,
-                        lat:coordinates.lat,
-                        lng:coordinates.lng ,
-                        cafename:isCafe.cafeName
-                        }};                   
-                    await ownercheckApi(data);
-                alert("가입 성공");
-                navigate("/owner/signin");
+                        address:isAddress.address,
+                        lat:coordinates.latitude,
+                        lng:coordinates.longitude,
+                        cafename:isCafe.cafename
+                        };    
+                    console.log(coordinates);               
+                    if(response.ok){
+                        const CafeData = await ownercheckApi(data);
+                        if(CafeData.isSuccess){
+                            alert("가입 성공");
+                            navigate("/owner/signin");
+                        }
+                    }          
                 },
             onError: (error) => {
                 console.error("Signup failed:", error);
                 alert("가입 실패"); 
+                const data = {
+                    address:isAddress.address,
+                    lat:coordinates.latitude,
+                    lng:coordinates.longitude,
+                    cafename:isCafe.cafename
+                }
+                ShowFiledError();
             }
         }
     );
-//     const handlesignuppageOnClick = async() => {
-//         const result = await ownersignupApi(loginState);
-//         if(result.isSuccess){
-//             SuceessSignupData.mutate(result);
-//         }
-//     }
-        
-            
-//     const SuceessSignupData = useMutation( 
-//         async (signupData) => {
-//             return await ownercheckApi(signupData);
-//             },
-//             {
-//             onSuccess: (signupData => {
-//                 if(signupData.isSuccess){
-//                     alert("가입 성공");
-//                     navigate("/owner/signin");
-//                 }
-//             }),
-//         retry: 0,
-//         refetchOnWindowFocus: false
-//     }
-// );
 
     return (
         <div>
@@ -191,7 +197,7 @@ const handleInputChange = (e) => {
                         </div>
                         <div>
                             <p>카페명</p>
-                            <input type="text" name='cafeName' value={isCafe.cafeName} onChange={handleInputTextChange} placeholder='' />
+                            <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
                         </div>
                         <div>
                             <p>사업자 등록번호</p>
