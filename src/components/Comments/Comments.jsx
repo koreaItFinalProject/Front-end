@@ -62,6 +62,15 @@ function Comments(props) {
         }
     );
 
+    const deleteCommentMutation = useMutation(
+        async (commentId) => await instance.delete(`/comment/${commentId}`),
+        {
+            onSuccess: response => {
+                comments.refetch();
+            }
+        }
+    );
+
     const handleCommentInputOnChange = (e) => {
         setComment(comment => ({
             ...comment,
@@ -98,11 +107,18 @@ function Comments(props) {
         modifyCommentMutation.mutateAsync();
     }
 
+    const handleDeleteCommentButtonOnClick = (commentId) => {
+        const selection = window.confirm("댓글을 삭제하시겠습니까?");
+        if(selection) {
+            deleteCommentMutation.mutateAsync(commentId);
+        }
+    }
+
     return (
         <div css={s.commentContainer}>
                         <h2>댓글</h2>
                         {
-                            // commentData.parentId === null &&
+                            comment.parentId === null &&
                             <div css={s.commentWriteBox(0)}>
                                 <textarea name="content"  value={comment.content} onChange={handleCommentInputOnChange} placeholder='댓글을 입력하세요.'></textarea>
                                 <button onClick={handleCommentSubmitOnClick}>작성하기</button>
@@ -129,12 +145,12 @@ function Comments(props) {
                                                             {
                                                                 modifyComment.commentId === comment.id
                                                                     ?
-                                                                    <button onClick={handleModifyCommentCancelButtonOnClick}>취소</button> // id가 같을때는 취소버튼이 보인다. 취소 버튼을 누르면 id가 0으로 초기화되면서 수정버튼이 보이게 된다.
+                                                                    <button onClick={handleModifyCommentCancelButtonOnClick}>취소</button>
                                                                     :
                                                                     <button onClick={() => handleModifyCommentButtonOnClick(comment.id, comment.content)} disabled={comments.parentId === comment.id}>수정</button>
                                                             }
-                                                            {/* <button onClick={() => handleDeleteCommentButtonOnClick(comment.id)}
-                                                                disabled={commentData.parentId === comment.id || modifyCommentData.commentId === comment.id}>삭제</button> */}
+                                                            <button onClick={() => handleDeleteCommentButtonOnClick(comment.id)}
+                                                                disabled={comment.parentId === comment.id || modifyComment.commentId === comment.id}>삭제</button>
                                                         </div>
                                                     }
                                                     {/* {
