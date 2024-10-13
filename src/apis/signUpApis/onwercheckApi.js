@@ -1,12 +1,8 @@
  import { instance } from "../util/instance"
 
  export const ownercheckApi = async(data) => {
-    console.log(data);
-
     let cafeData = {
         isSuccess:false,
-        
-    
     }
     
     try{
