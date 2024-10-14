@@ -21,6 +21,8 @@ function Comments(props) {
         content: ""
     });
 
+    const [replyActive, setReplyActive] = useState(null);
+
     const comments = useQuery(
         ["commentsQuery"],
         async () => {
@@ -30,7 +32,7 @@ function Comments(props) {
             retry: 0,
             onSuccess: response => console.log(response)
         }
-    )
+    );
 
     const commentMutation = useMutation(
         async () => {
@@ -76,43 +78,59 @@ function Comments(props) {
             ...comment,
            content: e.target.value
         }));
-    }
+    };
 
     const handleCommentSubmitOnClick = () => {
         commentMutation.mutateAsync();
-    }
+    };
 
     const handleModifyCommentButtonOnClick = (commentId, content) => {
         setModifyComment(modifyComment => ({
             commentId,
             content
         }));
-    }
+    };
 
     const handleModifyCommentCancelButtonOnClick = () => {
         setModifyComment(modifyComment => ({
             commentId: 0,
             content: ""
         }));
-    }
+    };
 
     const handleModifyCommentInputOnChange = (e) => {
         setModifyComment(modifyComment => ({
             ...modifyComment,
             content: e.target.value
         }))
-    }
+    };
 
     const handleCommentModifySubmitOnClick = () => {
         modifyCommentMutation.mutateAsync();
-    }
+    };
 
     const handleDeleteCommentButtonOnClick = (commentId) => {
         const selection = window.confirm("댓글을 삭제하시겠습니까?");
         if(selection) {
             deleteCommentMutation.mutateAsync(commentId);
         }
-    }
+    };
+
+    const handleReplyButtonOnClick = (commentId) => {
+        setReplyActive(prevState => (prevState === commentId ? null : commentId));
+        setComment(comment => ({
+            ...comment,
+            parentId: commentId
+        }));
+    };
+
+    const handleCancelReplyOnClick = () => {
+        setReplyActive(null);
+        setComment(comment =>({
+            ...comment,
+            parentId: null
+        }));
+    };
 
     return (
         <div css={s.commentContainer}>
@@ -120,7 +138,10 @@ function Comments(props) {
                         {
                             comment.parentId === null &&
                             <div css={s.commentWriteBox(0)}>
-                                <textarea name="content"  value={comment.content} onChange={handleCommentInputOnChange} placeholder='댓글을 입력하세요.'></textarea>
+                                <textarea name="content"  
+                                    value={comment.content} 
+                                    onChange={handleCommentInputOnChange} 
+                                    placeholder='댓글을 입력하세요.'></textarea>
                                 <button onClick={handleCommentSubmitOnClick}>작성하기</button>
                             </div>
                         }
@@ -147,28 +168,37 @@ function Comments(props) {
                                                                     ?
                                                                     <button onClick={handleModifyCommentCancelButtonOnClick}>취소</button>
                                                                     :
-                                                                    <button onClick={() => handleModifyCommentButtonOnClick(comment.id, comment.content)} disabled={comments.parentId === comment.id}>수정</button>
+                                                                    <button onClick={() => handleModifyCommentButtonOnClick(comment.id, comment.content)} 
+                                                                        disabled={comments.parentId === comment.id}>수정</button>
                                                             }
                                                             <button onClick={() => handleDeleteCommentButtonOnClick(comment.id)}
                                                                 disabled={comment.parentId === comment.id || modifyComment.commentId === comment.id}>삭제</button>
                                                         </div>
                                                     }
-                                                    {/* {
-                                                        comment.level < 3 &&
+                                                    {
+                                                        comment.level < 2 &&
                                                         <div>
-                                                            <button onClick={() => handleReplyButtonOnClick(comment.id)} disabled={modifyCommentData.commentId === comment.id}>답글</button>
+                                                            {
+                                                                replyActive === comment.id
+                                                                    ?
+                                                                    <button onClick={handleCancelReplyOnClick}>취소</button>
+                                                                    :
+                                                                    <button onClick={() => handleReplyButtonOnClick(comment.id)} 
+                                                                        disabled={modifyComment.commentId === comment.id}>답글</button>
+                                                            }
                                                         </div>
-                                                    } */}
+                                                    }
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* {
-                                            commentData.parentId === comment.id && // 처음엔 답글 작성란이 렌더링 되지 않다가 handleReplyButtonOnClick으로 인해 버튼을 누르면 보임(토글)
+                                        {
+                                            replyActive === comment.id && 
                                             <div css={s.commentWriteBox(comment.level)}>
-                                                <textarea name="content" onChange={handleCommentInputOnChange} value={commentData.content} placeholder='댓글을 입력하세요.'></textarea>
-                                                <button>작성하기</button>
+                                                <textarea name="content" onChange={handleCommentInputOnChange} 
+                                                    value={comments.content} placeholder='답글을 입력하세요.'></textarea>
+                                                <button onClick={handleCommentSubmitOnClick}>작성하기</button>
                                             </div>
-                                        } */}
+                                        }
                                         {
                                             modifyComment.commentId === comment.id &&
                                             <div css={s.commentWriteBox(comment.level)}>
