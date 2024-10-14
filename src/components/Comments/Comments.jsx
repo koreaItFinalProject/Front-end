@@ -9,7 +9,7 @@ function Comments(props) {
     const params = useParams();
     const boardId = params.boardId;
 
-    const [comment, setComment] = useState({
+    const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
         content: ""
@@ -20,8 +20,6 @@ function Comments(props) {
         parentId: null,
         content: ""
     });
-
-    const [replyActive, setReplyActive] = useState(null);
 
     const comments = useQuery(
         ["commentsQuery"],
@@ -36,11 +34,11 @@ function Comments(props) {
 
     const commentMutation = useMutation(
         async () => {
-            return await instance.post("/comment", comment);
+            return await instance.post("/comment", commentData);
         },
         {
             onSuccess: response => {
-                setComment({
+                setCommentData({
                     boardId,
                     parentId: null,
                     content: ""
@@ -74,7 +72,7 @@ function Comments(props) {
     );
 
     const handleCommentInputOnChange = (e) => {
-        setComment(comment => ({
+        setCommentData(comment => ({
             ...comment,
            content: e.target.value
         }));
@@ -117,16 +115,15 @@ function Comments(props) {
     };
 
     const handleReplyButtonOnClick = (commentId) => {
-        setReplyActive(prevState => (prevState === commentId ? null : commentId));
-        setComment(comment => ({
+        setCommentData(comment => ({
             ...comment,
-            parentId: commentId
+            content: "",
+            parentId: commentId === comment.parentId ? null : commentId
         }));
     };
 
     const handleCancelReplyOnClick = () => {
-        setReplyActive(null);
-        setComment(comment =>({
+        setCommentData(comment =>({
             ...comment,
             parentId: null
         }));
@@ -136,10 +133,10 @@ function Comments(props) {
         <div css={s.commentContainer}>
                         <h2>댓글</h2>
                         {
-                            comment.parentId === null &&
+                            commentData.parentId === null &&
                             <div css={s.commentWriteBox(0)}>
                                 <textarea name="content"  
-                                    value={comment.content} 
+                                    value={commentData.content} 
                                     onChange={handleCommentInputOnChange} 
                                     placeholder='댓글을 입력하세요.'></textarea>
                                 <button onClick={handleCommentSubmitOnClick}>작성하기</button>
@@ -176,10 +173,10 @@ function Comments(props) {
                                                         </div>
                                                     }
                                                     {
-                                                        comment.level < 2 &&
+                                                        comment.level < 3 &&
                                                         <div>
                                                             {
-                                                                replyActive === comment.id
+                                                                comment.parentId === comment.id
                                                                     ?
                                                                     <button onClick={handleCancelReplyOnClick}>취소</button>
                                                                     :
@@ -192,10 +189,10 @@ function Comments(props) {
                                             </div>
                                         </div>
                                         {
-                                            replyActive === comment.id && 
-                                            <div css={s.commentWriteBox(comment.level)}>
+                                            commentData.parentId === comment.id && 
+                                            <div css={s.commentWriteBox(comments.level)}>
                                                 <textarea name="content" onChange={handleCommentInputOnChange} 
-                                                    value={comments.content} placeholder='답글을 입력하세요.'></textarea>
+                                                    value={commentData.content} placeholder='답글을 입력하세요.'></textarea>
                                                 <button onClick={handleCommentSubmitOnClick}>작성하기</button>
                                             </div>
                                         }
