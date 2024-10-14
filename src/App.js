@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from './page/HomePage/HomePage';
 import SignupSelectPage from './page/SignupSelectPage/SignupSelectPage';
 import ListPage from './page/ListPage';
@@ -25,6 +25,9 @@ import ManagerStoreRequestPage from './page/Manager/ManagerStoreRequestPage/Mana
 import ParticularRequestPage from './page/Particular/ParticularRequestPage/ParticularRequestPage';
 import ManagerRegisterStore from './page/Manager/ManagerRegisterStore/ManagerRegisterStore';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
+import { useState } from 'react';
+import { useQuery } from 'react-query';
+import { instance } from './apis/util/instance';
 
 
 function App() {
