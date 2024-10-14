@@ -17,6 +17,15 @@ function UserSignupPage(props) {
         nickname:'',
     })
 
+    const [fieldErrorMessages, setFieldErrorMessages] = useState({
+        username: <></>,
+        password: <></>,
+        checkPassword: <></>,
+        name: <></>,
+        email: <></>,
+        nickname:<></>,
+    });
+
     const handleInputOnChange =(e)=> {
         setLoginState({
             ...loginState,
@@ -30,12 +39,35 @@ function UserSignupPage(props) {
         const signupData = await usersignupApi(loginState);
         console.log(signupData);
         if(!signupData.isSuccess){
+            ShowFiledError(signupData.fieldErrors);
             alert("회원가입 실패");       
         }else{
             alert("가입 성공");
             navigate("/signin");
         }
     }
+
+    const ShowFiledError = (fieldErrors) => {
+        let EmptyfieldErrors = {
+            username: <></>,
+            password: <></>,
+            checkPassword: <></>,
+            name: <></>,
+            email: <></>,
+            nickname:<></>,
+        }
+      
+        // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
+        for (let fieldError of fieldErrors) {
+            EmptyfieldErrors = {
+                ...EmptyfieldErrors,
+                [fieldError.field]: <p>{fieldError.defaultMessage}</p>
+            }
+        }
+        setFieldErrorMessages(EmptyfieldErrors);
+      }
+
+    
 
     return (
         <div>
@@ -46,26 +78,32 @@ function UserSignupPage(props) {
                         <div>
                             <p>아이디</p>
                             <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.username}
                         </div>
                         <div>
                             <p>비밀번호</p>
                             <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.password}
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
                             <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.checkPassword}
                         </div>
                         <div>
                             <p>이름</p>
                             <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.name}
                         </div>
                         <div>
                             <p>이메일</p>
                             <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.email}
                         </div>
                         <div>
                             <p>닉네임</p>
                             <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.nickname}
                         </div>
                     </div>
                     

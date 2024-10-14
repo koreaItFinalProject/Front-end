@@ -18,7 +18,6 @@ function ParticularRequestPage(props) {
                 <Link>설정</Link>
                 <Link to="/">로그아웃</Link>
             </div>
-
         </div>
     );
 }

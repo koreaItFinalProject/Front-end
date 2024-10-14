@@ -1,6 +1,6 @@
 import { instance } from "../util/instance";
 
-export const usersignInApi = async (isLogin) => {
+export const ownersigninAPi = async (isLogin) => {
     let signinData = {
         isSuccess : false,
         token: null,
@@ -14,15 +14,14 @@ export const usersignInApi = async (isLogin) => {
     console.log(isLogin);
 
     try {
-        const response = await instance.post("/user/signin", isLogin);
+        const response = await instance.post("/owner/signin", isLogin);
         console.log(response);
         signinData = {
             isSuccess:true,
             token: response.data
         }
-        }catch(error) {
+    }catch(error) {
         console.error(error);
-        console.log(error.response);
         const response = error.response;
         console.log(response);
         signinData = {

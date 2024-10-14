@@ -3,13 +3,11 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
-import axios from 'axios';
 import { ownersignupApi } from '../../../apis/signUpApis/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
-import ShowFiledError from '../../../apis/ShowFiledError/ShowFiledErrorApi';
-
+import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -49,9 +47,6 @@ function OwnerSignupPage(props) {
     });
 
     const [businessNumber, setBusinessNumber] = useState('');
-    const [businessInfo, setBusinessInfo] = useState("");
-    const [error, setError] = useState('');
-
 
     const handleInputOnChange =(e)=> {
         setLoginState({
@@ -83,53 +78,36 @@ function OwnerSignupPage(props) {
         setBusinessNumber(e.target.value);
     };
 
-    const handleCheckBusiness = async () => {
-    if (!businessNumber) {
-        setError('사업자 등록번호를 입력해주세요.');
-        return;
-    }
 
-    const data = {
-        b_no: [businessNumber], // 사업자번호를 배열로 전달
-    };
-
-    console.log(data);
-
-    const apiKey = process.env.REACT_APP_BUSINESS_API_KEY;// 발급받은 API 키
-    const apiUrl = `https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=${apiKey}`;
-
-    console.log(apiUrl);
-    
-    try {
-        const response = await axios.post(apiUrl, data, {
-        headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json',
-        },
-        });
-        console.log(response.data);
-        // response.data.data의 b_stt_cd 코드 종류(01 계속사업자, 02 휴업자, 03 폐업자)
-        if (response.data.data[0].b_stt_cd === "01") {
-        setBusinessInfo("인증완료");
-        setError('');
-        console.log(businessInfo);
-        } else {
-        setBusinessInfo(null);
-        setError('등록된 사업자가 없습니다.');
-        alert(`${response.data.data[0].tax_type}`)
+    const ShowFiledError = (fieldErrors) => {
+        let EmptyfieldErrors = {
+            username: <></>,
+            password: <></>,
+            checkPassword: <></>,
+            name: <></>,
+            email: <></>,
+            nickname:<></>,
+            address:<></>,
+            cafename:<></>
         }
-        } catch (error) {
-            console.error('Error:', error);
-            setError('조회 중 오류가 발생했습니다.');
-            setBusinessInfo(null);
+      
+        // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
+        for (let fieldError of fieldErrors) {
+            EmptyfieldErrors = {
+                ...EmptyfieldErrors,
+                [fieldError.field]: <p>{fieldError.defaultMessage}</p>
+            }
         }
-    };
+        setFieldErrorMessages(EmptyfieldErrors);
+      }
 
     const handlesignuppageOnClick = useMutation(
         async () => {
-                const response = await ownersignupApi(loginState);
-                
-                return response 
+                const signupData = await ownersignupApi(loginState);
+                if(!signupData.isSuccess){
+                    ShowFiledError(signupData.fieldErrors);
+                }
+                return signupData 
             },
             {
             onSuccess: async(response) =>{
@@ -147,20 +125,14 @@ function OwnerSignupPage(props) {
                         const CafeData = await ownercheckApi(data);
                         if(CafeData.isSuccess){
                             alert("가입 성공");
-                            navigate("/owner/signin");
+                            navigate("/signin");
                         }
                     }          
                 },
             onError: (error) => {
                 console.error("Signup failed:", error);
+                
                 alert("가입 실패"); 
-                const data = {
-                    address:isAddress.address,
-                    lat:coordinates.latitude,
-                    lng:coordinates.longitude,
-                    cafename:isCafe.cafename
-                }
-                ShowFiledError();
             }
         }
     );
@@ -174,37 +146,44 @@ function OwnerSignupPage(props) {
                         <div>
                             <p>아이디</p>
                             <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.username}
                         </div>
                         <div>
                             <p>비밀번호</p>
                             <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.password}
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
                             <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.checkPassword}
                         </div>
                         <div>
                             <p>이메일</p>
                             <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.email}
                         </div>
                         <div>
                             <p>대표자명</p>
                             <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.name}
                         </div>
                         <div>
                             <p>닉네임</p>
                             <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
+                            {fieldErrorMessages.nickname}
                         </div>
                         <div>
                             <p>카페명</p>
                             <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
+                            {fieldErrorMessages.cafename}
                         </div>
                         <div>
                             <p>사업자 등록번호</p>
                             <input type="text" 
                                 name='businessNumber' value={businessNumber}
                                 onChange={handleInputChange} placeholder='' />
-                            <button onClick={handleCheckBusiness}>확인</button>
+                            <button onClick={() => Businessregistration(businessNumber)}>확인</button>
                         </div>
                         <div>
                             <p>등록번호 이미지</p>
