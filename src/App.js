@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import HomePage from './page/HomePage/HomePage';
 import SignupSelectPage from './page/SignupSelectPage/SignupSelectPage';
 import ListPage from './page/ListPage';
@@ -28,6 +28,48 @@ import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
 
 
 function App() {
+  const location = useLocation();
+  const navigeter = useNavigate();
+  const [ authRefresh , setAuthRefresh ] = useState(true);
+
+  const accessTokenValid = useQuery(
+    ["accessTokenValidQuery"],
+    async () => { 
+        setAuthRefresh(false);
+        console.log("쿼리1")
+        return await instance.get("/auth/access" , {
+            params: { 
+                accessToken : localStorage.getItem("accessToken") 
+            }
+        });
+    } ,
+      {
+        enabled: authRefresh,
+        retry: 0, 
+        refetchOnWindowFocus:false,
+        onSuccess : response => {
+            const permitAllPasths = [ "/user" ];
+          for(let permitAllPasth of permitAllPasths){
+            if(location.pathname.startsWith(permitAllPasth)){
+              alert("잘못된 요청입니다.")
+              navigeter("/"); 
+              break;
+              }
+            }
+        },
+        onError : error => {
+          const authPaths = [ "/profile" ];
+          for(let authPath of authPaths){
+            if(location.pathname.startsWith(authPath)){
+              alert("로그인 후 이용해주세요")
+              navigeter("/user/login");
+              break;
+              }
+            }
+          }
+    }
+  );
+
   return (
     <div className="App">
       <Global styles={reset}/>
