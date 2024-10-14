@@ -15,6 +15,7 @@ function UserSignupPage(props) {
         email:'',
         name:'',
         nickname:'',
+        role: "USER"
     })
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
@@ -74,35 +75,35 @@ function UserSignupPage(props) {
             <div css={s.layout}>
                 <div>
                     <div css={s.Info}>
-                        <div>
+                        <div ccs={s.inputStyle}>
                             <p>아이디</p>
                             <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.username}
+                            <p>{fieldErrorMessages.username}</p>
                         </div>
                         <div>
                             <p>비밀번호</p>
                             <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.password}
+                            <p>{fieldErrorMessages.password}</p>
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
                             <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.checkPassword}
+                            <p>{fieldErrorMessages.checkPassword}</p>
                         </div>
                         <div>
                             <p>이름</p>
                             <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.name}
+                            <p>{fieldErrorMessages.name}</p>
                         </div>
                         <div>
                             <p>이메일</p>
                             <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.email}
+                            <p>{fieldErrorMessages.email}</p>
                         </div>
                         <div>
                             <p>닉네임</p>
                             <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
-                            {fieldErrorMessages.nickname}
+                            <p>{fieldErrorMessages.nickname}</p>
                         </div>
                     </div>
                     

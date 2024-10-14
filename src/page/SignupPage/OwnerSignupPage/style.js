@@ -68,10 +68,17 @@ export const Info = css`
             width: 50px;
             height: 36px;
             border-radius: 10px;
-            margin-left: 20px;
+            margin-left: 20px; 
+            &:disabled{
+                cursor: not-allowed;
+            }
             &:hover{
                 background-color: #dbdbdb;
                 box-shadow: 2px 2px 1px inset;
+            }
+            &:hover:disabled{
+                box-shadow: none;
+                background-color: white;
             }
 
             &:active{
@@ -116,5 +123,7 @@ export const addressStyle = css`
 `;
 
 export const signupbutton = css`
-
+    button:disabled {
+        cursor: not-allowed;
+    }
 `;

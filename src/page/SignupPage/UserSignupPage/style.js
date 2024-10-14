@@ -24,27 +24,40 @@ export const layout = css`
 export const Info = css`
     & div{
         width: 480px;
-        height: 46px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 10px 0px;
+        margin-top: 30px ;
         & input {
             height: 35px;
-            width: 320px;
+            width: 300px;
             border-radius: 10px;
             padding-left: 20px;
             font-size: 18px;
+            
         }
     }
     & p {
         width: 100px;
-        margin-right: 10px;
-        padding: 10px;
+        margin-right: 0px;
+        padding: 0px;
+    }    
+`;
+
+export const inputStyle = css`
+    width: 100px;
+    height: 20px;
+    box-sizing: border-box;
+    p {
+        box-sizing: border-box;
+        width: 100px;
+        height: 20px;
+        font-size: 15px;
     }
 
-    
-`;
+`;    
+
 
 export const addressInfo = css`
     width: 480px;

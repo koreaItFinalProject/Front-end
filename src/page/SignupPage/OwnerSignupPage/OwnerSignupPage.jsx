@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
-import { ownersignupApi } from '../../../apis/signUpApis/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
 import Ocr from '../../../apis/Ocr/Ocr';
 import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
+import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -23,6 +23,7 @@ function OwnerSignupPage(props) {
         email:'',
         checkPassword:'',
         nickname:'',
+        role: "OWNER"
     })
 
     const [isAddress , setAddress] = useState({
@@ -43,14 +44,14 @@ function OwnerSignupPage(props) {
         name: <></>,
         email: <></>,
         nickname:<></>,
-        address:<></>,
-        cafename:<></>
     });
 
-    const [businessNumber, setBusinessNumber] = useState('1098172945');
+    const [businessNumber, setBusinessNumber] = useState('2148813306');
     const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
-
+    const [ proccess , setProccess] = useState(true);
+    const [ isLoading , setLoading] = useState(true);
     const [image, setImage] = useState();
+
 
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
@@ -92,33 +93,36 @@ function OwnerSignupPage(props) {
 
     const ShowFiledError = (fieldErrors) => {
         let EmptyfieldErrors = {
-            username: <></>,
-            password: <></>,
-            checkPassword: <></>,
-            name: <></>,
-            email: <></>,
-            nickname:<></>,
-            address:<></>,
-            cafename:<></>
+            username: '',
+            password:'',
+            checkPassword:'',
+            email:'',
+            name:'',
+            nickname:'',
+            cafename:''
         }
-      
+
         // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
         for (let fieldError of fieldErrors) {
             EmptyfieldErrors = {
                 ...EmptyfieldErrors,
                 [fieldError.field]: <p>{fieldError.defaultMessage}</p>
             }
+            
         }
         setFieldErrorMessages(EmptyfieldErrors);
       }
 
+    
+
     const handlesignuppageOnClick = useMutation (
         async () => {
-                const signupData = await ownersignupApi(loginState);
+                const signupData = await usersignupApi(loginState);
+                console.log(signupData);
                 if(!signupData.isSuccess){
                     ShowFiledError(signupData.fieldErrors);
                 }
-                return signupData 
+                return signupData;
             },
             {
             onSuccess: async(response) =>{
@@ -132,17 +136,15 @@ function OwnerSignupPage(props) {
                         cafename:isCafe.cafename
                         };    
                     console.log(coordinates);               
-                    if(response.ok) {
+                    
                         const CafeData = await ownercheckApi(data);
                         if(CafeData.isSuccess){
                             alert("가입 성공");
                             navigate("/signin");
                         }
-                    }          
                 },
-            onError: (error) => {
-                console.error("Signup failed:", error);
-                
+            onError: (signupData) => {
+                ShowFiledError(signupData.fieldErrors);
                 alert("가입 실패"); 
             }
         }
@@ -150,18 +152,32 @@ function OwnerSignupPage(props) {
 
     const handleRegistrationNumberCheckOnClick = async () => {
         const response = await Businessregistration(businessNumber);
+        console.log(response);
+        setLoading(true);
+        setProccess(false);
         if(response === '인증완료') {
             if (image) {
                 Ocr(image)
                     .then((number) => {
-                        setBusinessNumber(number); // 사업자 등록번호 상태 업데이트
                         console.log(`추출된 사업자 등록번호: ${number}`);
+                        if(number=== businessNumber){
+                            setProccess(false);
+                            setLoading(false);
+                            console.log(proccess);
+                            alert("사업자등록번호 인증을 완료하였습니다.")
+                        }else if(number !== businessNumber){
+                            alert("일치하지 않습니다");
+                            setLoading(false);
+                            setProccess(true);
+                        }
                     })
                     .catch((error) => {
                         console.error('OCR 처리 중 오류 발생:', error);
                     })
             } else {
                 console.log('이미지를 선택해 주세요.');
+                alert("이미지를 선택해 주세요.")
+                setProccess(true);
             }
         }
     }
@@ -211,12 +227,12 @@ function OwnerSignupPage(props) {
                             <p>사업자 등록번호</p>
                             <input type="text" 
                                 name='businessNumber' value={businessNumber}
-                                onChange={handleInputChange} placeholder='' />
-                            <button onClick={handleRegistrationNumberCheckOnClick}>확인</button>
+                                onChange={handleInputChange} placeholder='' disabled={proccess === false ? true : false}/>
+                            <button onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
                         </div>
                         <div>
                             <p>등록번호 이미지</p>
-                            <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' />
+                            <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' disabled={proccess === false ? true : false}/>
                         </div>
                     </div>
                     <div css={s.addressInfo}>
@@ -232,7 +248,7 @@ function OwnerSignupPage(props) {
                         </div>
                     </div>
                     <div css={s.signupbutton}>
-                        <button onClick={() => handlesignuppageOnClick.mutateAsync()}>가입하기</button>
+                        <button onClick={() => handlesignuppageOnClick.mutateAsync()} disabled={isLoading === true ? true : false} >가입하기</button>
                     </div>
                 </div>
             </div>
