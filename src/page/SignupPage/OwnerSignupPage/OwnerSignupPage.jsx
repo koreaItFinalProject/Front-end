@@ -7,6 +7,7 @@ import { ownersignupApi } from '../../../apis/signUpApis/ownersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
+import Ocr from '../../../apis/Ocr/Ocr';
 import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
 
 function OwnerSignupPage(props) {
@@ -46,7 +47,17 @@ function OwnerSignupPage(props) {
         cafename:<></>
     });
 
-    const [businessNumber, setBusinessNumber] = useState('');
+    const [businessNumber, setBusinessNumber] = useState('1098172945');
+    const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
+
+    const [image, setImage] = useState();
+
+    const handleImageChange = (e) => {
+        setImage(e.target.files[0]);
+        if(image) {
+            setOcrBusinessNumber(Ocr(image));
+        }
+    }
 
     const handleInputOnChange =(e)=> {
         setLoginState({
@@ -101,7 +112,7 @@ function OwnerSignupPage(props) {
         setFieldErrorMessages(EmptyfieldErrors);
       }
 
-    const handlesignuppageOnClick = useMutation(
+    const handlesignuppageOnClick = useMutation (
         async () => {
                 const signupData = await ownersignupApi(loginState);
                 if(!signupData.isSuccess){
@@ -121,7 +132,7 @@ function OwnerSignupPage(props) {
                         cafename:isCafe.cafename
                         };    
                     console.log(coordinates);               
-                    if(response.ok){
+                    if(response.ok) {
                         const CafeData = await ownercheckApi(data);
                         if(CafeData.isSuccess){
                             alert("가입 성공");
@@ -136,6 +147,24 @@ function OwnerSignupPage(props) {
             }
         }
     );
+
+    const handleRegistrationNumberCheckOnClick = async () => {
+        const response = await Businessregistration(businessNumber);
+        if(response === '인증완료') {
+            if (image) {
+                Ocr(image)
+                    .then((number) => {
+                        setBusinessNumber(number); // 사업자 등록번호 상태 업데이트
+                        console.log(`추출된 사업자 등록번호: ${number}`);
+                    })
+                    .catch((error) => {
+                        console.error('OCR 처리 중 오류 발생:', error);
+                    })
+            } else {
+                console.log('이미지를 선택해 주세요.');
+            }
+        }
+    }
 
     return (
         <div>
@@ -183,11 +212,11 @@ function OwnerSignupPage(props) {
                             <input type="text" 
                                 name='businessNumber' value={businessNumber}
                                 onChange={handleInputChange} placeholder='' />
-                            <button onClick={() => Businessregistration(businessNumber)}>확인</button>
+                            <button onClick={handleRegistrationNumberCheckOnClick}>확인</button>
                         </div>
                         <div>
                             <p>등록번호 이미지</p>
-                            <input type="file" name='ownerImage' onChange={handleInputOnChange} placeholder='' />
+                            <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' />
                         </div>
                     </div>
                     <div css={s.addressInfo}>
