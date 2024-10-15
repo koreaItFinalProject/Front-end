@@ -2,11 +2,10 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     display: flex;
-    width: 100%;
-    height: 802px;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
+    height: 100%;
 `;
 
 export const loginMain = css`
@@ -16,7 +15,7 @@ export const loginMain = css`
     justify-content: center;
     margin: 0px auto;
     height: 100%;
-    width: 600px;
+    /* width: 600px; */
 `;
 
 export const selectMember = css`

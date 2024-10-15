@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const background = css`
     box-sizing: border-box;
-    padding: 10px 0px;
+    padding: 15px 0px;
     width: 100%;
     height: 100%;
     background-color: #111111;
@@ -47,6 +47,7 @@ export const camera = css`
 `;
 
 export const container = css`
+    padding-bottom: 0px;
     box-sizing: border-box;
     margin: 0px auto;
     border-radius: 10px;
@@ -56,9 +57,27 @@ export const container = css`
     overflow-y: auto;
     background-color: #F4F4F6;
     box-shadow: 0px 0px 2px 1px #00000066 inset;
-
     & * {
         color: #1c1c1b;
         font-size: 16px;
     }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 `;
+
+export const header = css`
+    box-sizing: border-box;
+    height: 20px;
+`;
+
+export const children = css`
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+`;
+
+export const footer = css`
+    height: 60px;
+    box-sizing: border-box;
+`

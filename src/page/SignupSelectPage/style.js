@@ -10,6 +10,7 @@ export const layout = css`
     & h1,p {
         margin: 0;
     }
+    background-color: #dbdbdb;
 `;
 
 export const layoutMain = css`
