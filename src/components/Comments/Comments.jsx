@@ -24,7 +24,7 @@ function Comments(props) {
     const comments = useQuery(
         ["commentsQuery"],
         async () => {
-            return await instance.get(`/board/${boardId}/comments`);
+            return await instance.get(`/comment/${boardId}`);
         },
         {
             retry: 0,
@@ -128,6 +128,8 @@ function Comments(props) {
             parentId: null
         }));
     };
+
+    console.log(comments.data);
 
     return (
         <div css={s.commentContainer}>
