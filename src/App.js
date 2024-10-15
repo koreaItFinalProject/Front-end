@@ -26,10 +26,7 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
-import Header from './components/Header/Header';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
-import SideBar from './components/SideBar/SideBar';
-
 
 function App() {
   const location = useLocation();
@@ -108,7 +105,6 @@ function App() {
               <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
               <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
             </Routes>
-            <Header/>
           </MainLayout>
         }/>
         
