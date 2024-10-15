@@ -38,27 +38,7 @@ export const selectMember = css`
 
     }
     
-    & button:nth-last-of-type(2){
-        border-radius: 10px 0px 0px 0px;
-        border-right: none;
-    }
-    & button:nth-last-of-type(1){
-        border-radius: 0px 10px 0px 0px;
-        border-left: none;
-    }
     `;
-
-export const userButton = css`
-    border-radius: 10px 0px 10px 0px !important;
-    background-color: #dbdbdb ;
-    box-shadow: 5px 2px 3px #757575 inset;
-`;
-
-export const ownerButton = css`
-    border-radius: 0px 10px 0px 10px !important;
-    background-color: #dbdbdb ;
-    box-shadow: 2px 2px 3px #757575 inset;
-`;
 
 export const togleLogin = css`
     display: flex;

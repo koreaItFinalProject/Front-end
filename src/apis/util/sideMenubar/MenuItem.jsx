@@ -12,7 +12,14 @@ function Menu({ title , icon , path }){
 
   return (
       <div css={s.layout}  >
-          <button onClick={handleClick}>{icon}{title}</button>
+          <button onClick={handleClick}>
+            <div>
+                {icon}
+            </div>
+            <div>
+                {title}
+            </div>
+        </button>
       </div>
   )
 };

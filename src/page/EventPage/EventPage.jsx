@@ -6,7 +6,6 @@ import Header from '../../components/Header/Header';
 function EventPage(props) {
     return (
         <div>
-            <Header />
             <div css={s.layout}>
                 <div css={s.eventImageBox}></div>
 

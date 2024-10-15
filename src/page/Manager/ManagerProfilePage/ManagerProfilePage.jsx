@@ -8,7 +8,6 @@ import SideBar from '../../../components/SideBar/SideBar';
 function ManagerProfilePage(props) {
     return (
         <div css={s.mainLayout}>
-            <SideBar />
             <div css={s.layout}>
                 <div css={s.listBox}>
                     <div css={s.list}>

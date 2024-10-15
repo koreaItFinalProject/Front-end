@@ -11,7 +11,6 @@ function SignupSelectPage(props) {
 
     return (
         <div>
-            <Header/>
             <div css={s.layout}>
                     <div css={s.userlogin}>
                             <h1>개인회원</h1>

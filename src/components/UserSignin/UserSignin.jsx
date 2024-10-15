@@ -14,7 +14,8 @@ function UserSignin(props) { // 로그인
     const navigate = useNavigate();
     const [ isLogin , setIsLogin ] = useState({
         username:"",
-        password:""
+        password:"",
+        role:"USER"
     });
 
 

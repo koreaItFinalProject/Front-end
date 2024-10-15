@@ -1,6 +1,12 @@
 import { css } from "@emotion/react";
 
 export const reset = css`
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+    
+    * {
+        font-family: "Noto Sans KR", sans-serif;
+    }
+
     html, body, #root {
         width: 100%;
         height: 100%;
@@ -10,16 +16,19 @@ export const reset = css`
         /* font-family: ; 폰트 설정 */
         /* 공용으로 사용할 color 정해지면 작성*/
     }
+
     ul, ol {
         list-style-type: none;
         padding: 0;
         margin: 0;
     }
-    a{
+
+    a {
         text-decoration: none;
         color: inherit;
         transition: color 0.3s;
     }
+
     button {
         cursor: pointer; 
         border: none;
@@ -28,6 +37,8 @@ export const reset = css`
 
     ::-webkit-scrollbar{
         display: none;
+    }
+
     .App {
         width: 100%;
         height: 100%;

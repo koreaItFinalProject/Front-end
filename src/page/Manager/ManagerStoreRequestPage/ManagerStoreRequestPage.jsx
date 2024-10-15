@@ -1,13 +1,10 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
-import { Link } from 'react-router-dom';
-import SideBar from '../../../components/SideBar/SideBar';
 
 function ManagerStoreRequestPage(props) {
     return (
         <div css={s.mainLayout}>
-            <SideBar />
                 <div css={s.columnBox}>
                     <div>
                         <div css={s.titleBox}>

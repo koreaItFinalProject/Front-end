@@ -7,7 +7,6 @@ import SideBar from '../../../components/SideBar/SideBar';
 function ManagerStoreManagementPage(props) {
     return (
         <div css={s.mainLayout}>
-            <SideBar/>
             <div css={s.mainBox}>
                 <div css={s.box}>
                     <div css={s.ibBox}>

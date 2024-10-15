@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 function ParticularStorePage(props) {
     return (
         <div>
-            <Header />
             <div css={s.mainBox}>
                 <div css={s.mainLayout}>
                     <div css={s.layout}>

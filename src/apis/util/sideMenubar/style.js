@@ -5,20 +5,30 @@ export const layout = css`
   display: flex;
   justify-content: center;
   align-items: center;
+  
   & button{
     display: flex;
-    justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    font-size: 28px;
+    font-size: 18px;
     font-weight: 600;
     margin: 0px;
-    padding: 0px;
-    width: 250px;
+    padding: 0px 30px;
+    width: 100%;
     height: 50px;
-    & svg{
-      font-size: 26px;
-      margin-right: 10px;
+    color: #1c1c1b;
+    & div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
     }
+    & svg{
+      font-size: 23px;
+      margin-right: 20px;
+      color: #1c1c1b;
+    }
+    
   }
 `;
+
