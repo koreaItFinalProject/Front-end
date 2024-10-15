@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 function ParticularRequestPage(props) {
     return (
         <div>
-            <Header />
             <div css={s.layout}>
                 <Link to="/manager/profile">프로필</Link>
                 <Link to="/manager/dashboard">대시보드</Link>

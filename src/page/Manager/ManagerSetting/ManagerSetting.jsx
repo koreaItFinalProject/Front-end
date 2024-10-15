@@ -6,7 +6,6 @@ import SideBar from '../../../components/SideBar/SideBar';
 function ManagerSetting(props) {
   return (
     <div css={s.layout}>
-      <SideBar/>
     </div>
   );
 }

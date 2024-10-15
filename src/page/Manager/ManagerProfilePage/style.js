@@ -36,7 +36,6 @@ export const listBox = css`
 `;
 
 export const list = css`
-
     & > div {
         display: flex;
         margin: 20px 0;

@@ -184,7 +184,6 @@ function OwnerSignupPage(props) {
 
     return (
         <div>
-            <Header/>
             <div css={s.layout}>
                 <div>
                     <div css={s.Info}>

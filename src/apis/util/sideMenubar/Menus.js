@@ -12,12 +12,7 @@ export const Menus = [
   {
     title: '메인',
     icon:<HiOutlineHome/>,
-    path: '/manager'
-  },
-  {
-    title: '대시보드',
-    icon:<RxDashboard/>,
-    path: '/manager/dashboard'
+    path: '/manager/home'
   },
   {
     title: '프로필',
@@ -33,16 +28,6 @@ export const Menus = [
     title: '점포 관리',
     icon:<FaWindowRestore/>,
     path: "/manager/storemanagement"
-  },
-  {
-    title: '점포 등록',
-    icon:<GiArchiveRegister/>,
-    path: "/manager/registerstore"
-  },
-  {
-    title: '요청 관리',
-    icon:<VscGitPullRequestGoToChanges/>,
-    path: "/manager/storerequest"
   },
   {
     title: '설정',

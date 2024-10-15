@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 export const layout = css`
     margin: 0 auto;
     width: 100%;
-    height: 150px;
     border-bottom: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -18,7 +17,6 @@ export const highBar = css`
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    height: 20%;
     margin-right: 20px;
     & button {
         font-weight: 600;
@@ -29,7 +27,6 @@ export const highBar = css`
 export const logo = css`
     box-sizing: border-box;
     width: 100%;
-    height: 80%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -41,8 +38,8 @@ export const logo = css`
     }
 
     & img {
-        width: 50px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
     }
 `;
 

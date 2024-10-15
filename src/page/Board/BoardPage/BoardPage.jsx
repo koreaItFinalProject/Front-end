@@ -66,7 +66,6 @@ function BoardPage(props) {
 
     return (
         <div css={s.layout}>
-            <Header />
             <div css={s.boardHeader}>
                 <h1>Cafe 커뮤니티</h1>
                 <div><h3>카페에 대한 이야기를 나눠보세요!</h3></div>
