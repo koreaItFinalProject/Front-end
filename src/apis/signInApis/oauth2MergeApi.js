@@ -1,8 +1,9 @@
-import { instance } from "./util/instance";
+import { instance } from "../util/instance";
+
 
 export const oauth2MergeApi = async (user) => {
     let mergeData = {
-        isSuceess: false,
+        isSuccess: false,
         fieldErrors: [
             {
                 field: "",
@@ -13,13 +14,13 @@ export const oauth2MergeApi = async (user) => {
     try {
         const response = await instance.post("/auth/oauth2/merge", user);
         mergeData = {
-            isSuceess: true
+            isSuccess: true
         }
     } catch (error) {
         const response = error.response;
         
         mergeData = {
-            isSuceess: false,
+            isSuccess: false,
         }
 
         if(typeof(response.data) === 'string') {

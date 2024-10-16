@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import Header from '../../../components/Header/Header';
-import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 
 
-function UserSignupPage(props) {
+function OAuth2MergePage(props) {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [loginState , setLoginState] = useState({
         username: '',
         password:'',
@@ -37,11 +37,17 @@ function UserSignupPage(props) {
     }
 
     const handlesignuppageOnClick = async () => {
+        const mergeData = {
+            username : loginState.username,
+            password : loginState.password,
+            oAuth2Name : searchParams.get("oAuth2Name"),
+            provider: searchParams.get("provider")
+        }
         console.log(loginState);
-        const signupData = await usersignupApi(loginState);
-        console.log(signupData);
-        if(!signupData.isSuccess){
-            ShowFiledError(signupData.fieldErrors);
+        const response = await oauth2MergeApi(mergeData);
+        console.log(response);
+        if(!response.isSuccess){
+            ShowFiledError(response.fieldErrors);
             alert("회원가입 실패");       
         }else{
             alert("가입 성공");
@@ -69,8 +75,6 @@ function UserSignupPage(props) {
         }
         setFieldErrorMessages(EmptyfieldErrors);
       }
-
-    
 
     return (
         <div>
@@ -127,4 +131,4 @@ function UserSignupPage(props) {
     );
 }
 
-export default UserSignupPage;
+export default OAuth2MergePage;

@@ -7,8 +7,6 @@ import { usersignInApi } from '../../apis/signInApis/usersignInApi';
 import { instance } from '../../apis/util/instance';
 
 function UserSigninPage(props) {
-
-    const [login , setLogin] = useState(false);
     const [save , setSave] = useState(false);
     const navigate = useNavigate();
     const [ isLogin , setIsLogin ] = useState({
@@ -58,16 +56,14 @@ function UserSigninPage(props) {
                             아이디 저장
                         </span>
                     </div>
-                </div>
-                <div css={s.button}>
                     <button onClick = {handleOnLoginClick}>로그인</button>
                 </div>
             </div>
             <div css={s.foundInfo}>
                 <ol>
-                    <li><button>아이디 찾기</button></li>
-                    <li><button>비밀번호 찾기</button></li>
-                    <li><button>회원가입</button></li>
+                    <li><button onClick={() => navigate()}>아이디 찾기</button></li>
+                    <li><button onClick={() => navigate()}>비밀번호 찾기</button></li>
+                    <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
                 </ol>
             </div>
     </div>
