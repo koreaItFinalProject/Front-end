@@ -18,7 +18,6 @@ export const oauth2MergeApi = async (user) => {
         }
     } catch (error) {
         const response = error.response;
-        
         mergeData = {
             isSuccess: false,
         }
