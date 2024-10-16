@@ -6,7 +6,8 @@ export const layout = css`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    
+    justify-content: center;
+    align-items: center;
 `;
 
 export const login = css`
@@ -14,7 +15,7 @@ export const login = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: 400px;
     width: 100%;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
@@ -27,6 +28,16 @@ export const login = css`
     & input:nth-last-child(1){
         margin-bottom: 0px;
     }
+    & button {
+        padding: 10px 140px;
+        box-sizing: border-box;
+        border: 1px solid black;
+        border-radius: 10px;
+        margin: 10px 0px;
+        background-color: #131313;
+        color: #e4e4e4;
+        font-weight: 600;
+    }
 `;
 
 export const loginInput = css`
@@ -37,6 +48,7 @@ export const loginInput = css`
     & input {
         padding-left: 20px;
     }
+    
 `;
 
 export const checkbox = css`
@@ -56,16 +68,6 @@ export const checkbox = css`
     }
 `;
 
-export const button = css`
-        padding-bottom: 15px;
-    & button {
-        padding: 40px 20px;
-        margin-left: 10px;
-        border-radius: 10px;
-        border: 1px solid black;
-        /* cursor: pointer; */
-    }
-`;
 
 export const oauth2 = css`
     display: flex;
@@ -90,11 +92,18 @@ export const oauth2 = css`
 export const foundInfo = css`
     height: 40px;
     box-sizing: border-box;
+    
     & ol {
         display: flex;
-        
+        & li:nth-last-child(1){
+            border: none;
+        }
+
         & li {
-            margin-right: 20px;
+            padding: 0px 15px;
+            border-right: 1px solid black;
+            font-weight: 600;
+            cursor: pointer;
         }
     }
 

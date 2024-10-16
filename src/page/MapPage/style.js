@@ -1,77 +1,155 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
     display: flex;
-    margin: 0px;
+    margin: 0;
     width: 100%;
     height: 100%;
-`
+`;
 
 export const box = css`
     display: flex;
-    box-sizing: border-box;
-    flex-direction: column; /* 세로 방향으로 정렬 */
-    border: 1px blue;
-    height: 953px;
-    width: 25%;
-`
+    position: absolute;
+    z-index: 100;
+    top: 10px;
+    left: 10px;
+`;
 
-export const header = css`
-    box-sizing: border-box;
-    padding: 10px;
-    background-color: lightblue; /* 배경 색상 */
-    height: 100px;
-`
-
-export const logobox = css`
-box-sizing: border-box;
-    margin: 10px 0px;
-    background-color: lightblue; /* 배경 색상 */
-`
-
-export const footer = css`
-    margin: 10px; /* 아이템 간 간격 */
-    padding: 20px;
-    background-color: lightblue; /* 배경 색상 */
-    border: 1px solid #ccc; /* 테두리 */
-`
 export const inputbox = css`
-`
+    display: flex;
+    position: relative;
+    padding: 0;
+    font: 12px/1.5 'Malgun Gothic', '돋움', dotum, sans-serif;
+    height: 36px;
+    padding: 2px 3px 4px;
+    background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png) no-repeat 0 0;
 
-export const radiobutton = css`
-    padding: 0px;
-    margin: 0px;
-    border: none;
-`
+    & > a {
+        margin: 0;
+        padding: 0 10px;
+        & > h2 {
+            font: 12px/1.5 'Malgun Gothic';
+            font-weight: 550;
+            color: #ceca00ff;
+            margin: 0;
+            font-size: 100%;
+            padding: 5px;
+        }
+    }
 
-export const content = css`
-    flex-grow: 1;
-    background: lightgreen; /* 배경 색상 */
-    padding: 10px;
-    border: 1px solid #dbdbdb;
-    overflow-y: scroll;
-    height: 100%;
-`
-
-export const contentlist = css`
-    box-sizing: border-box;
-    ul{
-        list-style-type: none;
+    & > button {
+        font: inherit;
+        outline: 0;
         padding: 0;
+        border-radius: 0;
+        overflow: hidden;
+        background: url(//t1.daumcdn.net/localimg/localimages/07/2018/pc/common/ico_search.png) no-repeat;
+        float: left;
+        border: 0 none;
+        font-size: 0;
+        line-height: 0;
+        text-indent: -9999px;
+        cursor: pointer;
+        width: 29px;
+        height: 29px;
+        margin: 4px 4px 4px 0;
+        background-position: 0 -160px;
     }
 
-    li{
-        box-sizing: border-box;
-        background: #f9f9f9;
-        margin: 5px 0;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
+    & > input {
+        padding: 0px 10px;
+        font-size: 15px;
+        outline: none;
+        border: none;
     }
+`;
+
+export const selectbutton = css`
+    display: flex;
+    position: absolute;
+    z-index: 100;
+    top: 40px;
+    margin-top: 10px;
+    margin-left: 2px;
+
+    button {
+        border-radius: 20px;
+        background-color: #ffffff; // 버튼 배경색
+        border: none;            // 테두리 제거
+        color: black;           // 글자 색상
+        margin: 0 15px;         // 버튼 사이의 간격 (좌우)
+        padding: 5px 13px;     // 패딩 설정 (위 아래, 좌우)
+        cursor: pointer;         // 커서 모양 변경
+        transition: 0.3s; // 호버 효과를 위한 트랜지션
+        box-shadow: 3px 3px 3px #a3a3a3;
+        font-size: 14px;        // 글자 크기 조정
+        font-weight: 600;
+        line-height: normal;     // 줄 높이 기본값으로 설정
+        text-indent: 0;         // 텍스트 들여쓰기 제거
+        white-space: nowrap;
+
+    
+            margin-left: 0;      // 첫 번째 버튼의 왼쪽 마진 제거
+
+        &:hover {
+            background-color: #c9c9c9; // 호버 시 배경색 변경
+        }
+        &:active {
+            background-color: #a3a3a3;
+            box-shadow: none;
+        }
+
+        &:last-of-type {
+            margin-right: 0;      // 마지막 버튼의 오른쪽 마진 제거
+        }
+    }
+`;
+
+export const icon = css`
+    position: relative;
+    top: 2px;
 `
+
 
 export const map = css`
     display: flex;
     width: 100%;
-    height: 953px;
-`
+    height: 100%;
+`;
+
+export const cafeContainer = css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // 버튼을 양 끝으로 배치
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.9); // 반투명 배경
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
+`;
+
+export const cafeInfo = css`
+    flex: 1; // 중앙 카페 정보 영역을 차지하도록 설정
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    h3 {
+        margin: 0;
+        font-size: 18px; // 카페 이름 크기
+        font-weight: 600;
+        color: #333; // 카페 이름 색상
+    }
+    p {
+        margin: 5px 0 0; // 설명의 여백
+        font-size: 14px; // 설명 크기
+        color: #666; // 설명 색상
+    }
+`;

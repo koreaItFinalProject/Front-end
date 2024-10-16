@@ -26,6 +26,8 @@ import MainLayout from './components/MainLayout/MainLayout';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
+import UserFindPage from './page/UserFindPage/UserFindPage';
+import OAuth2MergePage from './page/SignupPage/OAuth2MergePage/OAuth2MergePage';
 function App() {
   const location = useLocation();
   const navigeter = useNavigate();
@@ -103,6 +105,23 @@ function App() {
               <Route path='/board/write' element={<WritePage />} />
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
               <Route path='/board/modify/:boardId' element={<ModifyPage />} />
+              <Route path='/' element={<HomePage/>}/>
+              <Route path='/user/signup' element={<UserSignupPage/>}/>
+              <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
+              <Route path='/particular/store' element={<ParticularStorePage/>}/>
+              <Route path='/particular/request' element={<ParticularRequestPage/>}/>
+              <Route path='/user/loginsel' element={<UsersSignupSelectPage/>}/>
+              <Route path='/user/signin' element={<UserSigninPage/>}/>
+              <Route path='/select/signup' element={<UsersSignupSelectPage/>}/>
+              <Route path='/list' element={<ListPage/>}/>
+              <Route path='/map' element={<MapPage/>}/>
+              <Route path='/event' element={<EventPage />}/>
+              <Route path='/board' element={<BoardPage/>}/>
+              <Route path='/board/write' element={<WritePage/>}/>
+              <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
+              <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
+              <Route path='/user/find' element={<UserFindPage/>}/>
+              <Route path='/user/oauth' element={<OAuth2MergePage/>}/>
             </Routes>
           </MainLayout>
         } />
