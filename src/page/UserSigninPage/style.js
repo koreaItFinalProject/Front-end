@@ -1,89 +1,101 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    display: flex;
-    margin: 0 auto;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     height: 100%;
-    flex-direction: column;
-`;
-
-export const logo = css`
     display: flex;
-    font-size: 16px;
-    & img {
-        width: 50px;
-        height: 50px;
-    }
-`;
-
-export const loginMain = css`
+    flex-direction: column;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    /* width: 600px; */
-
     
 `;
 
-export const selectMember = css`
-    display: flex;
+export const login = css`
     box-sizing: border-box;
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    width: 100%;
+    border-top: none;
+    border-radius: 0px 0px 10px 10px;
+    & input{
+        width: 300px;
+        height: 40px;
+        margin: 5px 0px;
+        border-radius: 10px;
+    }
+    & input:nth-last-child(1){
+        margin-bottom: 0px;
+    }
+`;
+
+export const loginInput = css`
+    display: flex;
     flex-direction: column;
-    height: 300px;
-    width: 500px;
-        & img:nth-child(1){
-            width: 400px;
-            height: 60px;
-            margin-bottom: 20px;
-            border-radius: 20px;
-        }
-    `;
+    justify-content: center;
+    align-items: center;
+    & input {
+        padding-left: 20px;
+    }
+`;
 
-export const emailbutton = css`
+export const checkbox = css`
     width: 100%;
-    height: 60px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    & span {
+        cursor: pointer;
+        font-size: 12px;
+    }
+    & input {
+        box-sizing: border-box;
+        width: 10px;
+        height: 10px;
+        display: none;
+    }
+`;
+
+export const button = css`
+        padding-bottom: 15px;
+    & button {
+        padding: 40px 20px;
+        margin-left: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        /* cursor: pointer; */
+    }
+`;
+
+export const oauth2 = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    & button{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & p{
-            margin: 0;
-        }
-        & p:nth-last-child(1) {
-            margin-left: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            & svg {
-                font-size: 20px;
-            }
-        }
-    }
-`;
-
-export const loseEmail = css`
     width: 100%;
     height: 60px;
-    display: flex;
-    justify-content: center;
+    box-sizing: border-box;
     & button{
-        padding: 0;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & p {
-            margin: 0;
-        }
+        margin: 10px 10px;
+        border-radius: 50%;
     }
+    & img {
+        border-radius: 50%;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+    }
+
 `;
 
+export const foundInfo = css`
+    height: 40px;
+    box-sizing: border-box;
+    & ol {
+        display: flex;
+        
+        & li {
+            margin-right: 20px;
+        }
+    }
+
+`;

@@ -1,15 +1,12 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from './page/HomePage/HomePage';
-import SignupSelectPage from './page/SignupSelectPage/SignupSelectPage';
 import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import MapPage from './page/MapPage/MapPage';
-// import CafeBoardPage from './page/CafeBoardPage/CafeBoardPage';
 import EventPage from './page/EventPage/EventPage';
 import BoardPage from './page/Board/BoardPage/BoardPage';
 import WritePage from './page/Board/WritePage/WritePage';
-import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
 import ManagerPage from './page/Manager/ManagerPage/ManagerPage';
@@ -27,7 +24,8 @@ import { useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
-
+import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
+import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 function App() {
   const location = useLocation();
   const navigeter = useNavigate();
@@ -91,12 +89,13 @@ function App() {
           <MainLayout>
             <Routes>
               <Route path='/' element={<HomePage/>}/>
-              <Route path='/signup' element={<SignupSelectPage/>}/>
               <Route path='/user/signup' element={<UserSignupPage/>}/>
               <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
               <Route path='/particular/store' element={<ParticularStorePage/>}/>
               <Route path='/particular/request' element={<ParticularRequestPage/>}/>
-              <Route path='/signin' element={<UserSigninPage/>}/>
+              <Route path='/user/loginsel' element={<UsersSignupSelectPage/>}/>
+              <Route path='/user/signin' element={<UserSigninPage/>}/>
+              <Route path='/select/signup' element={<UsersSignupSelectPage/>}/>
               <Route path='/list' element={<ListPage/>}/>
               <Route path='/map' element={<MapPage/>}/>
               <Route path='/event' element={<EventPage />}/>
@@ -107,8 +106,6 @@ function App() {
             </Routes>
           </MainLayout>
         }/>
-        
-        
       </Routes>
     </>
   );

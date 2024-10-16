@@ -4,7 +4,7 @@ import * as s from './style';
 
 function ListMain(props) {
     return (
-        <div>
+        <div css={s.allLayout}>
             <div css={s.adornmentBox}></div>
             <div css={s.box}>
                 <div css={s.inputSection}>
@@ -18,17 +18,13 @@ function ListMain(props) {
                 </select>   
             </label>
             </div>
-
             <div css={s.layout}>
                 <div css={s.pictureBox}></div>
-
                 <div css={s.showBox}>
-
                     <div css={s.viewBox}>
                         <p>조회수</p>
                         <p>추천수</p>
                     </div>
-
                     <div css={s.spanBox}>
                         <p>카페 이름:</p>
                         <p>카테고리:</p>
@@ -36,9 +32,7 @@ function ListMain(props) {
                     </div>
                     
                 </div>
-
             </div>
-
             <div css={s.layout}>
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
@@ -46,7 +40,6 @@ function ListMain(props) {
                         <p>조회수</p>
                         <p>추천수</p>
                     </div>
-
                     <div css={s.spanBox}>
                         <p>카페 이름:</p>
                         <p>카테고리:</p>
@@ -54,7 +47,6 @@ function ListMain(props) {
                     </div>
                 </div>
             </div>
-
             <div css={s.layout}>
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
@@ -62,7 +54,6 @@ function ListMain(props) {
                         <p>조회수</p>
                         <p>추천수</p>
                     </div>
-
                     <div css={s.spanBox}>
                         <p>카페 이름:</p>
                         <p>카테고리:</p>
@@ -70,7 +61,6 @@ function ListMain(props) {
                     </div>
                 </div>
             </div>
-
             <div css={s.layout}>
                 <div css={s.pictureBox}></div>
                 <div css={s.showBox}>
@@ -78,7 +68,6 @@ function ListMain(props) {
                         <p>조회수</p>
                         <p>추천수</p>
                     </div>
-
                     <div css={s.spanBox}>
                         <p>카페 이름:</p>
                         <p>카테고리:</p>
@@ -86,9 +75,6 @@ function ListMain(props) {
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     );
 }
