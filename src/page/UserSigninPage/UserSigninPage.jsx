@@ -1,53 +1,76 @@
 import React, { useState } from 'react';
-import Header from '../../components/Header/Header';
+
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import UserSignin from '../../components/UserSignin/UserSignin';
-import logo from '../../assets/logo.png'
-import {naver, kakao , google} from '../../assets/image'
-import { IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
+import { usersignInApi } from '../../apis/signInApis/usersignInApi';
+import { instance } from '../../apis/util/instance';
 
 function UserSigninPage(props) {
 
     const [login , setLogin] = useState(false);
-    const handleLoginStateOnClick = () => {
-        setLogin(false);
-        console.log(login);
+    const [save , setSave] = useState(false);
+    const navigate = useNavigate();
+    const [ isLogin , setIsLogin ] = useState({
+        username:"",
+        password:"",
+        role:"USER"
+    });
+
+
+    const handleSaveOnChange = () => {
+        setSave(!save);
+        console.log(save);
     }
-  
+
+    const handleOnInputChange = (e) => {
+        setIsLogin({
+            ...isLogin,
+            [e.target.name] : e.target.value
+        })
+        console.log(e.target.value);
+    }
+
+    const handleOnLoginClick = async() => {
+        const signinData = await usersignInApi(isLogin);
+        console.log(signinData);
+        if(!signinData.isSuccess){
+            alert("로그인 실패");
+        }else{
+            alert("로그인 성공");
+            localStorage.setItem("accessToken", "bearer " + signinData.token.accessToken);
+            instance.interceptors.request.use(config => 
+                config.headers["Authorization"] = localStorage.getItem("accessToken")
+            )
+            navigate("/");
+            }
+    }
+
     return (
-        <div>
-            <div css={s.layout}>
-                <div css={s.logo}> 
-                    <img src={logo} alt="" />
-                    <h1>CAFE DEV</h1>
+        <div css={s.layout}>
+            <div css={s.login}>
+                <div css={s.loginInput}>
+                    <input type="text" name="username" onChange={handleOnInputChange} value={isLogin.username} placeholder='아이디'/>
+                    <input type="password" name="password" onChange={handleOnInputChange} value={isLogin.password} placeholder='비밀번호'/>
+                    <div css={s.checkbox}>
+                        <span id='checkbox' onClick={handleSaveOnChange}>
+                            <input type="checkbox" id='checkboxt' />
+                            아이디 저장
+                        </span>
+                    </div>
                 </div>
-                <div css={s.loginMain}>
-                        <div css={s.selectMember}>
-                            <button><img src={kakao} alt="" /></button>
-                            <button><img src={naver} alt="" /></button>
-                            <button><img src={google} alt="" /></button>
-                        </div>
-                        <div css={s.emailbutton}>
-                            <button>
-                                <p>
-                                    이메일로 게속하기
-                                </p> 
-                                <p>
-                                    <IoIosArrowForward/>
-                                </p>
-                            </button>
-                        </div>
-                        <div css={s.loseEmail}>
-                            <button>
-                                <p>
-                                    계정이 기억나지 않아요.
-                                </p>
-                            </button>
-                        </div>
+                <div css={s.button}>
+                    <button onClick = {handleOnLoginClick}>로그인</button>
                 </div>
             </div>
-        </div>
+            <div css={s.foundInfo}>
+                <ol>
+                    <li><button>아이디 찾기</button></li>
+                    <li><button>비밀번호 찾기</button></li>
+                    <li><button>회원가입</button></li>
+                </ol>
+            </div>
+    </div>
     );
 }
 

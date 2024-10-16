@@ -1,5 +1,8 @@
 import { css } from "@emotion/react";
 
+export const allLayout = css`
+    height: 100%;
+`
 
 export const adornmentBox = css`
     box-sizing: border-box;
