@@ -3,7 +3,9 @@ import { css } from "@emotion/react";
 export const layout = css`
     display: flex;
     flex-direction: column;
-    margin: 0px 200px;
+    width: 100%;
+    height: 100%;
+    padding: 0px 15px;
 `;
 
 export const boardHeader = css`
@@ -27,13 +29,14 @@ export const boardHeader = css`
         margin-left: 10px;
         border: none;
         font-size: 18px;
+        background: none;
+        outline: none;
     }
 `;
 
 export const editorLayout = css`
-    box-sizing: border-box;
-    margin-bottom: 42px;
-    height: 600px;
+    height: 60%;
+    margin-bottom: 60px;
 `;
 
 export const buttonLayout = css`

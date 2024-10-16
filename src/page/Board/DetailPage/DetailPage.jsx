@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
+import ReactQuill from "react-quill";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -23,24 +24,57 @@ function DetailPage(props) {
         }
     );
 
+    const boardLike = useQuery(
+        ["boardLikeQuery"],
+        async () => {
+            return instance.get(`/board/${boardId}/like`)
+        },
+        {
+            refetchOnWindowFocus: false,
+            retry: 0
+        }
+    );
+
     const deleteBoardMutation = useMutation(
-        async() => await instance.delete(`/board/${boardId}`),
+        async () => await instance.delete(`/board/${boardId}`),
         {
             onSuccess: response => {
                 alert("게시글을 삭제하였습니다.");
                 navigate("/board?page=1");
             }
         }
-    )
+    );
+
+    const likeMutation = useMutation(
+        async () => {
+            return await instance.post(`/board/${boardId}/like`)
+        },
+        {
+            onSuccess: response => {
+                boardLike.refetch();
+            }
+        }
+    );
+
+    const dislikeMutation = useMutation(
+        async () => {
+            return await instance.delete(`/board/like/${boardLike.data?.data.boardLikeId}`)
+        },
+        {
+            onSuccess: response => {
+                boardLike.refetch();
+            }
+        }
+    );
 
     const handleDeleteBoardOnClick = () => {
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
-        if(selection){
+        if (selection) {
             deleteBoardMutation.mutateAsync();
         } else {
             navigate(`/board/detail/${boardId}`);
         }
-        
+
     }
 
     const handleModifyBoardOnClick = () => {
@@ -51,7 +85,13 @@ function DetailPage(props) {
         navigate(`/board/modify/${params.boardId}`);
     }
 
-    console.log(board);
+    const handleLikeOnClick = () => {
+        likeMutation.mutateAsync();
+    }
+
+    const handleDislikeOnClick = () => {
+        dislikeMutation.mutateAsync();
+    }
 
     return (
         <div css={s.layout}>
@@ -81,8 +121,21 @@ function DetailPage(props) {
                                     조회수: {board?.data?.data.viewCount}
                                 </span>
                                 <span>
-                                    추천: 5
+                                    추천: {boardLike?.data?.data.likeCount}
                                 </span>
+                            </div>
+                            <div>
+                                {
+                                    !!boardLike?.data?.data?.boardLikeId
+                                        ?
+                                        <button onClick={handleDislikeOnClick}>
+                                            <IoMdHeart />
+                                        </button>
+                                        :
+                                        <button onClick={handleLikeOnClick}>
+                                            <IoMdHeartEmpty />
+                                        </button>
+                                }
                             </div>
                             <div>
                                 <button onClick={() => handleModifyBoardOnClick()}>수정</button>
@@ -90,13 +143,24 @@ function DetailPage(props) {
                             </div>
                         </div>
                     </div>
-                    <div css={s.contentBox} dangerouslySetInnerHTML={{
-                        __html: board.data.data.content
-                    }}>
+                    <div css={s.contentBox}>
+                        <ReactQuill
+                            value={board.data.data.content}
+                            readOnly={true}
+                            theme="snow"
+                            modules={{ 
+                                toolbar: false 
+                            }}
+                            style={{ 
+                                boxSizing: 'border-box',
+                                width: '100%', 
+                                height: '100%',
+                            }}
+                        />
                     </div>
                 </>
             }
-            <Comments/>
+            <Comments />
         </div>
     );
 }
