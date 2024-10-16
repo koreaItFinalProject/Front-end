@@ -31,65 +31,80 @@ import OAuth2MergePage from './page/SignupPage/OAuth2MergePage/OAuth2MergePage';
 function App() {
   const location = useLocation();
   const navigeter = useNavigate();
-  const [ authRefresh , setAuthRefresh ] = useState(true);
+  const [authRefresh, setAuthRefresh] = useState(true);
 
   const accessTokenValid = useQuery(
     ["accessTokenValidQuery"],
-    async () => { 
-        setAuthRefresh(false);
-        console.log("쿼리1")
-        return await instance.get("/auth/access" , {
-            params: { 
-                accessToken : localStorage.getItem("accessToken") 
-            }
-        });
-    } ,
-      {
-        enabled: authRefresh,
-        retry: 0, 
-        refetchOnWindowFocus:false,
-        onSuccess : response => {
-            const permitAllPasths = [ "/user" ];
-          for(let permitAllPasth of permitAllPasths){
-            if(location.pathname.startsWith(permitAllPasth)){
-              alert("잘못된 요청입니다.")
-              navigeter("/"); 
-              break;
-              }
-            }
-        },
-        onError : error => {
-          const authPaths = [ "/profile" ];
-          for(let authPath of authPaths){
-            if(location.pathname.startsWith(authPath)){
-              alert("로그인 후 이용해주세요")
-              navigeter("/user/login");
-              break;
-              }
-            }
+    async () => {
+      setAuthRefresh(false);
+      console.log("쿼리1")
+      return await instance.get("/auth/access", {
+        params: {
+          accessToken: localStorage.getItem("accessToken")
+        }
+      });
+    },
+    {
+      enabled: authRefresh,
+      retry: 0,
+      refetchOnWindowFocus: false,
+      onSuccess: response => {
+        const permitAllPasths = ["/user"];
+        for (let permitAllPasth of permitAllPasths) {
+          if (location.pathname.startsWith(permitAllPasth)) {
+            alert("잘못된 요청입니다.")
+            navigeter("/");
+            break;
           }
+        }
+      },
+      onError: error => {
+        const authPaths = ["/profile"];
+        for (let authPath of authPaths) {
+          if (location.pathname.startsWith(authPath)) {
+            alert("로그인 후 이용해주세요")
+            navigeter("/user/login");
+            break;
+          }
+        }
+      }
     }
   );
 
   return (
     <>
-      <Global styles={reset}/>
+      <Global styles={reset} />
       <Routes>
         <Route path='/manager/*' element={
           <ManagerMainLayout>
             <Routes>
-              <Route path='/signIn' element={<ManagerPage/>}/>
-              <Route path='/profile' element={<ManagerProfilePage/>}/>
-              <Route path='/home' element={<ManagerDashBoardPage/>}/>
-              <Route path='/management' element={<ManagerManagementPage/>}/>
-              <Route path='/storemanagement' element={<ManagerStoreManagementPage/>}/>
-              <Route path='/setting' element={<ManagerSetting/>}/>
+              <Route path='/signIn' element={<ManagerPage />} />
+              <Route path='/profile' element={<ManagerProfilePage />} />
+              <Route path='/home' element={<ManagerDashBoardPage />} />
+              <Route path='/management' element={<ManagerManagementPage />} />
+              <Route path='/storemanagement' element={<ManagerStoreManagementPage />} />
+              <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
           </ManagerMainLayout>
-        }/>
+        } />
         <Route path='/*' element={
           <MainLayout>
             <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/user/signup' element={<UserSignupPage />} />
+              <Route path='/owner/signup' element={<OwnerSignupPage />} />
+              <Route path='/particular/store' element={<ParticularStorePage />} />
+              <Route path='/particular/request' element={<ParticularRequestPage />} />
+              <Route path='/user/loginsel' element={<UsersSignupSelectPage />} />
+              <Route path='/user/signin' element={<UserSigninPage />} />
+              <Route path='/select/signup' element={<UsersSignupSelectPage />} />
+              <Route path='/list' element={<ListPage />} />
+              <Route path='/map' element={<MapPage />} />
+              <Route path='/event' element={<EventPage />} />
+              <Route path='/board' element={<BoardPage />} />
+              <Route path='/board/write' element={<WritePage />} />
+              <Route path='/board/detail/:boardId' element={<DetailPage />} />
+              <Route path='/board/modify/:boardId' element={<ModifyPage />} />
               <Route path='/' element={<HomePage/>}/>
               <Route path='/user/signup' element={<UserSignupPage/>}/>
               <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
@@ -109,7 +124,7 @@ function App() {
               <Route path='/user/oauth' element={<OAuth2MergePage/>}/>
             </Routes>
           </MainLayout>
-        }/>
+        } />
       </Routes>
     </>
   );

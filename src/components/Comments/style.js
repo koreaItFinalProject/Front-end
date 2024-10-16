@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 
 export const commentContainer = css`
+    width: 100%;
+    height: 100%;
     margin-bottom: 50px;
 `;
 
