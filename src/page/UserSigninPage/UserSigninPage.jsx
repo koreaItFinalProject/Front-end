@@ -9,11 +9,30 @@ import { instance } from '../../apis/util/instance';
 function UserSigninPage(props) {
     const [save , setSave] = useState(false);
     const navigate = useNavigate();
+    const [ fieldErrorMessages , setFieldErrorMessages ] = useState({
+        username : <></>,
+        password : <></>
+    });
     const [ isLogin , setIsLogin ] = useState({
         username:"",
         password:"",
         role:"USER"
     });
+
+    const showFieldErrorMessage = (fieldErrors) => {
+        let EmptyfieldErrors = {
+            username : <></>,
+            password : <></>,
+        };
+
+        for(let fieldError of fieldErrors){
+            EmptyfieldErrors = {
+                ...EmptyfieldErrors,
+                [fieldError.field] : <p>{fieldError.defaultMessage}</p>
+            }
+        }
+        setFieldErrorMessages(EmptyfieldErrors);
+    }
 
 
     const handleSaveOnChange = () => {
@@ -34,6 +53,7 @@ function UserSigninPage(props) {
         console.log(signinData);
         if(!signinData.isSuccess){
             alert("로그인 실패");
+            showFieldErrorMessage(signinData.error);
         }else{
             alert("로그인 성공");
             localStorage.setItem("accessToken", "bearer " + signinData.token.accessToken);

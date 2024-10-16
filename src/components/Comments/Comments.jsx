@@ -28,7 +28,7 @@ function Comments(props) {
         },
         {
             retry: 0,
-            onSuccess: response => console.log(response)
+            refetchOnWindowFocus: false
         }
     );
 
@@ -128,8 +128,6 @@ function Comments(props) {
             parentId: null
         }));
     };
-
-    console.log(comments.data);
 
     return (
         <div css={s.commentContainer}>

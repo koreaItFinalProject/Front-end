@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
+import { oAuth2SignupApi } from '../../../apis/signInApis/oAuth2SignupApi';
 
 
-function OAuth2MergePage(props) {
+function OAuth2Merge(props) {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [loginState , setLoginState] = useState({
@@ -29,32 +30,6 @@ function OAuth2MergePage(props) {
         phoneNumber:<></>,
     });
 
-    const handleInputOnChange =(e)=> {
-        setLoginState({
-            ...loginState,
-            [e.target.name] : e.target.value
-        })
-    }
-
-    const handlesignuppageOnClick = async () => {
-        const mergeData = {
-            username : loginState.username,
-            password : loginState.password,
-            oAuth2Name : searchParams.get("oAuth2Name"),
-            provider: searchParams.get("provider")
-        }
-        console.log(loginState);
-        const response = await oauth2MergeApi(mergeData);
-        console.log(response);
-        if(!response.isSuccess){
-            ShowFiledError(response.fieldErrors);
-            alert("회원가입 실패");       
-        }else{
-            alert("가입 성공");
-            navigate("/signin");
-        }
-    }
-
     const ShowFiledError = (fieldErrors) => {
         let EmptyfieldErrors = {
             username: <></>,
@@ -65,8 +40,7 @@ function OAuth2MergePage(props) {
             nickname:<></>,
             phoneNumber:<></>
         }
-      
-        // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
+
         for (let fieldError of fieldErrors) {
             EmptyfieldErrors = {
                 ...EmptyfieldErrors,
@@ -74,7 +48,75 @@ function OAuth2MergePage(props) {
             }
         }
         setFieldErrorMessages(EmptyfieldErrors);
-      }
+    }
+
+    const handleInputOnChange =(e)=> {
+        setLoginState({
+            ...loginState,
+            [e.target.name] : e.target.value
+        })
+    }
+
+    const handleMergepageOnClick = async () => {
+        const mergeData = {
+            username : loginState.username,
+            password : loginState.password,
+            oAuth2Name : searchParams.get("oAuth2Name"),
+            provider: searchParams.get("provider")
+        }
+        console.log(mergeData);
+        const response = await oauth2MergeApi(mergeData);
+        console.log(response);
+        if(!mergeData.isSuccess){
+            if(mergeData.errorStatus === "loginError"){
+                alert(mergeData.error);       
+                return;
+            }
+            if(mergeData.errorStatus === "fieldError"){
+                ShowFiledError(mergeData.error);
+                return;
+            }
+            }else{
+                alert("통합 완료");
+                navigate("/signin");
+            }
+    }
+
+    const handleJoinSubmitOnClick = async () => {
+        const joinUser = {
+         ...loginState,
+         oauth2Name : searchParams.get("oAuth2Name"),
+         provider : searchParams.get("provider"),
+        }
+        console.log(joinUser);
+        const joinData = await oAuth2SignupApi(joinUser);
+       console.log(joinData);
+       if(!joinData.isSuceess){
+            showFieldErrorMessage(joinData.fieldErrors);
+            return;
+       }
+       alert("회원가입이 완료되었습니다.");
+       navigate("/user/login");
+    }
+
+    const showFieldErrorMessage = (fieldErrors) => {
+        let EmptyfieldErrors = {
+            username : <></>,
+            password : <></>,
+            checkPassword : <></>,
+            name : <></>,
+            email : <></>
+            }
+            
+        // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
+        for(let fieldError of fieldErrors){
+            EmptyfieldErrors = {
+                ...EmptyfieldErrors,
+                [fieldError.field] : <p>{fieldError.defaultMessage}</p>
+            }
+        }
+        setFieldErrorMessages(EmptyfieldErrors);
+    }
 
     return (
         <div>
@@ -123,7 +165,7 @@ function OAuth2MergePage(props) {
                     </div>
                     
                     <div css={s.signupbutton}>
-                        <button onClick={ handlesignuppageOnClick}>가입하기</button>
+                        <button onClick={handleMergepageOnClick}>가입하기</button>
                     </div>
                 </div>
             </div>
@@ -131,4 +173,4 @@ function OAuth2MergePage(props) {
     );
 }
 
-export default OAuth2MergePage;
+export default OAuth2Merge;

@@ -11,7 +11,7 @@ export const layout = css`
 export const highBar = css`
     box-sizing: border-box;
     display: flex;
-    height: 20px;
+    
     & div{
         box-sizing: border-box;
         display: flex;
