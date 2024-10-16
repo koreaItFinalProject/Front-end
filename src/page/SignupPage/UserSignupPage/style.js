@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 802px;
+    height:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@ export const layout = css`
     
     & > div {
         width: 600px;
-        height: 500px;
+        height: 700px;
         border: 1px solid black;
         border-radius: 20px;
         display: flex;
@@ -28,14 +28,13 @@ export const Info = css`
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 30px ;
+        margin-top: 20px ;
         & input {
             height: 35px;
             width: 300px;
             border-radius: 10px;
             padding-left: 20px;
             font-size: 18px;
-            
         }
     }
     & p {
@@ -45,18 +44,7 @@ export const Info = css`
     }    
 `;
 
-export const inputStyle = css`
-    width: 100px;
-    height: 20px;
-    box-sizing: border-box;
-    p {
-        box-sizing: border-box;
-        width: 100px;
-        height: 20px;
-        font-size: 15px;
-    }
-
-`;    
+ 
 
 
 export const addressInfo = css`
@@ -88,5 +76,8 @@ export const addressStyle = css`
 `;
 
 export const signupbutton = css`
-
+    margin-top: 20px;
+    & button {
+        padding: 10px 50px;
+    }
 `;

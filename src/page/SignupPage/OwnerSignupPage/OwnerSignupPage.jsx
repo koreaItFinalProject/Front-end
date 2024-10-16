@@ -23,6 +23,7 @@ function OwnerSignupPage(props) {
         email:'',
         checkPassword:'',
         nickname:'',
+        phoneNumber:'',
         role: "OWNER"
     })
 
@@ -44,6 +45,7 @@ function OwnerSignupPage(props) {
         name: <></>,
         email: <></>,
         nickname:<></>,
+        phoneNumber:<></>,
     });
 
     const [businessNumber, setBusinessNumber] = useState('2148813306');
@@ -99,7 +101,8 @@ function OwnerSignupPage(props) {
             email:'',
             name:'',
             nickname:'',
-            cafename:''
+            cafename:'',
+            phoneNumber:''
         }
 
         // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
@@ -189,33 +192,38 @@ function OwnerSignupPage(props) {
                     <div css={s.Info}>
                         <div>
                             <p>아이디</p>
-                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
+                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
                             {fieldErrorMessages.username}
                         </div>
                         <div>
                             <p>비밀번호</p>
-                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
+                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
                             {fieldErrorMessages.password}
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='' />
+                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='비밀번호 공백일 수 없습니다' />
                             {fieldErrorMessages.checkPassword}
                         </div>
                         <div>
                             <p>이메일</p>
-                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='' />
+                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='이메일은 공백일 수 없습니다.' />
                             {fieldErrorMessages.email}
                         </div>
                         <div>
                             <p>대표자명</p>
-                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='' />
+                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='한글로 된 이름을 기입해주세요.' />
                             {fieldErrorMessages.name}
                         </div>
                         <div>
                             <p>닉네임</p>
-                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
+                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
                             {fieldErrorMessages.nickname}
+                        </div>
+                        <div>
+                            <p>전화번호</p>
+                            <input type="text" name='cafename' value={loginState.phoneNumber} onChange={handleInputTextChange} placeholder='휴대전화 인증을 받아야 합니다.' />
+                            {fieldErrorMessages.phoneNumber}
                         </div>
                         <div>
                             <p>카페명</p>

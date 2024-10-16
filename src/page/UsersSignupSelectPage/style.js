@@ -11,10 +11,17 @@ export const layout = css`
 
 export const logo = css`
     display: flex;
-    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     & img {
-        width: 50px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
+    }
+
+    & h1{
+        font-size: 24px;
+        margin: 0;
     }
 `;
 
@@ -36,18 +43,23 @@ export const selectMember = css`
     align-items: center;
     flex-direction: column;
     height: 400px;
-    width: 500px;
+    width: 400px;
         & img:nth-child(1){
             width: 400px;
             height: 60px;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
         }
         & a{
             border-radius: 20px;
+            width: 400px;
+            height: 60px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
         }
 
         & a img {
-                border-radius: 20px;
+            border-radius: 20px;
+            
         }
 
         & a:nth-last-child(1) {
@@ -62,19 +74,30 @@ export const selectMember = css`
             
         }
         & button {
-            box-sizing: border-box;
-            border-radius: 20px;
-            
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            & a{
-                font-size: 20px;
-                font-weight: 600;
+            width: 100%;
+            height: 60px;
+            padding: 0;
+            border-radius: 20px;
+            background-color: #ffe1a1;
+            font-size: 20px;
+            justify-content: center;
+            & div {
+                width: 100%;
                 display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            & * {
+                margin: 0px 20px;
+                font-weight: 600;
             }
             & svg {
-                font-size: 30px;
+                font-size: 40px;
+                /* margin: 0px 30px; */
+                width: 40px;
+                height: 40px;
             }
         }
     `;
@@ -89,10 +112,8 @@ export const emailbutton = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        & p{
-            margin: 0;
-        }
-        & p:nth-last-child(1) {
+        margin: 0;
+        & p {
             margin-left: 10px;
             display: flex;
             justify-content: center;
@@ -115,9 +136,7 @@ export const loseEmail = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        & p {
-            margin: 0;
-        }
+        margin: 0;
     }
 `;
 
