@@ -5,6 +5,8 @@ import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
 import { usersignInApi } from '../../apis/signInApis/usersignInApi';
 import { instance } from '../../apis/util/instance';
+import { showFieldErrorMessage } from '../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
+import { handleInputOnChange } from '../../apis/util/handleInputOnChange/handleInputOnChange';
 
 function UserSigninPage(props) {
     const [save , setSave] = useState(false);
@@ -19,41 +21,20 @@ function UserSigninPage(props) {
         role:"USER"
     });
 
-    const showFieldErrorMessage = (fieldErrors) => {
-        let EmptyfieldErrors = {
-            username : <></>,
-            password : <></>,
-        };
-
-        for(let fieldError of fieldErrors){
-            EmptyfieldErrors = {
-                ...EmptyfieldErrors,
-                [fieldError.field] : <p>{fieldError.defaultMessage}</p>
-            }
-        }
-        setFieldErrorMessages(EmptyfieldErrors);
-    }
-
-
     const handleSaveOnChange = () => {
         setSave(!save);
         console.log(save);
     }
 
-    const handleOnInputChange = (e) => {
-        setIsLogin({
-            ...isLogin,
-            [e.target.name] : e.target.value
-        })
-        console.log(e.target.value);
-    }
-
     const handleOnLoginClick = async() => {
         const signinData = await usersignInApi(isLogin);
         console.log(signinData);
+        console.log(signinData.error);
         if(!signinData.isSuccess){
+            const newFieldErrors = showFieldErrorMessage(signinData.error);
             alert("로그인 실패");
-            showFieldErrorMessage(signinData.error);
+            setFieldErrorMessages(newFieldErrors);
+            return;
         }else{
             alert("로그인 성공");
             localStorage.setItem("accessToken", "bearer " + signinData.token.accessToken);
@@ -68,8 +49,10 @@ function UserSigninPage(props) {
         <div css={s.layout}>
             <div css={s.login}>
                 <div css={s.loginInput}>
-                    <input type="text" name="username" onChange={handleOnInputChange} value={isLogin.username} placeholder='아이디'/>
-                    <input type="password" name="password" onChange={handleOnInputChange} value={isLogin.password} placeholder='비밀번호'/>
+                    <input type="text" name="username" onChange={handleInputOnChange(setIsLogin)} value={isLogin.username} placeholder='아이디'/>
+                    <p>{fieldErrorMessages.username}</p>
+                    <input type="password" name="password" onChange={handleInputOnChange(setIsLogin)} value={isLogin.password} placeholder='비밀번호'/>
+                    <p>{fieldErrorMessages.password}</p>
                     <div css={s.checkbox}>
                         <span id='checkbox' onClick={handleSaveOnChange}>
                             <input type="checkbox" id='checkboxt' />

@@ -4,12 +4,13 @@ import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { oAuth2SignupApi } from '../../../apis/signInApis/oAuth2SignupApi';
+import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 
 
 function OAuth2Merge(props) {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const [loginState , setLoginState] = useState({
+    const [inputUser , setinputUser] = useState({
         username: '',
         password:'',
         checkPassword:'',
@@ -50,17 +51,17 @@ function OAuth2Merge(props) {
         setFieldErrorMessages(EmptyfieldErrors);
     }
 
-    const handleInputOnChange =(e)=> {
-        setLoginState({
-            ...loginState,
-            [e.target.name] : e.target.value
-        })
-    }
+    // const handleInputOnChange =(e)=> {
+    //     setLoginState({
+    //         ...loginState,
+    //         [e.target.name] : e.target.value
+    //     })
+    // }
 
     const handleMergepageOnClick = async () => {
         const mergeData = {
-            username : loginState.username,
-            password : loginState.password,
+            username : inputUser.username,
+            password : inputUser.password,
             oAuth2Name : searchParams.get("oAuth2Name"),
             provider: searchParams.get("provider")
         }
@@ -84,7 +85,7 @@ function OAuth2Merge(props) {
 
     const handleJoinSubmitOnClick = async () => {
         const joinUser = {
-         ...loginState,
+         ...inputUser,
          oauth2Name : searchParams.get("oAuth2Name"),
          provider : searchParams.get("provider"),
         }
@@ -126,40 +127,40 @@ function OAuth2Merge(props) {
                         <div>
                             <div>
                                 <p>아이디</p>
-                                <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
+                                <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                                 <p>{fieldErrorMessages.username}</p>
                             </div>
                         </div>
                         <div>
                             <div>
                             <p>비밀번호</p>
-                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
+                            <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                             </div>
                             <p>{fieldErrorMessages.password}</p>
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='' />
+                            <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                             <p>{fieldErrorMessages.checkPassword}</p>
                         </div>
                         <div>
                             <p>이름</p>
-                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='' />
+                            <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                             <p>{fieldErrorMessages.name}</p>
                         </div>
                         <div>
                             <p>이메일</p>
-                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='' />
+                            <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                             <p>{fieldErrorMessages.email}</p>
                         </div>
                         <div>
                             <p>닉네임</p>
-                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
+                            <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setinputUser)} placeholder='' />
                             <p>{fieldErrorMessages.nickname}</p>
                         </div>
                         <div>
                             <p>전화번호</p>
-                            <input type="text" name='cafename' value={loginState.phoneNumber} onChange={handleInputOnChange} placeholder='휴대전화 인증을 받아야 합니다.' />
+                            <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setinputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
                             {fieldErrorMessages.phoneNumber}
                         </div>
                     </div>
