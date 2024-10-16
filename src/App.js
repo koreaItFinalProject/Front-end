@@ -27,7 +27,8 @@ import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMai
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
-import OAuth2MergePage from './page/SignupPage/OAuth2MergePage/OAuth2MergePage';
+import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2Page';
+
 function App() {
   const location = useLocation();
   const navigeter = useNavigate();
@@ -121,7 +122,7 @@ function App() {
               <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
               <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
               <Route path='/user/find' element={<UserFindPage/>}/>
-              <Route path='/user/oauth' element={<OAuth2MergePage/>}/>
+              <Route path='/user/oauth' element={<OAuth2Page/>}/>
             </Routes>
           </MainLayout>
         } />
