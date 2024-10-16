@@ -75,7 +75,7 @@ export const children = css`
     height: 100%;
     width: 100%;
     box-sizing: border-box;
-`;
+`    
 
 export const footer = css`
     height: 60px;
