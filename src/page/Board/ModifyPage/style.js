@@ -3,7 +3,9 @@ import { css } from "@emotion/react";
 export const layout = css`
     display: flex;
     flex-direction: column;
-    margin: 0px 200px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
 `;
 
 export const boardHeader = css`
@@ -27,28 +29,14 @@ export const boardHeader = css`
         margin-left: 10px;
         border: none;
         font-size: 18px;
+        background: none;
+        outline: none;
     }
 `;
 
 export const editorLayout = css`
-    box-sizing: border-box;
-    margin-bottom: 42px;
-    width: 100%;
-    height: 700px;
-`;
-
-export const loadingLayout = css`
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 99;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #00000066;
+    height: 60%;
+    margin-bottom: 60px;
 `;
 
 export const buttonLayout = css`
@@ -77,3 +65,18 @@ export const buttonLayout = css`
         color: white;
     }
 `;
+
+
+export const loadingLayout = css`
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 99;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: #00000066;
+    `;

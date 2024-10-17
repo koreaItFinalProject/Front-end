@@ -2,7 +2,7 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height: 802px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,7 +10,7 @@ export const layout = css`
     
     & > div {
         width: 600px;
-        height: 640px;
+        height: 700px;
         border: 1px solid black;
         border-radius: 20px;
         display: flex;
@@ -18,8 +18,6 @@ export const layout = css`
         justify-content: center;
         align-items: center;
     }
-
-    
 `;
 
 export const Info = css`
@@ -35,7 +33,7 @@ export const Info = css`
             width: 320px;
             border-radius: 10px;
             padding-left: 20px;
-            font-size: 18px;
+            font-size: 13px;
         }
     }
 

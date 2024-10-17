@@ -15,6 +15,7 @@ function UserSignupPage(props) {
         email:'',
         name:'',
         nickname:'',
+        phoneNumber:'',
         role: "USER"
     })
 
@@ -25,6 +26,7 @@ function UserSignupPage(props) {
         name: <></>,
         email: <></>,
         nickname:<></>,
+        phoneNumber:<></>,
     });
 
     const handleInputOnChange =(e)=> {
@@ -55,6 +57,7 @@ function UserSignupPage(props) {
             name: <></>,
             email: <></>,
             nickname:<></>,
+            phoneNumber:<></>
         }
       
         // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
@@ -74,14 +77,18 @@ function UserSignupPage(props) {
             <div css={s.layout}>
                 <div>
                     <div css={s.Info}>
-                        <div ccs={s.inputStyle}>
-                            <p>아이디</p>
-                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
-                            <p>{fieldErrorMessages.username}</p>
+                        <div>
+                            <div>
+                                <p>아이디</p>
+                                <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='' />
+                                <p>{fieldErrorMessages.username}</p>
+                            </div>
                         </div>
                         <div>
+                            <div>
                             <p>비밀번호</p>
                             <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='' />
+                            </div>
                             <p>{fieldErrorMessages.password}</p>
                         </div>
                         <div>
@@ -103,6 +110,11 @@ function UserSignupPage(props) {
                             <p>닉네임</p>
                             <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='' />
                             <p>{fieldErrorMessages.nickname}</p>
+                        </div>
+                        <div>
+                            <p>전화번호</p>
+                            <input type="text" name='cafename' value={loginState.phoneNumber} onChange={handleInputOnChange} placeholder='휴대전화 인증을 받아야 합니다.' />
+                            {fieldErrorMessages.phoneNumber}
                         </div>
                     </div>
                     

@@ -54,7 +54,6 @@ export const container = css`
     background-clip: padding-box;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
     background-color: #F4F4F6;
     box-shadow: 0px 0px 2px 1px #00000066 inset;
     & * {
@@ -63,21 +62,39 @@ export const container = css`
     }
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    position: relative;
+
 `;
 
 export const header = css`
     box-sizing: border-box;
     height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
 `;
 
 export const children = css`
-    height: 100%;
     width: 100%;
+    height: calc(100% - 60px);
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    border-radius: 10px;
 `;
 
 export const footer = css`
+    position: absolute;
+    bottom: 0;
     height: 60px;
+    width: 100%;
     box-sizing: border-box;
-`
+    background-color: #F4F4F6;
+    z-index: 99;
+    border-radius: 0px 0px 10px 10px;
+    border-top: 1px solid #c9c9c9;
+`;

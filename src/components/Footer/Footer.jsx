@@ -15,7 +15,7 @@ function Footer(props) {
       <button onClick={() => navigate('/board?page=1')}><GoHomeFill/>게시판</button>
       <button onClick={() => navigate('/list')}><FaList/>리스트</button>
       <button onClick={() => navigate('/map')}><LuMapPin/>지도</button>
-      <button onClick={() => navigate('/signin')}><MdManageAccounts/>사용자</button>
+      <button onClick={() => navigate('/user/loginsel')}><MdManageAccounts/>사용자</button>
     </div>
   );
 }

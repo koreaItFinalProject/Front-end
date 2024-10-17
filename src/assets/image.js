@@ -1,5 +1,5 @@
-import naver from './btnG_아이콘원형.png';
-import kakao from './Kakao.png';
-import google from './Google.png';
+import naver from './naver_login.png';
+import kakao from './kakao_login.png';
+import google from './google_login.png';
 
 export { naver, kakao, google };
