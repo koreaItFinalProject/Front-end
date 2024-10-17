@@ -4,8 +4,6 @@ import { useState } from 'react';
 import 'swiper/css'
 import 'swiper/css/pagination';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { IoMdArrowDropleft, IoMdArrowDropright, IoMdHeart } from "react-icons/io";
-import ReactPaginate from 'react-paginate';
 import { instance } from '../../../apis/util/instance';
 import { useQuery } from "react-query";
 import BoardList from "../../../components/BoardList/BoardList";
@@ -53,7 +51,7 @@ function BoardPage(props) {
         }
     }
 
-    const handleButtonClick = (buttonName) => {
+    const handleNavButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
     };
 
@@ -64,40 +62,38 @@ function BoardPage(props) {
             </div>
             <div css={s.boardNavigater}>
                 <button
-                    onClick={() => handleButtonClick('공지')}
+                    onClick={() => handleNavButtonClick('공지')}
                     style={{ fontWeight: selectedButton === '공지' ? 'bold' : 'normal' }}
                 >
                     공지
                 </button>
                 <button
-                    onClick={() => handleButtonClick('자유')}
+                    onClick={() => handleNavButtonClick('자유')}
                     style={{ fontWeight: selectedButton === '자유' ? 'bold' : 'normal' }}
                 >
                     자유
                 </button>
             </div>
-            <div css={s.boardListLayout}>
-                <div css={s.boardListHeader}>
-                    <h3>총 {boardList?.data?.data.totalCount}개</h3>
-                    <select name="searchFilter" onChange={handleFilterOnChange}>
-                        <option name="title" value={"title"}>제목</option>
-                        <option name="writer" value={"writer"}>작성자</option>
-                    </select>
-                    <div css={s.searchBox}>
-                        <input
-                            type="text"
-                            placeholder='검색'
-                            onChange={handleSearchInputOnChange}
-                            onKeyDown={handleEnterInput}
-                            name=""
-                            value={searchValue}
-                        />
-                        <button onClick={handleSearchOnClick}>검색</button>
-                    </div>
-                    <button css={s.writeButton} onClick={() => navigate("/board/write")}>글쓰기</button>
+            <div css={s.boardListHeader}>
+                <h3>총 {boardList?.data?.data.totalCount}개</h3>
+                <select name="searchFilter" onChange={handleFilterOnChange}>
+                    <option name="title" value={"title"}>제목</option>
+                    <option name="writer" value={"writer"}>작성자</option>
+                </select>
+                <div css={s.searchBox}>
+                    <input
+                        type="text"
+                        placeholder='검색'
+                        onChange={handleSearchInputOnChange}
+                        onKeyDown={handleEnterInput}
+                        name=""
+                        value={searchValue}
+                    />
+                    <button onClick={handleSearchOnClick}>검색</button>
                 </div>
+                <button css={s.writeButton} onClick={() => navigate("/board/write")}>글쓰기</button>
             </div>
-            <div css={s.boardList}>
+            <div css={s.boardListLayout}>
                 <BoardList isClick={isClick} page={page} />
             </div>
         </div>

@@ -83,7 +83,7 @@ export const children = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
+    overflow-y: hidden;
     border-radius: 10px;
 `;
 
