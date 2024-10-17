@@ -11,28 +11,23 @@ import BoardList from "../../../components/BoardList/BoardList";
 function BoardPage(props) {
     const [searchValue, setSearchValue] = useState("");
     const [searchFilter, setSearchFilter] = useState("title");
-    const [isClick, setIsClick] = useState(false);
     const [selectedButton, setSelectedButton] = useState('공지');
     const loadMoreRef = useRef(null);
     const navigate = useNavigate();
     const limit = 5;
 
-    const { data, fetchNextPage, hasNextPage } = useInfiniteQuery(
-        ["boardListQuery", searchFilter, searchValue],
+    const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
+        ["boardListQuery"],
         async ({ pageParam = 1 }) => await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`),
         {
             getNextPageParam: (lastPage, allPage) => {
                 const totalPageCount = lastPage.data.totalCount % limit === 0
                     ? lastPage.data.totalCount / limit
                     : Math.floor(lastPage.data.totalCount / limit) + 1
-                console.log(allPage.length);
                 return totalPageCount !== allPage.length ? allPage.length + 1 : null;
             },
             retry: 0,
             refetchOnWindowFocus: false,
-            onSuccess: response => {
-                setIsClick(false);
-            }
         }
     );
 
@@ -45,7 +40,7 @@ function BoardPage(props) {
             if (entries[0].isIntersecting) {
                 fetchNextPage();
             }
-        }, { threshold: 1.0 });
+        }, { threshold: 0.5 });
 
         observer.observe(loadMoreRef.current);
 
@@ -62,12 +57,12 @@ function BoardPage(props) {
     }
 
     const handleSearchOnClick = (e) => {
-        setIsClick(true);
+        refetch();
     }
 
     const handleEnterInput = (e) => {
         if (e.key === "Enter") {
-            setIsClick(true);
+            refetch();
         }
     }
 
@@ -117,10 +112,11 @@ function BoardPage(props) {
                     </div>
                     <div css={s.boardList}>
                         <BoardList data={data} loadMoreRef={loadMoreRef} />
+                        <div ref={loadMoreRef}>ref</div>
                     </div>
                 </div>
             </div>
-            <div ref={loadMoreRef}>ref</div>
+            
         </div>
     );
 }
