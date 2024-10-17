@@ -62,7 +62,7 @@ export const profile = css`
         margin-bottom: 5px;
     }
 
-    & div:nth-child(1){
+    & div:nth-of-type(1) {
         cursor: pointer;
     }
     & button {

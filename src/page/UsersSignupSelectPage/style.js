@@ -44,7 +44,7 @@ export const selectMember = css`
     flex-direction: column;
     height: 400px;
     width: 400px;
-        & img:nth-child(1){
+        & img:nth-of-type(1) {
             width: 400px;
             height: 60px;
             /* margin-bottom: 20px; */

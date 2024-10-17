@@ -48,7 +48,7 @@ export const buttonLayout = css`
     width: 100%;
     height: 50px;
 
-    & button:nth-child(1) {
+    & button:nth-of-type(1) {
         width: 200px;
         height: 50px;
         margin-right: 5px;
@@ -57,7 +57,7 @@ export const buttonLayout = css`
         color: white;
     }
 
-    & button:nth-child(2) {
+    & button:nth-of-type(2) {
         width: 200px;
         height: 50px;
         background-color: #333447;

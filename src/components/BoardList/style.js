@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 
 export const cardLayout = css`
-    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+    margin: 10px 0px;
 `;
 
 export const card = css`
@@ -11,7 +13,7 @@ export const card = css`
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     margin-bottom: 20px;
-    height: 500px;
+    height: 400px;
     box-shadow: 0px 3px 5px #00000011;
     background-color: #ffffff;
     cursor: pointer;
