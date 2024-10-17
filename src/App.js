@@ -1,6 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import HomePage from './page/HomePage/HomePage';
-import ListPage from './page/ListPage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import MapPage from './page/MapPage/MapPage';
@@ -24,6 +23,7 @@ import { useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
+import CafeListPage from './page/CafeListPage/CafeListPage';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
@@ -33,7 +33,18 @@ function App() {
   const location = useLocation();
   const navigeter = useNavigate();
   const [authRefresh, setAuthRefresh] = useState(true);
-
+  const [check, setCheck] = useState("전체");
+  const [inputvalue, setInputvalue] = useState("");
+  const cafe = useQuery(
+    ["cafeQuery", check, inputvalue],
+    async () => {
+      return instance.get(`/cafe/get/${check}/${inputvalue}`);
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    }
+  );
   const accessTokenValid = useQuery(
     ["accessTokenValidQuery"],
     async () => {
@@ -96,10 +107,11 @@ function App() {
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/particular/store' element={<ParticularStorePage />} />
               <Route path='/particular/request' element={<ParticularRequestPage />} />
-              <Route path='/user/loginsel' element={<UsersSignupSelectPage />} />
+              <Route path='/signin' element={<UserSigninPage />} />
+              <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
+              <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/user/signin' element={<UserSigninPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
-              <Route path='/list' element={<ListPage />} />
               <Route path='/map' element={<MapPage />} />
               <Route path='/event' element={<EventPage />} />
               <Route path='/board' element={<BoardPage />} />
