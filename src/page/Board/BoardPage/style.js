@@ -6,6 +6,7 @@ export const layout = css`
     width: 100%;
     height: 100%;
     padding: 0px 15px;
+    overflow-y: auto;
 `;
 
 export const boardHeader = css`
@@ -18,15 +19,10 @@ export const boardHeader = css`
 `;
 
 export const boardNavigater = css`
-
     & button {
         padding: 0;
         margin-bottom: 5px;
         font-size: 18px;
-    }
-
-    & button:focus, & button:active {
-        font-weight: bold;
     }
 
     & button:nth-of-type(1) {
@@ -37,6 +33,10 @@ export const boardNavigater = css`
 export const boardListLayout = css`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
 `;
 
 export const boardListHeader = css`
