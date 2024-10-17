@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import 'swiper/css'
 import 'swiper/css/pagination';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { IoMdArrowDropleft, IoMdArrowDropright, IoMdHeart } from "react-icons/io";
-import ReactPaginate from 'react-paginate';
 import { instance } from '../../../apis/util/instance';
 import { useInfiniteQuery } from "react-query";
 import BoardList from "../../../components/BoardList/BoardList";
@@ -73,7 +71,7 @@ function BoardPage(props) {
         }
     }
 
-    const handleButtonClick = (buttonName) => {
+    const handleNavButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
     };
 
@@ -84,13 +82,13 @@ function BoardPage(props) {
             </div>
             <div css={s.boardNavigater}>
                 <button
-                    onClick={() => handleButtonClick('공지')}
+                    onClick={() => handleNavButtonClick('공지')}
                     style={{ fontWeight: selectedButton === '공지' ? 'bold' : 'normal' }}
                 >
                     공지
                 </button>
                 <button
-                    onClick={() => handleButtonClick('자유')}
+                    onClick={() => handleNavButtonClick('자유')}
                     style={{ fontWeight: selectedButton === '자유' ? 'bold' : 'normal' }}
                 >
                     자유
