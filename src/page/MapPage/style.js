@@ -72,10 +72,64 @@ export const selectbutton = css`
     top: 40px;
     margin-top: 10px;
     margin-left: 2px;
+`;
+
+export const icon = css`
+    position: relative;
+    top: 2px;
+`
+
+
+export const map = css`
+    display: flex;
+    width: 100%;
+    height: 100%;
+`;
+
+export const cafeContainer = css`
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // 버튼을 양 끝으로 배치
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    padding: 10px 20px;
+    border-radius: 20px;
+    
+    z-index: 100;
+    width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
 
     button {
-        border-radius: 20px;
+        padding: 20px;
+        background-color: aliceblue;
+    }
+`;
+
+export const cafeInfo = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: aqua; // 반투명 배경
+    h3 {
+        margin: 0;
+        font-size: 18px; // 카페 이름 크기
+        font-weight: 600;
+        color: #333; // 카페 이름 색상
+    }
+    p {
+        margin: 5px 0 0; // 설명의 여백
+        font-size: 14px; // 설명 크기
+        color: #666; // 설명 색상
+    }
+`;
+
+const baseButtonStyle = css`
+    border-radius: 20px;
         background-color: #ffffff; // 버튼 배경색
+        /* background-color: inherit; */
         border: none;            // 테두리 제거
         color: black;           // 글자 색상
         margin: 0 15px;         // 버튼 사이의 간격 (좌우)
@@ -99,57 +153,25 @@ export const selectbutton = css`
             background-color: #a3a3a3;
             box-shadow: none;
         }
-
-        &:last-of-type {
-            margin-right: 0;      // 마지막 버튼의 오른쪽 마진 제거
-        }
-    }
 `;
 
-export const icon = css`
-    position: relative;
-    top: 2px;
-`
-
-
-export const map = css`
-    display: flex;
-    width: 100%;
-    height: 100%;
+// 각 카테고리별 스타일
+export const bakeryButton = (status) => css`
+    ${baseButtonStyle};
+    background-color: ${status? '' :  '#ffebcd' };
 `;
 
-export const cafeContainer = css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between; // 버튼을 양 끝으로 배치
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 0.9); // 반투명 배경
-    padding: 10px 20px;
-    border-radius: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 100;
-    width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
+export const brunchButton = (status) => css`
+    ${baseButtonStyle};
+    background-color: ${status? '' :  '#ffa297' };
 `;
 
-export const cafeInfo = css`
-    flex: 1; // 중앙 카페 정보 영역을 차지하도록 설정
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+export const atmosphereButton = (status) => css`
+    ${baseButtonStyle};
+    background-color: ${status? '' :  '#d3f3d3' };
+`;
 
-    h3 {
-        margin: 0;
-        font-size: 18px; // 카페 이름 크기
-        font-weight: 600;
-        color: #333; // 카페 이름 색상
-    }
-    p {
-        margin: 5px 0 0; // 설명의 여백
-        font-size: 14px; // 설명 크기
-        color: #666; // 설명 색상
-    }
+export const dessertButton = (status) => css`
+    ${baseButtonStyle};
+    background-color: ${status? '' :  '#dea1fa' };
 `;
