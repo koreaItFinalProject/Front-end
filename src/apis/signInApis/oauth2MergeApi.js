@@ -11,8 +11,10 @@ export const oauth2MergeApi = async (user) => {
             }
         ]
     }
+    console.log(user);
     try {
-        const response = await instance.post("/auth/oauth2/merge", user);
+        const response = await instance.post("/oauth/oauth2/merge", user);
+        console.log(response);
         mergeData = {
             isSuccess: true
         }

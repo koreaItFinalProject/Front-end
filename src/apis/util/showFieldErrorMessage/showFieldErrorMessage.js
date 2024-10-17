@@ -2,6 +2,10 @@ export const showFieldErrorMessage = (fieldErrors) => {
   let EmptyfieldErrors = {
       username : <></>,
       password : <></>,
+      checkPassword : <></>,
+      name : <></>,
+      email : <></>,
+      phoneNumber: <></>
       }
       console.log(fieldErrors);
   

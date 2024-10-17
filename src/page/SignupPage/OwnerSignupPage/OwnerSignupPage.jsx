@@ -9,6 +9,8 @@ import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
 import Ocr from '../../../apis/Ocr/Ocr';
 import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
+import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
+import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -62,14 +64,6 @@ function OwnerSignupPage(props) {
         }
     }
 
-    const handleInputOnChange =(e)=> {
-        setLoginState({
-            ...loginState,
-            [e.target.name] : e.target.value
-        })
-        console.log(e.target.value);
-    }
-
     const handleInputTextChange = (e) => {
         setCafe({
             ...isCafe,
@@ -92,38 +86,13 @@ function OwnerSignupPage(props) {
         setBusinessNumber(e.target.value);
     };
 
-
-    const ShowFiledError = (fieldErrors) => {
-        let EmptyfieldErrors = {
-            username: '',
-            password:'',
-            checkPassword:'',
-            email:'',
-            name:'',
-            nickname:'',
-            cafename:'',
-            phoneNumber:''
-        }
-
-        // 해당 에러하나에 하나씩 채워줌 - 키 밸류 형태로 넣음 리스트에 객체 형태
-        for (let fieldError of fieldErrors) {
-            EmptyfieldErrors = {
-                ...EmptyfieldErrors,
-                [fieldError.field]: <p>{fieldError.defaultMessage}</p>
-            }
-            
-        }
-        setFieldErrorMessages(EmptyfieldErrors);
-      }
-
-    
-
     const handlesignuppageOnClick = useMutation (
         async () => {
                 const signupData = await usersignupApi(loginState);
                 console.log(signupData);
                 if(!signupData.isSuccess){
-                    ShowFiledError(signupData.fieldErrors);
+                    const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+                    setFieldErrorMessages(newErrors);
                 }
                 return signupData;
             },
@@ -147,7 +116,8 @@ function OwnerSignupPage(props) {
                         }
                 },
             onError: (signupData) => {
-                ShowFiledError(signupData.fieldErrors);
+                const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+                setFieldErrorMessages(newErrors);
                 alert("가입 실패"); 
             }
         }
@@ -192,32 +162,32 @@ function OwnerSignupPage(props) {
                     <div css={s.Info}>
                         <div>
                             <p>아이디</p>
-                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
+                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange(loginState)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
                             {fieldErrorMessages.username}
                         </div>
                         <div>
                             <p>비밀번호</p>
-                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
+                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange(loginState)} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
                             {fieldErrorMessages.password}
                         </div>
                         <div>
                             <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange} placeholder='비밀번호 공백일 수 없습니다' />
+                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange(loginState)} placeholder='비밀번호 공백일 수 없습니다' />
                             {fieldErrorMessages.checkPassword}
                         </div>
                         <div>
                             <p>이메일</p>
-                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange} placeholder='이메일은 공백일 수 없습니다.' />
+                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange(loginState)} placeholder='이메일은 공백일 수 없습니다.' />
                             {fieldErrorMessages.email}
                         </div>
                         <div>
                             <p>대표자명</p>
-                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange} placeholder='한글로 된 이름을 기입해주세요.' />
+                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange(loginState)} placeholder='한글로 된 이름을 기입해주세요.' />
                             {fieldErrorMessages.name}
                         </div>
                         <div>
                             <p>닉네임</p>
-                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
+                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange(loginState)} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
                             {fieldErrorMessages.nickname}
                         </div>
                         <div>

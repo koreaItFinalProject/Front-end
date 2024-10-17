@@ -1,36 +1,40 @@
 import { instance } from "../util/instance";
 
-export const oAuth2SignupApi = async (user) => {
-  let signupData = {
-      isSuceess: false,
-      ok: {
-          message: "",
-          user: null
-      },
-      fieldErrors: [
-          {
-              field: "",
-              defaultMessage: ""
-          }
-      ]
-  }
-  try {
-      const response = await instance.post("/auth/oauth2/signup", user);
-      console.log(response);
-      signupData = {
-          isSuceess: true,
-          ok: response.data,
-      }
-  } catch (error) {
-      const response = error.response;
-      signupData = {
-          isSuceess: false,
-          fieldErrors: response.data.map(fieldError => ({
-              field: fieldError.field, 
-              defaultMessage: fieldError.defaultMessage
-          })),
-      }
-  }
 
-  return signupData;
+export const oauth2MergeApi = async (user) => {
+    let mergeData = {
+        isSuccess: false,
+        fieldErrors: [
+            {
+                field: "",
+                defaultMessage: ""
+            }
+        ]
+    }
+    console.log(user);
+    try {
+        const response = await instance.post("/oauth/oauth2/signup", user);
+        console.log(response);
+        mergeData = {
+            isSuccess: true
+        }
+    } catch (error) {
+        const response = error.response;
+        mergeData = {
+            isSuccess: false,
+        }
+
+        if(typeof(response.data) === 'string') {
+            mergeData['errorStatus'] = "loginError";
+            mergeData['error'] = response.data;
+        }else {
+            mergeData['errorStatus'] = "fieldError";
+            mergeData['error'] = response.data.map(fieldError => ({
+                field: fieldError.field, 
+                defaultMessage: fieldError.defaultMessage
+            }));
+        }
+    }
+
+    return mergeData;
 }
