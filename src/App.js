@@ -106,21 +106,6 @@ function App() {
               <Route path='/board/write' element={<WritePage />} />
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
               <Route path='/board/modify/:boardId' element={<ModifyPage />} />
-              <Route path='/' element={<HomePage/>}/>
-              <Route path='/user/signup' element={<UserSignupPage/>}/>
-              <Route path='/owner/signup' element={<OwnerSignupPage/>}/>
-              <Route path='/particular/store' element={<ParticularStorePage/>}/>
-              <Route path='/particular/request' element={<ParticularRequestPage/>}/>
-              <Route path='/user/loginsel' element={<UsersSignupSelectPage/>}/>
-              <Route path='/user/signin' element={<UserSigninPage/>}/>
-              <Route path='/select/signup' element={<UsersSignupSelectPage/>}/>
-              <Route path='/list' element={<ListPage/>}/>
-              <Route path='/map' element={<MapPage/>}/>
-              <Route path='/event' element={<EventPage />}/>
-              <Route path='/board' element={<BoardPage/>}/>
-              <Route path='/board/write' element={<WritePage/>}/>
-              <Route path='/board/detail/:boardId' element={<DetailPage/>}/>
-              <Route path='/board/modify/:boardId' element={<ModifyPage/>}/>
               <Route path='/user/find' element={<UserFindPage/>}/>
               <Route path='/user/oauth' element={<OAuth2Page/>}/>
             </Routes>
