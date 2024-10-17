@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { IoMdHeart } from 'react-icons/io';
@@ -6,29 +6,30 @@ import { useNavigate } from 'react-router-dom';
 
 function BoardList({ data, loadMoreRef }) {
     const navigate = useNavigate();
+    const listRef = useRef(null);
 
-    // useEffect(() => {
-    //     if (loadMoreRef.current && loadMoreRef.current) {
-    //         loadMoreRef.current.appendChild(loadMoreRef.current);
-    //     }
-    // }, []);
+    useEffect(() => {
+        if (listRef.current && loadMoreRef.current) {
+            listRef.current.appendChild(loadMoreRef.current);
+        }
+    }, [data]);
 
     return (
-        <ul css={s.cardLayout} ref={loadMoreRef}>
+        <ul css={s.cardLayout} ref={listRef}>
             {
                 data?.pages.map((page, pageIndex) => (
-                    <React.Fragment key={pageIndex}> {
-                        page.data.boards.map(board => {
+                    <React.Fragment key={pageIndex}>
+                        {page.data.boards.map(board => {
                             const mainImgStartIndex = board.content.indexOf("<img");
                             let mainImg = board.content.slice(mainImgStartIndex);
                             mainImg = mainImg.slice(0, mainImg.indexOf(">") + 1);
-                            const mainImgSrc = mainImg.slice(mainImg.indexOf("src") + 5, mainImg.length - 2)
+                            const mainImgSrc = mainImg.slice(mainImg.indexOf("src") + 5, mainImg.length - 2);
 
                             let mainContent = board.content;
                             while (true) {
                                 const pIndex = mainContent.indexOf("<p>");
-                                if (pIndex === -1) { // p태그가 없는 상황 
-                                    mainContent = ""; // p태그가 없으면 출력되지 않게 비워줌
+                                if (pIndex === -1) { 
+                                    mainContent = ""; 
                                     break;
                                 }
                                 mainContent = mainContent.slice(pIndex + 3);
@@ -37,7 +38,7 @@ function BoardList({ data, loadMoreRef }) {
                                         mainContent = mainContent.slice(0, mainContent.indexOf("<img"));
                                         break;
                                     }
-                                    mainContent = mainContent.slice(0, mainContent.indexOf("</p>")); // 다음 p태그 안의 내용을 mainContent에 넣어준다. 
+                                    mainContent = mainContent.slice(0, mainContent.indexOf("</p>"));
                                     break;
                                 }
                             }
