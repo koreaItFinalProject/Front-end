@@ -9,6 +9,13 @@ export const layout = css`
     overflow-y: auto;
 `;
 
+export const boardLayout = css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`;
+
 export const boardHeader = css`
     display: flex;
     flex-direction: column;
@@ -33,10 +40,8 @@ export const boardNavigater = css`
 export const boardListLayout = css`
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
 `;
 
 export const boardListHeader = css`

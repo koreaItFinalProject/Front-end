@@ -30,7 +30,7 @@ export const camera = css`
         height: 8px;
         border-radius: 50%;
         border:1px solid #2c2c2c;
-        &:nth-child(3){
+        &:nth-of-type(3) {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -83,12 +83,12 @@ export const children = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-y: hidden;
+    overflow: auto;
     border-radius: 10px;
 `;
 
 export const footer = css`
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
     height: 60px;
     width: 100%;
