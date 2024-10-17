@@ -13,11 +13,12 @@ function BoardList({isClick, page}) {
     return (
         <ul css={s.cardLayout}>
             {
-                boardList?.data?.boards.map(board => {
+                boardList?.data?.data.boards.map(board => {
                     const mainImgStartIndex = board.content.indexOf("<img");
                     let mainImg = board.content.slice(mainImgStartIndex);
                     mainImg = mainImg.slice(0, mainImg.indexOf(">") + 1);
                     const mainImgSrc = mainImg.slice(mainImg.indexOf("src") + 5, mainImg.length - 2)
+                    
                     let mainContent = board.content;
                     while (true) {
                         const pIndex = mainContent.indexOf("<p>");
