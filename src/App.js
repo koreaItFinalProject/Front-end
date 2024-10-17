@@ -31,7 +31,7 @@ import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2Page';
 
 function App() {
   const location = useLocation();
-  const navigeter = useNavigate();
+  const navigete = useNavigate();
   const [authRefresh, setAuthRefresh] = useState(true);
 
   const accessTokenValid = useQuery(
@@ -50,11 +50,12 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPasths = ["/user"];
+        const permitAllPasths = ["/user/sadasdsad", "/owner"];
         for (let permitAllPasth of permitAllPasths) {
           if (location.pathname.startsWith(permitAllPasth)) {
+            console.log(permitAllPasth);
             alert("잘못된 요청입니다.")
-            navigeter("/");
+            navigete("/");
             break;
           }
         }
@@ -64,13 +65,26 @@ function App() {
         for (let authPath of authPaths) {
           if (location.pathname.startsWith(authPath)) {
             alert("로그인 후 이용해주세요")
-            navigeter("/user/login");
+            navigete("/user/login");
             break;
           }
         }
       }
     }
   );
+
+  const userInfo = useQuery(
+    ["userInfoQuery"],
+    async () => {
+      return await instance.get("/user/me");
+    },
+    {
+      enabled:accessTokenValid.isSuccess,
+      refetchOnWindowFocus:false
+    }
+  )
+  console.log(accessTokenValid);
+
 
   return (
     <>
@@ -107,7 +121,7 @@ function App() {
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
               <Route path='/board/modify/:boardId' element={<ModifyPage />} />
               <Route path='/user/find' element={<UserFindPage/>}/>
-              <Route path='/user/oauth' element={<OAuth2Page/>}/>
+              <Route path='/oauth/oauth2' element={<OAuth2Page/>}/>
             </Routes>
           </MainLayout>
         } />

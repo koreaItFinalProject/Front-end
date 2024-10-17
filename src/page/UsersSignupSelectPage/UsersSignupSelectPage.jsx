@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
-import Header from '../../components/Header/Header';
+import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import logo from '../../assets/logo.png'
 import {naver, kakao , google} from '../../assets/image'
 import { IoIosArrowForward } from "react-icons/io";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GoPersonAdd } from "react-icons/go";
 
 function UsersSignupSelectPage(props) {
-
-    const [login , setLogin] = useState(false);
      
     const navigate = useNavigate();
   
