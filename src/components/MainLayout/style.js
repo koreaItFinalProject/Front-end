@@ -77,8 +77,8 @@ export const header = css`
 `;
 
 export const children = css`
-    height: 100%;
     width: 100%;
+    height: calc(100% - 60px);
     box-sizing: border-box;
     display: flex;
     justify-content: center;
