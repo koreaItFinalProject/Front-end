@@ -11,6 +11,7 @@ function Comments(props) {
 
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
+    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
 
     const [commentData, setCommentData] = useState({
         boardId,
@@ -118,6 +119,10 @@ function Comments(props) {
     };
 
     const handleReplyButtonOnClick = (commentId) => {
+        if(!accessCheck) {
+            alert("로그인 후 작성가능합니다.");
+            return;
+        }
         setCommentData(comment => ({
             ...comment,
             content: "",
