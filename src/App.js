@@ -16,7 +16,7 @@ import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 import ParticularStorePage from './page/Particular/ParticularStorePage/ParticularStorePage';
 import ParticularRequestPage from './page/Particular/ParticularRequestPage/ParticularRequestPage';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
@@ -33,6 +33,13 @@ function App() {
   const [authRefresh, setAuthRefresh] = useState(true);
   const [check, setCheck] = useState("전체");
   const [inputvalue, setInputvalue] = useState("");
+
+  useEffect(() => {
+    if (!authRefresh) {
+        setAuthRefresh(true);
+    }
+  }, [location.pathname]);
+
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
     async () => {
@@ -43,6 +50,7 @@ function App() {
       retry: 0,
     }
   );
+
   const accessTokenValid = useQuery(
     ["accessTokenValidQuery"],
     async () => {
@@ -58,8 +66,8 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPasths = ["/user/sadasdsad", "/owner"];
-        for (let permitAllPasth of permitAllPasths) {
+        const permitAllPaths = ["/user/sadasdsad", "/owner"];
+        for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
             alert("잘못된 요청입니다.")
@@ -81,15 +89,13 @@ function App() {
     }
   );
 
-  console.log(localStorage.getItem("accessToken"));
-
   const userInfo = useQuery(
     ["userInfoQuery"],
     async () => {
       return await instance.get("/user/me");
     },
     {
-      enabled: accessTokenValid.isSuccess,
+      enabled: accessTokenValid.isSuccess && accessTokenValid.data?.data,
       refetchOnWindowFocus:false
     }
   )
