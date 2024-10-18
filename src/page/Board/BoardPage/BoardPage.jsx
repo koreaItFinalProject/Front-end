@@ -17,7 +17,7 @@ function BoardPage(props) {
     const limit = 5;
 
     const queryClient = useQueryClient();
-    const userInfoData = queryClient.getQueryData("userInfoQuery");
+    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
 
     const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
         ["boardListQuery"],
@@ -73,6 +73,15 @@ function BoardPage(props) {
         setSelectedButton(buttonName);
     };
 
+    const handleWriteOnClick = () => {
+        if(!accessCheck) {
+            alert("로그인 후 작성해주세요.");
+            navigate("/user/signin");
+            return;
+        }
+        navigate("/board/write")
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.boardLayout}>
@@ -111,11 +120,11 @@ function BoardPage(props) {
                             />
                             <button onClick={handleSearchOnClick}>검색</button>
                         </div>
-                        <button css={s.writeButton} onClick={() => navigate("/board/write")}>글쓰기</button>
+                        <button css={s.writeButton} onClick={handleWriteOnClick}>글쓰기</button>
                     </div>
                     <div css={s.boardList}>
                         <BoardList data={data} loadMoreRef={loadMoreRef} />
-                        <div ref={loadMoreRef}></div>
+                        <div ref={loadMoreRef} css={s.ref}></div>
                     </div>
                 </div>
             </div>

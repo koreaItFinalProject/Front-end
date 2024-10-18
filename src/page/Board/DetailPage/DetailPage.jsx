@@ -29,7 +29,7 @@ function DetailPage(props) {
     const boardLike = useQuery(
         ["boardLikeQuery"],
         async () => {
-            return instance.get(`/board/${boardId}/like`)
+            return instance.get(`/board/${boardId}/like`);
         },
         {
             refetchOnWindowFocus: false,
@@ -49,7 +49,7 @@ function DetailPage(props) {
 
     const likeMutation = useMutation(
         async () => {
-            return await instance.post(`/board/${boardId}/like`)
+            return await instance.post(`/board/${boardId}/like`);
         },
         {
             onSuccess: response => {
@@ -60,7 +60,7 @@ function DetailPage(props) {
 
     const dislikeMutation = useMutation(
         async () => {
-            return await instance.delete(`/board/like/${boardLike.data?.data.boardLikeId}`)
+            return await instance.delete(`/board/like/${boardLike.data?.data.boardLikeId}`);
         },
         {
             onSuccess: response => {
@@ -94,6 +94,8 @@ function DetailPage(props) {
     const handleDislikeOnClick = () => {
         dislikeMutation.mutateAsync();
     }
+
+    console.log(userInfoData);
 
     return (
         <div css={s.layout}>

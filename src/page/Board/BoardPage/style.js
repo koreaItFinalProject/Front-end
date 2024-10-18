@@ -6,7 +6,8 @@ export const layout = css`
     width: 100%;
     height: 100%;
     padding: 0px 15px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
+    
 `;
 
 export const boardLayout = css`
@@ -95,4 +96,9 @@ export const boardList = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
+`;
+
+export const ref = css`
+    height: 10px;
 `;

@@ -96,7 +96,7 @@ function App() {
       refetchOnWindowFocus:false
     }
   )
-  console.log(accessTokenValid);
+  console.log(userInfo);
 
 
   return (
