@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
+import { oAuth2SignupApi } from '../../../apis/signUpApis/oauth2SignupApi';
 
 
 function OAuth2Signup(props) {
@@ -18,7 +18,6 @@ function OAuth2Signup(props) {
         name:'',
         nickname:'',
         phoneNumber:'',
-        role: "USER"
     })
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
@@ -32,21 +31,28 @@ function OAuth2Signup(props) {
     });
 
     const handleMergepageOnClick = async () => {
+        console.log(inputUser);
         const mergeData = {
             username : inputUser.username,
             password : inputUser.password,
+            email:inputUser.email,
+            name:inputUser.name,
+            nickname:inputUser.nickname,
+            phoneNumber:inputUser.phoneNumber,
             oauth2Name : searchParams.get("oAuth2Name"),
             provider: searchParams.get("provider")
         }
-        const response = await oauth2MergeApi(mergeData);
+        console.log(mergeData);
+        const response = await oAuth2SignupApi(mergeData);
         console.log(response);
-        if(!mergeData.isSuccess){
-            if(mergeData.errorStatus === "loginError"){
-                alert(mergeData.error);       
+        if(!response.isSuccess){
+            if(response.errorStatus === "loginError"){
+                alert(response.error);       
                 return;
             }
-            if(mergeData.errorStatus === "fieldError"){
-                const newErrors = showFieldErrorMessage(mergeData.error);
+            if(response.errorStatus === "fieldError"){
+                console.log(response.errorStatus);
+                const newErrors = showFieldErrorMessage(response.error);
                 setFieldErrorMessages(newErrors);
                 return;
             }
@@ -102,7 +108,7 @@ function OAuth2Signup(props) {
                     </div>
                     
                     <div css={s.signupbutton}>
-                        <button onClick={handleMergepageOnClick}>통합하기</button>
+                        <button onClick={handleMergepageOnClick}>회원가입</button>
                     </div>
                 </div>
             </div>
