@@ -7,7 +7,8 @@ export const writeBoardApi = async (board, navigate) => {
         alert("게시글이 작성되었습니다.")
         navigate(`/board/detail/${response.data}`);
     } catch (error) {
-        const fieldErrors = error.response.data;
+        console.error(error);
+        const fieldErrors = error.response;
         for (let fieldError of fieldErrors) {
             if (fieldError.field === 'title') {
                 alert(fieldError.defaultMessage);
