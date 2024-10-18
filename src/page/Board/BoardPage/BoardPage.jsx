@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "react-query";
 import BoardList from "../../../components/BoardList/BoardList";
 
 function BoardPage(props) {
@@ -15,6 +15,9 @@ function BoardPage(props) {
     const loadMoreRef = useRef(null);
     const navigate = useNavigate();
     const limit = 5;
+
+    const queryClient = useQueryClient();
+    const userInfoData = queryClient.getQueryData("userInfoQuery");
 
     const { data, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
         ["boardListQuery"],
@@ -112,7 +115,7 @@ function BoardPage(props) {
                     </div>
                     <div css={s.boardList}>
                         <BoardList data={data} loadMoreRef={loadMoreRef} />
-                        <div ref={loadMoreRef}>ref</div>
+                        <div ref={loadMoreRef}></div>
                     </div>
                 </div>
             </div>

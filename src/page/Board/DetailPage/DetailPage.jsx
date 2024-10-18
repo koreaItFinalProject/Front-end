@@ -11,7 +11,9 @@ function DetailPage(props) {
     const navigate = useNavigate();
     const params = useParams();
     const boardId = params.boardId;
+
     const queryClient = useQueryClient();
+    const userInfoData = queryClient.getQueryData("userInfoQuery");
 
     const board = useQuery(
         ["boardQuery", boardId],
@@ -138,8 +140,13 @@ function DetailPage(props) {
                                 }
                             </div>
                             <div>
-                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                {
+                                    board.data.data.writerId === userInfoData.data.userId &&
+                                    <>
+                                        <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                        <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                    </>
+                                }
                             </div>
                         </div>
                     </div>
@@ -148,12 +155,12 @@ function DetailPage(props) {
                             value={board.data.data.content}
                             readOnly={true}
                             theme="snow"
-                            modules={{ 
-                                toolbar: false 
+                            modules={{
+                                toolbar: false
                             }}
-                            style={{ 
+                            style={{
                                 boxSizing: 'border-box',
-                                width: '100%', 
+                                width: '100%',
                                 height: '100%',
                             }}
                         />

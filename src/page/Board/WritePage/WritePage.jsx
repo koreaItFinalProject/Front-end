@@ -39,6 +39,14 @@ function WritePage(props) {
     }
 
     const handleWriteSubmitOnClick = async () => {
+        if (board.title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+        if (!board.content) {
+            alert("내용을 입력하세요.");
+            return;
+        }
         await writeBoardApi(board, navigate);
     }
 

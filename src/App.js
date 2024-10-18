@@ -81,13 +81,15 @@ function App() {
     }
   );
 
+  console.log(localStorage.getItem("accessToken"));
+
   const userInfo = useQuery(
     ["userInfoQuery"],
     async () => {
       return await instance.get("/user/me");
     },
     {
-      enabled:accessTokenValid.isSuccess,
+      enabled: accessTokenValid.isSuccess,
       refetchOnWindowFocus:false
     }
   )
