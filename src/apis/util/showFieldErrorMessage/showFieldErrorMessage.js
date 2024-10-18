@@ -5,7 +5,8 @@ export const showFieldErrorMessage = (fieldErrors) => {
       checkPassword : <></>,
       name : <></>,
       email : <></>,
-      phoneNumber: <></>
+      phoneNumber: <></>,
+      oauth2Name:<></>
       }
       console.log(fieldErrors);
   
