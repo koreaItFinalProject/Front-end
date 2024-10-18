@@ -59,11 +59,11 @@ function UserSignupPage(props) {
                         </div>
                         <div>
                             <div>
-                            <p>비밀번호</p>
-                            <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='' />
+                                <p>비밀번호</p>
+                                <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='' />
+                                </div>
+                                <p>{fieldErrorMessages.password}</p>
                             </div>
-                            <p>{fieldErrorMessages.password}</p>
-                        </div>
                         <div>
                             <p>비밀번호 확인</p>
                             <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='' />

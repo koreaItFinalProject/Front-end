@@ -15,7 +15,7 @@ function UserSigninPage(props) {
         username : <></>,
         password : <></>
     });
-    const [ isLogin , setIsLogin ] = useState({
+    const [ inputUser , setInputUser ] = useState({
         username:"",
         password:"",
         role:"USER"
@@ -27,7 +27,7 @@ function UserSigninPage(props) {
     }
 
     const handleOnLoginClick = async() => {
-        const signinData = await usersignInApi(isLogin);
+        const signinData = await usersignInApi(inputUser);
         console.log(signinData);
         console.log(signinData.error);
         if(!signinData.isSuccess){
@@ -49,9 +49,9 @@ function UserSigninPage(props) {
         <div css={s.layout}>
             <div css={s.login}>
                 <div css={s.loginInput}>
-                    <input type="text" name="username" onChange={handleInputOnChange(setIsLogin)} value={isLogin.username} placeholder='아이디'/>
+                    <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디'/>
                     <p>{fieldErrorMessages.username}</p>
-                    <input type="password" name="password" onChange={handleInputOnChange(setIsLogin)} value={isLogin.password} placeholder='비밀번호'/>
+                    <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호'/>
                     <p>{fieldErrorMessages.password}</p>
                     <div css={s.checkbox}>
                         <span id='checkbox' onClick={handleSaveOnChange}>

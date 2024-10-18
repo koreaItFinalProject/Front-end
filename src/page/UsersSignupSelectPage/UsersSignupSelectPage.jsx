@@ -2,15 +2,17 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import logo from '../../assets/logo.png'
-import {naver, kakao , google} from '../../assets/image'
+import { naver, kakao, google } from '../../assets/image';
 import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-import { GoPersonAdd } from "react-icons/go";
+import { IoPersonAddSharp } from "react-icons/io5";
 
 function UsersSignupSelectPage(props) {
      
     const navigate = useNavigate();
-  
+    const naverLocation = "http://localhost:8080/oauth2/authorization/naver";
+    const kakaoLocation = "http://localhost:8080/oauth2/authorization/kakao";
+    const googleLocation = "http://localhost:8080/oauth2/authorization/google";
     return (
         <div>
             <div css={s.layout}>
@@ -20,14 +22,23 @@ function UsersSignupSelectPage(props) {
                 </div>
                 <div css={s.loginMain}>
                     <div css={s.selectMember}>
-                        <a href="http://localhost:8080/oauth2/authorization/naver"><img src={naver} alt="" /></a>
-                        <a href="http://localhost:8080/oauth2/authorization/kakao"><img src={kakao} alt="" /></a>
-                        <a href="http://localhost:8080/oauth2/authorization/google"><img src={google} alt="" /></a>
-                        <button onClilck = {() => navigate("/owner/signup") }>
-                            <GoPersonAdd/>
+                        <button css={s.naver} onClick={() => window.location.href = naverLocation}>
+                            <img src={naver} alt="Naver Logo"/>
+                            <p>네이버로 시작하기</p>
+                        </button>
+                        <button css={s.kakao} onClick={() => window.location.href = kakaoLocation}>
+                            <img src={kakao} alt="kakao Logo"/>
+                            <p>카카오로 시작하기</p>
+                        </button>
+                        <button css={s.google} onClick={() => window.location.href = googleLocation}>
+                            <img src={google} alt="kakao Logo"/>
+                            <p>google로 시작하기</p>
+                        </button>
+                        <button onClilck = {() => navigate("/owner/signup") } css={s.ownerButton}>
+                            <IoPersonAddSharp />
                             <div>
                                 <button onClick={() => navigate("/owner/signup")}>
-                                    점주 회원가입
+                                    점주로 시작하기
                                 </button>
                             </div>
                         </button>
