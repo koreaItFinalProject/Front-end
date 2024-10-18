@@ -68,6 +68,7 @@ function UserSignupPage(props) {
                             <p>비밀번호 확인</p>
                             <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='' />
                             <p>{fieldErrorMessages.checkPassword}</p>
+                            <p>{fieldErrorMessages.passwordMatching}</p>
                         </div>
                         <div>
                             <p>이름</p>
