@@ -50,7 +50,7 @@ function OAuth2Signup(props) {
         console.log(response);
         if(!response.isSuccess){
             if(response.errorStatus === "loginError"){
-                alert(response.error);       
+                alert(response.error); 
                 return;
             }
             if(response.errorStatus === "fieldError"){
