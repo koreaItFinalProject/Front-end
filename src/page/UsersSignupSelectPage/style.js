@@ -15,12 +15,16 @@ export const logo = css`
     justify-content: center;
     align-items: center;
     & img {
-        width: 100px;
-        height: 100px;
+        width: 125px;
+        height: 125px;
     }
 
     & h1{
-        font-size: 24px;
+        font-size: 30px;
+        font-family: "Oswald", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 600;
+        font-style: normal;
         margin: 0;
     }
 `;
@@ -31,10 +35,124 @@ export const loginMain = css`
     flex-direction: column;
     justify-content: center;
     height: 100%;
-    /* width: 600px; */
-
-    
 `;
+
+
+export const naver = css`
+    display: flex;
+    align-items: center;
+    background-color: #03C75A;
+    justify-content: space-around;
+    width: 350px;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    & img {
+        font-size: 40px;
+        width: 50px;
+        height: 50px;
+    }
+    & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & p {
+        margin: 0px 20px 4px 0px ;
+        color: #FDF3F2;
+        font-size: 20px;
+        font-weight: 500;
+    }
+`;
+export const kakao = css`
+    display: flex;
+    align-items: center;
+    background-color: #FEE500;
+    justify-content: space-around;
+    width: 350px;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    & img {
+        font-size: 40px;
+        width: 50px;
+        height: 50px;
+    }
+    & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & p {
+        margin: 0px 20px 4px 0px ;
+        color: #393200;
+        font-size: 20px;
+        font-weight: 500;
+    }
+    `;
+export const google = css`
+    background-color: #E94334;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 350px;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    & img {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        margin-left: 6px;
+    }
+    & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & p {
+        margin: 0px 20px 4px 0px ;
+        color: #FDF3F2;
+        font-size: 20px;
+        font-weight: 500;
+    }
+`;
+
+export const ownerButton =css`
+    background-color: #9146FF;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 350px;
+    height: 60px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    padding: 0;
+    & svg {
+        width: 30px;
+        height: 30px;
+        margin-left: 4px;
+        & path {
+            color: #FDF3F2;
+        }
+        & circle{
+            color: #FDF3F2;
+        }
+    }
+    & a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    & button {
+        margin: 0px 20px 4px 0px ;
+        color: #FDF3F2;
+        font-size: 20px;
+        font-weight: 450;
+        
+    }
+`;
+
 
 export const selectMember = css`
     display: flex;
@@ -44,62 +162,6 @@ export const selectMember = css`
     flex-direction: column;
     height: 400px;
     width: 400px;
-        & img:nth-of-type(1) {
-            width: 400px;
-            height: 60px;
-            /* margin-bottom: 20px; */
-        }
-        & a{
-            border-radius: 20px;
-            width: 400px;
-            height: 60px;
-            box-sizing: border-box;
-            margin-bottom: 20px;
-        }
-
-        & a img {
-            border-radius: 20px;
-            
-        }
-
-        & a:nth-last-child(1) {
-            margin-bottom: 20px;
-            width: 400px;
-            height: 60px;
-            background-color: #ffe1a1;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-        }
-        & button {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 60px;
-            padding: 0;
-            border-radius: 20px;
-            background-color: #ffe1a1;
-            font-size: 20px;
-            justify-content: center;
-            & div {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            & * {
-                margin: 0px 20px;
-                font-weight: 600;
-            }
-            & svg {
-                font-size: 40px;
-                /* margin: 0px 30px; */
-                width: 40px;
-                height: 40px;
-            }
-        }
     `;
  
 export const emailbutton = css`

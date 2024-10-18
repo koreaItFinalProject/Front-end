@@ -11,6 +11,7 @@ import Businessregistration from '../../../apis/BusinessregistrationApi/Business
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
+import logo from '../../../assets/logo.png'
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -18,7 +19,7 @@ function OwnerSignupPage(props) {
         latitude: '',
         longitude: ''
      });
-    const [loginState , setLoginState] = useState({
+    const [inputUser , setInputUser] = useState({
         username: '',
         password:'',
         name:'', 
@@ -86,48 +87,87 @@ function OwnerSignupPage(props) {
         setBusinessNumber(e.target.value);
     };
 
-    const handlesignuppageOnClick = useMutation (
-        async () => {
-                const signupData = await usersignupApi(loginState);
-                console.log(signupData);
-                if(!signupData.isSuccess){
-                    const newErrors = showFieldErrorMessage(signupData.fieldErrors);
-                    setFieldErrorMessages(newErrors);
-                }
-                return signupData;
-            },
-            {
-            onSuccess: async(response) =>{
-                    console.log(response);
-                    console.log(coordinates);
-                    const data = {
-                        ownerId: response.ok.user.id ,
-                        address:isAddress.address,
-                        lat:coordinates.latitude,
-                        lng:coordinates.longitude,
-                        cafename:isCafe.cafename
-                        };    
-                    console.log(coordinates);               
-                    
-                        const CafeData = await ownercheckApi(data);
-                        if(CafeData.isSuccess){
-                            alert("가입 성공");
-                            navigate("/signin");
-                        }
-                },
-            onError: (signupData) => {
+    // const handlesignuppageOnClick = useMutation (
+    //     async () => {
+    //             const signupData = await usersignupApi(inputUser);
+    //             console.log(signupData);
+    //             if(!signupData.isSuccess){
+    //                 const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+    //                 setFieldErrorMessages(newErrors);
+    //                 console.log("1");
+    //             }
+    //             return signupData;
+    //         },
+    //         {
+    //         onSuccess: async(response) =>{
+    //                 console.log("2");
+    //                 console.log(response?.ok?.user);
+    //                 console.log(coordinates);
+    //                 const data = {
+    //                     ownerId: response.ok.user.id ,
+    //                     address:isAddress.address,
+    //                     lat:coordinates.latitude,
+    //                     lng:coordinates.longitude,
+    //                     cafename:isCafe.cafename
+    //                     };    
+    //                 console.log(coordinates);               
+    //                     const CafeData = await ownercheckApi(data);
+    //                     if(CafeData.isSuccess){
+    //                         console.log("3");
+    //                         alert("가입 성공");
+    //                         navigate("/signin");
+    //                     }
+    //             },
+    //         onError: (signupData) => {
+    //             const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+    //             setFieldErrorMessages(newErrors);
+    //             alert("가입 실패"); 
+    //         }
+    //     }
+    // );
+    const handleSignup = async () => {
+        setLoading(true);
+        try {
+            const signupData = await usersignupApi(inputUser);
+            console.log(signupData);
+            if (!signupData.isSuccess) {
                 const newErrors = showFieldErrorMessage(signupData.fieldErrors);
                 setFieldErrorMessages(newErrors);
-                alert("가입 실패"); 
+                console.log("1");
+                setLoading(false);
+                return;
             }
+
+            const data = {
+                ownerId: signupData.ok.user.id,
+                address: isAddress.address,
+                lat: coordinates.latitude,
+                lng: coordinates.longitude,
+                cafename: isCafe.cafename,
+            };
+            console.log(coordinates);
+
+            const CafeData = await ownercheckApi(data);
+            if (CafeData.isSuccess) {
+                alert("가입 성공");
+                navigate("/signin");
+            }
+        } catch (error) {
+            console.error('Signup error:', error);
+        } finally {
+            setLoading(false);
         }
-    );
+    };
 
     const handleRegistrationNumberCheckOnClick = async () => {
         const response = await Businessregistration(businessNumber);
         console.log(response);
         setLoading(true);
         setProccess(false);
+        if(response === "조회 중 오류가 발생했습니다."){
+            setLoading(false);
+            setProccess(true);
+        }
         if(response === '인증완료') {
             if (image) {
                 Ocr(image)
@@ -156,77 +196,83 @@ function OwnerSignupPage(props) {
     }
 
     return (
-        <div>
-            <div css={s.layout}>
-                <div>
-                    <div css={s.Info}>
-                        <div>
-                            <p>아이디</p>
-                            <input type="text" name='username' value={loginState.username} onChange={handleInputOnChange(loginState)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
-                            {fieldErrorMessages.username}
-                        </div>
-                        <div>
-                            <p>비밀번호</p>
-                            <input type="password" name='password' value={loginState.password} onChange={handleInputOnChange(loginState)} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
-                            {fieldErrorMessages.password}
-                        </div>
-                        <div>
-                            <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={loginState.checkPassword} onChange={handleInputOnChange(loginState)} placeholder='비밀번호 공백일 수 없습니다' />
-                            {fieldErrorMessages.checkPassword}
-                        </div>
-                        <div>
-                            <p>이메일</p>
-                            <input type="email" name='email' value={loginState.email} onChange={handleInputOnChange(loginState)} placeholder='이메일은 공백일 수 없습니다.' />
-                            {fieldErrorMessages.email}
-                        </div>
-                        <div>
-                            <p>대표자명</p>
-                            <input type="text" name='name' value={loginState.name} onChange={handleInputOnChange(loginState)} placeholder='한글로 된 이름을 기입해주세요.' />
-                            {fieldErrorMessages.name}
-                        </div>
-                        <div>
-                            <p>닉네임</p>
-                            <input type="text" name='nickname' value={loginState.nickname} onChange={handleInputOnChange(loginState)} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
-                            {fieldErrorMessages.nickname}
-                        </div>
-                        <div>
-                            <p>전화번호</p>
-                            <input type="text" name='cafename' value={loginState.phoneNumber} onChange={handleInputTextChange} placeholder='휴대전화 인증을 받아야 합니다.' />
-                            {fieldErrorMessages.phoneNumber}
-                        </div>
-                        <div>
-                            <p>카페명</p>
-                            <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
-                            {fieldErrorMessages.cafename}
-                        </div>
-                        <div>
-                            <p>사업자 등록번호</p>
-                            <input type="text" 
-                                name='businessNumber' value={businessNumber}
-                                onChange={handleInputChange} placeholder='' disabled={proccess === false ? true : false}/>
-                            <button onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
-                        </div>
-                        <div>
-                            <p>등록번호 이미지</p>
-                            <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' disabled={proccess === false ? true : false}/>
-                        </div>
+        <div css={s.layout}>
+            <div>
+                <div css={s.logo}>
+                    <img src={logo} alt="로고" />
+                </div>
+                <div css={s.Info}>
+                    <div>
+                        <p>아이디</p>
+                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
+                        {fieldErrorMessages.username}
                     </div>
-                    <div css={s.addressInfo}>
-                        <p>카페 주소</p>
-                        <div css={s.addressStyle}>
-                            <input 
-                                value={isAddress.address} 
-                                disabled placeholder='주소'/>
-                            <input 
-                                value={isAddress.buildingName} 
-                                disabled placeholder='참고항목'/>
-                            <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
-                        </div>
+                    <div>
+                        <p>비밀번호</p>
+                        <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
+                        {fieldErrorMessages.password}
                     </div>
-                    <div css={s.signupbutton}>
-                        <button onClick={() => handlesignuppageOnClick.mutateAsync()} disabled={isLoading === true ? true : false} >가입하기</button>
+                    <div>
+                        <p>비밀번호 확인</p>
+                        <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 공백일 수 없습니다' />
+                        {fieldErrorMessages.checkPassword}
                     </div>
+                    <div>
+                        <p>이메일</p>
+                        <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
+                        {fieldErrorMessages.email}
+                    </div>
+                    <div>
+                        <p>대표자명</p>
+                        <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='한글로 된 이름을 기입해주세요.' />
+                        {fieldErrorMessages.name}
+                    </div>
+                    <div>
+                        <p>닉네임</p>
+                        <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
+                        {fieldErrorMessages.nickname}
+                    </div>
+                    <div>
+                        <p>전화번호</p>
+                        <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
+                        {fieldErrorMessages.phoneNumber}
+                    </div>
+                    <div>
+                        <p>카페명</p>
+                        <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
+                        {
+                            isCafe.cafename === "" ? "카페명 입력해주세요"
+                            : ""
+                        }
+                    </div>
+                    <div>
+                        <p>사업자 등록번호</p>
+                        <input type="text" 
+                            name='businessNumber' value={businessNumber}
+                            onChange={handleInputChange} placeholder='' disabled={proccess === false ? true : false}/>
+                        <button onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
+                    </div>
+                    <div>
+                        <p>등록번호 이미지</p>
+                        <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' disabled={proccess === false ? true : false}/>
+                    </div>
+                </div>
+                <div css={s.addressInfo}>
+                    <p>카페 주소</p>
+                    <div css={s.addressStyle}>
+                        <input 
+                            value={isAddress.address} 
+                            disabled placeholder='주소'/>
+                        <input 
+                            value={isAddress.buildingName} 
+                            disabled placeholder='참고항목'/>
+                        <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
+                    </div>
+                </div>
+                <div css={s.signupbutton}>
+                    <button onClick={handleSignup}  >가입하기</button>
+                    {/* () => handlesignuppageOnClick.mutateAsync() */}
+                    {/* disabled={isLoading === false ? true : false} */}
                 </div>
             </div>
         </div>

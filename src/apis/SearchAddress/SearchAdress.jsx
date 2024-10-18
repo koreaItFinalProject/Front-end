@@ -14,6 +14,7 @@ const SearchAdress = ({ setAddress  , setCoordinates}) => {
         setAddress(data); // setAddress를 호출하여 부모 컴포넌트의 상태를 업데이트
         KakaoGeocoder(data , setCoordinates);
         console.log(data);
+        console.log(setCoordinates.latitude,setCoordinates.longitude);
 
     };
 

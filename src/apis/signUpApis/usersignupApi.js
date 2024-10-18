@@ -26,8 +26,19 @@ export const usersignupApi = async (loginState) => {
         }catch(error){
         console.error(error);
         const response = error.response;
+        console.log(error.response);
+        if(error.response){
+            signupData = {
+                isSuccess:false,
+                fieldErrors:({
+                    field : loginState.username,
+                    defaultMessage : error.response.data
+                })
+            }
+            console.log(signupData);
+        }
         signupData = {
-            isSuceess:false,
+            isSuccess:false,
             // field랑 defaultMessage를 사용하겠다
             fieldErrors: response.data.map(fieldError => ({
                 field : fieldError.field,

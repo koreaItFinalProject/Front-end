@@ -1,17 +1,18 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    overflow: hidden;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+    position: relative;
     & > div {
         width: 600px;
-        height: 700px;
-        border: 1px solid black;
+        height: 100%;
+        /* border: 1px solid black; */
         border-radius: 20px;
         display: flex;
         flex-direction: column;
@@ -20,13 +21,33 @@ export const layout = css`
     }
 `;
 
+export const logo = css`
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: end;
+    & img {
+        height: 150px;
+        width: 150px;
+    }
+`;
+
 export const Info = css`
+    max-height: 900px; /* 최대 높이 설정 */
+    min-height: 500px; /* 최소 높이 설정 */
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     & div{
-        width: 480px;
-        height: 46px;
+        width: 100%;
+        height: 100px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         margin: 5px 0px;
         & input {
             height: 35px;
@@ -34,6 +55,9 @@ export const Info = css`
             border-radius: 10px;
             padding-left: 20px;
             font-size: 13px;
+        }
+        & p {
+            margin: 0;
         }
     }
 
