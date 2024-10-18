@@ -96,6 +96,8 @@ function DetailPage(props) {
         dislikeMutation.mutateAsync();
     }
 
+    console.log(board.error);
+
     return (
         <div css={s.layout}>
             <Link to={"/board?page=1"}><h1>게시판</h1></Link>

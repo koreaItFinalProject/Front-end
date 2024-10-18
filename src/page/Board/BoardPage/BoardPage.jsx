@@ -43,7 +43,7 @@ function BoardPage(props) {
             if (entries[0].isIntersecting) {
                 fetchNextPage();
             }
-        }, { threshold: 0.5 });
+        }, { threshold: 0.1 });
 
         observer.observe(loadMoreRef.current);
 
