@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 
-function MainLayout({children}) {
+function MainLayout({children, setCheck, setInputvalue}) {
     return (
         <div css={s.background}>
             <div css={s.layout}>
@@ -26,7 +26,7 @@ function MainLayout({children}) {
                         {children}
                     </div>
                     <div css={s.footer}>
-                        <Footer/>
+                        <Footer setCheck={setCheck} setInputvalue={setInputvalue}/>
                     </div>
                 </div>
             </div>

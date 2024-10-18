@@ -1,9 +1,7 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import HomePage from './page/HomePage/HomePage';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import MapPage from './page/MapPage/MapPage';
-import EventPage from './page/EventPage/EventPage';
 import BoardPage from './page/Board/BoardPage/BoardPage';
 import WritePage from './page/Board/WritePage/WritePage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
@@ -49,7 +47,6 @@ function App() {
     ["accessTokenValidQuery"],
     async () => {
       setAuthRefresh(false);
-      console.log("쿼리1")
       return await instance.get("/auth/access", {
         params: {
           accessToken: localStorage.getItem("accessToken")
@@ -96,8 +93,6 @@ function App() {
       refetchOnWindowFocus:false
     }
   )
-  console.log(userInfo);
-
 
   return (
     <>
@@ -116,9 +111,8 @@ function App() {
           </ManagerMainLayout>
         } />
         <Route path='/*' element={
-          <MainLayout>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/' element={<HomePage />} />
               <Route path='/user/signup' element={<UserSignupPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/particular/store' element={<ParticularStorePage />} />
@@ -129,7 +123,6 @@ function App() {
               <Route path='/user/signin' element={<UserSigninPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
               <Route path='/map' element={<MapPage />} />
-              <Route path='/event' element={<EventPage />} />
               <Route path='/board' element={<BoardPage />} />
               <Route path='/board/write' element={<WritePage />} />
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
