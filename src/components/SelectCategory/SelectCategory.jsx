@@ -6,36 +6,28 @@ import { TbCoffee } from 'react-icons/tb';
 import { LuDessert } from 'react-icons/lu';
 
 function SelectCategory({check, setCheck}) {
-    const handleCheckClick = (e) => {
-        const category = e.target.value;
-        setCheck(category === check ? "전체" : category);
-    };
     return (
         <>
             <button
-                value={"베이커리"}
-                onClick={handleCheckClick}
+                onClick={() => setCheck(check === "베이커리"? "전체" : "베이커리")}
                 css={s.bakeryButton(check === "베이커리")}
             >
                 <MdOutlineBakeryDining css={s.icon} /> 베이커리
             </button>
             <button
-                value={"브런치"}
-                onClick={handleCheckClick}
+                onClick={() => setCheck(check === "브런치"? "전체" : "브런치")}
                 css={s.brunchButton(check === "브런치")}
             >
                 <MdOutlineBrunchDining css={s.icon} /> 브런치
             </button>
             <button
-                value={"분위기"}
-                onClick={handleCheckClick}
+                onClick={() => setCheck(check === "분위기"? "전체" : "분위기")}
                 css={s.atmosphereButton(check === "분위기")}
             >
                 <TbCoffee css={s.icon} /> 분위기
             </button>
             <button
-                value={"디저트"}
-                onClick={handleCheckClick}
+                onClick={() => setCheck(check === "디저트"? "전체" : "디저트")}
                 css={s.dessertButton(check === "디저트")}
             >
                 <LuDessert css={s.icon} /> 디저트

@@ -24,8 +24,9 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         <div css={s.allLayout}>
             <div css={s.box}>
                 <div css={s.inputSection}>
-                    <p>검색:</p>
-                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress}/>
+                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} spellCheck="false" required/>
+                    <label>카페이름:</label>
+                    <span></span>
                 </div>
                 <div css={s.selectbutton}>
                     <SelectCategory check={check} setCheck={setCheck}/>

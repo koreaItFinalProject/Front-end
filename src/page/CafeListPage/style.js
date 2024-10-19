@@ -1,43 +1,87 @@
 import { css } from "@emotion/react";
 
 export const allLayout = css`
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     margin: 0px;
     padding: 0px 15px;
+    overflow-y: hidden;
     background-color: white;
 `
 export const box = css` 
     display: flex;
+    width: 100%;
+    box-sizing: border-box;
     flex-direction: column;
     justify-content: flex-start;
     flex-grow: 1;
     margin-top: 20px;
-    padding: 0px 10px;
+    padding: 0px 15px;
     background-color: white;
-    position: sticky;
-    top: 0px;
     z-index: 2;
-
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
+
+    position: relative;
 `;
 
 export const inputSection = css`
-    & > input {
+    padding-top: 50px;
+    height: 40px;
+    input {
         box-sizing: border-box;
         padding-bottom: 10px;
         height: 30px;
-        font-size: 25px;
         border: none;
         outline: none;
         color: black;
         width: 64%;
         background-color: white;
         border-bottom: 1px solid #8f8282;
+        text-decoration: none;
+        position: relative;
+        background: none;
+        z-index: 5;
     }
 
+    input::placeholder { color: #aaaaaa; }
+    input:focus { outline: none; }
+
+    span {
+        display: block;
+        position: absolute;
+        left: 0%; 
+        background-color: #8f8282;
+        width: 0;
+        margin-left: 15px;
+        height: 1px;
+        border-radius: 2px;
+        transition: 0.5s;
+    }
+
+    label {
+        position: absolute;
+        color: #aaa;
+        left: 20px;
+        font-size: 20px;
+        transition: all 0.5s ease;
+    }
+
+    input:focus ~ label, input:valid ~ label {
+        font-size: 20px;
+        color: #666;
+        font-weight: bold;
+        top: 10px;
+        transition: all 0.5s ease, color 0.5s ease;
+    }
+
+    input:focus ~ span, input:valid ~ span {
+        width: 61%;
+    }
 `;
+
+
 export const listbox = css`
     display: flex;
     margin-top: 30px;
@@ -91,54 +135,3 @@ export const icon = css`
     position: relative;
     top: 2px;
 `
-
-const baseButtonStyle = css`
-    border-radius: 20px;
-    background-color: #ffffff; // 버튼 배경색
-    /* background-color: inherit; */
-    border: none;            // 테두리 제거
-    color: black;           // 글자 색상
-    margin: 0 13px;         // 버튼 사이의 간격 (좌우)
-    padding: 5px 13px;     // 패딩 설정 (위 아래, 좌우)
-    cursor: pointer;         // 커서 모양 변경
-    transition: 0.3s; // 호버 효과를 위한 트랜지션
-    box-shadow: 3px 3px 3px #a3a3a3;
-    font-size: 14px;        // 글자 크기 조정
-    font-weight: 600;
-    line-height: normal;     // 줄 높이 기본값으로 설정
-    text-indent: 0;         // 텍스트 들여쓰기 제거
-    white-space: nowrap;
-    margin-left: 0;      // 첫 번째 버튼의 왼쪽 마진 제거
-
-    :last-of-type{
-        margin-right: 0px;
-    }
-    &:hover {
-        background-color: #c9c9c9; // 호버 시 배경색 변경
-    }
-    &:active {
-        background-color: #a3a3a3;
-        box-shadow: none;
-    }
-`;
-
-// 각 카테고리별 스타일
-export const bakeryButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#ffebcd' };
-`;
-
-export const brunchButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#ffa297' };
-`;
-
-export const atmosphereButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#d3f3d3' };
-`;
-
-export const dessertButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#dea1fa' };
-`;
