@@ -4,11 +4,8 @@ import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
-import { LuDessert } from "react-icons/lu";
-import { MdOutlineBrunchDining } from "react-icons/md";
-import { MdOutlineBakeryDining } from "react-icons/md";
-import { TbCoffee } from "react-icons/tb";
 import SelectCategory from "../../components/SelectCategory/SelectCategory";
+import { IoIosSearch } from "react-icons/io";
 
 function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const [inputdata, setInputData] = useState("");
@@ -55,7 +52,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
         <div css={s.layout}>
             <div css={s.box}>
                 <div css={s.inputbox}>
-                    <Link to={"/"}><h2>CafeDev</h2></Link>
+                    <Link to={"/"}><div/></Link>
                     <input
                         type="text"
                         placeholder="카페명을 입력해주세요"
@@ -63,7 +60,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                         onChange={handleInputOnChange}
                         onKeyDown={handleInputKeyPress}
                     />
-                    <button onClick={handleSearchOnClick}>검색</button>
+                    <button onClick={handleSearchOnClick}><IoIosSearch size={20}/></button>
                 </div>
                 <div css={s.selectbutton}>
                     <SelectCategory check={check} setCheck={setCheck} />

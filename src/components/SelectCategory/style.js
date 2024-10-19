@@ -1,54 +1,80 @@
 import { css } from "@emotion/react";
 
-const baseButtonStyle = css`
+const baseButtonStyle = (status) => css`
     border-radius: 20px;
-        background-color: #ffffff; // 버튼 배경색
-        /* background-color: inherit; */
-        border: none;            // 테두리 제거
-        color: black;           // 글자 색상
-        margin: 0 15px;         // 버튼 사이의 간격 (좌우)
-        padding: 5px 13px;     // 패딩 설정 (위 아래, 좌우)
-        cursor: pointer;         // 커서 모양 변경
-        transition: 0.3s; // 호버 효과를 위한 트랜지션
-        box-shadow: 3px 3px 3px #a3a3a3;
-        font-size: 14px;        // 글자 크기 조정
-        font-weight: 600;
-        line-height: normal;     // 줄 높이 기본값으로 설정
-        text-indent: 0;         // 텍스트 들여쓰기 제거
-        white-space: nowrap;
-
+    border: none;
+    color: black;
+    margin: 0 15px;
+    margin-left: 0;
+    padding: 5px 13px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.5s ease; /* 트랜지션 추가 */
+    box-shadow: 3px 3px 3px #a3a3a3;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: normal;
+    text-indent: 0;
+    white-space: nowrap;
+    outline: none;  /* 포커스 아웃라인 제거 */
+    transform: ${status ? 'scale(1.2)' : 'scale(1)'}; /* 기본 상태에서의 크기 조정 */
     
-            margin-left: 0;      // 첫 번째 버튼의 왼쪽 마진 제거
-
-        &:hover {
-            background-color: #c9c9c9; // 호버 시 배경색 변경
-        }
-        &:active {
-            background-color: #a3a3a3;
-            box-shadow: none;
-        }
+    &:hover {
+        transform: ${status ? 'scale(1.15)' : 'scale(1.05)'}; /* Hover 시 크기 변화 */
+    }
+    &:active {
+        transform: ${status ? 'scale(1.2)' : 'scale(1.1)'}; /* Active 시 크기 변화 */
+    }
 `;
+
 export const bakeryButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#ffebcd' };
+    ${baseButtonStyle(status)};
+    background-color: ${status ? '#ffaa29' : '#ffd89d'};
+
+    &:hover {
+        background-color: #ffb366;
+    }
+    &:active {
+        background-color: #e69500;
+    }
 `;
 
 export const brunchButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#ffa297' };
+    ${baseButtonStyle(status)};
+    background-color: ${status ? '#ff7d76' : '#ffb8b0'};
+
+    &:hover {
+        background-color: #ff9c96;
+    }
+    &:active {
+        background-color: #ff7d76;
+    }
 `;
 
 export const atmosphereButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#d3f3d3' };
+    ${baseButtonStyle(status)};
+    background-color: ${status ? '#a1dba1' : '#d3f3d3'};
+
+    &:hover {
+        background-color: #b8e3b8;
+    }
+    &:active {
+        background-color: #a1dba1;
+    }
 `;
 
 export const dessertButton = (status) => css`
-    ${baseButtonStyle};
-    background-color: ${status? '' :  '#dea1fa' };
+    ${baseButtonStyle(status)};
+    background-color: ${status ? '#c392dd' : '#e7b8fd'};
+
+    &:hover {
+        background-color: #d4a6ed;
+    }
+    &:active {
+        background-color: #c392dd;
+    }
 `;
 
 export const icon = css`
     position: relative;
     top: 2px;
-`
+`;
