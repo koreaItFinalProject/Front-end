@@ -1,11 +1,19 @@
 export const showFieldErrorMessage = (fieldErrors) => {
-  let EmptyfieldErrors = {
+    if (!Array.isArray(fieldErrors)) {
+        console.error("fieldErrors is not an array:", fieldErrors);
+        return {
+            username: <></>,
+            password: <></>,
+        };
+    }
+    let EmptyfieldErrors = {
       username : <></>,
       password : <></>,
       checkPassword : <></>,
       name : <></>,
       email : <></>,
-      phoneNumber: <></>
+      phoneNumber: <></>,
+      oauth2Name:<></>
       }
       console.log(fieldErrors);
   

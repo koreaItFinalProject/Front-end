@@ -6,6 +6,7 @@ import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
 import ReactQuill from "react-quill";
+import { useRef } from "react";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -95,7 +96,7 @@ function DetailPage(props) {
         dislikeMutation.mutateAsync();
     }
 
-    console.log(userInfoData);
+    console.log(board.error);
 
     return (
         <div css={s.layout}>
@@ -143,7 +144,7 @@ function DetailPage(props) {
                             </div>
                             <div>
                                 {
-                                    board.data.data.writerId === userInfoData.data.userId &&
+                                    board?.data?.data?.writerId === userInfoData?.data?.userId &&
                                     <>
                                         <button onClick={() => handleModifyBoardOnClick()}>수정</button>
                                         <button onClick={handleDeleteBoardOnClick}>삭제</button>

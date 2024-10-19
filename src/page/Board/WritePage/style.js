@@ -65,3 +65,17 @@ export const buttonLayout = css`
         color: white;
     }
 `;
+
+export const loadingLayout = css`
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #00000066;
+`;

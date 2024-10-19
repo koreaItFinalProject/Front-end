@@ -11,6 +11,7 @@ const KakaoGeocoder = (data , setCoordinates) => {
         if (status === window.kakao.maps.services.Status.OK) {
             const { y: latitude, x: longitude } = result[0];
             setCoordinates(latitude , longitude);
+            console.log(setCoordinates(latitude , longitude));
         } else {
             console.error('Geocode was not successful for the following reason: ' + status);
         }

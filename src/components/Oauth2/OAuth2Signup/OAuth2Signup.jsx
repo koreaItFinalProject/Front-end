@@ -18,6 +18,7 @@ function OAuth2Signup(props) {
         name:'',
         nickname:'',
         phoneNumber:'',
+        role:'USER'
     })
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
@@ -28,6 +29,7 @@ function OAuth2Signup(props) {
         email: <></>,
         nickname:<></>,
         phoneNumber:<></>,
+        oauth2Name:<></>
     });
 
     const handleMergepageOnClick = async () => {
@@ -40,14 +42,15 @@ function OAuth2Signup(props) {
             nickname:inputUser.nickname,
             phoneNumber:inputUser.phoneNumber,
             oauth2Name : searchParams.get("oAuth2Name"),
-            provider: searchParams.get("provider")
+            provider: searchParams.get("provider"),
+            role:'USER'
         }
         console.log(mergeData);
         const response = await oAuth2SignupApi(mergeData);
         console.log(response);
         if(!response.isSuccess){
             if(response.errorStatus === "loginError"){
-                alert(response.error);       
+                alert(response.error); 
                 return;
             }
             if(response.errorStatus === "fieldError"){

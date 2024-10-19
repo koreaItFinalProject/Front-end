@@ -2,12 +2,16 @@
 import * as s from "./style";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { instance } from '../../apis/util/instance';
 
 function Comments(props) {
     const params = useParams();
     const boardId = params.boardId;
+
+    const queryClient = useQueryClient();
+    const userInfoData = queryClient.getQueryData("userInfoQuery");
+    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
 
     const [commentData, setCommentData] = useState({
         boardId,
@@ -115,6 +119,10 @@ function Comments(props) {
     };
 
     const handleReplyButtonOnClick = (commentId) => {
+        if(!accessCheck) {
+            alert("로그인 후 작성가능합니다.");
+            return;
+        }
         setCommentData(comment => ({
             ...comment,
             content: "",
@@ -158,7 +166,7 @@ function Comments(props) {
                                     <pre css={s.detailContent}>{comment.content}</pre>
                                     <div css={s.detailButtons}>
                                         {
-                                            // userInfoData?.data?.userId === comment.writerId &&
+                                            userInfoData?.data?.userId === comment.writerId &&
                                             <div>
                                                 {
                                                     modifyComment.commentId === comment.id

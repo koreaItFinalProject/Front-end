@@ -3,6 +3,7 @@ import * as s from "./style";
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { writeBoardApi } from '../../../apis/writeBoardApi';
+import { PuffLoader } from "react-spinners";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from "uuid";
@@ -102,6 +103,12 @@ function WritePage(props) {
                 <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
+                {
+                    isUploading &&
+                    <div css={s.loadingLayout}>
+                        <PuffLoader />
+                    </div>
+                }
                 <ReactQuill
                     ref={quillRef}
                     theme="snow"
