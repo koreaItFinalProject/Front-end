@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import Header from '../../../components/Header/Header';
@@ -19,6 +19,8 @@ function OwnerSignupPage(props) {
         latitude: '',
         longitude: ''
      });
+     const [isTimerRunning, setIsTimerRunning] = useState(false);
+     const [timer, setTimer] = useState(0);
     const [inputUser , setInputUser] = useState({
         username: '',
         password:'',
@@ -159,6 +161,23 @@ function OwnerSignupPage(props) {
         }
     };
 
+    useEffect(() => {
+        let interval;
+        if (isTimerRunning && timer > 0) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer - 1);
+            }, 1000);
+        } else if (timer === 0) {
+            setIsTimerRunning(false);
+        }
+        return () => clearInterval(interval);
+    }, [isTimerRunning, timer]);
+
+    const startTimer = () => {
+        setTimer(180);
+        setIsTimerRunning(true);
+    }
+
     const handleRegistrationNumberCheckOnClick = async () => {
         const response = await Businessregistration(businessNumber);
         console.log(response);
@@ -197,7 +216,7 @@ function OwnerSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <div>
+            <div css={s.mainlayout}>
                 <div css={s.logo}>
                     <img src={logo} alt="로고" />
                 </div>
@@ -205,72 +224,78 @@ function OwnerSignupPage(props) {
                     <div>
                         <p>아이디</p>
                         <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
-                        {fieldErrorMessages.username}
                     </div>
+                        {fieldErrorMessages.username}
                     <div>
                         <p>비밀번호</p>
                         <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
-                        {fieldErrorMessages.password}
                     </div>
+                        {fieldErrorMessages.password}
                     <div>
                         <p>비밀번호 확인</p>
                         <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 공백일 수 없습니다' />
-                        {fieldErrorMessages.checkPassword}
                     </div>
+                        {fieldErrorMessages.checkPassword}
                     <div>
                         <p>이메일</p>
                         <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
-                        {fieldErrorMessages.email}
                     </div>
+                        <div css={s.emailButton}>
+                                {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                            <button onClick={startTimer}>이메일 인증</button>
+                        </div>
+                        {fieldErrorMessages.email}
                     <div>
                         <p>대표자명</p>
                         <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='한글로 된 이름을 기입해주세요.' />
-                        {fieldErrorMessages.name}
                     </div>
+                        {fieldErrorMessages.name}
                     <div>
                         <p>닉네임</p>
                         <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
-                        {fieldErrorMessages.nickname}
                     </div>
+                        {fieldErrorMessages.nickname}
                     <div>
                         <p>전화번호</p>
-                        <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
-                        {fieldErrorMessages.phoneNumber}
+                        <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호를 입력해주세요.' />
                     </div>
+                        {fieldErrorMessages.phoneNumber}
                     <div>
                         <p>카페명</p>
                         <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
-                        {
-                            isCafe.cafename === "" ? "카페명 입력해주세요"
-                            : ""
-                        }
                     </div>
+                        <p>
+                            {
+                                isCafe.cafename === "" ? "카페명 입력해주세요"
+                                : ""
+                            }
+                        </p>
                     <div>
                         <p>사업자 등록번호</p>
                         <input type="text" 
                             name='businessNumber' value={businessNumber}
                             onChange={handleInputChange} placeholder='' disabled={proccess === false ? true : false}/>
-                        <button onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
                     </div>
                     <div>
                         <p>등록번호 이미지</p>
                         <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' disabled={proccess === false ? true : false}/>
+                        <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
                     </div>
-                </div>
-                <div css={s.addressInfo}>
-                    <p>카페 주소</p>
-                    <div css={s.addressStyle}>
-                        <input 
-                            value={isAddress.address} 
-                            disabled placeholder='주소'/>
-                        <input 
-                            value={isAddress.buildingName} 
-                            disabled placeholder='참고항목'/>
-                        <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
+                    <div css={s.cafe}>
+                        <p>카페 주소</p>
+                        <div css={s.cafeAddress}>
+                            <input 
+                                value={isAddress.address} 
+                                disabled placeholder='주소'/>
+                            <input 
+                                value={isAddress.buildingName} 
+                                disabled placeholder='참고항목'/>
+                        </div>
                     </div>
+                            <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
                 </div>
                 <div css={s.signupbutton}>
-                    <button onClick={handleSignup}  >가입하기</button>
+                    <button onClick={handleSignup} disabled={isLoading === false ? true : false}>가입하기</button>
                     {/* () => handlesignuppageOnClick.mutateAsync() */}
                     {/* disabled={isLoading === false ? true : false} */}
                 </div>
