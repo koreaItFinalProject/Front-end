@@ -16,7 +16,7 @@ const baseButtonStyle = (status) => css`
     text-indent: 0;
     white-space: nowrap;
     outline: none;  /* 포커스 아웃라인 제거 */
-    transform: ${status ? 'scale(1.2)' : 'scale(1)'}; /* 기본 상태에서의 크기 조정 */
+    transform: ${status ? 'scale(1.13)' : 'scale(1)'}; /* 기본 상태에서의 크기 조정 */
     
     &:hover {
         transform: ${status ? 'scale(1.15)' : 'scale(1.05)'}; /* Hover 시 크기 변화 */

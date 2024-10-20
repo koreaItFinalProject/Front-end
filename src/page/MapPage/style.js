@@ -92,15 +92,17 @@ export const cafeContainer = css`
     button {
         padding: 20px;
         background-color: aliceblue;
+        border-radius: 100%;
     }
 `;
 
-export const cafeInfo = css`
+export const cafeInfo = (slide)=> css`
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     background-color: aqua;
+    overflow: hidden;
     h3 {
         margin: 0;
         font-size: 18px;

@@ -24,12 +24,12 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         <div css={s.allLayout}>
             <div css={s.box}>
                 <div css={s.inputSection}>
-                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} spellCheck="false" required/>
+                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} spellCheck="false" required />
                     <label>카페이름:</label>
                     <span></span>
                 </div>
                 <div css={s.selectbutton}>
-                    <SelectCategory check={check} setCheck={setCheck}/>
+                    <SelectCategory check={check} setCheck={setCheck} />
                 </div>
             </div>
             <div css={s.listContainer}>
@@ -37,14 +37,14 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                     <div css={s.listbox} key={index}>
                         <div css={s.pictureBox}></div>
                         <div css={s.showBox}>
-                            <div css={s.viewBox}>
-                                <p>조회</p>
-                                <p>추천</p>
-                            </div>
                             <div css={s.spanBox}>
-                                <p>카페 이름: {cafeItem.cafeName}</p>
+                                <h2>카페 이름: {cafeItem.cafeName}</h2>
                                 <p>주소: {cafeItem.address}</p>
                                 <p>카테고리: {cafeItem.category}</p>
+                            </div>
+                            <div css={s.viewBox}>
+                                <span>조회:</span>
+                                <span>추천:</span>
                             </div>
                         </div>
                     </div>

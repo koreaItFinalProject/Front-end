@@ -84,38 +84,42 @@ export const inputSection = css`
 
 export const listbox = css`
     display: flex;
+    border: 1px solid #dbdbdb;
+    padding: 20px;
     margin-top: 30px;
+    border-radius: 20px;
 `;
 
 export const pictureBox = css`
     box-sizing: border-box;
     border: 1px solid #dbdbdb;
     width: 200px;
-    height: 200px;
+    height: 180px;
 `;
 
 export const showBox = css`
     display: flex;
     flex-direction: column;
+    padding: 10px 0px;
 `;
 
 export const viewBox = css`
     display: flex;
-    margin-left: 20px;
-    
-    p {
-        margin-top: 5px;
-    }
+    justify-content: space-between;
+    margin-left: 23px;
+    margin-top: 10px;
 `;
 
 export const spanBox = css`
     display: flex;
     flex-direction: column;
-    margin: 23px;
-    margin-top: 0px;
+    margin: 0px 23px;
 
-    & > span {
-        padding-bottom: 10px;
+    h2 {
+        margin-top: 0px;
+    }
+    p {
+        margin: 10px 0px;
     }
 `;
 
