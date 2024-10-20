@@ -17,8 +17,10 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
     const cafe = cafelist?.data;
     const [currentCafeIndex, setCurrentCafeIndex] = useState(0);
+    const [ slide, setSlide ] = useState(0);
 
     const handlePrevCafe = () => {
+        setSlide(-100);
         setCurrentCafeIndex((prevIndex) => {
             const newIndex = (prevIndex - 1 + cafe.length) % cafe.length;
             setCenter({ lat: cafe[newIndex].lat, lng: cafe[newIndex].lng });
@@ -27,6 +29,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     };
 
     const handleNextCafe = () => {
+        setSlide(100);
         setCurrentCafeIndex((prevIndex) => {
             const newIndex = (prevIndex + 1) % cafe.length;
             setCenter({ lat: cafe[newIndex].lat, lng: cafe[newIndex].lng });
@@ -77,7 +80,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                     <button onClick={handlePrevCafe} disabled={!cafe?.length}>
                         이전
                     </button>
-                    <div css={s.cafeInfo}>
+                    <div css={s.cafeInfo(slide)}>
                         {cafe?.length > 0 ? (
                             <>
                                 <h3>카페이름: {cafe[currentCafeIndex].cafeName}</h3>
