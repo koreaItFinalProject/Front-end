@@ -1,6 +1,6 @@
-import naver from './naver_login.png';
-import kakao from './kakao_login.png';
-import google from './google_login.png';
+import naver from './Naver_icon.png';
+import kakao from './Kakao_icon.png';
+import google from './Google_icon.png';
 import logo from './logo.png'
 
 export { naver, kakao, google, logo };

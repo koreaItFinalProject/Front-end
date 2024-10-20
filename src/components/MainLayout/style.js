@@ -51,9 +51,9 @@ export const container = css`
     box-sizing: border-box;
     margin: 0px auto;
     border-radius: 10px;
-    background-clip: padding-box;
     width: 100%;
     height: 100%;
+    background-clip: padding-box;
     background-color: #F4F4F6;
     box-shadow: 0px 0px 2px 1px #00000066 inset;
     & * {
@@ -78,12 +78,12 @@ export const header = css`
 
 export const children = css`
     width: 100%;
-    height: calc(100% - 60px);
+    height: 100%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
     border-radius: 10px;
 `;
 

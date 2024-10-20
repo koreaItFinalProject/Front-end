@@ -1,33 +1,33 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    overflow: hidden;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    & > div {
-        width: 600px;
-        height: 100%;
-        /* border: 1px solid black; */
-        border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+    overflow-y: auto;
+`;
+
+export const mainlayout = css`
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const logo = css`
-    height: 100%;
+    width: 100%;
+    height: 150px;
     position: relative;
     display: flex;
     align-items: center;
-    flex-direction: column;
-    justify-content: end;
+    justify-content: center;
+    box-sizing: border-box;
     & img {
         height: 150px;
         width: 150px;
@@ -35,114 +35,80 @@ export const logo = css`
 `;
 
 export const Info = css`
-    max-height: 900px; /* 최대 높이 설정 */
-    min-height: 500px; /* 최소 높이 설정 */
+    width: 100%;
+    height: 100%;
     display: flex;
-    overflow-y: auto;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    & div{
-        width: 100%;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 5px 0px;
-        & input {
-            height: 35px;
-            width: 320px;
-            border-radius: 10px;
-            padding-left: 20px;
-            font-size: 13px;
-        }
-        & p {
-            margin: 0;
-        }
-    }
-
-    & div:nth-last-child(1){
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        
-        & input {
-            height: 30px;
-            width: 220px;
-            font-size: 15px;
-            padding-left: 5px;
-        }
-    }
-    & div:nth-last-child(2){
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        box-sizing: border-box;
-        & input {
-            height: 30px;
-            width: 220px;
-            font-size: 15px;
-            padding-left: 15px;
-        }
-
-        & button {
-            border: 1px solid black;
-            width: 50px;
-            height: 36px;
-            border-radius: 10px;
-            margin-left: 20px; 
-            &:disabled{
-                cursor: not-allowed;
-            }
-            &:hover{
-                background-color: #dbdbdb;
-                box-shadow: 2px 2px 1px inset;
-            }
-            &:hover:disabled{
-                box-shadow: none;
-                background-color: white;
-            }
-
-            &:active{
-                background-color: #dbdbdb;
-                box-sizing: 3px 3px 2px inset;
-            }
-        }
-    }
-
-    & p {
-        width: 120px;
-        padding-right: 15px;
-    }
-`;
-
-export const addressInfo = css`
-    width: 480px;
-    display: flex;
     justify-content: center;
     align-items: center;
-    box-sizing: border-box;
-    & > div {
-        width: 340px;
-    }
+    height: 100%;
     & p {
-        width: 80px;
-        margin-right: 40px;
-        padding: 10px;
+        margin: 0;
+    }
+    & div{
+        width: 550px;
+        height: 90px;
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+        & p{
+            width: 130px;
+            box-sizing: border-box;
+        }
+        & input{
+            width: 420px;
+            height: 45px;
+            box-sizing: border-box;
+            border-radius: 20px;
+            padding-left: 20px;
+        }
+    }
+    & > p {
+        color: #E94334;
     }
 `;
 
-export const addressStyle = css`
+export const emailButton = css`
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    & button{
+        border-radius: 20px;
+        height: 40px;
+        width: 100px;
+        border: 1px solid black;
+    }
+
+    & p{
+        width: 100px;
+        font-size: 14px;
+    }
+`;
+
+export const registerButton =css`
+    border-radius: 20px;
+    height: 30px;
+    width: 80px;
+    border: 1px solid black;
+`;
+
+export const cafeAddress =css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    width: 100px;
-    box-sizing: border-box;
-    & input {    
-    border-radius: 10px;
-    padding-left: 10px;
-    }
-    
+    align-items: center;
 `;
+
+export const cafe =css`
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    & p {
+        width: 130px;
+    }
+`;
+
 
 export const signupbutton = css`
     button:disabled {
