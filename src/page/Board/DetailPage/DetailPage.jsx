@@ -6,7 +6,6 @@ import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
 import ReactQuill from "react-quill";
-import { useRef } from "react";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -95,8 +94,6 @@ function DetailPage(props) {
     const handleDislikeOnClick = () => {
         dislikeMutation.mutateAsync();
     }
-
-    console.log(board.error);
 
     return (
         <div css={s.layout}>

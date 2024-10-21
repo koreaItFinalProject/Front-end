@@ -14,7 +14,7 @@ function BoardPage(props) {
     const [selectedButton, setSelectedButton] = useState('공지');
     const loadMoreRef = useRef(null);
     const navigate = useNavigate();
-    const limit = 5;
+    const limit = 20;
 
     const queryClient = useQueryClient();
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
@@ -43,13 +43,16 @@ function BoardPage(props) {
             if (entries[0].isIntersecting) {
                 fetchNextPage();
             }
-        }, { threshold: 0.1 });
+        }, { 
+            rootMargin: '1000px',
+            threshold: 0.1 
+        });
 
         observer.observe(loadMoreRef.current);
 
         return () => observer.disconnect();
 
-    }, [hasNextPage]);
+    }, [hasNextPage, fetchNextPage]);
 
     const handleFilterOnChange = (e) => {
         setSearchFilter(e.target.value);
