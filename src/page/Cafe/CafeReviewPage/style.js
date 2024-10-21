@@ -15,7 +15,7 @@ export const rating = css`
     flex-direction: column;
     align-items: center;
     padding: 10px 10px;
-    gap: 20px;
+    gap: 10px;
     border-radius: 10px;
     background-color: #ffffff;
 
@@ -25,18 +25,7 @@ export const rating = css`
     }
 `;
 
-export const reviewStat = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
 
-    svg {
-        width: 40px;
-        height: 40px;
-        margin-right: 5px;
-    }
-`;
 
 export const category = css`
     display: flex;
@@ -58,6 +47,11 @@ export const buttons = css`
     }
 `;
 
+export const activeButton = css`
+    color: #111111;
+    background-color: #f2780c;
+`;
+
 export const review = css`
     box-sizing: border-box;
     display: flex;
@@ -73,8 +67,10 @@ export const review = css`
     }
 
     button {
+        width: 100%;
         padding: 5px 250px;
         border-radius: 10px;
+        color: #ffffff;
         background-color: #f2780c;
     }
 `;
