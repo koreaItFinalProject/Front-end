@@ -4,6 +4,7 @@ export const layout = css`
     width: 100%;
     height: 100%;
     padding: 0px 15px;
+    overflow-y: auto;
 `;
 
 export const header = css`
