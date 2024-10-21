@@ -6,6 +6,7 @@ export const mainBox = css`
 
 export const mainLayout = css`
     display: flex;
+    overflow: auto;
 `;
 
 export const layout = css`
