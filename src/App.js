@@ -26,6 +26,7 @@ import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelec
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
 import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2Page';
+import CafeDetailPage from './page/CafeDetailPage/CafeDetailPage';
 
 function App() {
   const location = useLocation();
@@ -124,6 +125,7 @@ function App() {
               <Route path='/particular/request' element={<ParticularRequestPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
+              <Route path='/cafe/detail' element={<CafeDetailPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/user/signin' element={<UserSigninPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
