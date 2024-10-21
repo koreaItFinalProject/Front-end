@@ -77,22 +77,22 @@ export const header = css`
 `;
 
 export const children = css`
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     border-radius: 10px 10px 0px 0px;
 `;
 
 export const footer = css`
     /* position: absolute; */
-    bottom: 0;
-    height: 60px;
-    width: 100%;
     box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
     background-color: #F4F4F6;
     z-index: 99;
     border-radius: 0px 0px 10px 10px;

@@ -19,6 +19,10 @@ export const reset = css`
         /* 공용으로 사용할 color 정해지면 작성*/
     }
 
+    h1 {
+        margin: 0;
+    }
+
     ul, ol {
         list-style-type: none;
         padding: 0;

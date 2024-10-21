@@ -1,93 +1,81 @@
 import { css } from "@emotion/react";
 
-export const allLayout = css`
+export const layout = css`
     box-sizing: border-box;
+    width: 100%;
     height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px 15px;
+    padding: 5px 15px;
     overflow-y: hidden;
-    background-color: white;
-`
-export const box = css` 
+    background-color: #191919;
+`;
+
+export const title = css`
+    margin-bottom: 15px;
+    font-size: 34px;
+    color: #f2780c;
+`;
+
+export const searchContainer = css`
     display: flex;
-    width: 100%;
-    box-sizing: border-box;
-    flex-direction: column;
-    justify-content: flex-start;
-    flex-grow: 1;
-    margin-top: 20px;
-    padding: 0px 15px;
-    background-color: white;
-    z-index: 2;
-    box-sizing: border-box;
-    border: 1px solid #dbdbdb;
-
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     position: relative;
-`;
-
-export const inputSection = css`
-    padding-top: 50px;
+    width: 100%;
     height: 40px;
+    margin-bottom: 15px;
+
     input {
-        box-sizing: border-box;
-        padding-bottom: 10px;
-        height: 30px;
+        width: 550px;
         border: none;
-        outline: none;
-        color: black;
-        width: 64%;
-        background-color: white;
-        border-bottom: 1px solid #8f8282;
-        text-decoration: none;
-        position: relative;
-        background: none;
-        z-index: 5;
+        border-radius: 40px;
+        padding: 10px 20px;
+        background-color: #ffffff;
     }
 
-    input::placeholder { color: #aaaaaa; }
-    input:focus { outline: none; }
+    input::placeholder {
+        color: #b4b4b4;
+    }
 
-    span {
-        display: block;
+    button {
         position: absolute;
-        left: 0%; 
-        background-color: #8f8282;
-        width: 0;
-        margin-left: 15px;
-        height: 1px;
-        border-radius: 2px;
-        transition: 0.5s;
+        right: 87px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 5px 15px;
+        border-radius: 20px;
+        background-color: #f2780c;
     }
 
-    label {
-        position: absolute;
-        color: #aaa;
-        left: 20px;
-        font-size: 20px;
-        transition: all 0.5s ease;
-    }
-
-    input:focus ~ label, input:valid ~ label {
-        font-size: 20px;
-        color: #666;
-        font-weight: bold;
-        top: 10px;
-        transition: all 0.5s ease, color 0.5s ease;
-    }
-
-    input:focus ~ span, input:valid ~ span {
-        width: 61%;
+    select {
+        height: 42px;
+        border-radius: 20px;
+        text-align: center;
+        padding: 7px;
     }
 `;
 
+export const selectbutton = css`
+    height: 30px;
+    margin-bottom: 15px;
+`;
+
+export const listContainer = css`
+    height: 100%;
+    overflow-y: auto;
+`;
 
 export const listbox = css`
+    box-sizing: border-box;
     display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
     border: 1px solid #dbdbdb;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    height: 150px;
+    background-color: #ffffff;
     
     :hover {
         cursor: pointer;
@@ -96,50 +84,54 @@ export const listbox = css`
 
 export const pictureBox = css`
     box-sizing: border-box;
+    margin-right: 20px;
     border: 1px solid #dbdbdb;
-    width: 200px;
-    height: 180px;
+    border-radius: 10px;
+    width: 250px;
+    height: 130px;
 `;
 
 export const showBox = css`
     display: flex;
     flex-direction: column;
-    padding: 10px 0px;
-`;
-
-export const viewBox = css`
-    display: flex;
     justify-content: space-between;
-    margin-left: 23px;
-    margin-top: 10px;
+    width: 100%;
+    height: 100%;
 `;
 
 export const spanBox = css`
     display: flex;
     flex-direction: column;
-    margin: 0px 23px;
+    gap: 10px;
 
-    h2 {
-        margin-top: 0px;
+    h1 {
+        font-size: 28px;
     }
+
     p {
-        margin: 10px 0px;
+        margin: 0;
+    }
+
+    p:nth-of-type(2) {
+        font-weight: 700;
+        color: #f2780c;
     }
 `;
 
-export const listContainer = css`
-    overflow-y: auto;
-    height: calc(100vh - 60px);
-`;
-
-export const selectbutton = css`
+export const viewBox = css`
     display: flex;
-    height: 30px;
-    margin-top: 10px;
-    padding-bottom: 15px;
-`;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
 
-export const icon = css`
-    position: relative;
-    top: 2px;
-`
+    span {
+        margin-right: 50px;
+    }
+
+    svg {
+        width: 24px;
+        height: 24px;
+        fill:#f2780c;
+    }
+`;
