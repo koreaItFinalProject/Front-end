@@ -15,6 +15,7 @@ export const detailHeader = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
     padding: 10px 10px;
     background-color: #ffffff;
     border-radius: 10px;

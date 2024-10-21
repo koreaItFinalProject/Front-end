@@ -8,7 +8,7 @@ import { instance } from '../../../apis/util/instance';
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import BoardList from "../../../components/BoardList/BoardList";
 
-function BoardPage(props) {
+function BoardListPage(props) {
     const [searchValue, setSearchValue] = useState("");
     const [searchFilter, setSearchFilter] = useState("title");
     const [selectedButton, setSelectedButton] = useState('공지');
@@ -136,4 +136,4 @@ function BoardPage(props) {
     );
 }
 
-export default BoardPage;
+export default BoardListPage;
