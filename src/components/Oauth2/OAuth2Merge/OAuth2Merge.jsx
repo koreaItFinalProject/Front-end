@@ -53,28 +53,28 @@ function OAuth2Merge(props) {
 
 
     return (
-        <div>
             <div css={s.layout}>
-                <div>
-                    <div css={s.Info}>
+                <div css={s.Info}>
+                    <div css={s.loginLayout}>
+                        <div css={s.logo}>
+                            <p>
+                            Merge Login
+                            </p>
+                        </div>
                         <div>
-                            <p>아이디</p>
-                            <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                            <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='아이디' />
                             <p>{fieldErrorMessages.username}</p>
                         </div>
                         <div>
-                            <p>비밀번호</p>
-                            <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                            <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='비밀번호' />
                             <p>{fieldErrorMessages.password}</p>
                         </div>
-                    </div>
-                    
-                    <div css={s.signupbutton}>
-                        <button onClick={handleMergepageOnClick}>통합하기</button>
+                        <div css={s.signupbutton}>
+                            <button onClick={handleMergepageOnClick}>통합하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

@@ -45,4 +45,19 @@ export const reset = css`
         width: 100%;
         height: 100%;
     }
+
+    input {
+        background-color: transparent;
+        padding-left: 10px;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #F2780C;
+        box-sizing: border-box;
+        height: 40px;
+        caret-color: #F2780C;
+        width: 380px;
+        &::placeholder{
+            color: #ffffff;
+        }
+    }
 `;
