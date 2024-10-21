@@ -25,6 +25,7 @@ import UserFindPage from './page/UserFindPage/UserFindPage';
 import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2Page';
 import MyPage from './page/MyPage/MyPage';
 import SignLayout from './components/MainLayout/SignLayout/SignLayout';
+import CafeDetailPage from './page/CafeDetailPage/CafeDetailPage';
 
 function App() {
   const location = useLocation();
@@ -37,7 +38,7 @@ function App() {
     if (!authRefresh) {
         setAuthRefresh(true);
     }
-  }, [location.pathname]);
+  }, [location.pathname, authRefresh]);
 
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
@@ -69,6 +70,9 @@ function App() {
         for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
+        const blockPaths = ["/user", "/owner"];
+        for (let blockPath of blockPaths) {
+          if (location.pathname.startsWith(blockPath)) {
             alert("잘못된 요청입니다.")
             navigete("/");
             break;
@@ -109,7 +113,7 @@ function App() {
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
-              <Route path='/storemanagement' element={<ManagerStoreManagementPage />} />
+              <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
           </ManagerMainLayout>
@@ -118,6 +122,7 @@ function App() {
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
               <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
+              <Route path='/cafe/detail' element={<CafeDetailPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/board' element={<BoardPage />} />
               <Route path='/board/write' element={<WritePage />} />

@@ -12,7 +12,7 @@ function BoardList({ data, loadMoreRef }) {
         if (listRef.current && loadMoreRef.current) {
             listRef.current.appendChild(loadMoreRef.current);
         }
-    }, [data]);
+    }, [data, loadMoreRef]);
 
     return (
         <ul css={s.cardLayout} ref={listRef}>
