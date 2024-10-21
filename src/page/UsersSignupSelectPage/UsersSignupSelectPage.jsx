@@ -14,11 +14,9 @@ function UsersSignupSelectPage(props) {
     const kakaoLocation = "http://localhost:8080/oauth2/authorization/kakao";
     const googleLocation = "http://localhost:8080/oauth2/authorization/google";
     return (
-        <div>
             <div css={s.layout}>
                 <div css={s.logo}> 
-                    <img src={logo} alt="" />
-                    <h1>CAFE DEV</h1>
+                    <h1>CafeInBusan</h1>
                 </div>
                 <div css={s.loginMain}>
                     <div css={s.selectMember}>
@@ -44,14 +42,15 @@ function UsersSignupSelectPage(props) {
                         </button>
                     </div>
                     <div css={s.emailbutton}>
-                        <button>
-                            <button onClick={() => navigate("/user/signin")}>
-                                이메일로 게속하기
-                            <p>
-                                <IoIosArrowForward/>
-                            </p>
-                            </button>
+                        <button onClick={() => navigate("/user/signin")}>
+                            아이디로 게속하기
+                        <p>
+                            <IoIosArrowForward/>
+                        </p>
                         </button>
+                    </div>
+                    <div css={s.ownerloginButton}>
+                        <p>점주들은 아이디로만 로그인 하실 수 있습니다.</p>
                     </div>
                     <div css={s.loseEmail}>
                         <button onClick={() => navigate("/user/find")}>
@@ -60,7 +59,6 @@ function UsersSignupSelectPage(props) {
                     </div>
                 </div>
             </div>
-        </div>
     );
 }
 

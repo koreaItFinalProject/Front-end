@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import Header from '../../../components/Header/Header';
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
-
+import emailApi from '../../../apis/emailApis/emailApi';
 
 function UserSignupPage(props) {
     const navigate = useNavigate();
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
+    const [timer, setTimer] = useState(0);
     const [inputUser , setInputUser] = useState({
         username: '',
         password:'',
@@ -45,6 +46,26 @@ function UserSignupPage(props) {
         }
     }
 
+    useEffect(() => {
+        let interval;
+        if (isTimerRunning && timer > 0) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer - 1);
+            }, 1000);
+        } else if (timer === 0) {
+            setIsTimerRunning(false);
+        }
+        return () => clearInterval(interval);
+    }, [isTimerRunning, timer]);
+
+    const startTimer = async(email) => {
+        console.log(email);
+        const response = await emailApi(email);
+        console.log(response);
+        setTimer(180);
+        setIsTimerRunning(true);
+    }
+
     return (
         <div>
             <div css={s.layout}>
@@ -77,9 +98,13 @@ function UserSignupPage(props) {
                         </div>
                         <div>
                             <p>이메일</p>
-                            <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.email}</p>
+                            <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
                         </div>
+                            <div css={s.emailButton}>
+                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                <button onClick={()=> startTimer(inputUser.email)}>이메일 인증</button>
+                            </div>
+                            {fieldErrorMessages.email}
                         <div>
                             <p>닉네임</p>
                             <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='' />

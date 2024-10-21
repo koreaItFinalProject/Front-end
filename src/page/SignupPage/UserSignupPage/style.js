@@ -43,9 +43,23 @@ export const Info = css`
         padding: 0px;
     }    
 `;
-
  
+export const emailButton = css`
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    & button{
+        border-radius: 20px;
+        height: 40px;
+        width: 100px;
+        border: 1px solid black;
+    }
 
+    & p{
+        width: 100px;
+        font-size: 14px;
+    }
+`;
 
 export const addressInfo = css`
     width: 480px;

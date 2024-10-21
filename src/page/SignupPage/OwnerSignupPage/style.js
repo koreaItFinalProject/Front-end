@@ -1,36 +1,35 @@
 import { css } from "@emotion/react";
+import { logo } from "../../../assets/image";
 
 export const layout = css`
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     overflow-y: auto;
+    /* padding: 10px; */
 `;
 
-export const mainlayout = css`
+export const logoStyle = css`
     width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-export const logo = css`
-    width: 100%;
-    height: 150px;
-    position: relative;
+   
+    height: 120px;
+    /* position: relative; */
     display: flex;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
+    /* box-sizing: border-box;
+    background-image: url(${logo});
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0px; */
+    /* width: 45px;
+    height: 36px; */
     & img {
-        height: 150px;
-        width: 150px;
+        height: 120px;
+        width: 120px;
     }
 `;
 
@@ -41,7 +40,9 @@ export const Info = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    /* &:nth-of-type(1){
+        padding-top: 200px;
+    } */
     & p {
         margin: 0;
     }
@@ -72,9 +73,12 @@ export const emailButton = css`
     display: flex;
     justify-content: end;
     align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    height:60px;
     & button{
         border-radius: 20px;
-        height: 40px;
+        height: 35px;
         width: 100px;
         border: 1px solid black;
     }
@@ -82,6 +86,29 @@ export const emailButton = css`
     & p{
         width: 100px;
         font-size: 14px;
+    }
+`;
+
+export const emailcert = css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100px;
+    & p {
+        height: 35px;
+        padding-left: 15px;
+    }
+    & div {
+        display: flex;
+        justify-content: end;
+        align-items: end;
+        & input{
+            
+        }
+
+        & button {
+            
+        }
     }
 `;
 
@@ -111,6 +138,19 @@ export const cafe =css`
 
 
 export const signupbutton = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    padding: 20px 0px;
+    & button {
+        border: 1px solid black;
+        width: 200px;
+        height: 40px;
+        box-sizing: border-box;
+        border-radius: 10px;
+    }
     button:disabled {
         cursor: not-allowed;
     }

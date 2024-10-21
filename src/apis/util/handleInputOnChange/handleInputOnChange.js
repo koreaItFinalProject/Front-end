@@ -3,7 +3,7 @@ export const handleInputOnChange = (setInputUser) => (e) => {
   if (name === 'phoneNumber' && !/^\d*$/.test(value)) {
     return; // 숫자가 아닌 입력은 무시 
   }
-  if (value.length > 11) {
+  if (name === 'phoneNumber' && value.length > 11) {
     return;
   }
   setInputUser(inputUser => ({
