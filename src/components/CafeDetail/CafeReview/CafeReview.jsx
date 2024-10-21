@@ -4,8 +4,13 @@ import * as s from "./style";
 import { IoIosStarOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
-function CafeReview(props) {
+function CafeReview({ cafeItem }) {
     const navigate = useNavigate();
+
+    const handleReviewClick = () => {
+        navigate(`/cafe/review/${cafeItem.id}`, { state: { cafeItem } });
+    };
+
     return (
         <div css={s.layout}>
             <h1>Review</h1>
@@ -24,7 +29,7 @@ function CafeReview(props) {
                     <button>분위기</button>
                     <button>디저트</button>
                 </div>
-                <button onClick={() => navigate('/cafe/review')}>리뷰 쓰기</button>
+                <button onClick={handleReviewClick}>리뷰 쓰기</button>
             </div>
             <div css={s.review}>
                 <div css={s.reviewInfo}>

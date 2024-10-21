@@ -15,11 +15,13 @@ function CafeDetailPage() {
         setSelectMenu(e.target.value);
     }
 
+    console.log(cafeItem);
+
     return (
         <div css={s.layout}>
             <div css={s.detailHeader}>
-                <h1>{cafeItem.cafeName}</h1>
-                <div>{cafeItem.address}</div>
+                <h1>{cafeItem?.cafeName}</h1>
+                <div>{cafeItem?.address}</div>
                 <div css={s.reviewStat}>
                     <IoIosStarOutline />
                     <IoIosStarOutline />
@@ -29,7 +31,7 @@ function CafeDetailPage() {
                     <div>3.0</div>
                 </div>
                 <div css={s.detailInfo}>
-                    <div></div>
+                    <div>{cafeItem?.address}</div>
                     <div>리뷰 378</div>
                 </div>
             </div>
@@ -51,7 +53,7 @@ function CafeDetailPage() {
                 {
                     selectMenu === 'menu'
                     ? <CafeMenu />
-                    : <CafeReview />
+                    : <CafeReview cafeItem={cafeItem} />
                 }
             </div>
         </div>
