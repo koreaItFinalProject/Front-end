@@ -4,6 +4,8 @@ import * as s from "./style";
 import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
+import { IoMdThumbsUp } from "react-icons/io";
+import { MdRateReview } from "react-icons/md";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
@@ -23,20 +25,28 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     };
 
     const handleCafeClick = (cafeItem) => {
-        navigate(`/cafe/detail/${cafeItem.id}`, {state: { cafeItem } });
+        navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
     }
 
     return (
-        <div css={s.allLayout}>
-            <div css={s.box}>
-                <div css={s.inputSection}>
-                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} spellCheck="false" required />
-                    <label>카페이름:</label>
-                    <span></span>
-                </div>
-                <div css={s.selectbutton}>
-                    <SelectCategory check={check} setCheck={setCheck} />
-                </div>
+        <div css={s.layout}>
+            <h1 css={s.title}>Cafe List</h1>
+            <div css={s.searchContainer}>
+                <input type="text" 
+                    value={inputdata} 
+                    onChange={handleInputOnChange} 
+                    onKeyDown={handleInputKeyPress} 
+                    spellCheck="false" 
+                    placeholder='카페를 검색하세요'
+                    required />
+                <button>검색</button>
+                <select name="" id="">
+                    <option value="like">인기순</option>
+                    <option value="review">리뷰순</option>
+                </select>
+            </div>
+            <div css={s.selectbutton}>
+                <SelectCategory check={check} setCheck={setCheck} />
             </div>
             <div css={s.listContainer}>
                 {cafe?.map(cafeItem => (
@@ -44,13 +54,13 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                         <div css={s.pictureBox}></div>
                         <div css={s.showBox}>
                             <div css={s.spanBox}>
-                                <h2>카페 이름: {cafeItem.cafeName}</h2>
-                                <p>주소: {cafeItem.address}</p>
-                                <p>카테고리: {cafeItem.category}</p>
+                                <h1>{cafeItem.cafeName}</h1>
+                                <p>{cafeItem.address}</p>
+                                <p>{cafeItem.category}</p>
                             </div>
                             <div css={s.viewBox}>
-                                <span>조회:</span>
-                                <span>추천:</span>
+                                <span><MdRateReview /></span>
+                                <span><IoMdThumbsUp /></span>
                             </div>
                         </div>
                     </div>
