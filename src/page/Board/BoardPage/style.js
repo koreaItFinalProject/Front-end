@@ -100,5 +100,5 @@ export const boardList = css`
 `;
 
 export const ref = css`
-    height: 10px;
+    height: 1000px;
 `;
