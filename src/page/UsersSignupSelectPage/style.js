@@ -1,12 +1,17 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    * {
+        color : #F2780C;
+    }
+    width: 100%;
     display: flex;
     margin: 0 auto;
     justify-content: center;
     align-items: center;
     height: 100%;
     flex-direction: column;
+    background-color: #191919;
 `;
 
 export const logo = css`
@@ -14,13 +19,9 @@ export const logo = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    & img {
-        width: 125px;
-        height: 125px;
-    }
-
+    margin-bottom: 20px;
     & h1{
-        font-size: 30px;
+        font-size: 50px;
         font-family: "Oswald", sans-serif;
         font-optical-sizing: auto;
         font-weight: 600;
@@ -34,7 +35,6 @@ export const loginMain = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
 `;
 
 
@@ -160,21 +160,22 @@ export const selectMember = css`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 400px;
+    height: 300px;
     width: 400px;
     `;
  
 export const emailbutton = css`
     width: 100%;
-    height: 60px;
+    height: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     & button{
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 0;
+        height: 30px;
         & p {
             margin-left: 10px;
             display: flex;
@@ -187,7 +188,19 @@ export const emailbutton = css`
     }
 `;
 
+export const ownerloginButton = css`
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & p {
+    font-size: 10px;
+    margin: 0;
+    }
+`;
+
 export const loseEmail = css`
+    padding-top: 50px;
     width: 100%;
     height: 60px;
     display: flex;

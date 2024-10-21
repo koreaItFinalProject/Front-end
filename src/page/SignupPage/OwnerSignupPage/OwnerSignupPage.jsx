@@ -1,26 +1,36 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import Header from '../../../components/Header/Header';
 import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
 import Ocr from '../../../apis/Ocr/Ocr';
 import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
-import logo from '../../../assets/logo.png'
+import logo from '../../../assets/logo.png';
+import emailApi from '../../../apis/emailApis/emailApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
+    const [isTimerRunning, setIsTimerRunning] = useState(false);
+    const [isTimerStopped, setIsTimerStopped] = useState();
+    const [timer, setTimer] = useState(0);
+    const [businessNumber, setBusinessNumber] = useState('2148813306');
+    const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
+    const [ proccess , setProccess] = useState(true);
+    const [ isLoading , setLoading] = useState(true);
+    const [image, setImage] = useState();
+    const [emailCheckState, setEmailCheckState] = useState(false);
+    const [emailCheck, setEmailCheck] = useState("");
+    const [emailNumber , setEmailNumber] = useState("");
     const [coordinates, setCoordinates] = useState({ 
         latitude: '',
         longitude: ''
      });
-     const [isTimerRunning, setIsTimerRunning] = useState(false);
-     const [timer, setTimer] = useState(0);
+    const [isEndlock , setEndlock] = useState(false);
+    
     const [inputUser , setInputUser] = useState({
         username: '',
         password:'',
@@ -53,13 +63,7 @@ function OwnerSignupPage(props) {
         phoneNumber:<></>,
     });
 
-    const [businessNumber, setBusinessNumber] = useState('2148813306');
-    const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
-    const [ proccess , setProccess] = useState(true);
-    const [ isLoading , setLoading] = useState(true);
-    const [image, setImage] = useState();
-
-
+    
     const handleImageChange = (e) => {
         setImage(e.target.files[0]);
         if(image) {
@@ -68,11 +72,12 @@ function OwnerSignupPage(props) {
     }
 
     const handleInputTextChange = (e) => {
-        setCafe({
-            ...isCafe,
-            [e.target.name] : e.target.value
-        })
+        setCafe(e.target.value);
         console.log(isCafe);
+    }
+
+    const handleInputCheckChange = (e) => {
+        setEmailCheck(e.target.value);
     }
 
     const handleCoordinatesChange = (latitude, longitude) => {
@@ -148,7 +153,6 @@ function OwnerSignupPage(props) {
                 cafename: isCafe.cafename,
             };
             console.log(coordinates);
-
             const CafeData = await ownercheckApi(data);
             if (CafeData.isSuccess) {
                 alert("가입 성공");
@@ -167,15 +171,49 @@ function OwnerSignupPage(props) {
             interval = setInterval(() => {
                 setTimer(prevTimer => prevTimer - 1);
             }, 1000);
-        } else if (timer === 0) {
+        } else if (timer === 0 && emailCheckState) {
             setIsTimerRunning(false);
+            alert("인증시간을 초과하였습니다.");
         }
         return () => clearInterval(interval);
-    }, [isTimerRunning, timer]);
+    }, [isTimerRunning, timer ,isTimerStopped]);
 
-    const startTimer = () => {
-        setTimer(180);
-        setIsTimerRunning(true);
+    const startTimer = async(email) => {
+        try{
+            if(email.trim() === '') {
+                alert('빈 값은 입력할 수 없습니다.');
+                return;
+            }
+            setTimer(180);
+            setIsTimerStopped(false);
+            setIsTimerRunning(true);
+            setEmailCheckState(true);
+            const response = await emailApi(email);
+            const verificationCode = response.number;
+            setEmailNumber(verificationCode);
+
+        }catch (error) {
+            console.error("Error occurred:", error);
+            alert("이메일 인증 요청 중 오류가 발생했습니다.");
+        }
+    }
+
+    const handleOnEmailCheckClick = async() => {
+        console.log("이메일 넘버" + emailNumber);
+        console.log("이메일 체크"+ emailCheck);
+        if(emailCheck !== ''){
+            if(emailNumber == emailCheck){
+                alert("인증성공");
+                setEndlock(true);
+                setTimer(0);
+                setEmailCheckState(false);
+                setIsTimerStopped(true);
+                setIsTimerRunning(false);
+            }
+            if(emailNumber != emailCheck){
+                alert("인증번호가 일치하지 않습니다.");
+            }
+        }
     }
 
     const handleRegistrationNumberCheckOnClick = async () => {
@@ -216,9 +254,8 @@ function OwnerSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <div css={s.mainlayout}>
-                <div css={s.logo}>
-                    <img src={logo} alt="로고" />
+                <div css={s.logoStyle}>
+                    <img src={logo} alt="" />
                 </div>
                 <div css={s.Info}>
                     <div>
@@ -238,11 +275,23 @@ function OwnerSignupPage(props) {
                         {fieldErrorMessages.checkPassword}
                     <div>
                         <p>이메일</p>
-                        <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
+                        <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' disabled={isEndlock === true ? true : false} />
                     </div>
                         <div css={s.emailButton}>
-                                {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
-                            <button onClick={startTimer}>이메일 인증</button>
+                                {!emailCheckState ? (
+                                    <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
+                                ):( 
+                                    <div css={s.emailcert}>
+                                        <div>
+                                            <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange}/>
+                                            {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                        </div>
+                                        <div>
+                                            <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
+                                            <button onClick={handleOnEmailCheckClick}>확인</button>
+                                        </div>
+                                    </div>
+                                )} 
                         </div>
                         {fieldErrorMessages.email}
                     <div>
@@ -299,7 +348,6 @@ function OwnerSignupPage(props) {
                     {/* () => handlesignuppageOnClick.mutateAsync() */}
                     {/* disabled={isLoading === false ? true : false} */}
                 </div>
-            </div>
         </div>
     );
 }
