@@ -38,7 +38,7 @@ function App() {
     if (!authRefresh) {
         setAuthRefresh(true);
     }
-  }, [location.pathname]);
+  }, [location.pathname, authRefresh]);
 
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
@@ -66,10 +66,9 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPaths = ["/user/sadasdsad", "/owner"];
-        for (let permitAllPasth of permitAllPaths) {
-          if (location.pathname.startsWith(permitAllPasth)) {
-            console.log(permitAllPasth);
+        const blockPaths = ["/user", "/owner"];
+        for (let blockPath of blockPaths) {
+          if (location.pathname.startsWith(blockPath)) {
             alert("잘못된 요청입니다.")
             navigete("/");
             break;
