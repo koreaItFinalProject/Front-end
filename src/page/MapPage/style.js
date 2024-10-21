@@ -14,59 +14,68 @@ export const box = css`
     box-sizing: border-box;
     position: absolute;
     z-index: 100;
-    top: 10px;
+    top: 15px;
     left: 15px;
+    height: 50px;
+    width: 631px;
+    background-color: #111111;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    
+    h2 {
+        margin: 0px;
+        padding: 0px 10px;
+        padding-top: 8px;
+        align-items: center;
+        color: #F2780C;
+        font-family: 'Kulim Park';
+        font-style: normal;
+        font-weight: 'Bold', 600;
+        font-size: 30px;
+        line-height: 34px;
+    }
 `;
 
 export const inputbox = css`
     display: flex;
     position: relative;
-    height: 33px;
-    padding: 7px 0px;
-    background-color: #daa520;
-    border-radius: 20px;
-    a {
-        margin: 0;
-        padding-bottom: 10px;
-        & > div {
-            margin-left: 5px;
-            background-image: url(${logo});
-            background-size: cover;
-            background-position: center;
-            width: 45px;
-            height: 36px;
-        }
-    }
-
-    button{
-        padding: 0px 5px;
-        padding-top: 5px;
-    }
-
+    width: 100%;
+    padding: 0px;
+    width: 100%;
     input {
-        padding: 0px;
-        padding-left: 10px;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px 15px;
         font-size: 15px;
         width: 100%;
         outline: none;
         border: none;
-        border-radius: 20px;
+        font-size: 20px;
         background-color: #ffffff;
+
+
+        &::placeholder{
+        font-family: 'Kulim Park';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 20px;
+        line-height: 23px;
+        color: #B4B4B4;
+        
+        }
     }
 `;
-
 export const selectbutton = css`
     display: flex;
     position: absolute;
     z-index: 100;
-    margin-top: 55px;
+    margin-top: 60px;
 `;
 
 export const icon = css`
     position: relative;
     top: 2px;
 `
-
 
 export const map = css`
     display: flex;
@@ -79,7 +88,7 @@ export const cafeContainer = css`
     align-items: center;
     justify-content: space-between; // 버튼을 양 끝으로 배치
     position: absolute;
-    bottom: 20px;
+    bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
     
@@ -88,30 +97,53 @@ export const cafeContainer = css`
     
     z-index: 100;
     width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
-
     button {
-        padding: 20px;
-        background-color: aliceblue;
+        padding: 0px;
+        height: 50px;
+        width: 50px;
+        background-color: #111111;
         border-radius: 100%;
     }
 `;
 
-export const cafeInfo = (slide)=> css`
+export const pictureBox = css`
+    box-sizing: border-box;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    border-radius: 10px;
+    width: 120px;
+    height: 110px;
+`;
+
+export const cafeInfo = (slide) => css`
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    background-color: aqua;
-    overflow: hidden;
+    padding: 10px;
+    /* overflow: hidden; */
+    background: #111111;
+    border-radius: 20px;
     h3 {
         margin: 0;
+        padding: 10px 0px;
         font-size: 18px;
         font-weight: 600;
-        color: #333;
+        color: #FFFFFF;
     }
     p {
+        padding: 5px 0px;
         margin: 5px 0 0;
         font-size: 14px;
-        color: #666; 
+        color: #FFFFFF;
+
+        :nth-last-of-type(1){
+            color: #F2780C;
+        }
     }
 `;
+
+export const listBox = css`
+    display: flex;
+    padding-left: 15px;
+    flex-direction: column;
+
+`
