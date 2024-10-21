@@ -69,6 +69,26 @@ export const Info = css`
     }
 `;
 
+export const usernameInput =css`
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #F2780C;
+    & input {
+        height: 40px;
+        width: 300px;
+        font-size: 18px;
+        border: none;
+    }
+    & button {
+        box-sizing: border-box;
+        height: 30px;
+        width: 80px;
+        border: 1px solid #ffffff;
+        border-radius: 20px;
+    }
+`;
+
 export const emailButton = css`
     display: flex;
     justify-content: end;

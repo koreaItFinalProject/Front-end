@@ -11,6 +11,7 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import logo from '../../../assets/logo.png';
 import emailApi from '../../../apis/emailApis/emailApi';
+import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -25,11 +26,12 @@ function OwnerSignupPage(props) {
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber , setEmailNumber] = useState("");
+    const [isCheckUsername , setCheckUsername] = useState(false);
+    const [isEndlock , setEndlock] = useState(false);
     const [coordinates, setCoordinates] = useState({ 
         latitude: '',
         longitude: ''
      });
-    const [isEndlock , setEndlock] = useState(false);
     
     const [inputUser , setInputUser] = useState({
         username: '',
@@ -252,15 +254,39 @@ function OwnerSignupPage(props) {
         }
     }
 
+    const checkUsername = async () => {
+        if(inputUser.username === ''){
+            alert("빈 값을 넣으면 안됩니다")
+            return
+        }
+        console.log(inputUser.username);
+        try {
+            const response = await checkUsernameApi(inputUser.username);
+            console.log(response);
+            if(response.isSuccess){
+                setCheckUsername(true);
+                alert('사용가능한 아이디입니다.');
+            }else{
+                alert(response.data);
+                setCheckUsername(false);
+            }
+        }catch(error){
+            console.error('Username check error:', error.response.data);
+            setCheckUsername(false);
+            alert(error.response.data);
+        }
+    }
+
     return (
         <div css={s.layout}>
                 <div css={s.logoStyle}>
                     <img src={logo} alt="" />
                 </div>
                 <div css={s.Info}>
-                    <div>
+                    <div css={s.usernameInput}>
                         <p>아이디</p>
                         <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
+                        <button onClick={checkUsername}>확인</button>
                     </div>
                         {fieldErrorMessages.username}
                     <div>
@@ -277,22 +303,22 @@ function OwnerSignupPage(props) {
                         <p>이메일</p>
                         <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' disabled={isEndlock === true ? true : false} />
                     </div>
-                        <div css={s.emailButton}>
-                                {!emailCheckState ? (
-                                    <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
-                                ):( 
-                                    <div css={s.emailcert}>
-                                        <div>
-                                            <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange}/>
-                                            {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
-                                        </div>
-                                        <div>
-                                            <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
-                                            <button onClick={handleOnEmailCheckClick}>확인</button>
-                                        </div>
+                    <div css={s.emailButton}>
+                            {!emailCheckState ? (
+                                <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
+                            ):( 
+                                <div css={s.emailcert}>
+                                    <div>
+                                        <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange}/>
+                                        {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                     </div>
-                                )} 
-                        </div>
+                                    <div>
+                                        <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
+                                        <button onClick={handleOnEmailCheckClick}>확인</button>
+                                    </div>
+                                </div>
+                            )} 
+                    </div>
                         {fieldErrorMessages.email}
                     <div>
                         <p>대표자명</p>
@@ -345,8 +371,6 @@ function OwnerSignupPage(props) {
                 </div>
                 <div css={s.signupbutton}>
                     <button onClick={handleSignup} disabled={isLoading === false ? true : false}>가입하기</button>
-                    {/* () => handlesignuppageOnClick.mutateAsync() */}
-                    {/* disabled={isLoading === false ? true : false} */}
                 </div>
         </div>
     );
