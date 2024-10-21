@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQueryClient } from 'react-query';
-import SelectCategory from '../../components/SelectCategory/SelectCategory';
+import { useNavigate } from 'react-router-dom';
+import SelectCategory from '../../../components/SelectCategory/SelectCategory';
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
     const cafe = cafelist?.data;
@@ -20,6 +22,10 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         }
     };
 
+    const handleCafeClick = (cafeItem) => {
+        navigate(`/cafe/detail/${cafeItem.id}`, {state: { cafeItem } });
+    }
+
     return (
         <div css={s.allLayout}>
             <div css={s.box}>
@@ -33,8 +39,8 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                 </div>
             </div>
             <div css={s.listContainer}>
-                {cafe?.map((cafeItem, index) => (
-                    <div css={s.listbox} key={index}>
+                {cafe?.map(cafeItem => (
+                    <div css={s.listbox} key={cafeItem.id} onClick={() => handleCafeClick(cafeItem)}>
                         <div css={s.pictureBox}></div>
                         <div css={s.showBox}>
                             <div css={s.spanBox}>

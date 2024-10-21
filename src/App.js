@@ -1,8 +1,11 @@
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
+import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+import { instance } from './apis/util/instance';
+import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
-import BoardPage from './page/Board/BoardPage/BoardPage';
 import WritePage from './page/Board/WritePage/WritePage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
@@ -13,20 +16,17 @@ import DetailPage from './page/Board/DetailPage/DetailPage';
 import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
 import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { instance } from './apis/util/instance';
-import MainLayout from './components/MainLayout/MainLayout';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
-import CafeListPage from './page/CafeListPage/CafeListPage';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
 import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2Page';
 import MyPage from './page/MyPage/MyPage';
 import SignLayout from './components/MainLayout/SignLayout/SignLayout';
-import CafeDetailPage from './page/CafeDetailPage/CafeDetailPage';
-import CafeReviewPage from './page/CafeReviewPage/CafeReviewPage';
+import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
+import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
+import CafeReview from './components/CafeDetail/CafeReview/CafeReview';
+import BoardListPage from './page/Board/BoardListPage/BoardListPage';
 
 function App() {
   const location = useLocation();
@@ -125,10 +125,10 @@ function App() {
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
               <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/detail' element={<CafeDetailPage />} />
-              <Route path='/cafe/review' element={<CafeReviewPage />} />
+              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
+              <Route path='/cafe/review' element={<CafeReview />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/board' element={<BoardPage />} />
+              <Route path='/board' element={<BoardListPage />} />
               <Route path='/board/write' element={<WritePage />} />
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
               <Route path='/board/modify/:boardId' element={<ModifyPage />} />

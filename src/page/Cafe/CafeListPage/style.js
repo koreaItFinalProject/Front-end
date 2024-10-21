@@ -88,6 +88,10 @@ export const listbox = css`
     padding: 20px;
     margin-top: 30px;
     border-radius: 20px;
+    
+    :hover {
+        cursor: pointer;
+    }
 `;
 
 export const pictureBox = css`
