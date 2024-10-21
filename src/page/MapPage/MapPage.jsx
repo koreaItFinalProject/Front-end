@@ -17,7 +17,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
     const cafe = cafelist?.data;
     const [currentCafeIndex, setCurrentCafeIndex] = useState(0);
-    const [ slide, setSlide ] = useState(0);
+    const [slide, setSlide] = useState(0);
 
     const handlePrevCafe = () => {
         setSlide(-100);
@@ -54,8 +54,8 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     return (
         <div css={s.layout}>
             <div css={s.box}>
+                <h2>CafeInBusan</h2>
                 <div css={s.inputbox}>
-                    <Link to={"/"}><div/></Link>
                     <input
                         type="text"
                         placeholder="카페명을 입력해주세요"
@@ -63,7 +63,6 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                         onChange={handleInputOnChange}
                         onKeyDown={handleInputKeyPress}
                     />
-                    <button onClick={handleSearchOnClick}><IoIosSearch size={20}/></button>
                 </div>
                 <div css={s.selectbutton}>
                     <SelectCategory check={check} setCheck={setCheck} />
@@ -78,14 +77,19 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                 ))}
                 <div css={s.cafeContainer}>
                     <button onClick={handlePrevCafe} disabled={!cafe?.length}>
-                        이전
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.5 7.47475V12.5253H9.13636L13.5556 16.9444L10.5 20L0.5 10L10.5 0L13.5556 3.05556L9.13636 7.47475H20.5Z" fill="#F2780C" />
+                        </svg>
                     </button>
                     <div css={s.cafeInfo(slide)}>
                         {cafe?.length > 0 ? (
                             <>
-                                <h3>카페이름: {cafe[currentCafeIndex].cafeName}</h3>
-                                <p>주소: {cafe[currentCafeIndex].address}</p>
-                                <p>카테고리: {cafe[currentCafeIndex].category}</p>
+                                <div css={s.pictureBox} />
+                                <div css={s.listBox}>
+                                    <h3>{cafe[currentCafeIndex].cafeName}</h3>
+                                    <p>{cafe[currentCafeIndex].address}</p>
+                                    <p>{cafe[currentCafeIndex].category}</p>
+                                </div>
                                 <MapMarker
                                     position={{
                                         lat: cafe[currentCafeIndex].lat,
@@ -98,7 +102,10 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                         )}
                     </div>
                     <button onClick={handleNextCafe} disabled={!cafe?.length}>
-                        다음
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.5 12.5253V7.47475H11.8636L7.44444 3.05556L10.5 0L20.5 10L10.5 20L7.44444 16.9444L11.8636 12.5253H0.5Z" fill="#F2780C" />
+                        </svg>
+
                     </button>
                 </div>
             </Map>
