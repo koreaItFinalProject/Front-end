@@ -67,62 +67,51 @@ function UserSignupPage(props) {
     }
 
     return (
-        <div>
-            <div css={s.layout}>
+    <div css={s.layout}>
+        <div css={s.Info}>
+            <div>
                 <div>
-                    <div css={s.Info}>
-                        <div>
-                            <div>
-                                <p>아이디</p>
-                                <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                                <p>{fieldErrorMessages.username}</p>
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <p>비밀번호</p>
-                                <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                                </div>
-                                <p>{fieldErrorMessages.password}</p>
-                            </div>
-                        <div>
-                            <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.checkPassword}</p>
-                            <p>{fieldErrorMessages.passwordMatching}</p>
-                        </div>
-                        <div>
-                            <p>이름</p>
-                            <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.name}</p>
-                        </div>
-                        <div>
-                            <p>이메일</p>
-                            <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
-                        </div>
-                            <div css={s.emailButton}>
-                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
-                                <button onClick={()=> startTimer(inputUser.email)}>이메일 인증</button>
-                            </div>
-                            {fieldErrorMessages.email}
-                        <div>
-                            <p>닉네임</p>
-                            <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.nickname}</p>
-                        </div>
-                        <div>
-                            <p>전화번호</p>
-                            <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
-                            {fieldErrorMessages.phoneNumber}
-                        </div>
-                    </div>
-                    
-                    <div css={s.signupbutton}>
-                        <button onClick={ handlesignuppageOnClick}>가입하기</button>
-                    </div>
+                    <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' />
+                    <p>{fieldErrorMessages.username}</p>
+                    <button>확인</button>
                 </div>
             </div>
+            <div>
+                <div>
+                    <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                    </div>
+                    <p>{fieldErrorMessages.password}</p>
+                </div>
+            <div>
+                <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
+                <p>{fieldErrorMessages.checkPassword}</p>
+                <p>{fieldErrorMessages.passwordMatching}</p>
+            </div>
+            <div>
+                <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                <p>{fieldErrorMessages.name}</p>
+            </div>
+            <div>
+                <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' />
+            </div>
+                <div css={s.emailButton}>
+                        {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                    <button onClick={()=> startTimer(inputUser.email)}>이메일 인증</button>
+                </div>
+                {fieldErrorMessages.email}
+            <div>
+                <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                <p>{fieldErrorMessages.nickname}</p>
+            </div>
+            <div>
+                <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
+                {fieldErrorMessages.phoneNumber}
+            </div>
+            <div css={s.signupbutton}>
+                <button onClick={ handlesignuppageOnClick}>가입하기</button>
+            </div>
         </div>
+    </div>
     );
 }
 

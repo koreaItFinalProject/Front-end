@@ -8,31 +8,38 @@ export const layout = css`
     justify-content: center;
     align-items: center;
     
+    & p {
+        margin: 0;
+    }
     & > div {
         width: 600px;
         height: 700px;
         border: 1px solid black;
         border-radius: 20px;
         display: flex;
-        flex-direction: column;
+        /* flex-direction: column; */
         justify-content: center;
         align-items: center;
     }
     
 `;
 
+
 export const Info = css`
+    width: 400px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     & div{
-        width: 480px;
+        position: relative;
+        width: 350px;
         height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 20px ;
         & input {
-            height: 35px;
-            width: 300px;
-            border-radius: 10px;
+            position: absolute;
+            height: 40px;
+            width: 350px;
             padding-left: 20px;
             font-size: 18px;
         }
@@ -45,7 +52,7 @@ export const Info = css`
 `;
  
 export const emailButton = css`
-    display: flex;
+    /* display: flex;
     justify-content: end;
     align-items: center;
     & button{
@@ -58,11 +65,11 @@ export const emailButton = css`
     & p{
         width: 100px;
         font-size: 14px;
-    }
+    } */
 `;
 
 export const addressInfo = css`
-    width: 480px;
+    /* width: 480px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,24 +81,24 @@ export const addressInfo = css`
         width: 80px;
         margin-right: 40px;
         padding: 10px;
-    }
+    } */
 `;
 
 export const addressStyle = css`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     width: 100px;
     box-sizing: border-box;
     & input {    
     border-radius: 10px;
     padding-left: 10px;
-    }
+    } */
     
 `;
 
 export const signupbutton = css`
-    margin-top: 20px;
+    /* margin-top: 20px;
     & button {
         padding: 10px 50px;
-    }
+    } */
 `;

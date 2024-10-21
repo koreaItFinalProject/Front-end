@@ -8,6 +8,9 @@ export const layout = css`
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    * {
+        color: #ffffff;
+    }
 `;
 
 export const login = css`
@@ -15,29 +18,10 @@ export const login = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 400px;
+    height: 350px;
     width: 100%;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
-    & input{
-        width: 300px;
-        height: 40px;
-        margin: 5px 0px;
-        border-radius: 10px;
-    }
-    & input:nth-last-child(1){
-        margin-bottom: 0px;
-    }
-    & button {
-        padding: 10px 140px;
-        box-sizing: border-box;
-        border: 1px solid black;
-        border-radius: 10px;
-        margin: 10px 0px;
-        background-color: #131313;
-        color: #e4e4e4;
-        font-weight: 600;
-    }
 `;
 
 export const loginInput = css`
@@ -45,48 +29,32 @@ export const loginInput = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    & input {
-        padding-left: 20px;
+    & input:nth-last-child(1){
+        margin-bottom: 0px;
     }
-    
-`;
-
-export const checkbox = css`
-    width: 100%;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    & span {
-        cursor: pointer;
-        font-size: 12px;
-    }
-    & input {
+    & button {
+        display: flex;
+        align-items: center;
+        width: 360px;
         box-sizing: border-box;
-        width: 10px;
-        height: 10px;
-        display: none;
+        border-radius: 10px;
+        margin: 0px 0px 10px 0px;
+        color: #ffffff;
+        font-weight: 600;
+        background-color: #F2780C;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 `;
 
-
-export const oauth2 = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 60px;
-    box-sizing: border-box;
-    & button{
-        margin: 10px 10px;
-        border-radius: 50%;
+export const loginTitle =css`
+    & p {
+        color: #F2780C;
+        font-size: 45px;
+        font-weight: 700;
     }
-    & img {
-        border-radius: 50%;
-        cursor: pointer;
-        width: 40px;
-        height: 40px;
-    }
-
 `;
 
 export const foundInfo = css`
@@ -101,9 +69,13 @@ export const foundInfo = css`
 
         & li {
             padding: 0px 15px;
-            border-right: 1px solid black;
+            border-right: 1px solid #F2780C;
             font-weight: 600;
             cursor: pointer;
+            & button {
+                color: #F2780C;
+                font-size: 12px;
+            }
         }
     }
 

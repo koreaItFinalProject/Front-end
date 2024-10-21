@@ -69,53 +69,49 @@ function OAuth2Signup(props) {
 
 
     return (
-        <div>
             <div css={s.layout}>
-                <div>
-                    <div css={s.Info}>
-                        <div>
-                            <p>아이디</p>
-                            <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.username}</p>
-                        </div>
-                        <div>
-                            <p>비밀번호</p>
-                            <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.password}</p>
-                        </div>
-                        <div>
-                            <p>비밀번호 확인</p>
-                            <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.checkPassword}</p>
-                        </div>
-                        <div>
-                            <p>이름</p>
-                            <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.name}</p>
-                        </div>
-                        <div>
-                            <p>이메일</p>
-                            <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.email}</p>
-                        </div>
-                        <div>
-                            <p>닉네임</p>
-                            <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setinputUser)} placeholder='' />
-                            <p>{fieldErrorMessages.nickname}</p>
-                        </div>
-                        <div>
-                            <p>전화번호</p>
-                            <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setinputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
-                            {fieldErrorMessages.phoneNumber}
-                        </div>
+                <div css={s.Info}>
+                    <div>
+                        <p>아이디</p>
+                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.username}</p>
                     </div>
-                    
+                    <div>
+                        <p>비밀번호</p>
+                        <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.password}</p>
+                    </div>
+                    <div>
+                        <p>비밀번호 확인</p>
+                        <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.checkPassword}</p>
+                    </div>
+                    <div>
+                        <p>이름</p>
+                        <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.name}</p>
+                    </div>
+                    <div>
+                        <p>이메일</p>
+                        <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.email}</p>
+                    </div>
+                    <div>
+                        <p>닉네임</p>
+                        <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setinputUser)} placeholder='' />
+                        <p>{fieldErrorMessages.nickname}</p>
+                    </div>
+                    <div>
+                        <p>전화번호</p>
+                        <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setinputUser)} placeholder='휴대전화 인증을 받아야 합니다.' />
+                        {fieldErrorMessages.phoneNumber}
+                    </div>
                     <div css={s.signupbutton}>
                         <button onClick={handleMergepageOnClick}>회원가입</button>
                     </div>
                 </div>
+                    
             </div>
-        </div>
     );
 }
 
