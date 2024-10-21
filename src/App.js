@@ -110,7 +110,7 @@ function App() {
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
-              <Route path='/storemanagement' element={<ManagerStoreManagementPage />} />
+              <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
           </ManagerMainLayout>
