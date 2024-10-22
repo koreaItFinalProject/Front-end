@@ -47,7 +47,7 @@ function CafeDetailPage() {
                 <div>{cafeItem?.address}</div>
                 <div css={s.reviewStat}>
                     <StarRating averageRating={averageRating}/>
-                    <div>{averageRating}</div>
+                    <div>{averageRating.toFixed(1)}</div>
                 </div>
                 <div css={s.detailInfo}>
                     <div>{cafeItem.category}</div>

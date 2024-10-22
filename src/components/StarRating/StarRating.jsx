@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { IoStar } from "react-icons/io5";
 
 function StarRating({ score, setScore, isClick, setisClick }) {
+
+    useEffect(() => {
+        const tempIsClick = isClick.map((_, i) => i < score);
+        setisClick(tempIsClick);
+    }, [score, setisClick]);
 
     const handleStarOnClick = index => {
         if (score === index + 1) {
