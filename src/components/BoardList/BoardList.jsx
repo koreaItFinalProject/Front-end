@@ -4,7 +4,7 @@ import * as s from "./style";
 import { IoMdHeart } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
-function BoardList({ data, loadMoreRef }) {
+function BoardList({ boardList, loadMoreRef }) {
     const navigate = useNavigate();
     const listRef = useRef(null);
 
@@ -12,12 +12,12 @@ function BoardList({ data, loadMoreRef }) {
         if (listRef.current && loadMoreRef.current) {
             listRef.current.appendChild(loadMoreRef.current);
         }
-    }, [data, loadMoreRef]);
+    }, [boardList, loadMoreRef]);
 
     return (
         <ul css={s.cardLayout} ref={listRef}>
             {
-                data?.pages.map((page, pageIndex) => (
+                boardList?.pages.map((page, pageIndex) => (
                     <React.Fragment key={pageIndex}>
                         {page.data.boards.map(board => {
                             const mainImgStartIndex = board.content.indexOf("<img");

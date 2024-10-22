@@ -28,6 +28,8 @@ function CafeDetailPage() {
         }
     );
 
+    console.log(review);
+
     useEffect(() => {
         if (review && review?.reviews.length > 0) {
             const totalRating = review?.reviews.reduce((sum, review) => sum + review.rating, 0);
