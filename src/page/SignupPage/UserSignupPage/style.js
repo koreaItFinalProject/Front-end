@@ -2,11 +2,12 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     width: 100%;
-    height:100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; 
+    overflow-y: auto;
+    padding: 0px 140px;
+    padding-top: 50px;
     *{
         color: #ffffff;
         & button {
@@ -18,32 +19,22 @@ export const layout = css`
         cursor: not-allowed;
     }
     }
-    & p {
-        margin: 0;
-        font-size: 10px;
-    }
-    & > div {
-        width:  100%;
-        height: 700px;
-        display: flex;
-        /* flex-direction: column; */
-        justify-content: center;
-        align-items: center;
-    }
 `;
 
 export const Info = css`
+    
     box-sizing: border-box;
-    padding: 0px 140px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column; 
-    & p {
-        width: 100px;
-        margin: 0px;
-        padding: 0px;
-    }   
+    & p{
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+        width: 100%;
+        color: #E94334;
+        margin: 0;
+    }
     & input {
         padding-left: 10px;
     }

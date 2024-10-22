@@ -10,14 +10,14 @@ import { handleInputOnChange } from '../../apis/util/handleInputOnChange/handleI
 
 function UserSigninPage(props) {
     const navigate = useNavigate();
-    const [ fieldErrorMessages , setFieldErrorMessages ] = useState({
-        username : <></>,
-        password : <></>
-    });
     const [ inputUser , setInputUser ] = useState({
         username:"",
         password:"",
         role:"USER"
+    });
+    const [ fieldErrorMessages , setFieldErrorMessages ] = useState({
+        username : <></>,
+        password : <></>
     });
 
 
@@ -47,11 +47,11 @@ function UserSigninPage(props) {
                 <div css={s.loginTitle}>
                     <p>Login</p>
                 </div>
-                <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디'/>
-                <p>{fieldErrorMessages.username}</p>
-                <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호'/>
-                <p>{fieldErrorMessages.password}</p>
-                <button onClick = {handleOnLoginClick}>로그인</button>
+                    <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디'/>
+                    <p>{fieldErrorMessages.username}</p>
+                    <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호'/>
+                    <p>{fieldErrorMessages.password}</p>
+                    <button onClick = {handleOnLoginClick}>로그인</button>
             </div>
         </div>
         <div css={s.foundInfo}>

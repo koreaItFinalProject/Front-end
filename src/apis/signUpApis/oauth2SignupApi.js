@@ -17,7 +17,7 @@ export const oAuth2SignupApi = async (user) => {
 
     console.log(user);
   try {
-    const response = await instance.post("/oauth/oauth2/signup", user);
+    const response = await instance.post("/user/oauth2/signup", user);
     console.log(response);
     mergeData = {
         isSuccess: true,

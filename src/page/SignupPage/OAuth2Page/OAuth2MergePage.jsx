@@ -6,26 +6,19 @@ import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 
-function OAuth2Page(props) {
-  const [ selectMenu, setSelectMenu ] = useState(true);
-  const handelSelectMenu = () => {
-    setSelectMenu(prevSelectMenu => !prevSelectMenu);
-  }
-
+function OAuth2MergePage(props) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [inputUser , setinputUser] = useState({
       username: '',
       password:'',
   })
-
   const [fieldErrorMessages, setFieldErrorMessages] = useState({
       username: <></>,
       password: <></>,
   });
 
   const handleMergepageOnClick = async () => {
-
       const mergeData = {
           username : inputUser.username,
           password : inputUser.password,
@@ -61,17 +54,17 @@ function OAuth2Page(props) {
               <div css={s.Info}>
                   <div css={s.loginLayout}>
                       <div css={s.logo}>
-                          <p>
-                          Merge Login
-                          </p>
+                          <h1>
+                            Merge Login
+                          </h1>
                       </div>
                       <div>
                           <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='아이디' />
-                          <p>{fieldErrorMessages.username}</p>
+                          {fieldErrorMessages.username}
                       </div>
                       <div>
                           <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='비밀번호' />
-                          <p>{fieldErrorMessages.password}</p>
+                          {fieldErrorMessages.password}
                       </div>
                       <div css={s.signupbutton}>
                           <button onClick={handleMergepageOnClick}>통합하기</button>
@@ -82,4 +75,4 @@ function OAuth2Page(props) {
   );
 }
 
-export default OAuth2Page;
+export default OAuth2MergePage;

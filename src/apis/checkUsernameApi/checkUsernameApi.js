@@ -6,7 +6,7 @@ const checkUsernameApi = async(username) => {
     isSuccess:false
   };
   try {
-    const response = await instance.get(`/user/check/${username}`);
+    const response = await instance.get(`/user/check/username/${username}`);
     checkname = {
       isSuccess:true,
     }

@@ -18,10 +18,17 @@ export const login = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 350px;
     width: 100%;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
+    padding: 0px 140px;
+    * p{
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+        width: 100%;
+        color: #E94334;
+    }
 `;
 
 export const loginInput = css`
@@ -29,16 +36,17 @@ export const loginInput = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    & input:nth-last-child(1){
-        margin-bottom: 0px;
+
+    & input{
+        margin: 10px 0px;
     }
     & button {
         display: flex;
         align-items: center;
-        width: 360px;
+        width: 100%;
         box-sizing: border-box;
         border-radius: 10px;
-        margin: 0px 0px 10px 0px;
+        margin: 10px 0px;
         color: #ffffff;
         font-weight: 600;
         background-color: #F2780C;
@@ -47,14 +55,26 @@ export const loginInput = css`
         align-items: center;
         justify-content: center;
     }
+    & input p {
+        display: flex;
+        justify-content: center;
+    }
 `;
+
 
 export const loginTitle =css`
     & p {
         color: #F2780C;
-        font-size: 45px;
+        font-size: 30px;
         font-weight: 700;
     }
+`;
+
+export const loginInputState = css`
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const foundInfo = css`
