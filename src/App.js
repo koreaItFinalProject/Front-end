@@ -27,6 +27,7 @@ import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
 import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
 import BoardListPage from './page/Board/BoardListPage/BoardListPage';
 import CafeReviewPage from './page/Cafe/CafeReviewPage/CafeReviewPage';
+import CafeReviewModifyPage from './page/Cafe/CafeReviewModifyPage/CafeReviewModifyPage';
 
 function App() {
   const location = useLocation();
@@ -127,6 +128,7 @@ function App() {
               <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
               <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
+              <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/board' element={<BoardListPage />} />
               <Route path='/board/write' element={<WritePage />} />

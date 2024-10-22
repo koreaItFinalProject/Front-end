@@ -17,17 +17,28 @@ const categories = [
 function CafeReviewModifyPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    const { cafeItem } = location.state || {};
+    const { reviewId, reviewItem, cafeItem } = location.state || {};
     const textareaRef = useRef(null);
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [reviewData, setReviewData] = useState({
-        cafeId: cafeItem.id,
+        reviewId: reviewId,
         rating: score,
         category: "",
         review: ""
     });
+
+    useEffect(() => {
+        setScore(reviewItem.rating);
+        setSelectedCategory(reviewItem.category);
+        setReviewData({
+            reviewId: reviewId,
+            rating: reviewItem.rating,
+            category: reviewItem.category,
+            review: reviewItem.review
+        });
+    }, [reviewItem]);
 
     useEffect(() => {
         adjustTextareaHeight(textareaRef.current);
@@ -65,13 +76,13 @@ function CafeReviewModifyPage(props) {
         }
     };
 
-    const reviewMutation = useMutation(
+    const reviewModifyMutation = useMutation(
         async () => {
-            return await instance.post("/review", reviewData);
+            return await instance.put(`/review/${reviewId}`, reviewData);
         },
         {
             onSuccess: response => {
-                alert("리뷰가 작성되었습니다");
+                alert("리뷰가 수정되었습니다");
                 navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
             }
         }
@@ -88,8 +99,10 @@ function CafeReviewModifyPage(props) {
             alert("후기를 작성해주세요.");
             return;
         }
-        reviewMutation.mutateAsync();
+        reviewModifyMutation.mutateAsync();
     }
+
+    console.log(reviewData);
 
     return (
         <div css={s.layout}>
@@ -127,7 +140,7 @@ function CafeReviewModifyPage(props) {
                         placeholder='유용한 팁을 알려주세요! 작성한 내용은 마이페이지 카페 상세페이지에 노출 됩니다.'>
                     </textarea>
                 </div>
-                <button onClick={handleSubmitOnClick}>작성 완료</button>
+                <button onClick={handleSubmitOnClick}>수정 완료</button>
             </div>
         </div>
     );
