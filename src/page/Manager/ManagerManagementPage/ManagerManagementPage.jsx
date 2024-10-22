@@ -39,6 +39,14 @@ function ManagerManagementPage(props) {
         console.log(id);
         deleteUserMutaion.mutateAsync(id);
     };
+
+    const hanldeGetInfoOnClick = async(userId) => {
+        console.log(userId);
+        let response;
+        response = await instance.get(`/manager/info/${userId}`);
+        // response = await instance.get("/manager/info");
+        console.log(response);
+    }
     return (
         <div css={s.mainLayout}>
             <div css={s.selectbutton(role)}>
@@ -61,7 +69,7 @@ function ManagerManagementPage(props) {
                 {
                     AllList?.data?.data.map((result, index) => (
                         <>
-                            <tr key={index} onClick={() => console.log(result.id)}>
+                            <tr key={index} onClick={() => hanldeGetInfoOnClick(result.id)}>
                                 <td>{index}</td>
                                 {role === "owner" &&
                                     <td>{result.cafeName}</td>
