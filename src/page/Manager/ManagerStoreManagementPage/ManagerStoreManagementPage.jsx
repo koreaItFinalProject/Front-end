@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
 import { Link } from 'react-router-dom';
@@ -16,6 +16,11 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
     };
+
+    useEffect(() => {
+        setCheck("전체");
+        setInputvalue("");
+    }, []);
 
     const handleInputKeyPress = (e) => {
         if (e.key === "Enter") {
@@ -63,6 +68,7 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
                                     <tr key={index}>
                                         <td>{index}</td>
                                         <td>{result.cafeName}</td>
+                                        {/* <input type="text" /> */}
                                         <td>{result.address}</td>
                                         <td>{result.category}</td>
                                         <td>{result.id}</td>

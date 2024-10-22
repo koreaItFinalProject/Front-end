@@ -96,3 +96,13 @@ export const stars = css`
         height: 18px;
     }
 `;
+
+export const contentBox = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    button {
+        font-size: 14px;
+    }
+`;

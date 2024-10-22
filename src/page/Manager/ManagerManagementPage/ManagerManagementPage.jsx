@@ -41,10 +41,11 @@ function ManagerManagementPage(props) {
     };
     return (
         <div css={s.mainLayout}>
-            <button value={"user"} onClick={handleRoleOnClick}>일반 회원</button>
-            <button value={"owner"} onClick={handleRoleOnClick}>기업 회원</button>
-
-            <table border={1}>
+            <div css={s.selectbutton(role)}>
+                <button value={"user"} onClick={handleRoleOnClick}>일반 회원</button>
+                <button value={"owner"} onClick={handleRoleOnClick}>기업 회원</button>
+            </div>
+            <table css={s.userList}>
                 <tr>
                     <th>number</th>
                     {role === "owner" &&
@@ -60,7 +61,7 @@ function ManagerManagementPage(props) {
                 {
                     AllList?.data?.data.map((result, index) => (
                         <>
-                            <tr key={index}>
+                            <tr key={index} onClick={() => console.log(result.id)}>
                                 <td>{index}</td>
                                 {role === "owner" &&
                                     <td>{result.cafeName}</td>
@@ -76,6 +77,7 @@ function ManagerManagementPage(props) {
                     ))
                 }
             </table>
+            {/* <div css={s.userInfo}></div> */}
         </div>
     );
 }
