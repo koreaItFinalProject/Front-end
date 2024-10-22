@@ -18,7 +18,6 @@ function UserSignupPage(props) {
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber , setEmailNumber] = useState("");
-    const [isEndlock , setEndlock] = useState(false);
     const [inputUser , setInputUser] = useState({
         username: '',
         password:'',
@@ -47,11 +46,13 @@ function UserSignupPage(props) {
     const handlesignuppageOnClick = async () => {
         console.log(inputUser);
         const signupData = await usersignupApi(inputUser);
-        console.log(signupData);
+        
         if(!signupData.isSuccess){
             const newFieldErrors = showFieldErrorMessage(signupData.fieldErrors);
+            console.log(signupData.fieldErrors);
+            console.log(newFieldErrors);
             setFieldErrorMessages(newFieldErrors);
-            alert("회원가입 실패");       
+            alert(`${signupData}`);       
         }else{
             alert("가입 성공");
             navigate("/user/signin");
@@ -64,7 +65,6 @@ function UserSignupPage(props) {
         if(emailCheck !== ''){
             if(emailNumber == emailCheck){
                 alert("인증성공");
-                setEndlock(true);
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
@@ -84,6 +84,7 @@ function UserSignupPage(props) {
             }, 1000);
         } else if (timer === 0 && emailCheckState) {
             setIsTimerRunning(false);
+            setEmailCheckState(false);
             alert("인증시간을 초과하였습니다.");
         }
         return () => clearInterval(interval);
@@ -95,10 +96,10 @@ function UserSignupPage(props) {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
             }
-            setTimer(180);
+            setEmailCheckState(true);
             setIsTimerStopped(false);
             setIsTimerRunning(true);
-            setEmailCheckState(true);
+            setTimer(180);
             const response = await emailApi(email);
             const verificationCode = response.number;
             setEmailNumber(verificationCode);
@@ -119,8 +120,8 @@ function UserSignupPage(props) {
             const response = await checkUsernameApi(inputUser.username);
             console.log(response);
             if(response.isSuccess){
+                alert('사용가능한 이름입니다.');
                 setCheckUsername(true);
-                alert('사용가능한 아이디입니다.');
             }else{
                 alert(response.data);
                 setCheckUsername(false);
@@ -135,11 +136,15 @@ function UserSignupPage(props) {
     return (
     <div css={s.layout}>
         <div css={s.Info}>
+            <div css={s.logo}>
+                <h1>
+                    회원가입
+                </h1>
+            </div>
             <div>
                 <div css={s.usernameInput}>
                     <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디'  style={{color: isCheckUsername ? '#adadad' : '#ffffff'}} />
-                    {/* disabled={isCheckUsername ? true : false} */}
-                    <button onClick={checkUsername}>확인</button>
+                    <button onClick={checkUsername}>중복 확인</button>
                 </div>
                     <p>{fieldErrorMessages.username}</p>
             </div>
@@ -156,28 +161,37 @@ function UserSignupPage(props) {
                 <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
             </div>
                 <p>{fieldErrorMessages.name}</p>
-                <div>
-                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={isEndlock === true ? true : false} />
+                <div css={s.emailCheck}>
+                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
+                    <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
                 </div>
                 <div css={s.emailButton}>
-                    {!emailCheckState ? (
-                        <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
-                    ):( 
-                        <div>
-                            <div css={s.emailcert}>
-                            <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange}/>
-                            {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                    <div>
+                        <div css={s.emailcert}>
+                            <div css={s.emailTimer}>
+                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState}/>
                                 <div>
-                                    <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
-                                    <button onClick={handleOnEmailCheckClick}>확인</button>
+                                {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
                             </div>
+                            <div css={s.emailCheckButton}>
+                                {
+                                    !emailCheckState? 
+                                    <></>
+                                    : 
+                                    <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
+                                }
+                                <button onClick={handleOnEmailCheckClick}>확인</button>
+                            </div>
                         </div>
-                    )} 
+                    </div>
                 </div>
-                {fieldErrorMessages.email}
+                <p>{fieldErrorMessages.email}</p>
             <div>
-                <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                <div css={s.nickNameStyle}>
+                    <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                    <button onClick={checkUsername}>중복 확인</button>
+                </div>
             </div>
                 <p>{fieldErrorMessages.nickname}</p>
             <div>
