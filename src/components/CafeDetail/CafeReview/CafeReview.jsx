@@ -41,7 +41,13 @@ function CafeReview({ cafeItem, review, averageRating }) {
                         <div css={s.stars}>
                             <StarRating averageRating={review.rating} />
                         </div>
-                        <div>{review.review}</div>
+                        <div css={s.contentBox}>
+                            <div>{review.review}</div>
+                            <div>
+                                <button onClick={() => navigate("/cafe/review")}>수정</button>
+                                <button>삭제</button>
+                            </div>
+                        </div>
                     </div>
                 )
             }
