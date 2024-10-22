@@ -41,8 +41,8 @@ export const inputbox = css`
     position: relative;
     width: 100%;
     padding: 0px;
-    width: 100%;
     input {
+        height: 100%;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         padding: 10px 15px;
@@ -99,6 +99,7 @@ export const cafeContainer = css`
     width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
     button {
         padding: 0px;
+        padding-top: 5px;
         height: 50px;
         width: 50px;
         background-color: #111111;
@@ -119,7 +120,6 @@ export const cafeInfo = (slide) => css`
     display: flex;
     align-items: center;
     padding: 10px;
-    /* overflow: hidden; */
     background: #111111;
     border-radius: 20px;
     h3 {
