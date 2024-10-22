@@ -11,6 +11,7 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
 import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
+import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -20,13 +21,13 @@ function OwnerSignupPage(props) {
     const [businessNumber, setBusinessNumber] = useState('2148813306');
     const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
     const [ proccess , setProccess] = useState(true);
-    const [ isLoading , setLoading] = useState(false);
     const [image, setImage] = useState();
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber , setEmailNumber] = useState("");
     const [ complete , setComplete ] = useState(false);
     const [isCheckUsername , setCheckUsername] = useState(false);
+    const [isChecknickname , setChecknickname] = useState(false);
     const [coordinates, setCoordinates] = useState({ 
         latitude: '',
         longitude: ''
@@ -93,24 +94,31 @@ function OwnerSignupPage(props) {
         setBusinessNumber(e.target.value);
     };
     const handleSignup = async () => {
-        setLoading(true);
+        if(isAddress.address === ''){
+            alert("주소가 빈 값입니다");
+            return
+        }
+        if(inputUser.password !== '' && inputUser.checkPassword !== ''){
+            if(inputUser.password !== inputUser.checkPassword){
+                alert("비밀번호가 일치하지 않습니다")
+                return;
+            }
+        }
         try {
             const signupData = await usersignupApi(inputUser);
             console.log(signupData);
             if (!signupData.isSuccess) {
-                const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+                const newErrors = showFieldErrorMessage(signupData);
                 console.log(newErrors);
                 setFieldErrorMessages(newErrors);
-                console.log("1");
-                setLoading(false);
                 return;
             }if(signupData.isSuccess){
             const data = {
                 ownerId: signupData.ok.user.id,
                 address: isAddress.address,
+                cafename: isCafe.cafename,
                 lat: coordinates.latitude,
                 lng: coordinates.longitude,
-                cafename: isCafe.cafename,
             };
             console.log(coordinates);
             const CafeData = await ownercheckApi(data);
@@ -121,8 +129,6 @@ function OwnerSignupPage(props) {
         }
         } catch (error) {
             console.error('Signup error:', error);
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -179,10 +185,8 @@ function OwnerSignupPage(props) {
     const handleRegistrationNumberCheckOnClick = async () => {
         const response = await Businessregistration(businessNumber);
         console.log(response);
-        setLoading(true);
         setProccess(false);
         if(response === "조회 중 오류가 발생했습니다."){
-            setLoading(false);
             setProccess(true);
         }
 
@@ -193,13 +197,11 @@ function OwnerSignupPage(props) {
                         console.log(`추출된 사업자 등록번호: ${number}`);
                         if(number=== businessNumber){
                             setProccess(false);
-                            setLoading(false);
                             setComplete(true);
                             console.log(proccess);
                             alert("사업자등록번호 인증을 완료하였습니다.")
                         }else if(number !== businessNumber){
                             alert("일치하지 않습니다");
-                            setLoading(false);
                             setProccess(true);
                             setComplete(false);
                         }
@@ -238,31 +240,56 @@ function OwnerSignupPage(props) {
         }
     }
 
+    const checkNickName = async () => {
+        if(inputUser.nickname === ''){
+            alert("빈 값을 넣으면 안됩니다")
+            return
+        }
+        console.log(inputUser.nickname);
+        try {
+            const response = await checkNicknameApi(inputUser.nickname);
+            console.log(response);
+            if(response.isSuccess){
+                alert('사용가능합니다.');
+                setChecknickname(true);
+            }else{
+                alert(response.data);
+                setCheckUsername(false);
+            }
+        } catch (error) {
+            console.error('Nickname check error:', error.response.data);
+            setChecknickname(false);
+            alert(error.response.data);
+        }
+    }
+
     return (
         <div css={s.layout}>
-                <div>
+            <div css={s.Info}>
+                <div css={s.logo}>
                     <h1>점주 회원가입</h1>
                 </div>
                 <div>
                     <div css={s.usernameInput}>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' />
+                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{color: isCheckUsername ? '#adadad' : '#ffffff'}}/>
                         <button onClick={checkUsername}>확인</button>
+                        {fieldErrorMessages.username}
                     </div>
-                    <p>{fieldErrorMessages.username}</p>
                 </div>
                 <div>
                     <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                    {fieldErrorMessages.password}
+                    {fieldErrorMessages.passwordMatching}
                 </div>
-                    <p>{fieldErrorMessages.password}</p>
-                    <p>{fieldErrorMessages.passwordMatching}</p>
                 <div>
                     <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
                 </div>
-                    <p>{fieldErrorMessages.checkPassword}</p>
+                    {fieldErrorMessages.checkPassword}
                 <div css={s.emailCheck}>
                     <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
                 </div>
+                {fieldErrorMessages.email}
                 <div css={s.emailButton}>
                     <div>
                         <div css={s.emailcert}>
@@ -272,6 +299,7 @@ function OwnerSignupPage(props) {
                                 {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
                             </div>
+                            
                             <div css={s.emailCheckButton}>
                                 {
                                     !emailCheckState? 
@@ -284,20 +312,20 @@ function OwnerSignupPage(props) {
                         </div>
                     </div>
                 </div>
-                    <p>{fieldErrorMessages.email}</p>
+                    
                 <div>
                     <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
                 </div>
-                    <p>{fieldErrorMessages.name}</p>
+                    {fieldErrorMessages.name}   
                 <div css={s.nickNameStyle}>
                     <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
-                    <button onClick={checkUsername}>중복 확인</button>
+                    <button onClick={checkNickName}>중복 확인</button>
                 </div>
-                    <p>{fieldErrorMessages.nickname}</p>
+                    {fieldErrorMessages.nickname}   
                 <div>
                     <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                    {fieldErrorMessages.phoneNumber}    
                 </div>
-                    <p>{fieldErrorMessages.phoneNumber}</p>
                 <div>
                     <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='카페명' />
                 </div>
@@ -319,18 +347,18 @@ function OwnerSignupPage(props) {
                 <div css={s.cafe}>
                     <div css={s.cafeAddress}>
                         <input 
-                            value={isAddress.address} 
+                            value={isAddress.address} name='address'
                             disabled placeholder='주소'/>
                         <input 
-                            value={isAddress.buildingName} 
+                            value={isAddress.buildingName}
                             disabled placeholder='참고항목'/>
                     </div>
                 </div>
                         <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
                 <div css={s.signupbutton}>
-                    <button onClick={handleSignup} >가입하기</button>
-                    {/* disabled={!complete} */}
+                    <button onClick={handleSignup} disabled={!complete}>가입하기</button>
                 </div>
+            </div>
         </div>
     );
 }

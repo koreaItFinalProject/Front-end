@@ -29,9 +29,10 @@ export const usersignupApi = async (loginState) => {
     console.log(error.response);
     if(error.response.status === 500){
         const errorMessage = error.response.data
+        console.log("1");
         return errorMessage;
     }
-    if(response){
+    if(!response.isSuccess){
         signupData = {
             isSuccess:false,
             fieldErrors:({
@@ -40,6 +41,7 @@ export const usersignupApi = async (loginState) => {
             })
         }
         const errorMessage = error.response.data;
+        console.log("2");
         return errorMessage;
     }
     signupData = {
@@ -49,8 +51,10 @@ export const usersignupApi = async (loginState) => {
             defaultMessage : fieldError.defaultMessage
         })),       
     }
+    console.log("3");
     return signupData;
     }
+    return signupData;
 
 }
 

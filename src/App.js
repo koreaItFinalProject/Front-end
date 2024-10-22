@@ -20,7 +20,6 @@ import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMai
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
-import OAuth2Page from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import MyPage from './page/MyPage/MyPage';
 import SignLayout from './components/MainLayout/SignLayout/SignLayout';
 import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
@@ -30,6 +29,7 @@ import CafeReviewPage from './page/Cafe/CafeReviewPage/CafeReviewPage';
 import CafeReviewModifyPage from './page/Cafe/CafeReviewModifyPage/CafeReviewModifyPage';
 import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
+import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 
 function App() {
   const location = useLocation();
@@ -170,7 +170,7 @@ function App() {
         <Route path='/user/*' element={
           <SignLayout>
             <Routes>
-              <Route path='/oauth/oauth2' element={<OAuth2Page />} />
+              <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
               <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/find' element={<UserFindPage />} />

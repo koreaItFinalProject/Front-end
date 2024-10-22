@@ -14,7 +14,6 @@ export const showFieldErrorMessage = (fieldErrors) => {
         fieldErrors = [];
     }
 
-
   for(let fieldError of fieldErrors){
     EmptyfieldErrors = {
         ...EmptyfieldErrors,

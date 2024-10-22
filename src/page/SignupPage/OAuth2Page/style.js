@@ -8,7 +8,7 @@ export const layout = css`
     align-items: center;
     justify-content: center;
     * {
-        color: #F2780C;
+        color: #ffffff;
     }
 `;
 
@@ -31,6 +31,11 @@ export const loginLayout =css`
         padding: 20px 0px;
     }
     & p {
+        display: flex;
+        justify-content: center;
+        font-size: 12px;
+        width: 100%;
+        color: #E94334;
         margin: 0;
     }
     & button {
@@ -50,10 +55,11 @@ export const logo = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    & p {
-        font-size: 45px;
+    & h1 {
+        font-size: 30px;
         font-weight: 700;
         margin: 0;
+        color: #F2780C;
     }
 `;
 
