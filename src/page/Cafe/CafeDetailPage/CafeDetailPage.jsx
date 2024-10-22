@@ -5,17 +5,31 @@ import { IoIosStarOutline } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
+import { useQuery } from 'react-query';
+import { instance } from '../../../apis/util/instance';
 
 function CafeDetailPage() {
     const location = useLocation();
     const { cafeItem } = location.state || {};
-    const[ selectMenu, setSelectMenu ] = useState("menu"); 
+    const[ selectMenu, setSelectMenu ] = useState('review'); 
+
+    const review = useQuery(
+        ["reviewQuery", cafeItem?.id],
+        async () => {
+            if(!cafeItem?.id) return;
+            const reviewList =  await instance.get(`/review/${cafeItem.id}`);
+            return reviewList;
+        },
+        {
+            enabled: !!cafeItem?.id,
+            refetchOnWindowFocus: false,
+            retry: 0
+        }
+    );
 
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
-    }
-
-    console.log(cafeItem);
+    };
 
     return (
         <div css={s.layout}>
@@ -38,22 +52,22 @@ function CafeDetailPage() {
             <div css={s.detailContent}>
                 <div css={s.menuButtons}>
                     <button 
-                        css={selectMenu === 'menu' ? s.activeButton : null}
-                        onClick={handleMenuOnClick} 
-                        value={"menu"}>
-                        Menu
-                        </button>
-                    <button 
                         css={selectMenu === 'review' ? s.activeButton : null}
                         onClick={handleMenuOnClick} 
                         value={"review"}>
                         Review
                         </button>
+                    <button 
+                        css={selectMenu === 'menu' ? s.activeButton : null}
+                        onClick={handleMenuOnClick} 
+                        value={"menu"}>
+                        Menu
+                        </button>
                 </div>
                 {
-                    selectMenu === 'menu'
-                    ? <CafeMenu />
-                    : <CafeReview cafeItem={cafeItem} />
+                    selectMenu === 'review'
+                    ? <CafeReview cafeItem={cafeItem} review={review}/>
+                    : <CafeMenu />
                 }
             </div>
         </div>

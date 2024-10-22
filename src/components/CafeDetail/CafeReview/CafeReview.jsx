@@ -4,7 +4,7 @@ import * as s from "./style";
 import { IoIosStarOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 
-function CafeReview({ cafeItem }) {
+function CafeReview({ cafeItem, review }) {
     const navigate = useNavigate();
 
     const handleReviewClick = () => {
@@ -31,23 +31,27 @@ function CafeReview({ cafeItem }) {
                 </div>
                 <button onClick={handleReviewClick}>리뷰 쓰기</button>
             </div>
-            <div css={s.review}>
-                <div css={s.reviewInfo}>
-                        <div css={s.profileImg}>
-                            <img src="" alt="" />
+            {
+                review?.data?.data.reviews.map(review =>
+                    <div key={review.id} css={s.review}>
+                        <div css={s.reviewInfo}>
+                                <div css={s.profileImg}>
+                                    <img src="" alt="" />
+                                </div>
+                                <div>{review.nickname}</div>
+                        <div>{review.writeDate}</div>
                         </div>
-                        <div>cafeinbusan</div>
-                <div>2024.10.21</div>
-                </div>
-                <div css={s.stars}>
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                </div>
-                <div>리뷰 내용이 여기 표시됨</div>
-            </div>
+                        <div css={s.stars}>
+                            <IoIosStarOutline />
+                            <IoIosStarOutline />
+                            <IoIosStarOutline />
+                            <IoIosStarOutline />
+                            <IoIosStarOutline />
+                        </div>
+                        <div>{review.review}</div>
+                    </div>
+                )
+            }
         </div>
     );
 }
