@@ -30,7 +30,7 @@ export const reviewStat = css`
     }
 `;
 
-export const category = css`
+export const categoryContainer = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -40,12 +40,16 @@ export const category = css`
     }
 `;
 
-export const buttons = css`
-    button {
+export const category = css`
+    display: flex;
+    flex-direction: row;
+
+    div {
         margin-right: 8px;
         padding: 5px 10px;
         border: 1px solid #000000;
         border-radius: 36px;
+        cursor: default;
     }
 `;
 

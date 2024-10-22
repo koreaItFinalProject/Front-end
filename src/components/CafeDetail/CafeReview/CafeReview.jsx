@@ -42,8 +42,6 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
         deleteReviewMutation.mutateAsync(reviewId);
     };
 
-    console.log(review?.reviews);
-
     return (
         <div css={s.layout}>
             <h1>Review</h1>
@@ -51,12 +49,12 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
                 <div>{averageRating.toFixed(1)} 점</div>
                 <StarRating averageRating={averageRating} />
             </div>
-            <div css={s.category}>
-                <div css={s.buttons}>
-                    <button>베이커리</button>
-                    <button>브런치</button>
-                    <button>분위기</button>
-                    <button>디저트</button>
+            <div css={s.categoryContainer}>
+                <div css={s.category}>
+                    <div>베이커리</div>
+                    <div>브런치</div>
+                    <div>분위기</div>
+                    <div>디저트</div>
                 </div>
                 <button onClick={handleWriteReviewClick}>리뷰 쓰기</button>
             </div>
