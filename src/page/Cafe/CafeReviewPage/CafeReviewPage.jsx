@@ -67,7 +67,7 @@ function CafeReviewPage(props) {
 
     const reviewMutation = useMutation(
         async () => {
-            return await instance.post("/cafe/review", reviewData);
+            return await instance.post("/review", reviewData);
         },
         {
             onSuccess: response => {
@@ -90,8 +90,6 @@ function CafeReviewPage(props) {
         }
         reviewMutation.mutateAsync();
     }
-
-    console.log(reviewData);
 
     return (
         <div css={s.layout}>
