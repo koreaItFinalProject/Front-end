@@ -18,7 +18,10 @@ export const reviewStat = css`
     align-items: center;
 
     div {
+        height: 100%;
         margin-right: 10px;
+        font-size: 20px;
+        font-weight: 600;
     }
 
     svg {
@@ -72,11 +75,14 @@ export const reviewInfo = css`
     }
 
     div:nth-of-type(2) {
+        height: 100%;
         margin-right: 10px;
+        font-weight: 500;
     }
 
     div:nth-of-type(3) {
         margin-right: 10px;
+        font-size: 14px;
     }
 `;
 

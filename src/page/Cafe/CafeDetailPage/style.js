@@ -29,10 +29,13 @@ export const detailHeader = css`
 export const reviewStat = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
 
     div {
+        height: 100%;
         margin-left: 10px;
+        font-size: 20px;
     }
 `;
 
@@ -40,8 +43,15 @@ export const detailInfo = css`
     display: flex;
     flex-direction: row;
     align-items: center;
+
     div:nth-of-type(1) {
         margin-right: 10px;
+        color: #f2780c;
+        font-size: 14px;
+    }
+
+    div:nth-of-type(2) {
+        font-size: 14px;
     }
 `;
 
@@ -60,9 +70,10 @@ export const menuButtons = css`
 
     button {
         border: 1px solid #000000;
-        border-radius: 10px;
+        border-radius: 20px;
         margin-right: 5px;
         padding: 5px 50px;
+        font-weight: 600;
 
         :active {
             background-color: #f2780c;
