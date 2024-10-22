@@ -28,6 +28,7 @@ import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
 import BoardListPage from './page/Board/BoardListPage/BoardListPage';
 import CafeReviewPage from './page/Cafe/CafeReviewPage/CafeReviewPage';
 import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
+import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 
 function App() {
   const location = useLocation();
@@ -147,6 +148,7 @@ function App() {
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
+              <Route path='/auth/mypage/modify' element={<ModifyProfilePage/>} />
             </Routes>
           </SignLayout>
         } />
