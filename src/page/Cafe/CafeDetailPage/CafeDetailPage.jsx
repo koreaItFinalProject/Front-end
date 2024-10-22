@@ -11,14 +11,14 @@ import StarRating from '../../../apis/util/starRating';
 function CafeDetailPage() {
     const location = useLocation();
     const { cafeItem } = location.state || {};
-    const[ selectMenu, setSelectMenu ] = useState('review'); 
+    const [selectMenu, setSelectMenu] = useState('review');
     const [averageRating, setAverageRating] = useState(0);
 
-    const review = useQuery(
+    const { data: review, refetch } = useQuery(
         ["reviewQuery", cafeItem?.id],
         async () => {
-            if(!cafeItem?.id) return;
-            const reviewList =  await instance.get(`/review/${cafeItem.id}`);
+            if (!cafeItem?.id) return;
+            const reviewList = await instance.get(`/review/${cafeItem.id}`);
             return reviewList.data;
         },
         {
@@ -29,9 +29,9 @@ function CafeDetailPage() {
     );
 
     useEffect(() => {
-        if (review && review?.data?.reviews.length > 0) {
-            const totalRating = review?.data?.reviews.reduce((sum, review) => sum + review.rating, 0);
-            const average = totalRating / review?.data?.reviews.length;
+        if (review && review?.reviews.length > 0) {
+            const totalRating = review?.reviews.reduce((sum, review) => sum + review.rating, 0);
+            const average = totalRating / review?.reviews.length;
             setAverageRating(average);
         }
     }, [review]);
@@ -46,33 +46,38 @@ function CafeDetailPage() {
                 <h1>{cafeItem?.cafeName}</h1>
                 <div>{cafeItem?.address}</div>
                 <div css={s.reviewStat}>
-                    <StarRating averageRating={averageRating}/>
+                    <StarRating averageRating={averageRating} />
                     <div>{averageRating.toFixed(1)}</div>
                 </div>
                 <div css={s.detailInfo}>
                     <div>{cafeItem.category}</div>
-                    <div>리뷰 {review?.data?.reviewCount}</div>
+                    <div>리뷰 {review?.reviewCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>
                 <div css={s.menuButtons}>
-                    <button 
+                    <button
                         css={selectMenu === 'review' ? s.activeButton : null}
-                        onClick={handleMenuOnClick} 
+                        onClick={handleMenuOnClick}
                         value={"review"}>
                         Review
-                        </button>
-                    <button 
+                    </button>
+                    <button
                         css={selectMenu === 'menu' ? s.activeButton : null}
-                        onClick={handleMenuOnClick} 
+                        onClick={handleMenuOnClick}
                         value={"menu"}>
                         Menu
-                        </button>
+                    </button>
                 </div>
                 {
                     selectMenu === 'review'
-                    ? <CafeReview cafeItem={cafeItem} review={review} averageRating={averageRating}/>
-                    : <CafeMenu />
+                        ? <CafeReview
+                            cafeItem={cafeItem}
+                            review={review}
+                            averageRating={averageRating}
+                            refetch={refetch}
+                        />
+                        : <CafeMenu />
                 }
             </div>
         </div>

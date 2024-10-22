@@ -3,17 +3,46 @@ import React from 'react';
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
 import StarRating from '../../../apis/util/starRating';
+import { useMutation, useQueryClient } from 'react-query';
+import { instance } from '../../../apis/util/instance';
 
-function CafeReview({ cafeItem, review, averageRating }) {
+function CafeReview({ cafeItem, review, averageRating, refetch }) {
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const userInfoData = queryClient.getQueryData("userInfoQuery");
+    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
 
-    const handleReviewClick = () => {
+    const deleteReviewMutation = useMutation(
+        async (reviewId) => await instance.delete(`/review/${reviewId}`),
+        {
+            onSuccess: () => {
+                alert("리뷰를 삭제하였습니다.");
+                refetch();
+            },
+            onError: (error) => {
+                alert(error.response.data);
+                refetch();
+            }
+        }
+    );
+
+    const handleWriteReviewClick = () => {
+        if (!accessCheck) {
+            alert("로그인 후 작성 가능합니다.");
+            return;
+        }
         navigate(`/cafe/review/${cafeItem.id}`, { state: { cafeItem } });
     };
 
     const handleModifyReviewClick = (reviewId, reviewItem) => {
-        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeItem }});
-    }
+        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeItem } });
+    };
+
+    const handleDeleteReviewOnClick = (reviewId) => {
+        deleteReviewMutation.mutateAsync(reviewId);
+    };
+
+    console.log(review?.reviews);
 
     return (
         <div css={s.layout}>
@@ -29,10 +58,10 @@ function CafeReview({ cafeItem, review, averageRating }) {
                     <button>분위기</button>
                     <button>디저트</button>
                 </div>
-                <button onClick={handleReviewClick}>리뷰 쓰기</button>
+                <button onClick={handleWriteReviewClick}>리뷰 쓰기</button>
             </div>
             {
-                review?.data?.reviews.map(reviewItem =>
+                review?.reviews.map(reviewItem =>
                     <div key={reviewItem.id} css={s.review}>
                         <div css={s.reviewInfo}>
                             <div css={s.profileImg}>
@@ -46,10 +75,16 @@ function CafeReview({ cafeItem, review, averageRating }) {
                         </div>
                         <div css={s.contentBox}>
                             <div>{reviewItem.review}</div>
-                            <div>
-                                <button onClick={() => handleModifyReviewClick(reviewItem.id, reviewItem)}>수정</button>
-                                <button>삭제</button>
-                            </div>
+                            {
+                                userInfoData?.data?.userId === reviewItem.writerId
+                                    ?
+                                    <div>
+                                        <button onClick={() => handleModifyReviewClick(reviewItem.id, reviewItem)}>수정</button>
+                                        <button onClick={() => handleDeleteReviewOnClick(reviewItem.id)}>삭제</button>
+                                    </div>
+                                    :
+                                    <></>
+                            }
                         </div>
                     </div>
                 )

@@ -120,7 +120,7 @@ function Comments(props) {
 
     const handleReplyButtonOnClick = (commentId) => {
         if(!accessCheck) {
-            alert("로그인 후 작성가능합니다.");
+            alert("로그인 후 작성 가능합니다.");
             return;
         }
         setCommentData(comment => ({
