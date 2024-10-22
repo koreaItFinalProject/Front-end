@@ -1,24 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { IoIosStarOutline } from "react-icons/io";
 import { useLocation } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
 import { useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import StarRating from '../../../apis/util/starRating';
 
 function CafeDetailPage() {
     const location = useLocation();
     const { cafeItem } = location.state || {};
     const[ selectMenu, setSelectMenu ] = useState('review'); 
+    const [averageRating, setAverageRating] = useState(0);
 
     const review = useQuery(
         ["reviewQuery", cafeItem?.id],
         async () => {
             if(!cafeItem?.id) return;
             const reviewList =  await instance.get(`/review/${cafeItem.id}`);
-            return reviewList;
+            return reviewList.data;
         },
         {
             enabled: !!cafeItem?.id,
@@ -26,6 +27,14 @@ function CafeDetailPage() {
             retry: 0
         }
     );
+
+    useEffect(() => {
+        if (review && review?.data?.reviews.length > 0) {
+            const totalRating = review?.data?.reviews.reduce((sum, review) => sum + review.rating, 0);
+            const average = totalRating / review?.data?.reviews.length;
+            setAverageRating(average);
+        }
+    }, [review]);
 
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
@@ -37,16 +46,12 @@ function CafeDetailPage() {
                 <h1>{cafeItem?.cafeName}</h1>
                 <div>{cafeItem?.address}</div>
                 <div css={s.reviewStat}>
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <IoIosStarOutline />
-                    <div>3.0</div>
+                    <StarRating averageRating={averageRating}/>
+                    <div>{averageRating}</div>
                 </div>
                 <div css={s.detailInfo}>
-                    <div>{cafeItem?.address}</div>
-                    <div>리뷰 378</div>
+                    <div>{cafeItem.category}</div>
+                    <div>리뷰 {review?.data?.reviewCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>
@@ -66,7 +71,7 @@ function CafeDetailPage() {
                 </div>
                 {
                     selectMenu === 'review'
-                    ? <CafeReview cafeItem={cafeItem} review={review}/>
+                    ? <CafeReview cafeItem={cafeItem} review={review} averageRating={averageRating}/>
                     : <CafeMenu />
                 }
             </div>

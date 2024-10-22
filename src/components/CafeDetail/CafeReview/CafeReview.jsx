@@ -3,8 +3,9 @@ import React from 'react';
 import * as s from "./style";
 import { IoIosStarOutline } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import StarRating from '../../../apis/util/starRating';
 
-function CafeReview({ cafeItem, review }) {
+function CafeReview({ cafeItem, review, averageRating }) {
     const navigate = useNavigate();
 
     const handleReviewClick = () => {
@@ -15,12 +16,8 @@ function CafeReview({ cafeItem, review }) {
         <div css={s.layout}>
             <h1>Review</h1>
             <div css={s.reviewStat}>
-                <div>3.0 점</div>
-                <IoIosStarOutline />
-                <IoIosStarOutline />
-                <IoIosStarOutline />
-                <IoIosStarOutline />
-                <IoIosStarOutline />
+                <div>{averageRating} 점</div>
+                <StarRating averageRating={averageRating} />
             </div>
             <div css={s.category}>
                 <div css={s.buttons}>
@@ -32,21 +29,17 @@ function CafeReview({ cafeItem, review }) {
                 <button onClick={handleReviewClick}>리뷰 쓰기</button>
             </div>
             {
-                review?.data?.data.reviews.map(review =>
+                review?.data?.reviews.map(review =>
                     <div key={review.id} css={s.review}>
                         <div css={s.reviewInfo}>
-                                <div css={s.profileImg}>
-                                    <img src="" alt="" />
-                                </div>
-                                <div>{review.nickname}</div>
-                        <div>{review.writeDate}</div>
+                            <div css={s.profileImg}>
+                                <img src="" alt="" />
+                            </div>
+                            <div>{review.nickname}</div>
+                            <div>{review.writeDate}</div>
                         </div>
                         <div css={s.stars}>
-                            <IoIosStarOutline />
-                            <IoIosStarOutline />
-                            <IoIosStarOutline />
-                            <IoIosStarOutline />
-                            <IoIosStarOutline />
+                            <StarRating averageRating={review.rating} />
                         </div>
                         <div>{review.review}</div>
                     </div>
