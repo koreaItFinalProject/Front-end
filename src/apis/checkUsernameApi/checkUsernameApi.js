@@ -6,9 +6,7 @@ const checkUsernameApi = async(username) => {
     isSuccess:false
   };
   try {
-    const response = await instance.get(`/user/check/username`, {
-      params: { username } // 쿼리 파라미터로 username을 전달
-    });
+    const response = await instance.get(`/user/check/${username}`);
     checkname = {
       isSuccess:true,
     }
