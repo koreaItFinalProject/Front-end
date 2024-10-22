@@ -9,7 +9,6 @@ import Businessregistration from '../../../apis/BusinessregistrationApi/Business
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
-import logo from '../../../assets/logo.png';
 import emailApi from '../../../apis/emailApis/emailApi';
 import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 
@@ -21,13 +20,13 @@ function OwnerSignupPage(props) {
     const [businessNumber, setBusinessNumber] = useState('2148813306');
     const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
     const [ proccess , setProccess] = useState(true);
-    const [ isLoading , setLoading] = useState(true);
+    const [ isLoading , setLoading] = useState(false);
     const [image, setImage] = useState();
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber , setEmailNumber] = useState("");
+    const [ complete , setComplete ] = useState(false);
     const [isCheckUsername , setCheckUsername] = useState(false);
-    const [isEndlock , setEndlock] = useState(false);
     const [coordinates, setCoordinates] = useState({ 
         latitude: '',
         longitude: ''
@@ -90,50 +89,9 @@ function OwnerSignupPage(props) {
         console.log("latitude " +coordinates.latitude);
         console.log("longitude " +coordinates.longitude);
     };
-
-
     const handleInputChange = (e) => {
         setBusinessNumber(e.target.value);
     };
-
-    // const handlesignuppageOnClick = useMutation (
-    //     async () => {
-    //             const signupData = await usersignupApi(inputUser);
-    //             console.log(signupData);
-    //             if(!signupData.isSuccess){
-    //                 const newErrors = showFieldErrorMessage(signupData.fieldErrors);
-    //                 setFieldErrorMessages(newErrors);
-    //                 console.log("1");
-    //             }
-    //             return signupData;
-    //         },
-    //         {
-    //         onSuccess: async(response) =>{
-    //                 console.log("2");
-    //                 console.log(response?.ok?.user);
-    //                 console.log(coordinates);
-    //                 const data = {
-    //                     ownerId: response.ok.user.id ,
-    //                     address:isAddress.address,
-    //                     lat:coordinates.latitude,
-    //                     lng:coordinates.longitude,
-    //                     cafename:isCafe.cafename
-    //                     };    
-    //                 console.log(coordinates);               
-    //                     const CafeData = await ownercheckApi(data);
-    //                     if(CafeData.isSuccess){
-    //                         console.log("3");
-    //                         alert("가입 성공");
-    //                         navigate("/signin");
-    //                     }
-    //             },
-    //         onError: (signupData) => {
-    //             const newErrors = showFieldErrorMessage(signupData.fieldErrors);
-    //             setFieldErrorMessages(newErrors);
-    //             alert("가입 실패"); 
-    //         }
-    //     }
-    // );
     const handleSignup = async () => {
         setLoading(true);
         try {
@@ -141,12 +99,12 @@ function OwnerSignupPage(props) {
             console.log(signupData);
             if (!signupData.isSuccess) {
                 const newErrors = showFieldErrorMessage(signupData.fieldErrors);
+                console.log(newErrors);
                 setFieldErrorMessages(newErrors);
                 console.log("1");
                 setLoading(false);
                 return;
-            }
-
+            }if(signupData.isSuccess){
             const data = {
                 ownerId: signupData.ok.user.id,
                 address: isAddress.address,
@@ -160,6 +118,7 @@ function OwnerSignupPage(props) {
                 alert("가입 성공");
                 navigate("/signin");
             }
+        }
         } catch (error) {
             console.error('Signup error:', error);
         } finally {
@@ -206,7 +165,6 @@ function OwnerSignupPage(props) {
         if(emailCheck !== ''){
             if(emailNumber == emailCheck){
                 alert("인증성공");
-                setEndlock(true);
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
@@ -227,6 +185,7 @@ function OwnerSignupPage(props) {
             setLoading(false);
             setProccess(true);
         }
+
         if(response === '인증완료') {
             if (image) {
                 Ocr(image)
@@ -235,12 +194,14 @@ function OwnerSignupPage(props) {
                         if(number=== businessNumber){
                             setProccess(false);
                             setLoading(false);
+                            setComplete(true);
                             console.log(proccess);
                             alert("사업자등록번호 인증을 완료하였습니다.")
                         }else if(number !== businessNumber){
                             alert("일치하지 않습니다");
                             setLoading(false);
                             setProccess(true);
+                            setComplete(false);
                         }
                     })
                     .catch((error) => {
@@ -265,7 +226,7 @@ function OwnerSignupPage(props) {
             console.log(response);
             if(response.isSuccess){
                 setCheckUsername(true);
-                alert('사용가능한 아이디입니다.');
+                alert('사용가능한 이름입니다.');
             }else{
                 alert(response.data);
                 setCheckUsername(false);
@@ -279,98 +240,96 @@ function OwnerSignupPage(props) {
 
     return (
         <div css={s.layout}>
-                <div css={s.logoStyle}>
-                    <img src={logo} alt="" />
+                <div>
+                    <h1>점주 회원가입</h1>
                 </div>
-                <div css={s.Info}>
+                <div>
                     <div css={s.usernameInput}>
-                        <p>아이디</p>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='사용자이름은 8자이상의 영소문자 , 숫자 조합이여야합니다.' />
+                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' />
                         <button onClick={checkUsername}>확인</button>
                     </div>
-                        {fieldErrorMessages.username}
+                    <p>{fieldErrorMessages.username}</p>
+                </div>
+                <div>
+                    <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                </div>
+                    <p>{fieldErrorMessages.password}</p>
+                    <p>{fieldErrorMessages.passwordMatching}</p>
+                <div>
+                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
+                </div>
+                    <p>{fieldErrorMessages.checkPassword}</p>
+                <div css={s.emailCheck}>
+                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
+                    <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
+                </div>
+                <div css={s.emailButton}>
                     <div>
-                        <p>비밀번호</p>
-                        <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호는 8자이상 16자 이하 영대소문, 숫자, 특수문자 포함' />
-                    </div>
-                        {fieldErrorMessages.password}
-                    <div>
-                        <p>비밀번호 확인</p>
-                        <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 공백일 수 없습니다' />
-                    </div>
-                        {fieldErrorMessages.checkPassword}
-                    <div>
-                        <p>이메일</p>
-                        <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일은 공백일 수 없습니다.' disabled={isEndlock === true ? true : false} />
-                    </div>
-                    <div css={s.emailButton}>
-                            {!emailCheckState ? (
-                                <button onClick={()=>startTimer(inputUser.email)}>이메일 인증</button>   
-                            ):( 
-                                <div css={s.emailcert}>
-                                    <div>
-                                        <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange}/>
-                                        {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
-                                    </div>
-                                    <div>
-                                        <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
-                                        <button onClick={handleOnEmailCheckClick}>확인</button>
-                                    </div>
+                        <div css={s.emailcert}>
+                            <div css={s.emailTimer}>
+                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState}/>
+                                <div>
+                                {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
-                            )} 
-                    </div>
-                        {fieldErrorMessages.email}
-                    <div>
-                        <p>대표자명</p>
-                        <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='한글로 된 이름을 기입해주세요.' />
-                    </div>
-                        {fieldErrorMessages.name}
-                    <div>
-                        <p>닉네임</p>
-                        <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임은 10글자 이내여야 하고 공백일 수 없습니다.' />
-                    </div>
-                        {fieldErrorMessages.nickname}
-                    <div>
-                        <p>전화번호</p>
-                        <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호를 입력해주세요.' />
-                    </div>
-                        {fieldErrorMessages.phoneNumber}
-                    <div>
-                        <p>카페명</p>
-                        <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='' />
-                    </div>
-                        <p>
-                            {
-                                isCafe.cafename === "" ? "카페명 입력해주세요"
-                                : ""
-                            }
-                        </p>
-                    <div>
-                        <p>사업자 등록번호</p>
-                        <input type="text" 
-                            name='businessNumber' value={businessNumber}
-                            onChange={handleInputChange} placeholder='' disabled={proccess === false ? true : false}/>
-                    </div>
-                    <div>
-                        <p>등록번호 이미지</p>
-                        <input type="file" name='ownerImage' onChange={handleImageChange} placeholder='' disabled={proccess === false ? true : false}/>
-                        <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={proccess === false ? true : false}>확인</button>
-                    </div>
-                    <div css={s.cafe}>
-                        <p>카페 주소</p>
-                        <div css={s.cafeAddress}>
-                            <input 
-                                value={isAddress.address} 
-                                disabled placeholder='주소'/>
-                            <input 
-                                value={isAddress.buildingName} 
-                                disabled placeholder='참고항목'/>
+                            </div>
+                            <div css={s.emailCheckButton}>
+                                {
+                                    !emailCheckState? 
+                                    <></>
+                                    : 
+                                    <button onClick={()=>startTimer(inputUser.email)}>재요청</button>
+                                }
+                                <button onClick={handleOnEmailCheckClick}>확인</button>
+                            </div>
                         </div>
                     </div>
-                            <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
                 </div>
+                    <p>{fieldErrorMessages.email}</p>
+                <div>
+                    <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                </div>
+                    <p>{fieldErrorMessages.name}</p>
+                <div css={s.nickNameStyle}>
+                    <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                    <button onClick={checkUsername}>중복 확인</button>
+                </div>
+                    <p>{fieldErrorMessages.nickname}</p>
+                <div>
+                    <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                </div>
+                    <p>{fieldErrorMessages.phoneNumber}</p>
+                <div>
+                    <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='카페명' />
+                </div>
+                    <p>
+                        {
+                            isCafe.cafename === "" ? "카페명 입력해주세요"
+                            : ""
+                        }
+                    </p>
+                <div>
+                    <input type="text" 
+                        name='businessNumber' value={businessNumber}
+                        onChange={handleInputChange} placeholder='사업자 등록번호' disabled={!proccess}/>
+                </div>
+                <div>
+                    <input type="file" name='ownerImage' onChange={handleImageChange} disabled={!proccess}/>
+                    <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={!proccess}>확인</button>
+                </div>
+                <div css={s.cafe}>
+                    <div css={s.cafeAddress}>
+                        <input 
+                            value={isAddress.address} 
+                            disabled placeholder='주소'/>
+                        <input 
+                            value={isAddress.buildingName} 
+                            disabled placeholder='참고항목'/>
+                    </div>
+                </div>
+                        <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange}/>
                 <div css={s.signupbutton}>
-                    <button onClick={handleSignup} disabled={isLoading === false ? true : false}>가입하기</button>
+                    <button onClick={handleSignup} >가입하기</button>
+                    {/* disabled={!complete} */}
                 </div>
         </div>
     );

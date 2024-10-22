@@ -9,27 +9,32 @@ export const layout = css`
     align-items: center;
     *{
         color: #ffffff;
+        & button {
+            background-color: #F2780C;
+            border: none;
+            border-radius: 20px;
+        }
+        button:disabled {
+        cursor: not-allowed;
+    }
     }
     & p {
-    margin: 0;
+        margin: 0;
+        font-size: 10px;
     }
     & > div {
-        width: 600px;
+        width:  100%;
         height: 700px;
-        border: 1px solid black;
-        border-radius: 20px;
         display: flex;
         /* flex-direction: column; */
         justify-content: center;
         align-items: center;
     }
-    
 `;
 
-
 export const Info = css`
-    width: 400px;
-    height: 700px;
+    box-sizing: border-box;
+    padding: 0px 140px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,13 +48,21 @@ export const Info = css`
         padding-left: 10px;
     }
 
-    & div{
-        padding-bottom: 20px ;
+    & > div{
+        margin-bottom: 30px;
+    }
+
+`;
+
+export const logo = css`
+    & h1 {
+        font-weight: 700;
+        font-size: 30px;
+        color: #F2780C;
     }
 `;
 
 export const usernameInput = css`
-    width: 100%;
     height: 40px;
     box-sizing: border-box;
     border-bottom: 1px solid #F2780C;
@@ -63,25 +76,32 @@ export const usernameInput = css`
         box-sizing: border-box;
         height: 30px;
         width: 80px;
-        border: 1px solid #ffffff;
-        border-radius: 20px;
     }
 `;
- 
+
+export const emailCheck = css`
+    display: flex;
+    & input {
+        width: 290px;
+    }
+    & button {
+        width: 90px;
+    }
+`;
+
 export const emailButton = css`
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: start;
     width: 380px;
     box-sizing: border-box;
-    height:60px;
+    height:100px;
+    & input {
+    }
     & button{
-        border-radius: 20px;
         height: 35px;
         width: 100px;
-        border: 1px solid black;
     }
-
     & p{
         width: 100px;
         font-size: 14px;
@@ -92,13 +112,10 @@ export const emailcert = css`
     display: flex;
     flex-direction: column;
     width: 100%;
-    height:50px;
+    height:100px;
     padding-bottom: 0;
     margin-bottom: 0;
-    & p {
-        height: 35px;
-        padding-left: 15px;
-    }
+    padding: 0;
     & div {
         display: flex;
         justify-content: end;
@@ -108,19 +125,63 @@ export const emailcert = css`
         & input{
             height: 50px;
         }
+    }
+`;
 
-        & button {
-            
-        }
+export const emailTimer = css`
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-bottom: 1px solid #F2780C;
+    width: 380px;
+    & input {
+        width: 245px;
+        border: none;
+    }
+    & div {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 135px;
+    }
+`;
+
+export const emailCheckButton = css`
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    padding-top: 10px ;
+    & input {
+        width: 300px;
+    }
+    & button{
+        width: 80px;
     }
 `;
 
 export const registerButton =css`
-    border-radius: 20px;
     height: 30px;
     width: 80px;
-    border: 1px solid black;
 `;
+
+export const nickNameStyle = css`
+    width: 380px;
+    border-bottom: 1px solid #F2780C;
+    margin: 0;
+    & input {
+        width: 300px;
+        border: none;
+        padding-left: 10px;
+    }
+    & button{
+        width: 80px;
+        height: 30px;
+    }
+`
 
 export const signupbutton = css`
     display: flex;
@@ -130,13 +191,12 @@ export const signupbutton = css`
     width: 100%;
     padding: 20px 0px;
     & button {
-        border: 1px solid black;
         width: 200px;
         height: 40px;
         box-sizing: border-box;
-        border-radius: 10px;
     }
     button:disabled {
         cursor: not-allowed;
     }
 `;
+

@@ -1,75 +1,44 @@
 import { css } from "@emotion/react";
-import { logo } from "../../../assets/image";
 
 export const layout = css`
-    width: 100%;
-    height: 100%;
-    /* display: flex; */
-    /* flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-    overflow-y: auto;
-    /* padding: 10px; */
-`;
-
-export const logoStyle = css`
-    width: 100%;
-   
-    height: 120px;
-    /* position: relative; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* box-sizing: border-box;
-    background-image: url(${logo});
-    background-size: cover;
-    background-position: center;
-    padding: 100px 0px; */
-    /* width: 45px;
-    height: 36px; */
-    & img {
-        height: 120px;
-        width: 120px;
-    }
-`;
-
-export const Info = css`
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* &:nth-of-type(1){
-        padding-top: 200px;
-    } */
+    overflow-y: auto;
+    padding: 0px 140px;
+    *{
+        color: #ffffff;
+        & button {
+            background-color: #F2780C;
+            border: none;
+            border-radius: 20px;
+            }
+    button:disabled {
+        cursor: not-allowed;
+    }
+    }
     & p {
         margin: 0;
+        font-size: 10px;
     }
-    & div{
-        width: 550px;
-        height: 90px;
+    & > div {
+        width:  100%;
+        height: 700px;
         display: flex;
-        /* justify-content: space-between; */
+        justify-content: center;
         align-items: center;
-        & p{
-            width: 130px;
-            box-sizing: border-box;
-        }
-        & input{
-            width: 420px;
-            height: 45px;
-            box-sizing: border-box;
-            border-radius: 20px;
-            padding-left: 20px;
-        }
     }
-    & > p {
-        color: #E94334;
+    & h1 {
+        font-weight: 700;
+        font-size: 30px;
+        color: #F2780C;
     }
 `;
 
-export const usernameInput =css`
+export const usernameInput = css`
     width: 100%;
     height: 40px;
     box-sizing: border-box;
@@ -84,25 +53,34 @@ export const usernameInput =css`
         box-sizing: border-box;
         height: 30px;
         width: 80px;
-        border: 1px solid #ffffff;
-        border-radius: 20px;
     }
+`;
+
+export const emailCheck = css`
+    display: flex;
+    & input {
+        width: 290px;
+    }
+    & button {
+        width: 90px;
+        }
+
 `;
 
 export const emailButton = css`
     display: flex;
     justify-content: end;
-    align-items: center;
-    width: 100%;
+    align-items: start;
+    width: 380px;
     box-sizing: border-box;
-    height:60px;
+    height:100px;
+    & input {
+    }
     & button{
-        border-radius: 20px;
         height: 35px;
         width: 100px;
         border: 1px solid black;
     }
-
     & p{
         width: 100px;
         font-size: 14px;
@@ -114,48 +92,75 @@ export const emailcert = css`
     flex-direction: column;
     width: 100%;
     height:100px;
-    & p {
-        height: 35px;
-        padding-left: 15px;
-    }
+    padding-bottom: 0;
+    margin-bottom: 0;
+    padding: 0;
     & div {
         display: flex;
         justify-content: end;
         align-items: end;
+        padding-bottom: 0;
+        margin-bottom: 0;
         & input{
-            
+            height: 50px;
         }
+    }
+`;
 
-        & button {
-            
-        }
+export const emailTimer = css`
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-bottom: 1px solid #F2780C;
+    width: 380px;
+    & input {
+        width: 245px;
+        border: none;
+    }
+    & div {
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        width: 135px;
+    }
+`;
+
+export const emailCheckButton = css`
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 380px;
+    padding-top: 10px ;
+    & input {
+        width: 300px;
+    }
+    & button{
+        width: 80px;
     }
 `;
 
 export const registerButton =css`
-    border-radius: 20px;
     height: 30px;
     width: 80px;
-    border: 1px solid black;
 `;
 
-export const cafeAddress =css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`;
-
-export const cafe =css`
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    align-items: center;
-    & p {
-        width: 130px;
+export const nickNameStyle = css`
+    width: 380px;
+    border-bottom: 1px solid #F2780C;
+    margin: 0;
+    & input {
+        width: 300px;
+        border: none;
+        padding-left: 10px;
     }
-`;
-
+    & button{
+        width: 80px;
+        height: 30px;
+    }
+`
 
 export const signupbutton = css`
     display: flex;
@@ -169,9 +174,14 @@ export const signupbutton = css`
         width: 200px;
         height: 40px;
         box-sizing: border-box;
-        border-radius: 10px;
-    }
-    button:disabled {
-        cursor: not-allowed;
     }
 `;
+
+export const cafe = css`
+
+`;
+
+export const cafeAddress = css`
+
+`;
+
