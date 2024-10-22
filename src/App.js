@@ -2,7 +2,7 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
@@ -37,6 +37,9 @@ function App() {
   const [authRefresh, setAuthRefresh] = useState(true);
   const [check, setCheck] = useState("전체");
   const [inputvalue, setInputvalue] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const [searchFilter, setSearchFilter] = useState("title");
+  const limit = 20;
 
   useEffect(() => {
     if (!authRefresh) {
@@ -52,6 +55,21 @@ function App() {
     {
       refetchOnWindowFocus: false,
       retry: 0,
+    }
+  );
+
+  const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
+    ["boardListQuery"],
+    async ({ pageParam = 1 }) => await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`),
+    {
+      getNextPageParam: (lastPage, allPage) => {
+        const totalPageCount = lastPage.data.totalCount % limit === 0
+          ? lastPage.data.totalCount / limit
+          : Math.floor(lastPage.data.totalCount / limit) + 1
+        return totalPageCount !== allPage.length ? allPage.length + 1 : null;
+      },
+      retry: 0,
+      refetchOnWindowFocus: false,
     }
   );
 
@@ -128,11 +146,21 @@ function App() {
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
               <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue}/>} />
+              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
               <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/board' element={<BoardListPage />} />
+              <Route path='/board' element={<BoardListPage
+                boardList={boardList}
+                fetchNextPage={fetchNextPage}
+                hasNextPage={hasNextPage}
+                refetch={refetch}
+                searchFilter={searchFilter}
+                setSearchFilter={setSearchFilter}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+              />}
+              />
               <Route path='/board/write' element={<WritePage />} />
               <Route path='/board/detail/:boardId' element={<DetailPage />} />
               <Route path='/board/modify/:boardId' element={<ModifyPage />} />
@@ -150,12 +178,11 @@ function App() {
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
-              <Route path='/auth/mypage/modify' element={<ModifyProfilePage/>} />
+              <Route path='/auth/mypage/modify' element={<ModifyProfilePage />} />
             </Routes>
           </SignLayout>
         } />
       </Routes>
-
     </>
   );
 }
