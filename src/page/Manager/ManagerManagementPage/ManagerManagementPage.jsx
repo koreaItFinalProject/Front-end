@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
-import Header from '../../../components/Header/Header';
-import { Link } from 'react-router-dom';
-import SideBar from '../../../components/SideBar/SideBar';
 import { useMutation, useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
-
+import ReactModal from 'react-modal';
+import UserContent from '../../../components/UserContent/UserContent';
 function ManagerManagementPage(props) {
     const [role, setRole] = useState("user");
+    const [isOpen, setIsOpen] = useState(false);
+    const [ check, setCheck ] = useState("user");
+    const [ info, setInfo ] = useState({
+        user: {},
+        board: {},
+        comment: {},
+        review: {},
+    });
+    const openModal = () => setIsOpen(true);
+    const closeModal = () => setIsOpen(false);
     const AllList = useQuery(
         ["getUsers", role],
         async () => {
@@ -19,8 +27,6 @@ function ManagerManagementPage(props) {
             retry: 0,
         }
     );
-
-    console.log(AllList);
 
     const handleRoleOnClick = (e) => {
         setRole(e.target.value);
@@ -40,13 +46,16 @@ function ManagerManagementPage(props) {
         deleteUserMutaion.mutateAsync(id);
     };
 
-    const hanldeGetInfoOnClick = async(userId) => {
+    const hanldeGetInfoOnClick = async (userId) => {
         console.log(userId);
         let response;
         response = await instance.get(`/manager/info/${userId}`);
         // response = await instance.get("/manager/info");
         console.log(response);
+        setInfo(response?.data);
+        openModal();
     }
+
     return (
         <div css={s.mainLayout}>
             <div css={s.selectbutton(role)}>
@@ -64,13 +73,11 @@ function ManagerManagementPage(props) {
                     <th>email</th>
                     <th>phonenumber</th>
                 </tr>
-                <tr>
-                </tr>
                 {
                     AllList?.data?.data.map((result, index) => (
                         <>
                             <tr key={index} onClick={() => hanldeGetInfoOnClick(result.id)}>
-                                <td>{index}</td>
+                                <td>{index + 1}</td>
                                 {role === "owner" &&
                                     <td>{result.cafeName}</td>
                                 }
@@ -85,7 +92,20 @@ function ManagerManagementPage(props) {
                     ))
                 }
             </table>
-            {/* <div css={s.userInfo}></div> */}
+            <ReactModal isOpen={isOpen} style={s.modalStyles}>
+                <button onClick={closeModal}>Close</button>
+                <div css={s.layout}>
+                    <div css={s.contentBox}>
+                        <div onClick={() => setCheck("user")}>사용자 정보</div>
+                        <div onClick={() => setCheck("board")}>게시글 기록</div>
+                        <div onClick={() => setCheck("comment")}>댓글 기록</div>
+                        <div onClick={() => setCheck("review")}>리뷰 기록</div>
+                    </div>
+                    <div css={s.content}>
+                        <UserContent check={check} info={info[check]}/>
+                    </div>
+                </div>
+            </ReactModal>
         </div>
     );
 }

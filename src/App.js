@@ -30,6 +30,7 @@ import CafeReviewModifyPage from './page/Cafe/CafeReviewModifyPage/CafeReviewMod
 import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
+import ReactModal from 'react-modal';
 
 function App() {
   const location = useLocation();
