@@ -53,6 +53,7 @@ export const modalStyles = {
 };
 export const layout = css`
     display: flex;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
 `
@@ -67,10 +68,10 @@ export const contentBox = css`
 `
 
 export const content = css`
-    box-sizing: border-box;
     margin-top: 15px;
     margin-left: 10px;
     width: 100%;
     height: 80%;
     border: 1px solid #dbdbdb;
+    box-sizing: border-box;
 `
