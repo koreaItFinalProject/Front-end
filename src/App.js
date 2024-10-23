@@ -171,12 +171,12 @@ function App() {
             <Routes>
               <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
-              <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/find' element={<UserFindPage />} />
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
+              <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/auth/mypage/modify' element={<ModifyProfilePage />} />
             </Routes>
           </SignLayout>
