@@ -26,6 +26,24 @@ export const detailHeader = css`
     }
 `;
 
+export const titleLike = css`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+`;
+
+export const heart = css`
+    position: absolute;
+    right: 0; 
+    svg {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
+`;
+
 export const reviewStat = css`
     display: flex;
     flex-direction: row;

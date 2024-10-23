@@ -45,7 +45,7 @@ function App() {
     if (!authRefresh) {
       setAuthRefresh(true);
     }
-  }, [location.pathname, authRefresh]);
+  }, [location.pathname]);
 
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
@@ -125,7 +125,10 @@ function App() {
       enabled: accessTokenValid.isSuccess && accessTokenValid.data?.data,
       refetchOnWindowFocus: false
     }
-  )
+  );
+
+  console.log(accessTokenValid?.data?.data);
+  console.log(userInfo?.data);
 
   return (
     <>

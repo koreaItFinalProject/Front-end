@@ -33,9 +33,10 @@ function UserSigninPage(props) {
         }else{
             alert("로그인 성공");
             localStorage.setItem("accessToken", "bearer " + signinData.token.accessToken);
-            instance.interceptors.request.use(config => 
-                config.headers["Authorization"] = localStorage.getItem("accessToken")
-            )
+            instance.interceptors.request.use((config) => {
+                config.headers['Authorization'] = localStorage.getItem('accessToken');
+                return config;
+            });
             navigate("/");
             }
     }
