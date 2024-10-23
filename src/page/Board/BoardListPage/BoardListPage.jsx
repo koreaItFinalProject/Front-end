@@ -13,7 +13,6 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
-
     useEffect(() => {
         if (!hasNextPage || !loadMoreRef.current) {
             return;
