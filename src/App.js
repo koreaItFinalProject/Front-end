@@ -45,7 +45,7 @@ function App() {
     if (!authRefresh) {
       setAuthRefresh(true);
     }
-  }, [location.pathname, authRefresh]);
+  }, [location.pathname]);
 
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
@@ -125,7 +125,7 @@ function App() {
       refetchOnWindowFocus: false
     }
   )
-  
+  );
   return (
     <>
       <Global styles={reset} />

@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useQuery, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
-import { IoMdThumbsUp } from "react-icons/io";
 import { MdRateReview } from "react-icons/md";
-import { instance } from '../../../apis/util/instance';
+import { IoMdHeart } from "react-icons/io";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
@@ -61,7 +60,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                             </div>
                             <div css={s.viewBox}>
                                 <span><MdRateReview /></span>
-                                <span><IoMdThumbsUp /></span>
+                                <span><IoMdHeart /></span>
                             </div>
                         </div>
                     </div>

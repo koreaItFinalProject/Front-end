@@ -12,7 +12,8 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
     const loadMoreRef = useRef(null);
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
+    const accessCheck = queryClient.getQueryData("userInfoQuery");
+
     useEffect(() => {
         if (!hasNextPage || !loadMoreRef.current) {
             return;
@@ -55,8 +56,10 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
         setSelectedButton(buttonName);
     };
 
+    console.log(accessCheck?.data);
+
     const handleWriteOnClick = () => {
-        if (!accessCheck) {
+        if (!accessCheck?.data) {
             alert("로그인 후 작성해주세요.");
             navigate("/user/signin");
             return;

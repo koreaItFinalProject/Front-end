@@ -4,9 +4,10 @@ import * as s from "./style";
 import { useLocation } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
 function CafeDetailPage() {
     const location = useLocation();
@@ -40,10 +41,68 @@ function CafeDetailPage() {
         setSelectMenu(e.target.value);
     };
 
+    const cafeLike = useQuery(
+        ["cafeLikeQuery"],
+        async () => {
+            return instance.get(`/cafe/${cafeItem.id}/like`);
+        },
+        {
+            refetchOnWindowFocus: false,
+            retry: 0
+        }
+    );
+
+    const likeMutation = useMutation(
+        async () => {
+            return await instance.post(`/cafe/${cafeItem.id}/like`);
+        },
+        {
+            onSuccess: response => {
+                cafeLike.refetch();
+            }
+        }
+    );
+
+    const dislikeMutation = useMutation(
+        async () => {
+            return await instance.delete(`/cafe/like/${cafeLike.data?.data.cafeLikeId}`);
+        },
+        {
+            onSuccess: response => {
+                cafeLike.refetch();
+            }
+        }
+    );
+
+    const handleLikeOnClick = () => {
+        likeMutation.mutateAsync();
+    }
+
+    const handleDislikeOnClick = () => {
+        dislikeMutation.mutateAsync();
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.detailHeader}>
-                <h1>{cafeItem?.cafeName}</h1>
+                <div css={s.titleLike}>
+                    <div>
+                        <h1>{cafeItem?.cafeName}</h1>
+                    </div>
+                    <div css={s.heart}>
+                        {
+                            !!cafeLike?.data?.data?.cafeLikeId
+                                ?
+                                <button onClick={handleDislikeOnClick}>
+                                    <IoMdHeart style={{ fill: '#f2780c' }} />
+                                </button>
+                                :
+                                <button onClick={handleLikeOnClick}>
+                                    <IoMdHeartEmpty />
+                                </button>
+                        }
+                    </div>
+                </div>
                 <div>{cafeItem?.address}</div>
                 <div css={s.reviewStat}>
                     <StarRating averageRating={averageRating} />
