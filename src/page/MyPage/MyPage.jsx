@@ -2,26 +2,25 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
 import { useQuery } from 'react-query';
 import { RiAlarmWarningLine , RiAlarmWarningFill  } from "react-icons/ri";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { instance } from '../../apis/util/instance';
-import ModifyProfilePage from './ModifyProfilePage/ModifyProfilePage';
-import MyPageSelect from '../../components/MyPageSelect/MyPageSelect';
+import { State } from '../../atom/userState';
+import { useRecoilState } from 'recoil';
 
 function MyPage(props) {
     const navigate = useNavigate();
     const [alram , setAlram] = useState(false);
+    const [user, setUser] = useRecoilState(State);
     const [isCount , setCount] = useState({
         user:{},
         board:{},
         review:{},
         comment:{}
     })
-    const [select , setSelect] = useState(false);
 
     const startTimer = useCallback(() => {
         const timer = setInterval(() => {
@@ -45,9 +44,11 @@ function MyPage(props) {
         },
         {
             retry: 0,
-            enabled: !isCount.user.length,
+            enabled: !user?.username,
             onSuccess: response => {
-                setCount(response?.data)
+                setUser(response.data);
+                setCount(response.data);
+                console.log(user);
             },
             onError : response => {
                 alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
@@ -55,22 +56,9 @@ function MyPage(props) {
         }
     )
 
-    const handleValueOnClick = (e) => {
-        const value = e.target.getAttribute('value');
-        const name = e.target.getAttribute('name');
-        console.log(value);
-        console.log(name);
-        if(e.target.name !== ''){
-            if(name == "modifypage"){
-                <ModifyProfilePage />
-                // info={info}
-            }
-        }
-    }
-
     return (
         <div css={s.layout}>
-            <div css={s.profileBox} name="modifypage" value="modifypage" onClick={handleValueOnClick}>
+            <div css={s.profileBox} onClick={() => navigate("/user/auth/mypage/modify")}>
                 <div css={s.profileimage}>
                     <img src={isCount.user?.img} alt="프로필 이미지" />
                 </div>
@@ -80,8 +68,6 @@ function MyPage(props) {
                     </div>
                 </div>
             </div>
-            {
-                select? 
                 <div css={s.mainBox}>
                     <div css={s.mainBoxLayout}>
                         <div>
@@ -145,10 +131,7 @@ function MyPage(props) {
                             </div>
                         </div>
                     </div>
-                </div>
-                :
-                <MyPageSelect name={name} info={info}/>
-            }
+                </div> 
         </div>
     );
 }
