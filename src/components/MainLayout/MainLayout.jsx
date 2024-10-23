@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-
 function MainLayout({ children, setCheck, setInputvalue }) {
+    
     return (
         <div css={s.background}>
             <div css={s.layout}>
