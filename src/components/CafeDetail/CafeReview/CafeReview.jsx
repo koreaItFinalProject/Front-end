@@ -10,7 +10,6 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
-    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
 
     const deleteReviewMutation = useMutation(
         async (reviewId) => await instance.delete(`/review/${reviewId}`),
@@ -27,7 +26,7 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
     );
 
     const handleWriteReviewClick = () => {
-        if (!accessCheck) {
+        if (!userInfoData?.data) {
             alert("로그인 후 작성 가능합니다.");
             return;
         }
