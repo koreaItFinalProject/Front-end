@@ -124,7 +124,6 @@ function App() {
       enabled: accessTokenValid.isSuccess && accessTokenValid.data?.data,
       refetchOnWindowFocus: false
     }
-  )
   );
   return (
     <>
