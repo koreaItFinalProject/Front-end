@@ -74,15 +74,15 @@ function App() {
   );
 
   const accessTokenValid = useQuery(
-    ["accessTokenValidQuery"],
+    ["accessTokenValidQuery"], 
     async () => {
-      setAuthRefresh(false);
-      return await instance.get("/auth/access", {
-        params: {
-          accessToken: localStorage.getItem("accessToken")
-        }
-      });
-    },
+        setAuthRefresh(false);
+        return await instance.get("/auth/access", {
+            params: {
+                accessToken: localStorage.getItem("accessToken")
+            }
+        });
+    }, 
     {
       enabled: authRefresh,
       retry: 0,
@@ -115,7 +115,6 @@ function App() {
       }
     }
   );
-
   const userInfo = useQuery(
     ["userInfoQuery"],
     async () => {
@@ -125,11 +124,8 @@ function App() {
       enabled: accessTokenValid.isSuccess && accessTokenValid.data?.data,
       refetchOnWindowFocus: false
     }
+  )
   );
-
-  console.log(accessTokenValid?.data?.data);
-  console.log(userInfo?.data);
-
   return (
     <>
       <Global styles={reset} />
