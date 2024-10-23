@@ -92,6 +92,7 @@ export const pictureBox = css`
 `;
 
 export const showBox = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -118,20 +119,31 @@ export const spanBox = css`
     }
 `;
 
-export const viewBox = css`
+export const counts = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
+    height: 25px;
+`;
 
-    span {
-        margin-right: 50px;
-    }
+export const count = css`
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
 
     svg {
-        width: 24px;
-        height: 24px;
+        width: 20px;
+        height: 20px;
         fill:#f2780c;
+    }
+
+    div:nth-of-type(2) {
+        margin-left: 5px;
+        font-size: 18px;
+        position: relative;
+        top: -5px;
     }
 `;
