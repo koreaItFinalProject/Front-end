@@ -5,7 +5,6 @@ export const layout = css`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  
 
   & button {
     display: flex;

@@ -88,7 +88,7 @@ export const children = css`
 `;
 
 export const footer = css`
-    /* position: absolute; */
+    position: absolute;
     box-sizing: border-box;
     width: 100%;
     height: 60px;

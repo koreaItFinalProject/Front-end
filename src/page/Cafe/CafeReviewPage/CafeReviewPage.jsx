@@ -78,13 +78,13 @@ function CafeReviewPage(props) {
     )
 
     const handleSubmitOnClick = async () => {
-        if(!reviewData.rating) {
+        if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if(!reviewData.category) {
+        } else if (!reviewData.category) {
             alert("카테고리를 선택해주세요.");
             return;
-        } else if(reviewData.review.trim("") === "") {
+        } else if (reviewData.review.trim("") === "") {
             alert("후기를 작성해주세요.");
             return;
         }
