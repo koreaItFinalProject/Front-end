@@ -40,7 +40,7 @@ function ModifyProfilePage() {
             return response.data;
         },
         {
-            enabled: !user.user,  
+            enabled: !user.data,  
             onSuccess: (data) => {
                 setUser(data);  
                 setUserInfo(data.user); 
@@ -58,8 +58,12 @@ function ModifyProfilePage() {
             role:user.user?.role
         })
         console.log(user);
-    },[user])
+    },[user]);
     console.log(user);
+
+    if(!user){
+        return <div>Loading...</div>
+    }
 
     return (
         <div css={s.layout}>

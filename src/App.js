@@ -31,6 +31,10 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
+import AlramInfoPage from './page/MyPage/AlramInfoPage/AlramInfoPage';
+import CommentInfo from './components/Info/CommentInfo/CommentInfo';
+import PostModifyPage from './page/MyPage/PostModifyPage/PostModifyPage';
+import ReviewStatePage from './page/MyPage/ReviewStatePage/ReviewStatePage';
 
 function App() {
   const location = useLocation();
@@ -178,6 +182,10 @@ function App() {
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
               <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/auth/mypage/modify' element={<ModifyProfilePage />} />
+              <Route path='/auth/mypage/alram' element={<AlramInfoPage />}/>
+              <Route path='/auth/mypage/comment' element={<CommentInfo />}/>
+              <Route path='/auth/mypage/post' element={<PostModifyPage />}/>
+              <Route path='/auth/mypage/review' element={<ReviewStatePage />}/>
             </Routes>
           </SignLayout>
         } />
