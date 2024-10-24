@@ -10,8 +10,15 @@ export const layout = css`
     flex-direction: column;
     & p {
         color:#747474;
+        font-weight: 700;
+    }
+    & input {
+        color:#747474;
         margin: 0;
         font-weight: 700;
+        padding: 0;
+        box-sizing: border-box;
+        width: 100%;
     }
 `;
 
@@ -74,34 +81,40 @@ export const userProfile = css`
         align-items: center;
         padding-bottom: 20px;
         box-sizing: border-box;
-        & p {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            width: 70px;
-            height: 40px;
+        & div{
+            & p:first-of-type {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                box-sizing: border-box;
+                width: 100px;
+                height: 40px;
+            }
+            & input {
+                box-sizing: border-box;
+                flex-grow: 1;
+            }
         }
-        & input {
-            box-sizing: border-box;
-            width: 390px;
-            height: 40px;
-        }
+        
     }
 `;
 
 export const profileinfo = css`
     display: flex;
     flex-direction: column;
+    width: 100%;
     & div {
-
+        width: 100%;
+        height: 60px;
     }
 `;
 
 export const modifyProfileInfo = css`
     display: flex;
     flex-direction: column;
+    width: 100%;
     & div {
-        
+        width: 100%;
+        height: 60px;
     }
 `;

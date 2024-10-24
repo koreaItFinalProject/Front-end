@@ -32,6 +32,10 @@ import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
 import BoardLayout from './components/Board/BoardLayout/BoardLayout';
+import AlramInfoPage from './page/MyPage/AlramInfoPage/AlramInfoPage';
+import CommentInfo from './components/Info/CommentInfo/CommentInfo';
+import PostModifyPage from './page/MyPage/PostModifyPage/PostModifyPage';
+import ReviewStatePage from './page/MyPage/ReviewStatePage/ReviewStatePage';
 
 function App() {
     const location = useLocation();
