@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { FaPencilAlt } from "react-icons/fa";
@@ -12,12 +12,16 @@ function ModifyProfilePage() {
     const [userInfo, setUserInfo] = useState({});
     const user = useRecoilValue(State);
     const setUser = useSetRecoilState(State);
+    const [imagePreview, setImagePreview] = useState(userInfo.img);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const inputRef = useRef(null);
     const [modifyUserInfo, setModifyUserInfo] = useState({
         name: '',
         username: '',
         email: '',
         nickname: '',
         phoneNumber: '',
+        img:'',
         role: ''
     })
     const handleChangeOnClick = () => {
@@ -55,15 +59,32 @@ function ModifyProfilePage() {
             email: user.user?.email,
             nickname: user.user?.nickname,
             phoneNumber: user.user?.phoneNumber,
+            img:user.user?.img,
             role: user.user?.role
         })
         console.log(user);
     }, [user]);
     console.log(user);
 
-    if (!user) {
-        return <div>Loading...</div>
-    }
+    const handleImageClick = () => {
+        inputRef.current.click(); // 파일 선택창 열기
+        console.log(inputRef.current);
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+            console.log(reader);
+            setSelectedImage(file);
+            console.log(file.name);
+            return file;
+        }
+    };
 
     return (
         <div css={s.layout}>
@@ -72,7 +93,16 @@ function ModifyProfilePage() {
                     <button onClick={handleChangeOnClick}>수정하기<FaPencilAlt /></button>
                 </div>
                 <div css={s.profileimage}>
-                    <img src={userInfo.img} alt="프로필 이미지" />
+                    <div css={s.imgSelect} onClick={handleImageClick}>
+                        <img src={userInfo.img} alt="프로필 이미지" />
+                        <input
+                        type="file"
+                        accept="image/*"
+                        ref={inputRef}
+                        style={{ display: 'none' }} // 숨겨진 input
+                        onChange={handleImageChange}
+                        />
+                    </div>
                 </div>
                 <div css={s.userProfile}>
                     {/*
