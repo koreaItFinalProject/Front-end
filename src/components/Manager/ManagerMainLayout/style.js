@@ -20,7 +20,7 @@ export const container = css`
 export const contentBox = css`
     box-sizing: border-box;
     display: flex;
-    flex-grow: 1;
+    height: 100%;
     border-radius: 10px;
     background-color: #EFECE8;
     overflow: hidden;
