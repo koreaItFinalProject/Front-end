@@ -13,6 +13,11 @@ export const layout = css`
         margin: 0;
         font-weight: 700;
     }
+    & input {
+        color:#747474;
+        margin: 0;
+        font-weight: 700;
+    }
 `;
 
 export const profileBox = css`
