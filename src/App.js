@@ -31,6 +31,7 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
+import BoardLayout from './components/Board/BoardLayout/BoardLayout';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -150,7 +151,14 @@ function App() {
               <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
               <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/board' element={<BoardListPage
+            </Routes>
+          </MainLayout>
+        } />
+
+        <Route path='/board/*' element={
+          <BoardLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='/' element={<BoardListPage
                 boardList={boardList}
                 fetchNextPage={fetchNextPage}
                 hasNextPage={hasNextPage}
@@ -159,14 +167,14 @@ function App() {
                 setSearchFilter={setSearchFilter}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-              />}
-              />
-              <Route path='/board/write' element={<WritePage />} />
-              <Route path='/board/detail/:boardId' element={<DetailPage />} />
-              <Route path='/board/modify/:boardId' element={<ModifyPage />} />
+              />} />
+              <Route path='write' element={<WritePage />} />
+              <Route path='modify/:boardId' element={<ModifyPage />} />
+              <Route path='detail/:boardId' element={<DetailPage />} />
             </Routes>
-          </MainLayout>
+          </BoardLayout>
         } />
+
         <Route path='/user/*' element={
           <SignLayout>
             <Routes>

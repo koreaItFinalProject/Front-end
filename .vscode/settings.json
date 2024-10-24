@@ -1,0 +1,7 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.insertSpaces": true,
+    "editor.renderLineHighlight": "none",
+    "editor.renderLineHighlightOnlyWhenFocus": false,
+    "editor.selectionHighlight": true
+}

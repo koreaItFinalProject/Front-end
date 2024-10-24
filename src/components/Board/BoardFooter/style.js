@@ -37,15 +37,23 @@ export const input = css`
     box-sizing: border-box;
 
 
-    input {
+    textarea {
+        box-sizing: border-box;
         width: 100%;
+        height: auto;
+        min-height: 30px;
+        max-height: 200px;
         padding: 10px;
         border-radius: 10px;
         border: none;
         outline: none;
-        background-color: #b4b4b4;
+        background-color: #B4B4B44D;
         resize: none;
-
+        overflow: hidden;
+    
+            &::placeholder {
+                color: #b4b4b4;
+            }
     }
 
     button {
@@ -57,4 +65,3 @@ export const input = css`
         cursor: pointer;
     }
 `;
-
