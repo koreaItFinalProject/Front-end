@@ -32,6 +32,7 @@ import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
 
+Modal.setAppElement('#root');
 function App() {
   const location = useLocation();
   const navigete = useNavigate();
@@ -75,15 +76,15 @@ function App() {
   );
 
   const accessTokenValid = useQuery(
-    ["accessTokenValidQuery"], 
+    ["accessTokenValidQuery"],
     async () => {
-        setAuthRefresh(false);
-        return await instance.get("/auth/access", {
-            params: {
-                accessToken: localStorage.getItem("accessToken")
-            }
-        });
-    }, 
+      setAuthRefresh(false);
+      return await instance.get("/auth/access", {
+        params: {
+          accessToken: localStorage.getItem("accessToken")
+        }
+      });
+    },
     {
       enabled: authRefresh,
       retry: 0,

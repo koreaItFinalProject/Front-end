@@ -5,23 +5,26 @@ import * as s from "./style";
 function CommentInfo({ info }) {
     return (
         <div css={s.mainLayout}>
-            <div css={s.content}>
-                <tr css={s.contentBox}>
-                    <th>번호</th>
-                    <th>내용</th>
-                    <th>날짜</th>
-                </tr>
-                {info.map((result, index) => (
-                    <div css={s.layout}> {/* 고유한 key 추가 */}
-                        {/* <div>{result.board_id}</div> */}
-                        <div>{index + 1}</div>
-                        <div>{result.content}</div>
-                        <div>{result.write_date}</div>
-                        <button>수정</button>
-                        <button>삭제</button>
-                    </div>
-                ))}
-            </div>
+            <table css={s.content}>
+                <thead>
+                    <tr >
+                        <th>번호</th>
+                        <th>내용</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {info.map((result, index) => (
+                        <tr>
+                            <td>{index + 1}</td>
+                            <td>{result.content}</td>
+                            <td>{result.write_date}</td>
+                            <button>수정</button>
+                            <button>삭제</button>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 }

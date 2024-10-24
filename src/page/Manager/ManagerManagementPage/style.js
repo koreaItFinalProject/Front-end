@@ -27,7 +27,6 @@ export const userList = css`
 
 export const selectbutton = (role) => css`
     button{
-        
         padding: 3px 6px;
         margin: 0px 3px;
         :nth-of-type(${role === 'user' ? 1 : 2}) {

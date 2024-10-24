@@ -10,7 +10,7 @@ function UserInfo({ info }) {
             </div>
             <div css={s.layout}>
                 <div css={s.profileImg}>
-                    이미지: {info.img}
+                    <img src={info.img}/>
                 </div>
                 <div css={s.userInfo}>
                     <div>username: {info.username}</div>
