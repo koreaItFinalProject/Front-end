@@ -1,58 +1,54 @@
 import { css } from "@emotion/react";
 
 export const commentContainer = css`
+    box-sizing: border-box;
     width: 100%;
-    height: 100%;
-    margin-bottom: 50px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #ffffff;
 `;
 
-export const commentWriteBox = (level) => css`
+export const title = css`
     display: flex;
-    box-sizing: border-box;
-    margin-top: 5px;
-    margin-left: ${level * 3}%;
-    height: 80px;
+    flex-direction: row;
+    margin-bottom: 15px;
 
-    & > textarea {
-        flex-grow: 1;
+    div{
+        font-size: 18px;
+        font-weight: 600;
         margin-right: 5px;
-        border: 1px solid #dbdbdb;
-        outline: none;
-        padding: 12px 15px;
-        resize: none;
-    }
-
-    & > button {
-        box-sizing: border-box;
-        border: 1px solid #dbdbdb;
-        width: 80px;
-        background-color: #ffffff;
-        cursor: pointer;
     }
 `;
 
 export const commentListContainer = (level) => css`
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    margin-bottom: 15px;
     margin-left: ${level * 3}%;
-    border-bottom: 1px solid #dbdbdb;
-    padding: 12px 15px;
+    border-bottom: 1px solid #f2780c;
+`;
 
-    & > div:nth-of-type(1) {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 12px;
-        border: 1px solid #dbdbdb;
-        border-radius: 50%;
-        width: 70px;
-        height: 70px;
-        overflow: hidden;
+export const userInfo = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 10px;
 
-        & > img {
-            height: 100%;
-        }
+    img {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+
+    div:nth-of-type(1) {
+        margin-right: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    span {
+        font-size: 12px;
     }
 `;
 
@@ -62,34 +58,65 @@ export const commentDetail = css`
   flex-grow: 1;
 `;
 
-export const detailHeader = css`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-
-    & > span:nth-of-type(1) {
-        font-weight: 600;
-        cursor: default;
-    }
-`;
-
 export const detailContent = css`
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
     max-height: 50px;
     overflow-y: auto;
 `;
 
 export const detailButtons = css`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     width: 100%;
+`;
 
-    & button {
-        box-sizing: border-box;
-        margin-left: 4px;
-        border: 1px solid #dbdbdb;
-        background-color: #ffffff;
-        padding: 5px 10px;
+export const replyButton = css`
+    button {
+        padding: 5px 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: #f2780c;
+    }
+`;
+
+export const editDelete = css`
+    button {
+        padding: 5px 5px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+`;
+
+export const commentWriteBox = css`
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 824px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #ffffff;
+
+    & > textarea {
+        width: 800px;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background-color: #b4b4b4;
+        resize: none;
+    }
+
+    & > button {
+        position: relative;
+        z-index: 99;
+        right: 100px;
+        background-color: #f2780c;
         cursor: pointer;
     }
 `;

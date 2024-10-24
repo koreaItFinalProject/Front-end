@@ -4,10 +4,11 @@ import * as s from "./style";
 import { useLocation } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
-import { useMutation, useQuery } from 'react-query';
+import { useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeLikeApi/CafeLikeApi';
 
 function CafeDetailPage() {
     const location = useLocation();
@@ -37,42 +38,13 @@ function CafeDetailPage() {
         }
     }, [review]);
 
+    const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeItem?.id);
+    const likeMutation = useLikeMutation(cafeItem?.id, refetchCafeLike);
+    const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
+
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
     };
-
-    const cafeLike = useQuery(
-        ["cafeLikeQuery"],
-        async () => {
-            return instance.get(`/cafe/${cafeItem.id}/like`);
-        },
-        {
-            refetchOnWindowFocus: false,
-            retry: 0
-        }
-    );
-
-    const likeMutation = useMutation(
-        async () => {
-            return await instance.post(`/cafe/${cafeItem.id}/like`);
-        },
-        {
-            onSuccess: response => {
-                cafeLike.refetch();
-            }
-        }
-    );
-
-    const dislikeMutation = useMutation(
-        async () => {
-            return await instance.delete(`/cafe/like/${cafeLike.data?.data.cafeLikeId}`);
-        },
-        {
-            onSuccess: response => {
-                cafeLike.refetch();
-            }
-        }
-    );
 
     const handleLikeOnClick = () => {
         likeMutation.mutateAsync();
@@ -91,7 +63,7 @@ function CafeDetailPage() {
                     </div>
                     <div css={s.heart}>
                         {
-                            !!cafeLike?.data?.data?.cafeLikeId
+                            !!cafeLike?.cafeLikeId
                                 ?
                                 <button onClick={handleDislikeOnClick}>
                                     <IoMdHeart style={{ fill: '#f2780c' }} />

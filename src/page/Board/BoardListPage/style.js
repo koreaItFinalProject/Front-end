@@ -1,40 +1,85 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 0px 15px;
-    /* overflow-y: auto; */
-    
+    padding: 5px 15px;
+    overflow-y: hidden;
+    background-color: #191919;
 `;
 
-export const boardLayout = css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+export const title = css`
+    margin-bottom: 15px;
+    font-size: 34px;
+    color: #f2780c;
 `;
 
-export const boardHeader = css`
+export const boardListHeader = css`
     display: flex;
-    flex-direction: column;
-    
-    & h1 {
-        font-size: 24px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 15px;
+    height: 40px;
+
+    select {
+        width: 75px;
+        height: 100%;
+        border-radius: 20px;
+        text-align: center;
+        padding: 7px;
     }
+`;
+
+export const searchBox = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 10px;
+    position: relative;
+
+    input {
+        width: 450px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 20px;
+        background-color: #ffffff;
+    }
+
+    input::placeholder {
+        color: #b4b4b4;
+    }
+
+    button {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: 600;
+        background-color: #f2780c;
+    }
+`;
+
+export const writeButton = css`
+        padding: 9px 20px;
+        margin-left: 10px;
+        border-radius: 20px;
+        font-weight: 600;
+        background-color: #f2780c;
 `;
 
 export const boardNavigater = css`
-    & button {
-        padding: 0;
-        margin-bottom: 5px;
-        font-size: 18px;
-    }
+    margin-bottom: 15px;
 
-    & button:nth-of-type(1) {
+    button {
         margin-right: 10px;
+        padding: 5px 25px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        font-size: 18px;
+        font-weight: 600;
     }
 `;
 
@@ -43,52 +88,6 @@ export const boardListLayout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
-`;
-
-export const boardListHeader = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 5px 0px;
-    border-top: 3px solid #dbdbdb;
-    border-bottom: 3px solid #dbdbdb;
-    height: 40px;
-
-    & select {
-        margin-left: 10px;
-    }
-`;
-
-export const searchBox = css`
-    display: flex;
-    flex-direction: row;
-    margin-left: 10px;
-
-    & input {
-        width: 150px;
-        padding: 0px 10px;
-        border: 1px solid #333447;
-        border-right: none;
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-        outline: none;
-    }
-
-    & button {
-        padding: 0px 10px;
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-        background-color: #333447;
-        color: #fafafa;
-    }
-`;
-
-export const writeButton = css`
-    margin-left: 10px;
-    border-radius: 5px;
-    background-color: #333447;
-    color: #fafafa;
 `;
 
 export const boardList = css`

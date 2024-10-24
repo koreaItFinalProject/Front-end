@@ -26,19 +26,20 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
 
     const handleCafeClick = (cafeItem) => {
         navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
-    }
+    };
 
     return (
         <div css={s.layout}>
             <h1 css={s.title}>Cafe List</h1>
             <div css={s.searchContainer}>
-                <input type="text" 
-                    value={inputdata} 
-                    onChange={handleInputOnChange} 
-                    onKeyDown={handleInputKeyPress} 
-                    spellCheck="false" 
+                <input type="text"
+                    value={inputdata}
+                    onChange={handleInputOnChange}
+                    onKeyDown={handleInputKeyPress}
+                    spellCheck="false"
                     placeholder='카페를 검색하세요'
-                    required />
+                    required
+                />
                 <button>검색</button>
                 <select name="" id="">
                     <option value="like">인기순</option>
@@ -49,8 +50,8 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                 <SelectCategory check={check} setCheck={setCheck} />
             </div>
             <div css={s.listContainer}>
-                {cafe?.map(cafeItem => (
-                    <div css={s.listbox} key={cafeItem.id} onClick={() => handleCafeClick(cafeItem)}>
+                {cafe?.map((cafeItem, index) => (
+                    <div css={s.listbox} key={index} onClick={() => handleCafeClick(cafeItem)}>
                         <div css={s.pictureBox}></div>
                         <div css={s.showBox}>
                             <div css={s.spanBox}>
@@ -58,9 +59,15 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                                 <p>{cafeItem.address}</p>
                                 <p>{cafeItem.category}</p>
                             </div>
-                            <div css={s.viewBox}>
-                                <span><MdRateReview /></span>
-                                <span><IoMdHeart /></span>
+                            <div css={s.counts}>
+                                <div css={s.count}>
+                                    <div><MdRateReview /></div>
+                                    <div>{cafeItem.reviewCount}</div>
+                                </div>
+                                <div css={s.count}>
+                                    <div><IoMdHeart /></div>
+                                    <div>{cafeItem.likeCount}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

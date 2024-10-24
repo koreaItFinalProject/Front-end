@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from '../../Header/Header';
+import BoardFooter from '../BoardFooter/BoardFooter';
 
-function MainLayout({ children, setCheck, setInputvalue }) {
-    
+function BoardLayout({ children }) {
     return (
         <div css={s.background}>
             <div css={s.layout}>
@@ -26,7 +25,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                         {children}
                     </div>
                     <div css={s.footer}>
-                        <Footer setCheck={setCheck} setInputvalue={setInputvalue} />
+                        <BoardFooter />
                     </div>
                 </div>
             </div>
@@ -34,4 +33,4 @@ function MainLayout({ children, setCheck, setInputvalue }) {
     );
 }
 
-export default MainLayout;
+export default BoardLayout;
