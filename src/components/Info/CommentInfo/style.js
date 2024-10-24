@@ -1,8 +1,6 @@
 import { css } from "@emotion/react";
 
 export const mainLayout = css`
-    display: flex;
-    align-items: center;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -11,28 +9,22 @@ export const mainLayout = css`
 `
 
 export const content = css`
-    display: flex;
     width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    flex-direction: column;
 `
 
 export const contentBox = css`
-    display: flex;
+    /* display: flex; */
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    align-items: center;
-    justify-content: space-around;
+    /* align-items: center; */
 
     padding-right: 230px;
 `
 export const layout = css`
-    display: flex;
+    /* display: flex; */
     width: 100%;
     height: 100%;
     align-items: center;
-    justify-content: space-around;
     flex-direction: row;
 `

@@ -37,6 +37,7 @@ import CommentInfo from './components/Info/CommentInfo/CommentInfo';
 import PostModifyPage from './page/MyPage/PostModifyPage/PostModifyPage';
 import ReviewStatePage from './page/MyPage/ReviewStatePage/ReviewStatePage';
 
+Modal.setAppElement('#root');
 function App() {
     const location = useLocation();
     const navigete = useNavigate();
