@@ -6,6 +6,7 @@ import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
 import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -108,45 +109,42 @@ function DetailPage(props) {
                 board.isSuccess &&
                 <>
                     <div css={s.header}>
-                        <div css={s.titleAndLike}>
-                            <h1>{board.data.data.title}</h1>
+                        <div css={s.writerInfo}>
+                            <img src="" alt="" />
+                            <div>{board.data.data.nickname}</div>
+                        </div>
+                        <div css={s.title}>
+                            <div>{board.data.data.title}</div>
                         </div>
                         <div css={s.boardInfoContainer}>
-                            <div>
-                                <span>
-                                    작성자: {board.data.data.nickname}
-                                </span>
-                                <span>
-                                    작성일: {board?.data?.data.writeDate}
-                                </span>
-                                <span>
-                                    조회수: {board?.data?.data.viewCount}
-                                </span>
-                                <span>
-                                    추천: {boardLike?.data?.data.likeCount}
-                                </span>
+                            <div css={s.boardInfo}>
+                                <div>{board?.data?.data.writeDate}</div>
+                                <div>조회수 {board?.data?.data.viewCount}</div>
+                                <div>추천수 {boardLike?.data?.data.likeCount}</div>
                             </div>
-                            <div>
-                                {
-                                    !!boardLike?.data?.data?.boardLikeId
-                                        ?
-                                        <button onClick={handleDislikeOnClick}>
-                                            <IoMdHeart />
-                                        </button>
-                                        :
-                                        <button onClick={handleLikeOnClick}>
-                                            <IoMdHeartEmpty />
-                                        </button>
-                                }
-                            </div>
-                            <div>
-                                {
-                                    board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                    <>
-                                        <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                        <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                    </>
-                                }
+                            <div css={s.buttonLayout}>
+                                <div>
+                                    {
+                                        !!boardLike?.data?.data?.boardLikeId
+                                            ?
+                                            <button onClick={handleDislikeOnClick}>
+                                                <IoMdHeart />
+                                            </button>
+                                            :
+                                            <button onClick={handleLikeOnClick}>
+                                                <IoMdHeartEmpty />
+                                            </button>
+                                    }
+                                </div>
+                                <div>
+                                    {
+                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
+                                        <>
+                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                        </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -154,14 +152,8 @@ function DetailPage(props) {
                         <ReactQuill
                             value={board.data.data.content}
                             readOnly={true}
-                            theme="snow"
                             modules={{
                                 toolbar: false
-                            }}
-                            style={{
-                                boxSizing: 'border-box',
-                                width: '100%',
-                                height: '100%',
                             }}
                         />
                     </div>

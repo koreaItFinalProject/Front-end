@@ -5,7 +5,7 @@ import 'swiper/css'
 import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from "react-query";
-import BoardList from "../../../components/BoardList/BoardList";
+import BoardList from "../../../components/Board/BoardList/BoardList";
 
 function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue }) {
     const [selectedButton, setSelectedButton] = useState('공지');
@@ -56,8 +56,6 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
         setSelectedButton(buttonName);
     };
 
-    console.log(accessCheck?.data);
-
     const handleWriteOnClick = () => {
         if (!accessCheck?.data) {
             alert("로그인 후 작성해주세요.");
@@ -69,50 +67,35 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
 
     return (
         <div css={s.layout}>
-            <div css={s.boardLayout}>
-                <div css={s.boardHeader}>
-                    <h1>커뮤니티</h1>
+            <h1 css={s.title}>Community</h1>
+            <div css={s.boardListHeader}>
+                <select name="searchFilter" onChange={handleFilterOnChange}>
+                    <option name="title" value={"title"}>제목</option>
+                    <option name="writer" value={"writer"}>작성자</option>
+                </select>
+                <div css={s.searchBox}>
+                    <input
+                        type="text"
+                        placeholder='검색어를 입력하세요'
+                        onChange={handleSearchInputOnChange}
+                        onKeyDown={handleEnterInput}
+                        name=""
+                        value={searchValue}
+                    />
+                    <button onClick={handleSearchOnClick}>검색</button>
                 </div>
-                <div css={s.boardNavigater}>
-                    <button
-                        onClick={() => handleNavButtonClick('공지')}
-                        style={{ fontWeight: selectedButton === '공지' ? 'bold' : 'normal' }}
-                    >
-                        공지
-                    </button>
-                    <button
-                        onClick={() => handleNavButtonClick('자유')}
-                        style={{ fontWeight: selectedButton === '자유' ? 'bold' : 'normal' }}
-                    >
-                        자유
-                    </button>
-                </div>
-                <div css={s.boardListLayout}>
-                    <div css={s.boardListHeader}>
-                        <select name="searchFilter" onChange={handleFilterOnChange}>
-                            <option name="title" value={"title"}>제목</option>
-                            <option name="writer" value={"writer"}>작성자</option>
-                        </select>
-                        <div css={s.searchBox}>
-                            <input
-                                type="text"
-                                placeholder='검색'
-                                onChange={handleSearchInputOnChange}
-                                onKeyDown={handleEnterInput}
-                                name=""
-                                value={searchValue}
-                            />
-                            <button onClick={handleSearchOnClick}>검색</button>
-                        </div>
-                        <button css={s.writeButton} onClick={handleWriteOnClick}>글쓰기</button>
-                    </div>
-                    <div css={s.boardList}>
-                        <BoardList boardList={boardList} loadMoreRef={loadMoreRef} />
-                        <div ref={loadMoreRef} css={s.ref}></div>
-                    </div>
+                <button css={s.writeButton} onClick={handleWriteOnClick}>글쓰기</button>
+            </div>
+            <div css={s.boardNavigater}>
+                <button onClick={() => handleNavButtonClick('공지')}>공지사항</button>
+                <button onClick={() => handleNavButtonClick('자유')}>자유</button>
+            </div>
+            <div css={s.boardListLayout}>
+                <div css={s.boardList}>
+                    <BoardList boardList={boardList} loadMoreRef={loadMoreRef} />
+                    <div ref={loadMoreRef} css={s.ref}></div>
                 </div>
             </div>
-
         </div>
     );
 }

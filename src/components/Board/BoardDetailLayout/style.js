@@ -54,7 +54,7 @@ export const container = css`
     width: 100%;
     height: 100%;
     background-clip: padding-box;
-    background-color: #191919;
+    /* background-color: #F4F4F6; */
     box-shadow: 0px 0px 2px 1px #00000066 inset;
     & * {
         color: #1c1c1b;
@@ -77,12 +77,61 @@ export const header = css`
 `;
 
 export const children = css`
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     border-radius: 10px 10px 0px 0px;
+`;
+
+export const footer = css`
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const commentWriteBox = css`
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 824px;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #ffffff;
+
+    & > textarea {
+        width: 800px;
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background-color: #b4b4b4;
+        resize: none;
+    }
+
+    & > button {
+        position: relative;
+        z-index: 99;
+        right: 100px;
+        background-color: #f2780c;
+        cursor: pointer;
+    }
+`;
+
+export const commentProfileImg = css`
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 20px;
+    background-color: black;
 `;

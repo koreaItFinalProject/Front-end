@@ -3,17 +3,15 @@ import { css } from "@emotion/react";
 export const cardLayout = css`
     width: 100%;
     height: 100%;
-    margin: 10px 0px;
 `;
 
 export const card = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin-bottom: 20px;
-    height: 400px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    height: 500px;
     box-shadow: 0px 3px 5px #00000011;
     background-color: #ffffff;
     cursor: pointer;
@@ -23,15 +21,17 @@ export const cardMain = css`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 10px;
 `;
 
 export const cardImg = css`
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 300px;
+    border-radius: 20px;
     overflow: hidden;
-    background-color: #000000;
 
     & > img {
         width: 100%;
@@ -75,40 +75,49 @@ export const cardFooter = css`
     justify-content: space-between;
     align-items: center;
     border-top: 1px solid #f5f5f5;
-    padding: 0px 15px;
+    padding: 0px 20px;
     height: 50px;
 
-    & > div:nth-of-type(1) {
-        display: flex;
-        align-items: center;
-        font-weight: 600;
+        div:nth-of-type(1) {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
 
-        & > img {
-            margin-right: 5px;
+        img {
+            margin-right: 10px;
             border: 1px solid #dbdbdb;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
         }
 
-        & > span {
-            margin-right: 8px;
-            font-weight: 400;
-            font-size: 14px;
-            color: #999999;
+        span {
+            margin-right: 10px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #f2780c;
         }
-    }
 
-    & > div:nth-of-type(2) {
-        display: flex;
-        align-items: center;
-
-        & > span {
-            line-height: 10px;
+        p {
+            font-size: 20px;
         }
     }
 
-    & svg {
-        margin-right: 5px;
-    }
+        div:nth-of-type(2) {
+            display: flex;
+            align-items: center;
+
+            svg {
+            width: 30px;
+            height: 30px;
+            margin-right: 5px;
+            fill: #f2780c;
+            }
+
+            span {
+                font-size: 20px;
+                font-weight: 600;
+                line-height: 10px;
+            }
+        }
 `;

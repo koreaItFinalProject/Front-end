@@ -119,7 +119,7 @@ function Comments(props) {
     };
 
     const handleReplyButtonOnClick = (commentId) => {
-        if(!accessCheck) {
+        if (!accessCheck) {
             alert("로그인 후 작성 가능합니다.");
             return;
         }
@@ -138,84 +138,78 @@ function Comments(props) {
     };
 
     return (
-        <div css={s.commentContainer}>
-            <h2>댓글</h2>
-            {
-                commentData.parentId === null &&
-                <div css={s.commentWriteBox(0)}>
-                    <textarea name="content"
-                        value={commentData.content}
-                        onChange={handleCommentInputOnChange}
-                        placeholder='댓글을 입력하세요.'></textarea>
-                    <button onClick={handleCommentSubmitOnClick}>작성하기</button>
+        <>
+            <div css={s.commentContainer}>
+                <div css={s.title}>
+                    <div>댓글</div>
+                    <div>{comments?.data?.data.commentCount}</div>
                 </div>
-            }
-            <div>
-                {
-                    comments?.data?.data.comments.map(comment =>
-                        <div key={comment.id}>
-                            <div css={s.commentListContainer(comment.level)}>
-                                <div>
-                                    <img src={comment.img} alt="" />
-                                </div>
-                                <div css={s.commentDetail}>
-                                    <div css={s.detailHeader}>
-                                        <span>{comment.username}</span>
+                <div>
+                    {
+                        comments?.data?.data.comments.map(comment =>
+                            <div key={comment.id}>
+                                <div css={s.commentListContainer(comment.level)}>
+                                    <div css={s.userInfo}>
+                                        <img src={comment.img} alt="" />
+                                        <div>{comment.username}</div>
                                         <span>{new Date(comment.writeDate).toLocaleString()}</span>
                                     </div>
-                                    <pre css={s.detailContent}>{comment.content}</pre>
-                                    <div css={s.detailButtons}>
-                                        {
-                                            userInfoData?.data?.userId === comment.writerId &&
-                                            <div>
-                                                {
-                                                    modifyComment.commentId === comment.id
-                                                        ?
-                                                        <button onClick={handleModifyCommentCancelButtonOnClick}>취소</button>
-                                                        :
-                                                        <button onClick={() => handleModifyCommentButtonOnClick(comment.id, comment.content)}
-                                                            disabled={comments.parentId === comment.id}>수정</button>
-                                                }
-                                                <button onClick={() => handleDeleteCommentButtonOnClick(comment.id)}
-                                                    disabled={comment.parentId === comment.id || modifyComment.commentId === comment.id}>삭제</button>
-                                            </div>
-                                        }
-                                        {
-                                            comment.level < 3 &&
-                                            <div>
-                                                {
-                                                    comment.parentId === comment.id
-                                                        ?
-                                                        <button onClick={handleCancelReplyOnClick}>취소</button>
-                                                        :
-                                                        <button onClick={() => handleReplyButtonOnClick(comment.id)}
-                                                            disabled={modifyComment.commentId === comment.id}>답글</button>
-                                                }
-                                            </div>
-                                        }
+                                    <div css={s.commentDetail}>
+                                        <pre css={s.detailContent}>{comment.content}</pre>
+                                        <div css={s.detailButtons}>
+                                            {
+                                                comment.level < 3 &&
+                                                <div css={s.replyButton}>
+                                                    {
+                                                        comment.parentId === comment.id
+                                                            ?
+                                                            <button onClick={handleCancelReplyOnClick}>취소</button>
+                                                            :
+                                                            <button onClick={() => handleReplyButtonOnClick(comment.id)}
+                                                                disabled={modifyComment.commentId === comment.id}>답글</button>
+                                                    }
+                                                </div>
+                                            }
+                                            {
+                                                userInfoData?.data?.userId === comment.writerId &&
+                                                <div css={s.editDelete}>
+                                                    {
+                                                        modifyComment.commentId === comment.id
+                                                            ?
+                                                            <button onClick={handleModifyCommentCancelButtonOnClick}>취소</button>
+                                                            :
+                                                            <button onClick={() => handleModifyCommentButtonOnClick(comment.id, comment.content)}
+                                                                disabled={comments.parentId === comment.id}>수정</button>
+                                                    }
+                                                    <button onClick={() => handleDeleteCommentButtonOnClick(comment.id)}
+                                                        disabled={comment.parentId === comment.id || modifyComment.commentId === comment.id}>삭제</button>
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
                                 </div>
+                                {
+                                    commentData.parentId === comment.id &&
+                                    <div css={s.commentWriteBox(comments.level)}>
+                                        <textarea name="content" onChange={handleCommentInputOnChange}
+                                            value={commentData.content} placeholder='답글을 입력하세요.'></textarea>
+                                        <button onClick={handleCommentSubmitOnClick}>작성하기</button>
+                                    </div>
+                                }
+                                {
+                                    modifyComment.commentId === comment.id &&
+                                    <div css={s.commentWriteBox(comment.level)}>
+                                        <textarea name="content" onChange={handleModifyCommentInputOnChange} value={modifyComment.content}></textarea>
+                                        <button onClick={handleCommentModifySubmitOnClick}>수정하기</button>
+                                    </div>
+                                }
                             </div>
-                            {
-                                commentData.parentId === comment.id &&
-                                <div css={s.commentWriteBox(comments.level)}>
-                                    <textarea name="content" onChange={handleCommentInputOnChange}
-                                        value={commentData.content} placeholder='답글을 입력하세요.'></textarea>
-                                    <button onClick={handleCommentSubmitOnClick}>작성하기</button>
-                                </div>
-                            }
-                            {
-                                modifyComment.commentId === comment.id &&
-                                <div css={s.commentWriteBox(comment.level)}>
-                                    <textarea name="content" onChange={handleModifyCommentInputOnChange} value={modifyComment.content}></textarea>
-                                    <button onClick={handleCommentModifySubmitOnClick}>수정하기</button>
-                                </div>
-                            }
-                        </div>
-                    )
-                }
+                        )
+                    }
+                </div>
             </div>
-        </div>
+            
+        </>
     );
 }
 
