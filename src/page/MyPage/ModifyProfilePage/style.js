@@ -7,10 +7,10 @@ export const layout = css`
     display: flex;
     align-items: center;
     padding:20px 20px 10px 20px;
-    flex-direction: column;
     & p {
         color:#747474;
         font-weight: 700;
+        margin: 0;
     }
     & input {
         color:#747474;
@@ -53,50 +53,37 @@ export const profileBox = css`
 `;
 
 export const profileimage = css`
-    cursor: pointer;
     border-radius: 50%;
+    width: 100%;
+    height: 180px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+`;
+
+export const imgSelect = css`
     width: 180px;
     height: 180px;
     border: 1px solid black;
+    border-radius: 50%;
     box-sizing: border-box;
     & img {
-        width: 100%;
+        cursor: pointer;
         height: 100%;
         border-radius: 50%;
-        box-sizing:border-box
+        box-sizing:border-box;
     }
-
 `;
 
 export const userProfile = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 40px 60px 0px 60px;
+    padding: 40px 60px 0px 40px;
     overflow-y: auto;
-    & div {
-        width: 100%;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        padding-bottom: 20px;
-        box-sizing: border-box;
-        & div{
-            & p:first-of-type {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                box-sizing: border-box;
-                width: 100px;
-                height: 40px;
-            }
-            & input {
-                box-sizing: border-box;
-                flex-grow: 1;
-            }
-        }
-        
-    }
 `;
 
 export const profileinfo = css`
@@ -104,8 +91,18 @@ export const profileinfo = css`
     flex-direction: column;
     width: 100%;
     & div {
+        display: flex; 
         width: 100%;
         height: 60px;
+        align-items: center; 
+        
+        p {
+            width: 120px; 
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 `;
 
@@ -113,8 +110,22 @@ export const modifyProfileInfo = css`
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
+    justify-content: center;
     & div {
+        display: flex; 
         width: 100%;
         height: 60px;
+        align-items: center; 
+        p {
+            width: 120px; 
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input {
+            flex-grow: 1; 
+        }
     }
 `;
