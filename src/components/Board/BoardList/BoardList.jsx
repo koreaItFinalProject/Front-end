@@ -28,8 +28,8 @@ function BoardList({ boardList, loadMoreRef }) {
                             let mainContent = board.content;
                             while (true) {
                                 const pIndex = mainContent.indexOf("<p>");
-                                if (pIndex === -1) { 
-                                    mainContent = ""; 
+                                if (pIndex === -1) {
+                                    mainContent = "";
                                     break;
                                 }
                                 mainContent = mainContent.slice(pIndex + 3);
@@ -61,7 +61,7 @@ function BoardList({ boardList, loadMoreRef }) {
                                         <div>
                                             <img src={board.writerProfileImg} alt="" />
                                             <span>by </span>
-                                            {board.nickname}
+                                            <p>{board.nickname}</p>
                                         </div>
                                         <div><IoMdHeart /><span>{board.likeCount}</span></div>
                                     </footer>

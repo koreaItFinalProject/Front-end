@@ -86,3 +86,10 @@ export const children = css`
     overflow: hidden;
     border-radius: 10px 10px 0px 0px;
 `;
+
+export const footer = css`
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
