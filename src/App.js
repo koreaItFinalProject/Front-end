@@ -30,6 +30,7 @@ import CafeReviewModifyPage from './page/Cafe/CafeReviewModifyPage/CafeReviewMod
 import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
+import ReactModal from 'react-modal';
 
 function App() {
   const location = useLocation();
@@ -88,7 +89,7 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPaths = ["/user/auth", "/owner"];
+        const permitAllPaths = ["/user/auth/sasdas", "/owner"];
         for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
@@ -170,12 +171,12 @@ function App() {
             <Routes>
               <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
-              <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/find' element={<UserFindPage />} />
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
+              <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/auth/mypage/modify' element={<ModifyProfilePage />} />
             </Routes>
           </SignLayout>
