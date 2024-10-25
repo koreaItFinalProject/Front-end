@@ -16,12 +16,10 @@ import DetailPage from './page/Board/DetailPage/DetailPage';
 import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
 import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
-import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
 import MyPage from './page/MyPage/MyPage';
-import SignLayout from './components/MainLayout/SignLayout/SignLayout';
 import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
 import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
 import BoardListPage from './page/Board/BoardListPage/BoardListPage';
@@ -31,7 +29,6 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
-import BoardLayout from './components/Board/BoardLayout/BoardLayout';
 
 ReactModal.setAppElement('#root');
 function App() {

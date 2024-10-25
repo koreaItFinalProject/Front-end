@@ -10,11 +10,13 @@ import { MdOutlineRateReview } from "react-icons/md";
 import { instance } from '../../apis/util/instance';
 import { State } from '../../atom/userState';
 import { useRecoilState } from 'recoil';
+import ModifyProfilePage from './ModifyProfilePage/ModifyProfilePage';
 
 function MyPage(props) {
     const navigate = useNavigate();
     const [alram, setAlram] = useState(false);
     const [user, setUser] = useRecoilState(State);
+    const [profileModify, setProfileModify] = useState(false);
     const [isCount, setCount] = useState({
         user: {},
         board: {},
@@ -57,17 +59,14 @@ function MyPage(props) {
         }
     )
 
+    const handleProfileOnClick = () => {
+        setProfileModify(!profileModify);
+    }
+
     return (
         <div css={s.layout}>
-            <div css={s.profileBox} onClick={() => navigate("/mypage/modify")}>
-                <div css={s.profileimage}>
-                    <img src={isCount.user?.img} alt="프로필 이미지" />
-                </div>
-                <div css={s.infoLayout}>
-                    <div css={s.userInfo}>
-                        <p>{isCount.user?.nickname} </p>
-                    </div>
-                </div>
+            <div css={s.profileBox} onClick={handleProfileOnClick}>
+                <ModifyProfilePage />
             </div>
             <div css={s.mainBox}>
                 <div css={s.mainBoxLayout}>

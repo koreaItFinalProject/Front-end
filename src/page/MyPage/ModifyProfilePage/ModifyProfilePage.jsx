@@ -88,78 +88,61 @@ function ModifyProfilePage() {
 
     return (
         <div css={s.layout}>
+            <div css={s.modifyButton}>
+                <button onClick={handleChangeOnClick}>수정하기<FaPencilAlt /></button>
+            </div>
             <div css={s.profileBox}>
-                <div>
-                    <button onClick={handleChangeOnClick}>수정하기<FaPencilAlt /></button>
+                <div onClick={handleImageClick} css={s.profileimage}>
+                    <img src={userInfo.img} alt="프로필 이미지" />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        ref={inputRef}
+                        style={{ display: 'none' }} // 숨겨진 input
+                        onChange={handleImageChange}
+                    />
                 </div>
-                <div css={s.profileimage}>
-                    <div css={s.imgSelect} onClick={handleImageClick}>
-                        <img src={userInfo.img} alt="프로필 이미지" />
-                        <input
-                            type="file"
-                            accept="image/*"
-                            ref={inputRef}
-                            style={{ display: 'none' }} // 숨겨진 input
-                            onChange={handleImageChange}
-                        />
-                    </div>
-                </div>
-                <div css={s.userProfile}>
-                    {/*
-                      이름, 아이디 , 닉네임 , 이메일 수정가능해야함  
-                    */}
+                <div css={s.userInfo}>
                     {
                         modifyState ?
-                            <div css={s.profileinfo}>
+                            <div>
                                 <div>
                                     <p>이름 :</p>
-                                    <p>{userInfo.name}</p>
-                                </div>
-                                <div>
                                     <p>아이디 :</p>
-                                    <p>{userInfo.username}</p>
-                                </div>
-                                <div>
                                     <p>닉네임 :</p>
-                                    <p>{userInfo.nickname}</p>
-                                </div>
-                                <div>
                                     <p>이메일 :</p>
-                                    <p>{userInfo.email}</p>
+                                    <p>전화번호 :</p>
                                 </div>
                                 <div>
-                                    <p>전화번호 :</p>
+                                    <p>{userInfo.name}</p>
+                                    <p>{userInfo.username}</p>
+                                    <p>{userInfo.nickname}</p>
+                                    <p>{userInfo.email}</p>
                                     <p>{userInfo.phoneNumber}</p>
                                 </div>
                             </div>
                             :
-                            <div css={s.modifyProfileInfo}>
+                            <div>
                                 <div>
                                     <p>이름 :</p>
+                                    <p>아이디 : </p>
+                                    <p>닉네임 : </p>
+                                    <p>이메일 : </p>
+                                    <p>전화번호 :</p>
+                                </div>
+                                <div>
                                     <input name='name'
                                         value={modifyUserInfo.name}
                                         onChange={handleOnInput} />
-                                </div>
-                                <div>
-                                    <p>아이디 : </p>
                                     <input name='username'
                                         value={modifyUserInfo.username}
                                         onChange={handleOnInput} />
-                                </div>
-                                <div>
-                                    <p>닉네임 : </p>
                                     <input name='nickname'
                                         value={modifyUserInfo.nickname}
                                         onChange={handleOnInput} />
-                                </div>
-                                <div>
-                                    <p>이메일 : </p>
                                     <input name='email'
                                         value={modifyUserInfo.email}
                                         onChange={handleOnInput} />
-                                </div>
-                                <div>
-                                    <p>전화번호 :</p>
                                     <input name='phoneNumber'
                                         value={modifyUserInfo.phoneNumber}
                                         onChange={handleOnInput} />

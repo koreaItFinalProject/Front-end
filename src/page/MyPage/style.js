@@ -21,42 +21,11 @@ export const profileBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 280px;
+    height: 200px;
     width: 100%;
     border-radius: 20px;
     background-color: #ffffff;
-    cursor: pointer;
-`;
-
-export const profileimage = css`
-    cursor: pointer;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    border: 1px solid black;
     box-sizing: border-box;
-    & img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        box-sizing:border-box
-    }
-`;
-
-export const infoLayout = css`
-    width: 100%;
-`;
-
-
-
-export const userInfo = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & p {
-        padding: 5px 0px;
-    }
 `;
 
 export const mainBox = css`
@@ -66,6 +35,7 @@ export const mainBox = css`
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0px;
+    flex-grow: 1;
 `;
 
 export const mainBoxLayout = css`
