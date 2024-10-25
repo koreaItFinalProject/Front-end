@@ -59,7 +59,7 @@ function MyPage(props) {
 
     return (
         <div css={s.layout}>
-            <div css={s.profileBox} onClick={() => navigate("/user/auth/mypage/modify")}>
+            <div css={s.profileBox} onClick={() => navigate("/mypage/modify")}>
                 <div css={s.profileimage}>
                     <img src={isCount.user?.img} alt="프로필 이미지" />
                 </div>

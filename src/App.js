@@ -133,7 +133,7 @@ function App() {
       <Global styles={reset} />
       <Routes>
         <Route path='/manager/*' element={
-          <ManagerMainLayout>
+          <MainLayout>
             <Routes>
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
@@ -141,22 +141,12 @@ function App() {
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
-          </ManagerMainLayout>
-        } />
-        <Route path='/*' element={
-          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
-            <Routes>
-              <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
-              <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
-              <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-            </Routes>
           </MainLayout>
         } />
 
+
         <Route path='/board/*' element={
-          <BoardLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
               <Route path='/' element={<BoardListPage
                 boardList={boardList}
@@ -172,23 +162,35 @@ function App() {
               <Route path='modify/:boardId' element={<ModifyPage />} />
               <Route path='detail/:boardId' element={<DetailPage />} />
             </Routes>
-          </BoardLayout>
+          </MainLayout>
         } />
 
         <Route path='/user/*' element={
-          <SignLayout>
+          <MainLayout>
             <Routes>
               <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
-              <Route path='/auth/mypage' element={<MyPage />} />
               <Route path='/find' element={<UserFindPage />} />
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
               <Route path='/select/signup' element={<UsersSignupSelectPage />} />
-              <Route path='/auth/mypage/modify' element={<ModifyProfilePage />} />
             </Routes>
-          </SignLayout>
+          </MainLayout>
+        } />
+
+        <Route path='/*' element={
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
+              <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
+              <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route path='/mypage' element={<MyPage />} />
+              <Route path='/mypage/modify' element={<ModifyProfilePage />} />
+            </Routes>
+          </MainLayout>
         } />
       </Routes>
     </>

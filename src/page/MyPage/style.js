@@ -6,8 +6,9 @@ export const layout = css`
     height: 100%;
     display: flex;
     align-items: center;
-    padding:20px 20px 20px 20px;
+    padding-top: 20px;
     flex-direction: column;
+    background-color: #ffffff;
     & p {
         color:#747474;
         margin: 0;

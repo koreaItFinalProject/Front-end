@@ -91,10 +91,8 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                 <button onClick={() => handleNavButtonClick('자유')}>자유</button>
             </div>
             <div css={s.boardListLayout}>
-                <div css={s.boardList}>
-                    <BoardList boardList={boardList} loadMoreRef={loadMoreRef} />
-                    <div ref={loadMoreRef} css={s.ref}></div>
-                </div>
+                <BoardList boardList={boardList} loadMoreRef={loadMoreRef} />
+                <div ref={loadMoreRef} css={s.ref}></div>
             </div>
         </div>
     );

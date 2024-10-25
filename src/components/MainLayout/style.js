@@ -9,17 +9,25 @@ export const background = css`
 `;
 
 export const layout = css`
+    position: relative;
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     margin: 0px auto;
     border: 2px solid #b4b4b4;
     border-radius: 35px;
-    padding: 7px 25px 40px 25px;
+    padding: 25px;
     width: 714.75px;
     height: 933px;
     background-color: #000000;
+    overflow: hidden;
 `;
 
 export const camera = css`
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
     display:flex;
     justify-content: center;
     align-items: center;
@@ -63,17 +71,15 @@ export const container = css`
     display: flex;
     flex-direction: column;
     position: relative;
-
+    overflow: hidden;
 `;
 
 export const header = css`
     box-sizing: border-box;
     height: 20px;
+    width: 100%;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 99;
 `;
 
 export const children = css`
@@ -81,20 +87,17 @@ export const children = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    padding-bottom: 60px;
     height: 100%;
-    overflow: hidden;
-    border-radius: 10px 10px 0px 0px;
 `;
 
 export const footer = css`
-    position: absolute;
     box-sizing: border-box;
     width: 100%;
     height: 60px;
-    bottom: 0;
     background-color: #F4F4F6;
-    z-index: 99;
     border-radius: 0px 0px 10px 10px;
     border-top: 1px solid #c9c9c9;
+    position: absolute;
+    bottom: 0;
 `;

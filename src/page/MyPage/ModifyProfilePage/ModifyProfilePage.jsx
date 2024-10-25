@@ -21,7 +21,7 @@ function ModifyProfilePage() {
         email: '',
         nickname: '',
         phoneNumber: '',
-        img:'',
+        img: '',
         role: ''
     })
     const handleChangeOnClick = () => {
@@ -59,7 +59,7 @@ function ModifyProfilePage() {
             email: user.user?.email,
             nickname: user.user?.nickname,
             phoneNumber: user.user?.phoneNumber,
-            img:user.user?.img,
+            img: user.user?.img,
             role: user.user?.role
         })
         console.log(user);
@@ -96,11 +96,11 @@ function ModifyProfilePage() {
                     <div css={s.imgSelect} onClick={handleImageClick}>
                         <img src={userInfo.img} alt="프로필 이미지" />
                         <input
-                        type="file"
-                        accept="image/*"
-                        ref={inputRef}
-                        style={{ display: 'none' }} // 숨겨진 input
-                        onChange={handleImageChange}
+                            type="file"
+                            accept="image/*"
+                            ref={inputRef}
+                            style={{ display: 'none' }} // 숨겨진 input
+                            onChange={handleImageChange}
                         />
                     </div>
                 </div>
@@ -130,12 +130,6 @@ function ModifyProfilePage() {
                                 <div>
                                     <p>전화번호 :</p>
                                     <p>{userInfo.phoneNumber}</p>
-                                </div>
-                                <div>
-                                    <p>권한 :</p>
-                                    <p>{userInfo.role === "USER" ? '사용자' :
-                                        userInfo.role === "OWNER" ? '점주' :
-                                            userInfo.role === "admin" ? '관리자' : '권한 정보가 없습니다'}</p>
                                 </div>
                             </div>
                             :
@@ -169,12 +163,6 @@ function ModifyProfilePage() {
                                     <input name='phoneNumber'
                                         value={modifyUserInfo.phoneNumber}
                                         onChange={handleOnInput} />
-                                </div>
-                                <div>
-                                    <p>권한 :</p>
-                                    <p>{modifyUserInfo.role === "USER" ? '사용자' :
-                                        modifyUserInfo.role === "OWNER" ? '점주' :
-                                            modifyUserInfo.role === "admin" ? '관리자' : '권한 정보가 없습니다'}</p>
                                 </div>
                             </div>
                     }
