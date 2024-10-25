@@ -6,7 +6,6 @@ export const layout = css`
     height: 100%;
     display: flex;
     align-items: center;
-    padding:20px 20px 10px 20px;
     & p {
         color:#747474;
         font-weight: 700;
@@ -19,6 +18,7 @@ export const layout = css`
         padding: 0;
         box-sizing: border-box;
         width: 100%;
+        height: 60px;
     }
 `;
 
@@ -29,7 +29,6 @@ export const profileBox = css`
     align-items: center;
     height: 100%;
     width: 100%;
-    border-radius: 20px;
     background-color: #ffffff;
     padding: 40px 20px 0px 20px;
 
@@ -95,13 +94,20 @@ export const profileinfo = css`
         width: 100%;
         height: 60px;
         align-items: center; 
-        
+        box-sizing: border-box;
         p {
             width: 120px; 
             height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
+        & p:nth-of-type(2){
+            width: 360px;
+            box-sizing: border-box;
         }
     }
 `;
@@ -116,16 +122,25 @@ export const modifyProfileInfo = css`
         display: flex; 
         width: 100%;
         height: 60px;
-        align-items: center; 
+        box-sizing: border-box;
         p {
-            width: 120px; 
+            width: 120px !important; 
             height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
+            box-sizing: border-box;
+            flex-shrink: 0;
         }
-        input {
-            flex-grow: 1; 
+        & input {
+            display: flex;
+            text-align: center;
+            width: 360px;
         }
     }
+`;
+export const roleDiv = css`
+    width: 360px;
+    display: flex;
+    justify-content: center;
 `;

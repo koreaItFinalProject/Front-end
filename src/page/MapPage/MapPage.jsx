@@ -105,7 +105,6 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                         <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0.5 12.5253V7.47475H11.8636L7.44444 3.05556L10.5 0L20.5 10L10.5 20L7.44444 16.9444L11.8636 12.5253H0.5Z" fill="#F2780C" />
                         </svg>
-
                     </button>
                 </div>
             </Map>

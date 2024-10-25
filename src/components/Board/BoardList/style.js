@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 export const cardLayout = css`
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
 `;
 
 export const card = css`

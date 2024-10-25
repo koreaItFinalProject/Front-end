@@ -1,12 +1,14 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 5px 15px;
-    overflow-y: hidden;
+    padding: 0px 15px;
     background-color: #191919;
+    overflow: hidden;
 `;
 
 export const title = css`
@@ -84,20 +86,10 @@ export const boardNavigater = css`
 `;
 
 export const boardListLayout = css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-`;
-
-export const boardList = css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
+    flex-grow: 1;
     overflow-y: auto;
 `;
 
 export const ref = css`
-    height: 1000px;
+    height: 10px;
 `;
