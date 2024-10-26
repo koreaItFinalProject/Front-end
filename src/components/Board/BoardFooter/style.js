@@ -46,9 +46,12 @@ export const input = css`
     }
     
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: absolute;
         left: 570px;
-        transform: translateY(25%);
+        transform: translateY(35%);
         padding: 0;
         border-radius: 20px;
         cursor: pointer;

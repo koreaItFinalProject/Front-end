@@ -1,6 +1,14 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+`;
+
+export const subLayout = css`
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -89,6 +97,7 @@ export const contentBox = css`
 
     img {
         border-radius: 20px;
+        cursor: default;
     }
 
     .quill {
@@ -116,5 +125,15 @@ export const contentBox = css`
 export const commentContainer = css`
     display: flex;
     flex-grow: 1;
-    overflow-y: auto;
+`;
+
+export const footer = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    background-color: #F4F4F6;
+    border-radius: 0px 0px 10px 10px;
+    border-top: 1px solid #c9c9c9;
+    position: absolute;
+    top: 100%;
 `;
