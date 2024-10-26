@@ -3,9 +3,12 @@ import React, { useEffect } from 'react';
 import * as s from "./style";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useLocation } from 'react-router-dom';
+import BoardFooter from '../Board/BoardFooter/BoardFooter';
 
 function MainLayout({ children, setCheck, setInputvalue }) {
-    
+    const location = useLocation();
+
     return (
         <div css={s.background}>
             <div css={s.layout}>
@@ -26,7 +29,13 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                         {children}
                     </div>
                     <div css={s.footer}>
-                        <Footer setCheck={setCheck} setInputvalue={setInputvalue} />
+                        {
+                            location.pathname.includes('detail')
+                                ?
+                                <BoardFooter />
+                                :
+                                <Footer setCheck={setCheck} setInputvalue={setInputvalue} />
+                        }
                     </div>
                 </div>
             </div>

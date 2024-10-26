@@ -1,12 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import BackButton from "../../../components/BackButton/BackButton";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -98,7 +99,7 @@ function DetailPage(props) {
 
     return (
         <div css={s.layout}>
-            <Link to={"/board?page=1"}><h1>게시판</h1></Link>
+            <BackButton prevPage={"게시판"} prevPageUrl={"/board"} />
             {
                 board.isLoading && <></>
             }
@@ -159,7 +160,9 @@ function DetailPage(props) {
                     </div>
                 </>
             }
-            <Comments />
+            <div css={s.commentContainer}>
+                <Comments />
+            </div>
         </div>
     );
 }

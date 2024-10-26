@@ -7,7 +7,7 @@ import { FaList } from "react-icons/fa";
 import { LuMapPin } from "react-icons/lu";
 import { MdManageAccounts } from "react-icons/md";
 
-function Footer({setCheck, setInputvalue}) {
+function Footer({ setCheck, setInputvalue }) {
   const navigate = useNavigate();
   const handleLogoutButtonOnClick = () => {
     localStorage.removeItem("accessToken");
@@ -27,10 +27,10 @@ function Footer({setCheck, setInputvalue}) {
   }
   return (
     <div css={s.layout}>
-      <button onClick={() => navigate('/board?page=1')}><GoHomeFill/>게시판</button>
+      <button onClick={() => navigate('/board?page=1')}><GoHomeFill />게시판</button>
       <button onClick={handleListClick}><FaList />리스트</button>
       <button onClick={handleMapClick}><LuMapPin />지도</button>
-      <button onClick={() => navigate('/user/signin')}><MdManageAccounts/>사용자</button>
+      <button onClick={() => navigate('/user/signin')}><MdManageAccounts />사용자</button>
       <button onClick={handleLogoutButtonOnClick}>로그아웃</button>
     </div>
   );
