@@ -2,28 +2,17 @@ import { css } from "@emotion/react";
 
 export const layout = css`
   box-sizing: border-box;
-  height: 50px;
-  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-`;
-
-export const commentWriteBox = css`
-    position: absolute;
-    box-sizing: border-box;
-    left: 0;
-    right: 0;
-    top: 824px;
-    display: flex;
-    padding: 10px;
-    width: 100%;
-    height: 60px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: #ffffff;
+  padding: 5px;
+  width: 100%;
+  height: 100%;
 `;
 
 export const commentProfileImg = css`
-    width: 43px;
+    width: 40px;
     height: 40px;
     border-radius: 100%;
     background-color: black;
@@ -31,36 +20,36 @@ export const commentProfileImg = css`
 
 export const input = css`
     position: relative;
-    display: flex;
-    width: 100%;
-    margin-left: 10px;
     box-sizing: border-box;
-
+    display: flex;
+    flex-direction: row;
+    width: 605px;
+    height: 100%;
 
     textarea {
-        box-sizing: border-box;
+        padding: 10px 45px 10px 10px;
         width: 100%;
         height: auto;
         min-height: 30px;
         max-height: 200px;
-        padding: 10px;
+        overflow: visible;
         border-radius: 10px;
         border: none;
         outline: none;
-        background-color: #B4B4B44D;
         resize: none;
-        overflow: hidden;
-    
-            &::placeholder {
-                color: #b4b4b4;
-            }
+        font-size: 20px;
+        background-color: #B4B4B44D;
     }
-
+    
+    input::placeholder {
+        color: #b4b4b4;
+    }
+    
     button {
         position: absolute;
-        top: 4px;
-        bottom: 5px;
-        right: 5px;
+        left: 570px;
+        transform: translateY(25%);
+        padding: 0;
         border-radius: 20px;
         cursor: pointer;
     }

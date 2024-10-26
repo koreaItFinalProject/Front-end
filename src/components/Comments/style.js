@@ -3,7 +3,6 @@ import { css } from "@emotion/react";
 export const commentContainer = css`
     box-sizing: border-box;
     width: 100%;
-    border-radius: 20px;
     padding: 10px;
     background-color: #ffffff;
 `;
@@ -53,9 +52,9 @@ export const userInfo = css`
 `;
 
 export const commentDetail = css`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 `;
 
 export const detailContent = css`
