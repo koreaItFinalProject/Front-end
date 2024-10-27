@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
-import { GoHomeFill } from "react-icons/go";
 import { FaList } from "react-icons/fa";
-import { LuMapPin } from "react-icons/lu";
-import { MdManageAccounts } from "react-icons/md";
+import { FaMap } from "react-icons/fa";
+import { BsChatLeftTextFill } from "react-icons/bs";
+import { FaUserLarge } from "react-icons/fa6";
 
 function Footer({ setCheck, setInputvalue }) {
   const navigate = useNavigate();
@@ -27,10 +27,10 @@ function Footer({ setCheck, setInputvalue }) {
   }
   return (
     <div css={s.layout}>
-      <button onClick={() => navigate('/board?page=1')}><GoHomeFill />게시판</button>
-      <button onClick={handleListClick}><FaList />리스트</button>
-      <button onClick={handleMapClick}><LuMapPin />지도</button>
-      <button onClick={() => navigate('/user/signin')}><MdManageAccounts />사용자</button>
+      <button onClick={handleMapClick}><FaMap /></button>
+      <button onClick={handleListClick}><FaList /></button>
+      <button onClick={() => navigate('/board?page=1')}><BsChatLeftTextFill /></button>
+      <button onClick={() => navigate('/user/signin')}><FaUserLarge /></button>
       <button onClick={handleLogoutButtonOnClick}>로그아웃</button>
     </div>
   );

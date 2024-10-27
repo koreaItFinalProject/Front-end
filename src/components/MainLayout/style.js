@@ -95,9 +95,8 @@ export const footer = css`
     box-sizing: border-box;
     width: 100%;
     height: 60px;
-    background-color: #F4F4F6;
+    background-color: #000000;
     border-radius: 0px 0px 10px 10px;
-    border-top: 1px solid #c9c9c9;
     position: absolute;
     bottom: 0;
 `;
