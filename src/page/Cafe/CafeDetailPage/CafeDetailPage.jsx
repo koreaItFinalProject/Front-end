@@ -9,6 +9,7 @@ import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeLikeApi/CafeLikeApi';
+import BackButton from '../../../components/BackButton/BackButton';
 
 function CafeDetailPage() {
     const location = useLocation();
@@ -17,14 +18,12 @@ function CafeDetailPage() {
     const [averageRating, setAverageRating] = useState(0);
 
     const { data: review, refetch } = useQuery(
-        ["reviewQuery", cafeItem?.id],
+        ["reviewQuery"],
         async () => {
-            if (!cafeItem?.id) return;
             const reviewList = await instance.get(`/review/${cafeItem.id}`);
             return reviewList.data;
         },
         {
-            enabled: !!cafeItem?.id,
             refetchOnWindowFocus: false,
             retry: 0
         }
@@ -56,6 +55,7 @@ function CafeDetailPage() {
 
     return (
         <div css={s.layout}>
+            <BackButton prevPage={'카페 리스트'} prevPageUrl={'/list'} />
             <div css={s.detailHeader}>
                 <div css={s.titleLike}>
                     <div>
@@ -81,7 +81,7 @@ function CafeDetailPage() {
                     <div>{averageRating.toFixed(1)}</div>
                 </div>
                 <div css={s.detailInfo}>
-                    <div>{cafeItem.category}</div>
+                    <div>{cafeItem?.category}</div>
                     <div>리뷰 {review?.reviewCount}</div>
                 </div>
             </div>

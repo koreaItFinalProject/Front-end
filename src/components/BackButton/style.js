@@ -4,9 +4,9 @@ export const layout = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 10px;
     height: 50px;
-    background-color: #ffffff;
+    padding: 0 10px;
+    background-color: #191919;
 
     button {
         padding: 6px 0;

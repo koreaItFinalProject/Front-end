@@ -4,8 +4,9 @@ import * as s from "./style";
 import { useLocation, useNavigate } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
     { value: 'bakery', label: '베이커리' },
@@ -19,6 +20,7 @@ function CafeReviewPage(props) {
     const location = useLocation();
     const { cafeItem } = location.state || {};
     const textareaRef = useRef(null);
+    const queryClient = useQueryClient();
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState("");
@@ -72,10 +74,11 @@ function CafeReviewPage(props) {
         {
             onSuccess: response => {
                 alert("리뷰가 작성되었습니다");
+                queryClient.refetchQueries(['reviews', cafeItem.id]);
                 navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
             }
         }
-    )
+    );
 
     const handleSubmitOnClick = async () => {
         if (!reviewData.rating) {
@@ -91,8 +94,11 @@ function CafeReviewPage(props) {
         reviewMutation.mutateAsync();
     }
 
+    console.log(reviewData);
+
     return (
         <div css={s.layout}>
+            <BackButton prevPage={cafeItem.cafeName} prevPageUrl={`/cafe/detail/${cafeItem.id}`} />
             <div css={s.rating}>
                 <h1>{cafeItem.cafeName}</h1>
                 <StarRating

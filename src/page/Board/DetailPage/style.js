@@ -6,6 +6,7 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    background-color: #191919;
 `;
 
 export const subLayout = css`
@@ -21,6 +22,8 @@ export const header = css`
     display: flex;
     flex-direction: column;
     padding: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: #ffffff;
 `;
 
