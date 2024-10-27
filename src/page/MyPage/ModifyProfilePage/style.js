@@ -3,8 +3,8 @@ import { css } from "@emotion/react";
 export const layout = css`
     box-sizing: border-box;
     width: 100%;
-    height: 200px;
-    p {
+    height: 100%;
+    & p {
         margin: 5px 0px;
     }
 `;
@@ -13,6 +13,8 @@ export const modifyButton = css`
     display: flex;
     justify-content: end;
     width: 100%;
+    margin-top: 20px;
+    height: 25px;
     button {
         padding-right: 30px;
     }
@@ -21,10 +23,11 @@ export const modifyButton = css`
 export const profileBox = css`
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 180px;
     padding-left: 50px;
     box-sizing: border-box;
     flex-direction: row;
+    /* background-color: #ffffff; */
 `;
 
 export const profileimage = css`

@@ -89,7 +89,7 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPaths = ["/user/auth/sadasd", "/owner"];
+        const permitAllPaths = ["/user/auth/", "/owner"];
         for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
