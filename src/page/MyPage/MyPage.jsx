@@ -16,7 +16,6 @@ function MyPage(props) {
     const navigate = useNavigate();
     const [alram, setAlram] = useState(false);
     const [user, setUser] = useRecoilState(State);
-    const [profileModify, setProfileModify] = useState(false);
     const [isCount, setCount] = useState({
         user: {},
         board: {},
@@ -59,13 +58,9 @@ function MyPage(props) {
         }
     )
 
-    const handleProfileOnClick = () => {
-        setProfileModify(!profileModify);
-    }
-
     return (
         <div css={s.layout}>
-            <div css={s.profileBox} onClick={handleProfileOnClick}>
+            <div css={s.profileBox}>
                 <ModifyProfilePage />
             </div>
             <div css={s.mainBox}>

@@ -6,9 +6,8 @@ export const layout = css`
     height: 100%;
     display: flex;
     align-items: center;
-    padding-top: 20px;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #1c1c1b;
     & p {
         color:#747474;
         margin: 0;
@@ -21,18 +20,17 @@ export const profileBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 225px;
     width: 100%;
-    border-radius: 20px;
     background-color: #ffffff;
     box-sizing: border-box;
+    border-radius: 0px 0px 20px 20px;
 `;
 
 export const mainBox = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    margin-top: 10px;
     margin-bottom: 10px;
     padding: 0px;
     flex-grow: 1;

@@ -6,9 +6,11 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { State } from '../../../atom/userState';
 import { useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 
 function ModifyProfilePage() {
     const [modifyState, setModifySelect] = useState(true);
+    const [modifySave, setModifySave] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const user = useRecoilValue(State);
     const setUser = useSetRecoilState(State);
@@ -26,6 +28,12 @@ function ModifyProfilePage() {
     })
     const handleChangeOnClick = () => {
         setModifySelect(!modifyState);
+        setModifySave(!modifySave);
+        console.log(modifyUserInfo);
+        if(modifySave && !modifyState){
+            const response = mypageProfileModify(modifyUserInfo);
+            console.log(response);
+        }
     }
 
     const handleOnInput = (e) => {
@@ -33,6 +41,7 @@ function ModifyProfilePage() {
             ...modifyUserInfo,
             [e.target.name]: e.target.value
         })
+        console.log(modifyUserInfo);
     }
 
     // ModifyProfilePage로 직접 접근 시에 오류 처리
@@ -43,9 +52,12 @@ function ModifyProfilePage() {
             console.log(response);
             return response.data;
         },
-        {
+        {   
+            retry:0,
+            // refetchOnWindowFocus: false,
             enabled: !user.data,
             onSuccess: (data) => {
+                console.log(data);
                 setUser(data);
                 setUserInfo(data.user);
             },
@@ -54,6 +66,7 @@ function ModifyProfilePage() {
 
     useEffect(() => {
         setModifyUserInfo({
+            id:user.user?.id,
             name: user.user?.name,
             username: user.user?.username,
             email: user.user?.email,
@@ -64,7 +77,6 @@ function ModifyProfilePage() {
         })
         console.log(user);
     }, [user]);
-    console.log(user);
 
     const handleImageClick = () => {
         inputRef.current.click(); // 파일 선택창 열기
