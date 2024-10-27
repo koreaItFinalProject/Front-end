@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
 import { MdRateReview } from "react-icons/md";
 import { IoMdHeart } from "react-icons/io";
+import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
-    const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
-    const cafe = cafelist?.data;
     const [inputdata, setInputData] = useState("");
+    const { data: cafeList } = useCafeQuery(check, inputvalue);
 
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
@@ -50,7 +49,8 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                 <SelectCategory check={check} setCheck={setCheck} />
             </div>
             <div css={s.listContainer}>
-                {cafe?.map((cafeItem, index) => (
+                {
+                    cafeList?.map((cafeItem, index) => (
                     <div css={s.listbox} key={index} onClick={() => handleCafeClick(cafeItem)}>
                         <div css={s.pictureBox}></div>
                         <div css={s.showBox}>

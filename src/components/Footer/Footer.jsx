@@ -15,13 +15,13 @@ function Footer({ setCheck, setInputvalue }) {
   }
 
   const handleListClick = () => {
-    navigate('/list'); // 리스트 페이지로 이동
+    navigate('/cafe/list');
     setCheck("전체");
     setInputvalue("");
   }
 
   const handleMapClick = () => {
-    navigate('/map'); // 지도 페이지로 이동
+    navigate('/map');
     setCheck("전체");
     setInputvalue("");
   }
