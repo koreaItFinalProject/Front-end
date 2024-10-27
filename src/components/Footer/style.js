@@ -1,21 +1,26 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-  height: 50px;
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  width: 100%;
+  height: 100%;
 
   & button {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
   }
   
   & svg {
-    font-size: 18px;
-    margin-right: 10px;
+    width: 100%;
+    height: 100%;
+    fill: #f2780c;
   }
   
 `;
