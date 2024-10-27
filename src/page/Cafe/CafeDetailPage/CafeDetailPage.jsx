@@ -8,8 +8,9 @@ import { useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeLikeApi/CafeLikeApi';
+import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeApis/CafeLikeApi';
 import BackButton from '../../../components/BackButton/BackButton';
+import { useReviewQuery } from '../../../apis/ReviewApis/getReviewList';
 
 function CafeDetailPage() {
     const location = useLocation();
@@ -17,25 +18,16 @@ function CafeDetailPage() {
     const [selectMenu, setSelectMenu] = useState('review');
     const [averageRating, setAverageRating] = useState(0);
 
-    const { data: review, refetch } = useQuery(
-        ["reviewQuery"],
-        async () => {
-            const reviewList = await instance.get(`/review/${cafeItem.id}`);
-            return reviewList.data;
-        },
-        {
-            refetchOnWindowFocus: false,
-            retry: 0
-        }
-    );
+    const { data: reviewList, refetch } = useReviewQuery(cafeItem.id);
+    console.log(reviewList);
 
     useEffect(() => {
-        if (review && review?.reviews.length > 0) {
-            const totalRating = review?.reviews.reduce((sum, review) => sum + review.rating, 0);
-            const average = totalRating / review?.reviews.length;
+        if (reviewList && reviewList?.reviews.length > 0) {
+            const totalRating = reviewList?.reviews.reduce((sum, reviewList) => sum + reviewList.rating, 0);
+            const average = totalRating / reviewList?.reviews.length;
             setAverageRating(average);
         }
-    }, [review]);
+    }, [reviewList]);
 
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeItem?.id);
     const likeMutation = useLikeMutation(cafeItem?.id, refetchCafeLike);
@@ -55,7 +47,7 @@ function CafeDetailPage() {
 
     return (
         <div css={s.layout}>
-            <BackButton prevPage={'카페 리스트'} prevPageUrl={'/list'} />
+            <BackButton prevPage={'카페 리스트'} prevPageUrl={'/cafe/list'} />
             <div css={s.detailHeader}>
                 <div css={s.titleLike}>
                     <div>
@@ -82,7 +74,7 @@ function CafeDetailPage() {
                 </div>
                 <div css={s.detailInfo}>
                     <div>{cafeItem?.category}</div>
-                    <div>리뷰 {review?.reviewCount}</div>
+                    <div>리뷰 {reviewList?.reviewCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>
@@ -104,7 +96,7 @@ function CafeDetailPage() {
                     selectMenu === 'review'
                         ? <CafeReview
                             cafeItem={cafeItem}
-                            review={review}
+                            review={reviewList}
                             averageRating={averageRating}
                             refetch={refetch}
                         />

@@ -27,8 +27,6 @@ function BoardFooter({ mode, boardId, commentData, setCommentData, replyTo }) {
         }
     };
 
-    console.log(commentData);
-
     return (
         <div css={s.layout}>
             <div css={s.commentProfileImg}>

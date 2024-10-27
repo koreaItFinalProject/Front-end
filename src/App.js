@@ -29,6 +29,7 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
+import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -48,16 +49,7 @@ function App() {
     }
   }, [location.pathname]);
 
-  const cafe = useQuery(
-    ["cafeQuery", check, inputvalue],
-    async () => {
-      return instance.get(`/cafe/get/${check}/${inputvalue}`);
-    },
-    {
-      refetchOnWindowFocus: false,
-      retry: 0,
-    }
-  );
+  const cafe = useCafeQuery(check, inputvalue);
 
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery"],
@@ -116,6 +108,7 @@ function App() {
       }
     }
   );
+
   const userInfo = useQuery(
     ["userInfoQuery"],
     async () => {
@@ -126,6 +119,7 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
+  
   return (
     <>
       <Global styles={reset} />
@@ -142,11 +136,21 @@ function App() {
           </MainLayout>
         } />
 
+        <Route path='/cafe/*' element={
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route path='detail/:cafeId' element={<CafeDetailPage />} />
+              <Route path='review/:cafeId' element={<CafeReviewPage />} />
+              <Route path='review/modify/:cafeId' element={<CafeReviewModifyPage />} />
+            </Routes>
+          </MainLayout>
+        } />
 
         <Route path='/board/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/' element={<BoardListPage
+              <Route path='' element={<BoardListPage
                 boardList={boardList}
                 fetchNextPage={fetchNextPage}
                 hasNextPage={hasNextPage}
@@ -180,10 +184,6 @@ function App() {
         <Route path='/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
-              <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/mypage' element={<MyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />

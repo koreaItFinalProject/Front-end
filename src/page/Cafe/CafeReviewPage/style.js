@@ -84,7 +84,7 @@ export const textarea = css`
         height: auto;
         min-height: 50px;
         max-height: 200px;
-        padding: 5px;
+        padding: 10px;
         border-radius: 10px;
         resize: none;
         overflow: hidden;
