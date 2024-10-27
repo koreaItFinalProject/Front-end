@@ -27,7 +27,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                         {children}
                     </div>
                     {
-                        location.pathname.includes('detail')
+                        location.pathname.includes('/board/detail')
                             ?
                             <></>
                             :

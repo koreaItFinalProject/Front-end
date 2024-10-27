@@ -11,7 +11,6 @@ export const useCafeLikeQuery = (cafeId) => {
             return response.data;
         },
         {
-            enabled: !!cafeId,
             refetchOnWindowFocus: false,
             retry: 0
         }

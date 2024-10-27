@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from "react-query";
 import BoardList from "../../../components/Board/BoardList/BoardList";
+import { FaPlus } from "react-icons/fa6";
 
 function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue }) {
     const [selectedButton, setSelectedButton] = useState('공지');
@@ -68,12 +69,8 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
     return (
         <div css={s.layout}>
             <h1 css={s.title}>Community</h1>
-            <div css={s.boardListHeader}>
-                <select name="searchFilter" onChange={handleFilterOnChange}>
-                    <option name="title" value={"title"}>제목</option>
-                    <option name="writer" value={"writer"}>작성자</option>
-                </select>
-                <div css={s.searchBox}>
+            <button css={s.writeButton} onClick={handleWriteOnClick}><FaPlus /></button>
+                <div css={s.searchContainer}>
                     <input
                         type="text"
                         placeholder='검색어를 입력하세요'
@@ -83,9 +80,11 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                         value={searchValue}
                     />
                     <button onClick={handleSearchOnClick}>검색</button>
+                <select name="searchFilter" onChange={handleFilterOnChange}>
+                    <option name="title" value={"title"}>제목</option>
+                    <option name="writer" value={"writer"}>작성자</option>
+                </select>
                 </div>
-                <button css={s.writeButton} onClick={handleWriteOnClick}>글쓰기</button>
-            </div>
             <div css={s.boardNavigater}>
                 <button onClick={() => handleNavButtonClick('공지')}>공지사항</button>
                 <button onClick={() => handleNavButtonClick('자유')}>자유</button>
