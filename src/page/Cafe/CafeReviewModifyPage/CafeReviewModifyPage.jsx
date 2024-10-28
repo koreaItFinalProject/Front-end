@@ -6,6 +6,7 @@ import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
     { value: 'bakery', label: '베이커리' },
@@ -89,23 +90,22 @@ function CafeReviewModifyPage(props) {
     )
 
     const handleSubmitOnClick = async () => {
-        if(!reviewData.rating) {
+        if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if(!reviewData.category) {
+        } else if (!reviewData.category) {
             alert("카테고리를 선택해주세요.");
             return;
-        } else if(reviewData.review.trim("") === "") {
+        } else if (reviewData.review.trim("") === "") {
             alert("후기를 작성해주세요.");
             return;
         }
         reviewModifyMutation.mutateAsync();
     }
 
-    console.log(reviewData);
-
     return (
         <div css={s.layout}>
+            <BackButton prevPage={cafeItem.cafeName} prevPageUrl={`/cafe/detail/${cafeItem.id}`} />
             <div css={s.rating}>
                 <h1>{cafeItem.cafeName}</h1>
                 <StarRating
