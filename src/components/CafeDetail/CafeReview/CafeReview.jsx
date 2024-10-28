@@ -1,7 +1,7 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../../../apis/util/starRating';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
@@ -16,10 +16,12 @@ const categories = [
     { label: '주차하기 편해요' },
     { label: '사진이 잘 나와요' },
     { label: '아이와 가기 좋아요' },
-
 ];
-function CafeReview({ cafeItem, review, averageRating, refetch }) {
+
+function CafeReview({ cafeDetail, review, averageRating, refetch }) {
     const navigate = useNavigate();
+    const params = useParams();
+    const cafeId = params.cafeId;
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
 
@@ -42,11 +44,11 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
             alert("로그인 후 작성 가능합니다.");
             return;
         }
-        navigate(`/cafe/review/${cafeItem.id}`, { state: { cafeItem } });
+        navigate(`/cafe/review/${cafeId}`, { state: { cafeDetail } });
     };
 
     const handleModifyReviewClick = (reviewId, reviewItem) => {
-        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeItem } });
+        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeDetail } });
     };
 
     const handleDeleteReviewOnClick = (reviewId) => {
@@ -63,16 +65,16 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
                 </div>
                 <button onClick={handleWriteReviewClick}><IoPencil />리뷰 쓰기</button>
             </div>
-                <div css={s.category}>
-                    {
-                        categories.map(category => (
+            <div css={s.category}>
+                {
+                    categories.map(category => (
                         <div>{category.label}</div>
-                        ))
-                    }
-                </div>
+                    ))
+                }
+            </div>
             {
-                review?.reviews.map(reviewItem =>
-                    <div key={reviewItem.id} css={s.review}>
+                review?.reviews.map((reviewItem, index) =>
+                    <div key={index} css={s.review}>
                         <div css={s.reviewInfo}>
                             <div css={s.profileImg}>
                                 <img src="" alt="" />

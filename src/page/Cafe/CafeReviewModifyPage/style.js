@@ -33,14 +33,18 @@ export const category = css`
     justify-content: center;
     align-items: center;
     padding: 10px 10px;
+    height: fit-content;
     gap: 10px;
     border-radius: 10px;
     background-color: #ffffff;
 `;
 
 export const buttons = css`
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
     button {
-        margin-right: 8px;
         padding: 5px 10px;
         border: 1px solid #000000;
         border-radius: 36px;
