@@ -12,11 +12,11 @@ import { State } from '../../atom/userState';
 import { useRecoilState } from 'recoil';
 import ModifyProfilePage from './ModifyProfilePage/ModifyProfilePage';
 import ReactModal from 'react-modal';
-import AlramInfoPage from './AlramInfoPage/AlramInfoPage';
 import UserProfileModify from './UserProfileModify/UserProfileModify';
-import PostModifyPage from './PostModifyPage/PostModifyPage';
-import CommentStatePage from './CommentStatePage/CommentStatePage';
-import ReviewStatePage from './ReviewStatePage/ReviewStatePage';
+import PostModify from './PostModify/PostModify';
+import CommentState from './CommentState/CommentState';
+import ReviewState from './ReviewState/ReviewState';
+import AlramInfo from './AlramInfo/AlramInfo';
 
 function MyPage(props) {
     const navigate = useNavigate();
@@ -101,7 +101,7 @@ function MyPage(props) {
                                 <button css={s.box} onClick={handleOnModalClick} value={"post"}>
                                     <p>게시글 수 :
                                         {
-                                            isCount.board.length == 0 ? '' : isCount.board.length
+                                            isCount.board.length === 0 ? '0' : isCount.board.length
                                         }</p>
                                 </button>
                             </div>
@@ -115,7 +115,7 @@ function MyPage(props) {
                                 <button css={s.box} onClick={handleOnModalClick} value={"comment"}>
                                     <p>댓글 수 :
                                         {
-                                            isCount.comment.length == 0 ? '' : isCount.comment.length
+                                            isCount.comment.length === 0 ? '0' : isCount.comment.length
                                         }
                                     </p>
                                 </button>
@@ -131,7 +131,7 @@ function MyPage(props) {
                                 </div>
                                 <button css={s.box} onClick={handleOnModalClick} value={"review"}>
                                     <p>리뷰 수 :
-                                        {isCount.review.length == 0 ? '' : isCount.review.length}</p>
+                                        {isCount.review.length === 0 ? '0' : isCount.review.length}</p>
                                 </button>
                             </div>
                         </div>
@@ -160,16 +160,16 @@ function MyPage(props) {
                         <UserProfileModify isCount={isCount.user} />
                         :
                         check === "post" ?
-                            <PostModifyPage isCount={isCount.board} />
+                            <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentStatePage isCount={isCount.comment} />
+                                <CommentState isCount={isCount.comment} />
                                 :
                                 check === "review" ?
-                                    <ReviewStatePage isCount={isCount.review} />
+                                    <ReviewState isCount={isCount.review} />
                                     :
                                     check === "alram" ?
-                                        <AlramInfoPage isCount={isCount} />
+                                        <AlramInfo isCount={isCount} />
                                         : <></>
                 }
             </ReactModal>
