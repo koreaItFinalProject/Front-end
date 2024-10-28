@@ -50,7 +50,17 @@ function App() {
     }
   }, [location.pathname]);
 
-  const cafe = useCafeQuery(check, inputvalue);
+
+  const cafe = useQuery(
+    ["cafeQuery", check, inputvalue],
+    async () => {
+      return instance.get(`cafe/get?category=${check}&search=${inputvalue}`);
+    },
+    {
+      refetchOnWindowFocus: false,
+      retry: 0,
+    }
+  );
 
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery"],
