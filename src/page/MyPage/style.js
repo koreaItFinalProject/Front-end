@@ -223,3 +223,20 @@ export const box = css`
     align-items: center;
     cursor: pointer;
 `;
+
+export const modalStyles = {
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)', // 어두운 반투명 배경
+    },
+    content: {
+        background: 'white', // 모달 내부 배경색
+        boxSizing: 'border-box',
+        transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '50%',
+        padding: '20px',
+        width: '800px',
+        height: '500px',
+        overflow: 'hidden',
+    },
+};

@@ -30,6 +30,7 @@ import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
 import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
+import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -119,13 +120,13 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
-  
+
   return (
     <>
       <Global styles={reset} />
       <Routes>
         <Route path='/manager/*' element={
-          <MainLayout>
+          <ManagerMainLayout>
             <Routes>
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
@@ -133,7 +134,7 @@ function App() {
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
-          </MainLayout>
+          </ManagerMainLayout>
         } />
 
         <Route path='/cafe/*' element={
