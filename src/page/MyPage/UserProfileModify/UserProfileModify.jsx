@@ -10,7 +10,7 @@ import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
 import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 
-function UserProfileModify({ isCount }) {
+function UserProfileModify({ isCount ,}) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
@@ -22,6 +22,7 @@ function UserProfileModify({ isCount }) {
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
     const [inputUser, setInputUser] = useState(isCount)
+    const [passwordCheck , setPasswordCheck] = useState(isCount.password);
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
@@ -44,6 +45,13 @@ function UserProfileModify({ isCount }) {
                 alert("비밀번호가 일치하지 않습니다")
                 return;
             }
+        }
+        if(passwordCheck !== ''){
+            setInputUser((prevState) => ({
+                ...prevState,
+                password : passwordCheck  
+            }))
+            console.log(inputUser);
         }
         const signupData = await mypageProfileModify(inputUser);
         console.log(signupData);
@@ -75,6 +83,13 @@ function UserProfileModify({ isCount }) {
             }
         }
     }
+
+    useEffect(()=> {
+        setInputUser((prevState) =>({
+            ...prevState,
+            password : ""
+        }))
+    },[])
 
     useEffect(() => {
         let interval;
