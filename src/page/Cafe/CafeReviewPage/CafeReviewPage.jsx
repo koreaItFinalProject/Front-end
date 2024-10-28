@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation, useQueryClient } from 'react-query';
@@ -17,25 +17,28 @@ const categories = [
     { value: 'parking', label: '주차하기 편해요' },
     { value: 'pet', label: '반려동물과 가기 좋아요' },
     { value: 'children', label: '아이와 가기 좋아요' },
-    
 ];
 
 function CafeReviewPage(props) {
     const navigate = useNavigate();
+    const params = useParams();
+    const cafeId = params.cafeId;
     const location = useLocation();
     const MAX_LENGTH = 400;
-    const { cafeItem } = location.state || {};
+    const { cafeDetail } = location.state || {};
     const textareaRef = useRef(null);
     const queryClient = useQueryClient();
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState([]);
     const [reviewData, setReviewData] = useState({
-        cafeId: cafeItem.id,
+        cafeId: cafeId,
         rating: score,
-        category: "",
+        category: selectedCategory,
         review: ""
     });
+
+    console.log(reviewData);
 
     useEffect(() => {
         adjustTextareaHeight(textareaRef.current);
@@ -48,6 +51,13 @@ function CafeReviewPage(props) {
         }));
     }, [score]);
 
+    useEffect(() => {
+        setReviewData(review => ({
+            ...review,
+            category: selectedCategory
+        }));
+    }, [selectedCategory]);
+
     const handleTextareaChange = (e) => {
         adjustTextareaHeight(textareaRef.current);
         if (e.target.value.length > MAX_LENGTH) {
@@ -59,21 +69,14 @@ function CafeReviewPage(props) {
         }));
     };
 
-    const handleCategoryOnClick = (e) => {
-        const category = e.target.value;
-        if (selectedCategory === category) {
-            setSelectedCategory("");
-            setReviewData(prevData => ({
-                ...prevData,
-                category: ""
-            }));
-        } else {
-            setSelectedCategory(category);
-            setReviewData(prevData => ({
-                ...prevData,
-                category: category
-            }));
-        }
+    const handleCategoryOnClick = (category) => {
+        setSelectedCategory(prevCategories => {
+            if (prevCategories.includes(category)) {
+                return prevCategories.filter(c => c !== category);
+            } else {
+                return [...prevCategories, category];
+            }
+        });
     };
 
     const reviewMutation = useMutation(
@@ -83,8 +86,8 @@ function CafeReviewPage(props) {
         {
             onSuccess: response => {
                 alert("리뷰가 작성되었습니다");
-                queryClient.refetchQueries(['reviews', cafeItem.id]);
-                navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
+                queryClient.refetchQueries(['reviews', cafeId]);
+                navigate(`/cafe/detail/${cafeId}`);
             }
         }
     );
@@ -93,8 +96,8 @@ function CafeReviewPage(props) {
         if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if (!reviewData.category) {
-            alert("카테고리를 선택해주세요.");
+        } else if (reviewData.category.length === 0) {
+            alert("어떤점이 좋았는지 선택해주세요!");
             return;
         } else if (reviewData.review.trim("") === "") {
             alert("후기를 작성해주세요.");
@@ -103,13 +106,11 @@ function CafeReviewPage(props) {
         reviewMutation.mutateAsync();
     };
 
-    console.log(cafeItem);
-
     return (
         <div css={s.layout}>
-            <BackButton prevPage={cafeItem.cafeName} prevPageUrl={`/cafe/detail/${cafeItem.id}`} />
+            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeId}`} />
             <div css={s.rating}>
-                <h1>{cafeItem.cafeName}</h1>
+                <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating
                     score={score}
                     setScore={setScore}
@@ -122,9 +123,10 @@ function CafeReviewPage(props) {
                     {categories.map(category => (
                         <button
                             key={category.value}
-                            onClick={handleCategoryOnClick}
-                            value={category.value}
-                            css={selectedCategory === category.value ? s.activeButton : null}
+                            onClick={() => handleCategoryOnClick(category.value)}
+                            style={{
+                                backgroundColor: selectedCategory.includes(category.value) ? '#f2780c' : '#ffffff'
+                            }}
                         >
                             {category.label}
                         </button>
@@ -142,7 +144,7 @@ function CafeReviewPage(props) {
                         onChange={handleTextareaChange}
                         placeholder=
                         '유용한 팁을 알려주세요! 작성한 내용은 카페 상세페이지에 노출 됩니다.'
-                        >
+                    >
                     </textarea>
                 </div>
                 <div css={s.count}>

@@ -24,7 +24,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     };
 
     const handleCafeClick = (cafeItem) => {
-        navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
+        navigate(`/cafe/detail/${cafeItem.id}`);
     };
 
     return (
