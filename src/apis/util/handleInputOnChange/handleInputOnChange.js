@@ -1,5 +1,5 @@
 export const handleInputOnChange = (setInputUser) => (e) => {
-  const {name, value} = e.target;
+  const { name, value } = e.target;
   if (name === 'phoneNumber' && !/^\d*$/.test(value)) {
     return; // 숫자가 아닌 입력은 무시 
   }
@@ -7,8 +7,8 @@ export const handleInputOnChange = (setInputUser) => (e) => {
     return;
   }
   setInputUser(inputUser => ({
-      ...inputUser,
-      [name] : value
+    ...inputUser,
+    [name]: value
   }));
   console.log(value);
 }
