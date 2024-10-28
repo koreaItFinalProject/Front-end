@@ -8,6 +8,7 @@ export const layout = css`
     align-items: center;
     flex-direction: column;
     background-color: #1c1c1b;
+    border-radius: 20px;
     & p {
         color:#747474;
         margin: 0;
@@ -25,14 +26,13 @@ export const profileBox = css`
     background-color: #ffffff;
     box-sizing: border-box;
     border-radius: 0px 0px 20px 20px;
+    margin-bottom: 7px;
 `;
 
 export const mainBox = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    margin-bottom: 10px;
-    padding: 0px;
     flex-grow: 1;
 `;
 
@@ -41,6 +41,7 @@ export const mainBoxLayout = css`
     flex-direction: column;
     box-sizing: border-box;
     height: 100%;
+    
     & > div {
         height: 50%;
         width: 100%;
@@ -48,6 +49,9 @@ export const mainBoxLayout = css`
         display: flex;
         justify-content: center;
         margin: 7px 0px;
+        &:nth-last-child(1){
+            margin-bottom: 0;
+        }
         & > div {
             background-color: #ffffff;
             display: flex;
@@ -235,8 +239,8 @@ export const modalStyles = {
         top: '50%',
         left: '50%',
         padding: '20px',
-        width: '800px',
-        height: '500px',
+        width: '600px',
+        height: '750px',
         overflow: 'hidden',
     },
 };

@@ -8,8 +8,9 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import emailApi from '../../../apis/emailApis/emailApi';
 import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
+import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 
-function UserProfileModify(props) {
+function UserProfileModify({ isCount }) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
@@ -20,16 +21,7 @@ function UserProfileModify(props) {
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
-    const [inputUser, setInputUser] = useState({
-        username: '',
-        password: '',
-        checkPassword: '',
-        email: '',
-        name: '',
-        nickname: '',
-        phoneNumber: '',
-        role: "USER"
-    })
+    const [inputUser, setInputUser] = useState(isCount)
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
@@ -53,7 +45,7 @@ function UserProfileModify(props) {
                 return;
             }
         }
-        const signupData = await usersignupApi(inputUser);
+        const signupData = await mypageProfileModify(inputUser);
         console.log(signupData);
         if (!signupData.isSuccess) {
             const newFieldErrors = showFieldErrorMessage(signupData);
@@ -175,7 +167,7 @@ function UserProfileModify(props) {
                 </div>
                 <div>
                     <div css={s.usernameInput}>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#ffffff' }} />
+                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />
                         <button onClick={checkUsername}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}

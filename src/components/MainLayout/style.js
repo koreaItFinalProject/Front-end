@@ -89,6 +89,7 @@ export const children = css`
     align-items: center;
     padding-bottom: 60px;
     height: 100%;
+    border-radius: 20px;
 `;
 
 export const footer = css`

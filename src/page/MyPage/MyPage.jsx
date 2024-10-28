@@ -13,10 +13,10 @@ import { useRecoilState } from 'recoil';
 import ModifyProfilePage from './ModifyProfilePage/ModifyProfilePage';
 import ReactModal from 'react-modal';
 import AlramInfoPage from './AlramInfoPage/AlramInfoPage';
-import ReviewInfo from '../../components/Info/ReviewInfo/ReviewInfo';
 import UserProfileModify from './UserProfileModify/UserProfileModify';
 import PostModifyPage from './PostModifyPage/PostModifyPage';
-import CommentInfo from '../../components/Info/CommentInfo/CommentInfo';
+import CommentStatePage from './CommentStatePage/CommentStatePage';
+import ReviewStatePage from './ReviewStatePage/ReviewStatePage';
 
 function MyPage(props) {
     const navigate = useNavigate();
@@ -30,8 +30,15 @@ function MyPage(props) {
         comment: {}
     })
     const [isOpen, setIsOpen] = useState();
-    const openModal = () => setIsOpen(true);
-    const closeModal = () => setIsOpen(false);
+    const openModal = () => {
+        setIsOpen(true)
+        console.log(isOpen);
+    };
+    const closeModal = () => {
+        setIsOpen(false)
+        console.log(isOpen);
+
+    };
 
     const startTimer = useCallback(() => {
         const timer = setInterval(() => {
@@ -80,57 +87,57 @@ function MyPage(props) {
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
-                <ModifyProfilePage setIsOpen={setIsOpen} />
+                <ModifyProfilePage handleOnModalClick={handleOnModalClick} setIsOpen={setIsOpen} value={"userinfo"} closeModal={closeModal} isOpen={isOpen} />
             </div>
             <div css={s.mainBox}>
                 <div css={s.mainBoxLayout}>
                     <div>
                         <div css={s.post}>
-                            <div onClick={handleOnModalClick} value={"board"}>
+                            <div>
                                 <div css={s.postInventory} >
                                     <BsFillFileEarmarkPostFill />
                                     <p>게시글</p>
                                 </div>
-                                <div css={s.box}>
+                                <button css={s.box} onClick={handleOnModalClick} value={"post"}>
                                     <p>게시글 수 :
                                         {
                                             isCount.board.length == 0 ? '' : isCount.board.length
                                         }</p>
-                                </div>
+                                </button>
                             </div>
                         </div>
-                        <div css={s.comment} onClick={handleOnModalClick} value={"comment"} >
+                        <div css={s.comment}>
                             <div >
                                 <div css={s.commentInventory}>
                                     <FaRegCommentDots />
                                     <p>댓글관리</p>
                                 </div>
-                                <div css={s.box}>
+                                <button css={s.box} onClick={handleOnModalClick} value={"comment"}>
                                     <p>댓글 수 :
                                         {
                                             isCount.comment.length == 0 ? '' : isCount.comment.length
                                         }
                                     </p>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
                     <div>
                         <div css={s.review}>
-                            <div onClick={() => navigate('/')} value={"review"}>
+                            <div>
                                 <div css={s.reviewInventory}>
                                     <MdOutlineRateReview />
                                     <p>리뷰관리</p>
                                 </div>
-                                <div css={s.box} onClick={handleOnModalClick}>
+                                <button css={s.box} onClick={handleOnModalClick} value={"review"}>
                                     <p>리뷰 수 :
                                         {isCount.review.length == 0 ? '' : isCount.review.length}</p>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div css={s.information}>
                             <div >
-                                <div css={s.alarm} onClick={handleOnModalClick} value={"alram"}>
+                                <div css={s.alarm}>
                                     {
                                         alram ?
                                             <RiAlarmWarningLine className='white-alarm-icon' /> :
@@ -138,34 +145,35 @@ function MyPage(props) {
                                     }
                                     <p>알림정보</p>
                                 </div>
-                                <div css={s.box} onClick={() => navigate('/')}>
+                                <button css={s.box} onClick={handleOnModalClick} value={"alram"}>
                                     <p>알림 수 : {0}</p>
-                                </div>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
-                    <button onClick={closeModal}>Close</button>
-                    {
-                        check === "userinfo" ?
-                            <UserProfileModify isCount={isCount.user} />
-                            :
-                            check === "post" ?
-                                <PostModifyPage isCount={isCount.board} />
-                                :
-                                check === "comment" ?
-                                    <CommentInfo isCount={isCount.comment} />
-                                    :
-                                    check === "review" ?
-                                        <ReviewInfo isCount={isCount.review} />
-                                        :
-                                        check === "alram" ?
-                                            <AlramInfoPage isCount={isCount} />
-                                            : <></>
-                    }
-                </ReactModal>
             </div>
+            <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
+                <button onClick={closeModal}>Close</button>
+                {
+                    check === "userinfo" ?
+                        <UserProfileModify isCount={isCount.user} />
+                        :
+                        check === "post" ?
+                            <PostModifyPage isCount={isCount.board} />
+                            :
+                            check === "comment" ?
+                                <CommentStatePage isCount={isCount.comment} />
+                                :
+                                check === "review" ?
+                                    <ReviewStatePage isCount={isCount.review} />
+                                    :
+                                    check === "alram" ?
+                                        <AlramInfoPage isCount={isCount} />
+                                        : <></>
+                }
+            </ReactModal>
+
         </div>
     );
 }

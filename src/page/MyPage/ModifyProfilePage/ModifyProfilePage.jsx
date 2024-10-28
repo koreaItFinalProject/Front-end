@@ -2,40 +2,22 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FaPencilAlt } from "react-icons/fa";
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { State } from '../../../atom/userState';
-import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
 
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import ReactModal from 'react-modal';
 
-function ModifyProfilePage({ setIsOpen }) {
+function ModifyProfilePage({ handleOnModalClick, setIsOpen, isOpen, closeModal, value }) {
     const user = useRecoilValue(State);
     const [modifyState, setModifySelect] = useState(true);
-    const [modifySave, setModifySave] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const setUser = useSetRecoilState(State);
     const inputRef = useRef(null);
     const [modifyUserInfo, setModifyUserInfo] = useState({})
     const [check, setCheck] = useState("user");
-
-    const handleChangeOnClick = async () => {
-        setModifySelect(!modifyState);
-        setModifySave(!modifySave);
-        console.log(modifyUserInfo);
-        if (modifySave && !modifyState) {
-            const response = await mypageProfileModify(modifyUserInfo);
-            console.log(response);
-            if (response.status === 200) {
-                // alert("완료");
-                // userInfoRess.refetch();
-                console.log(1);
-            } else {
-                alert("실패");
-            }
-        }
-    }
 
     const handleOnInput = (e) => {
         const { name, value } = e.target;
@@ -55,9 +37,6 @@ function ModifyProfilePage({ setIsOpen }) {
             setUserInfo(user.user);
         }
     }, [user]);
-    // console.log(user.user);
-
-
 
     const handleImageClick = () => {
         inputRef.current.click(); // 파일 선택창 열기
@@ -88,15 +67,14 @@ function ModifyProfilePage({ setIsOpen }) {
         );
     };
 
-    console.log(modifyUserInfo?.img);
-
     return (
         <div css={s.layout}>
             <div css={s.modifyButton}>
-                <button onClick={() => setIsOpen(true)}>수정하기<FaPencilAlt /></button>
+                <button onClick={handleOnModalClick} value={value}>수정하기<FaPencilAlt /></button>
             </div>
+
             <div css={s.profileBox}>
-                <div onClick={!modifyState ? handleImageClick : null} css={[
+                <div onClick={handleImageClick} css={[
                     s.profileimage,
                     !modifyState && { cursor: 'pointer' }
                 ]}>
@@ -126,50 +104,6 @@ function ModifyProfilePage({ setIsOpen }) {
                             <p>{userInfo?.phoneNumber}</p>
                         </div>
                     </div>
-                    {/* {
-                        modifyState ?
-                            <div>
-                                <div>
-                                    <p>이름 :</p>
-                                    <p>아이디 :</p>
-                                    <p>닉네임 :</p>
-                                    <p>이메일 :</p>
-                                    <p>전화번호 :</p>
-                                </div>
-                                <div>
-                                    <p>{userInfo?.name}</p>
-                                    <p>{userInfo?.username}</p>
-                                    <p>{userInfo?.nickname}</p>
-                                    <p>{userInfo?.email}</p>
-                                    <p>{userInfo?.phoneNumber}</p>
-                                </div>
-                            </div>
-                            :
-                            <div>
-                                <div>
-                                    <p>이름 :</p>
-                                    <p>아이디 : </p>
-                                    <p>닉네임 : </p>
-                                    <p>이메일 : </p>
-                                    <p>전화번호 :</p>
-                                </div>
-                                <div>
-                                    <input name='name'
-                                        value={modifyUserInfo.name}
-                                        onChange={handleOnInput} />
-                                    <p>{userInfo.username}</p>
-                                    <input name='nickname'
-                                        value={modifyUserInfo.nickname}
-                                        onChange={handleOnInput} />
-                                    <input name='email'
-                                        value={modifyUserInfo.email}
-                                        onChange={handleOnInput} />
-                                    <input name='phoneNumber'
-                                        value={modifyUserInfo.phoneNumber}
-                                        onChange={handleOnInput} />
-                                </div>
-                            </div>
-                    } */}
                 </div>
             </div>
         </div>
