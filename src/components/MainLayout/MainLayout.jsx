@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import { useLocation } from 'react-router-dom';
 
 function MainLayout({ children, setCheck, setInputvalue }) {
-    
+    const location = useLocation();
+
     return (
         <div css={s.background}>
             <div css={s.layout}>
@@ -25,9 +26,15 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                     <div css={s.children}>
                         {children}
                     </div>
-                    <div css={s.footer}>
-                        <Footer setCheck={setCheck} setInputvalue={setInputvalue} />
-                    </div>
+                    {
+                        location.pathname.includes('/board/detail')
+                            ?
+                            <></>
+                            :
+                            <div css={s.footer}>
+                                <Footer setCheck={setCheck} setInputvalue={setInputvalue} />
+                            </div>
+                    }
                 </div>
             </div>
         </div>

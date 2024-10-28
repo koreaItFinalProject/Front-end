@@ -1,20 +1,33 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import BackButton from "../../../components/BackButton/BackButton";
+import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
+import { useState } from "react";
+import useGetComments from "../../../apis/CommentApis/getCommentsApi";
 
 function DetailPage(props) {
     const navigate = useNavigate();
     const params = useParams();
     const boardId = params.boardId;
-
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
+    const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
+
+    const [mode, setMode] = useState("comment");
+    const [replyTo, setReplyTo] = useState("");
+
+    const [commentData, setCommentData] = useState({
+        boardId,
+        parentId: null,
+        content: ""
+    });
 
     const board = useQuery(
         ["boardQuery", boardId],
@@ -37,6 +50,8 @@ function DetailPage(props) {
             retry: 0
         }
     );
+
+    const comments = useGetComments(boardId);
 
     const deleteBoardMutation = useMutation(
         async () => await instance.delete(`/board/${boardId}`),
@@ -96,70 +111,126 @@ function DetailPage(props) {
         dislikeMutation.mutateAsync();
     }
 
+    const handleModifyCommentButtonOnClick = (commentId, content) => {
+        setCommentData(prevComment => ({
+            commentId,
+            content
+        }));
+        setMode("modify");
+    };
+
+    const handleModifyCommentCancelButtonOnClick = () => {
+        setCommentData(prevComment => ({
+            commentId: 0,
+            content: ""
+        }));
+        setMode("comment");
+    };
+
+    const handleReplyButtonOnClick = (commentId, nickname) => {
+        if (!accessCheck) {
+            alert("로그인 후 작성 가능합니다.");
+            return;
+        }
+        setCommentData(comment => ({
+            ...comment,
+            content: "",
+            parentId: commentId === comment.parentId ? null : commentId
+        }));
+        setReplyTo(nickname);
+    };
+
+    const handleCancelReplyOnClick = () => {
+        setCommentData(comment => ({
+            ...comment,
+            parentId: null
+        }));
+        setReplyTo("");
+    };
+
     return (
         <div css={s.layout}>
-            <Link to={"/board?page=1"}><h1>게시판</h1></Link>
-            {
-                board.isLoading && <></>
-            }
-            {
-                board.isError && <h1>{board.error.response.data}</h1>
-            }
-            {
-                board.isSuccess &&
-                <>
-                    <div css={s.header}>
-                        <div css={s.writerInfo}>
-                            <img src="" alt="" />
-                            <div>{board.data.data.nickname}</div>
-                        </div>
-                        <div css={s.title}>
-                            <div>{board.data.data.title}</div>
-                        </div>
-                        <div css={s.boardInfoContainer}>
-                            <div css={s.boardInfo}>
-                                <div>{board?.data?.data.writeDate}</div>
-                                <div>조회수 {board?.data?.data.viewCount}</div>
-                                <div>추천수 {boardLike?.data?.data.likeCount}</div>
+            <BackButton prevPage={"게시판"} prevPageUrl={"/board"} />
+            <div css={s.subLayout}>
+                {
+                    board.isLoading && <></>
+                }
+                {
+                    board.isError && <h1>{board.error.response.data}</h1>
+                }
+                {
+                    board.isSuccess &&
+                    <>
+                        <div css={s.header}>
+                            <div css={s.writerInfo}>
+                                <img src="" alt="" />
+                                <div>{board.data.data.nickname}</div>
                             </div>
-                            <div css={s.buttonLayout}>
-                                <div>
-                                    {
-                                        !!boardLike?.data?.data?.boardLikeId
-                                            ?
-                                            <button onClick={handleDislikeOnClick}>
-                                                <IoMdHeart />
-                                            </button>
-                                            :
-                                            <button onClick={handleLikeOnClick}>
-                                                <IoMdHeartEmpty />
-                                            </button>
-                                    }
+                            <div css={s.title}>
+                                <div>{board.data.data.title}</div>
+                            </div>
+                            <div css={s.boardInfoContainer}>
+                                <div css={s.boardInfo}>
+                                    <div>{board?.data?.data.writeDate}</div>
+                                    <div>조회수 {board?.data?.data.viewCount}</div>
+                                    <div>추천수 {boardLike?.data?.data.likeCount}</div>
                                 </div>
-                                <div>
-                                    {
-                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                        <>
-                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                        </>
-                                    }
+                                <div css={s.buttonLayout}>
+                                    <div>
+                                        {
+                                            !!boardLike?.data?.data?.boardLikeId
+                                                ?
+                                                <button onClick={handleDislikeOnClick}>
+                                                    <IoMdHeart />
+                                                </button>
+                                                :
+                                                <button onClick={handleLikeOnClick}>
+                                                    <IoMdHeartEmpty />
+                                                </button>
+                                        }
+                                    </div>
+                                    <div>
+                                        {
+                                            board?.data?.data?.writerId === userInfoData?.data?.userId &&
+                                            <>
+                                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                            </>
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div css={s.contentBox}>
-                        <ReactQuill
-                            value={board.data.data.content}
-                            readOnly={true}
-                            modules={{
-                                toolbar: false
-                            }}
-                        />
-                    </div>
-                </>
-            }
-            <Comments />
+                        <div css={s.contentBox}>
+                            <ReactQuill
+                                value={board.data.data.content}
+                                readOnly={true}
+                                modules={{
+                                    toolbar: false
+                                }}
+                            />
+                        </div>
+                    </>
+                }
+                <div css={s.commentContainer}>
+                    <Comments
+                        commentData={commentData}
+                        handleModifyCommentButtonOnClick={handleModifyCommentButtonOnClick}
+                        handleModifyCommentCancelButtonOnClick={handleModifyCommentCancelButtonOnClick}
+                        handleReplyButtonOnClick={handleReplyButtonOnClick}
+                        handleCancelReplyOnClick={handleCancelReplyOnClick}
+                    />
+                </div>
+            </div>
+            <div css={s.footer}>
+                <BoardFooter
+                    mode={mode}
+                    boardId={boardId}
+                    commentData={commentData}
+                    setCommentData={setCommentData}
+                    replyTo={replyTo}
+                />
+            </div>
         </div>
     );
 }

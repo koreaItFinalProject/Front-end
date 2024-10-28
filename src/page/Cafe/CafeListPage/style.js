@@ -4,7 +4,7 @@ export const layout = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 5px 15px;
+    padding: 0 15px;
     overflow-y: hidden;
     background-color: #191919;
 `;
@@ -27,9 +27,9 @@ export const searchContainer = css`
 
     input {
         width: 550px;
+        padding: 10px 70px 10px 20px;
         border: none;
-        border-radius: 40px;
-        padding: 10px 20px;
+        border-radius: 20px;
         background-color: #ffffff;
     }
 
@@ -44,11 +44,13 @@ export const searchContainer = css`
         transform: translateY(-50%);
         padding: 5px 15px;
         border-radius: 20px;
+        font-weight: 600;
         background-color: #f2780c;
     }
 
     select {
-        height: 42px;
+        height: 100%;
+        border: none;
         border-radius: 20px;
         text-align: center;
         padding: 7px;

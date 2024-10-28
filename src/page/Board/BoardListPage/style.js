@@ -1,12 +1,13 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    padding: 0px 15px;
+    padding: 0 15px;
     background-color: #191919;
     overflow: hidden;
 `;
@@ -17,32 +18,38 @@ export const title = css`
     color: #f2780c;
 `;
 
-export const boardListHeader = css`
+export const writeButton = css`
     display: flex;
-    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    background-color: #f2780c;
+    position: absolute;
+    top: 92%;
+    left: 88%;
 
-    select {
-        width: 75px;
-        height: 100%;
-        border-radius: 20px;
-        text-align: center;
-        padding: 7px;
+    svg {
+        width: 30px;
+        height: 30px;
+        fill: #ffffff;
     }
 `;
 
-export const searchBox = css`
+export const searchContainer = css`
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    margin-left: 10px;
     position: relative;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 15px;
 
     input {
-        width: 450px;
-        padding: 10px 20px;
+        width: 550px;
+        padding: 10px 70px 10px 20px;
         border: none;
         border-radius: 20px;
         background-color: #ffffff;
@@ -54,7 +61,7 @@ export const searchBox = css`
 
     button {
         position: absolute;
-        right: 5px;
+        right: 87px;
         top: 50%;
         transform: translateY(-50%);
         padding: 5px 15px;
@@ -62,26 +69,32 @@ export const searchBox = css`
         font-weight: 600;
         background-color: #f2780c;
     }
-`;
 
-export const writeButton = css`
-        padding: 9px 20px;
-        margin-left: 10px;
+    select {
+        height: 100%;
+        border: none;
         border-radius: 20px;
-        font-weight: 600;
-        background-color: #f2780c;
+        text-align: center;
+        padding: 7px;
+    }
 `;
 
 export const boardNavigater = css`
+    height: 30px;
     margin-bottom: 15px;
 
     button {
-        margin-right: 10px;
-        padding: 5px 25px;
-        background-color: #ffffff;
         border-radius: 20px;
-        font-size: 18px;
+        border: none;
+        color: black;
+        margin: 0 10px 0 0;
+        padding: 5px 13px;
+        font-size: 14px;
         font-weight: 600;
+        white-space: nowrap;
+        outline: none;
+        background-color: #ffffff;
+        cursor: pointer;
     }
 `;
 

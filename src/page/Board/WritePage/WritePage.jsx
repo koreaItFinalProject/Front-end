@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize';
 import 'react-quill/dist/quill.snow.css';
+import { IoCloseOutline } from "react-icons/io5";
 Quill.register("modules/imageResize", ImageResize);
 
 function WritePage(props) {
@@ -86,21 +87,18 @@ function WritePage(props) {
     }, []);
 
     const toolbarOptions = useMemo(() => [
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'font': [] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'color': [] }, { 'background': [] }, { 'align': [] }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-        [{ 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video', 'formula'],
-        ['blockquote', 'code-block'],
+        ['image']
     ], []);
 
     return (
         <div css={s.layout}>
-            <Link to={"/board?page=1"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
+                <div css={s.buttonLayout}>
+                    <button onClick={() => navigate("/board?page=1")}><IoCloseOutline /></button>
+                    <h1>글쓰기</h1>
+                    <button onClick={handleWriteSubmitOnClick}>등록하기</button>
+                </div>
+                <input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 {
@@ -113,11 +111,7 @@ function WritePage(props) {
                     ref={quillRef}
                     theme="snow"
                     onChange={handleQuillValueOnChange}
-                    style={{
-                        boxSizing: "border-box",
-                        width: "100%",
-                        height: "100%"
-                    }}
+                    placeholder="내용을 입력하세요"
                     modules={{
                         toolbar: {
                             container: toolbarOptions,
@@ -130,10 +124,6 @@ function WritePage(props) {
                         },
                     }}
                 />
-            </div>
-            <div css={s.buttonLayout}>
-                <button onClick={handleWriteSubmitOnClick}>등록하기</button>
-                <button onClick={() => navigate("/board?page=1")}>취소</button>
             </div>
         </div>
     );

@@ -3,10 +3,9 @@ import { css } from "@emotion/react";
 export const layout = css`
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    padding: 30px 15px 0px 15px;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     background-color: #191919;
 `;
 
@@ -18,7 +17,8 @@ export const detailHeader = css`
     gap: 10px;
     padding: 10px 10px;
     background-color: #ffffff;
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 
     h1 {
         font-size: 36px;
@@ -76,8 +76,8 @@ export const detailInfo = css`
 export const detailContent = css`
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     padding: 10px 10px;
-    border-radius: 10px;
     background-color: #ffffff;
 `;
 

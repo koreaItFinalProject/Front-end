@@ -16,12 +16,10 @@ import DetailPage from './page/Board/DetailPage/DetailPage';
 import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
 import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
-import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
 import MyPage from './page/MyPage/MyPage';
-import SignLayout from './components/MainLayout/SignLayout/SignLayout';
 import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
 import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
 import BoardListPage from './page/Board/BoardListPage/BoardListPage';
@@ -31,7 +29,8 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
-import BoardLayout from './components/Board/BoardLayout/BoardLayout';
+import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
+import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -44,11 +43,13 @@ function App() {
   const [searchFilter, setSearchFilter] = useState("title");
   const limit = 20;
 
+
   useEffect(() => {
     if (!authRefresh) {
       setAuthRefresh(true);
     }
   }, [location.pathname]);
+
 
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
@@ -91,7 +92,7 @@ function App() {
       retry: 0,
       refetchOnWindowFocus: false,
       onSuccess: response => {
-        const permitAllPaths = ["/user/auth/sadasd", "/owner"];
+        const permitAllPaths = ["/user/auth/", "/owner"];
         for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
@@ -118,6 +119,7 @@ function App() {
       }
     }
   );
+
   const userInfo = useQuery(
     ["userInfoQuery"],
     async () => {
@@ -128,12 +130,13 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
+
   return (
     <>
       <Global styles={reset} />
       <Routes>
         <Route path='/manager/*' element={
-          <MainLayout>
+          <ManagerMainLayout>
             <Routes>
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
@@ -141,14 +144,24 @@ function App() {
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
-          </MainLayout>
+          </ManagerMainLayout>
         } />
 
+        <Route path='/cafe/*' element={
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route path='detail/:cafeId' element={<CafeDetailPage />} />
+              <Route path='review/:cafeId' element={<CafeReviewPage />} />
+              <Route path='review/modify/:cafeId' element={<CafeReviewModifyPage />} />
+            </Routes>
+          </MainLayout>
+        } />
 
         <Route path='/board/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/' element={<BoardListPage
+              <Route path='' element={<BoardListPage
                 boardList={boardList}
                 fetchNextPage={fetchNextPage}
                 hasNextPage={hasNextPage}
@@ -182,10 +195,6 @@ function App() {
         <Route path='/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/detail/:cafeId' element={<CafeDetailPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/cafe/review/:cafeId' element={<CafeReviewPage />} />
-              <Route path='/cafe/review/modify/:cafeId' element={<CafeReviewModifyPage />} />
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/mypage' element={<MyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />

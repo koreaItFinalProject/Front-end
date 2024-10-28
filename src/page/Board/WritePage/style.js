@@ -5,18 +5,16 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 0px 15px;
+    overflow: auto;
 `;
 
 export const boardHeader = css`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    height: 50px;
-    margin-bottom: 10px;
-    padding: 5px 5px;
-    border-top: 5px solid black;
-    border-bottom: 1px solid black;
+    height: 100px;
+    padding: 10px;
+    background-color: #ffffff;
 
     & div {
         font-size: 20px;
@@ -24,46 +22,100 @@ export const boardHeader = css`
     }
 
     & input {
-        width: 50%;
-        height: 80%;
-        margin-left: 10px;
+        padding: 5px 15px;
+        width: 100%;
+        height: 100%;
         border: none;
-        font-size: 18px;
+        font-size: 20px;
         background: none;
         outline: none;
-    }
-`;
 
-export const editorLayout = css`
-    height: 60%;
-    margin-bottom: 60px;
+    }
+
+    input::placeholder {
+        color: #b4b4b4;
+    }
 `;
 
 export const buttonLayout = css`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
+    margin: 15px 0;
     width: 100%;
-    height: 50px;
 
-    & button:nth-of-type(1) {
-        width: 200px;
-        height: 50px;
-        margin-right: 5px;
-        background-color: #5ec298;
-        font-size: 16px;
-        color: white;
+    h1 {
+        font-size: 20px;
     }
 
-    & button:nth-of-type(2) {
-        width: 200px;
-        height: 50px;
-        background-color: #333447;
-        font-size: 16px;
-        color: white;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        font-weight: 600;
+        color: #f2780c;
+        
+        svg {
+            width: 30px;
+            height: 30px;
+        }
     }
+`;
+
+export const editorLayout = css`
+    display: flex;
+    box-sizing: border-box;
+    flex-grow: 1;
+    background-color: #ffffff;
+
+    .quill {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .ql-toolbar.ql-snow {
+        box-sizing: border-box;
+        padding: 15px 15px;
+        border: none;
+        border-top: 3px solid #f2780c;
+
+        span {
+            margin: 0%;
+            width: 100%;
+            height: 100%;
+        }
+        button {
+            width: 30px;
+            height: 30px;
+            padding: 0;
+
+            & svg {
+            width: 30px;
+            height: 30px;
+            }
+        }
+    }
+
+    .ql-container.ql-snow {
+        position: relative;
+        width: 100%;
+        border: none;
+        padding: 10px 0;
+        overflow-y: auto;
+    }
+
+    .ql-editor {
+        padding: 0 15px;
+    }
+
+
 `;
 
 export const loadingLayout = css`

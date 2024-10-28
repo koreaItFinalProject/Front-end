@@ -11,7 +11,7 @@ export const card = css`
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     height: 500px;
     box-shadow: 0px 3px 5px #00000011;
     background-color: #ffffff;
@@ -31,7 +31,7 @@ export const cardImg = css`
     align-items: center;
     width: 100%;
     height: 300px;
-    border-radius: 20px;
+    border-radius: 10px;
     overflow: hidden;
 
     & > img {

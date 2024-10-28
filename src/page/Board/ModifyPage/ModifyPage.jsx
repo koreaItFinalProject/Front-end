@@ -91,21 +91,18 @@ function ModifyPage(props) {
     }, []);
 
     const toolbarOptions = useMemo(() => [
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'font': [] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        [{ 'color': [] }, { 'background': [] }, { 'align': [] }],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'list': 'check' }],
-        [{ 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video', 'formula'],
-        ['blockquote', 'code-block'],
+        ['image'],
     ], []);
 
     return (
         <div css={s.layout}>
-            <Link to={"/board?page=1"}><h3>게시판</h3></Link>
             <div css={s.boardHeader}>
-                <div>제목</div><input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
+                <div css={s.buttonLayout}>
+                    <button onClick={() => navigate(`/board/detail/${boardId}`)}>취소</button>
+                    <h1>글수정</h1>
+                    <button onClick={handleModifySubmitOnClick}>수정하기</button>
+                </div>
+                <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 {
@@ -119,11 +116,6 @@ function ModifyPage(props) {
                     theme='snow'
                     value={modifyBoard.content}
                     onChange={handleQuillValueOnChange}
-                    style={{
-                        boxSizing: "border-box",
-                        width: "100%",
-                        height: "100%"
-                    }}
                     modules={{
                         toolbar: {
                             container: toolbarOptions,
@@ -137,10 +129,7 @@ function ModifyPage(props) {
                     }}
                 />
             </div>
-            <div css={s.buttonLayout}>
-                <button onClick={handleModifySubmitOnClick}>수정하기</button>
-                <button onClick={() => navigate(`/board/detail/${boardId}`)}>취소</button>
-            </div>
+            
         </div>
     );
 }

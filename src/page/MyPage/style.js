@@ -6,9 +6,8 @@ export const layout = css`
     height: 100%;
     display: flex;
     align-items: center;
-    padding-top: 20px;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #1c1c1b;
     & p {
         color:#747474;
         margin: 0;
@@ -21,51 +20,20 @@ export const profileBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 280px;
+    height: 225px;
     width: 100%;
-    border-radius: 20px;
     background-color: #ffffff;
-    cursor: pointer;
-`;
-
-export const profileimage = css`
-    cursor: pointer;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    border: 1px solid black;
     box-sizing: border-box;
-    & img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        box-sizing:border-box
-    }
-`;
-
-export const infoLayout = css`
-    width: 100%;
-`;
-
-
-
-export const userInfo = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & p {
-        padding: 5px 0px;
-    }
+    border-radius: 0px 0px 20px 20px;
 `;
 
 export const mainBox = css`
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    margin-top: 10px;
     margin-bottom: 10px;
     padding: 0px;
+    flex-grow: 1;
 `;
 
 export const mainBoxLayout = css`
@@ -255,3 +223,20 @@ export const box = css`
     align-items: center;
     cursor: pointer;
 `;
+
+export const modalStyles = {
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.3)', // 어두운 반투명 배경
+    },
+    content: {
+        background: 'white', // 모달 내부 배경색
+        boxSizing: 'border-box',
+        transform: 'translate(-50%, -50%)',
+        top: '50%',
+        left: '50%',
+        padding: '20px',
+        width: '800px',
+        height: '500px',
+        overflow: 'hidden',
+    },
+};

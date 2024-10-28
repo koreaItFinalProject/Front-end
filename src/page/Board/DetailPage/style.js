@@ -1,9 +1,19 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    padding: 10px 10px;
+    background-color: #191919;
+`;
+
+export const subLayout = css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
     overflow-y: auto;
 `;
 
@@ -11,9 +21,9 @@ export const header = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    margin-bottom: 5px;
     padding: 10px;
-    border-radius: 10px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: #ffffff;
 `;
 
@@ -39,6 +49,7 @@ export const title = css`
     cursor: default;
 
     div {
+        margin: 5px 0px;
         font-size: 24px;
         font-weight: 600;
     }
@@ -83,11 +94,27 @@ export const buttonLayout = css`
 
 export const contentBox = css`
     box-sizing: border-box;
-    margin-bottom: 5px;
-    padding: 10px;
-    border-radius: 10px;
     background-color: #ffffff;
     cursor: default;
+    border-bottom: 5px solid #f2780c;
+
+    img {
+        border-radius: 20px;
+        cursor: default;
+    }
+
+    .quill {
+        padding: 13px 10px;
+    }
+
+    .ql-container.ql-snow {
+        width: 100%;
+        border: none;
+        overflow-y: auto;
+        .q1-editor {
+            padding: 0px;
+        }
+    }
 
     .ql-container.ql-snow {
         border: none;
@@ -96,4 +123,20 @@ export const contentBox = css`
     & img:not(img[width]) {
         width: 100%;
     }  
+`;
+
+export const commentContainer = css`
+    display: flex;
+    flex-grow: 1;
+`;
+
+export const footer = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 60px;
+    background-color: #F4F4F6;
+    border-radius: 0px 0px 10px 10px;
+    border-top: 1px solid #c9c9c9;
+    position: absolute;
+    top: 100%;
 `;

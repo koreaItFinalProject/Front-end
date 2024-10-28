@@ -13,8 +13,10 @@ export const layout = css`
 `;
 
 export const reviewStat = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     div {
@@ -28,25 +30,39 @@ export const reviewStat = css`
         width: 20px;
         height: 20px;
     }
-`;
-
-export const categoryContainer = css`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
 
     button {
-        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f2780c;
+        font-weight: 600;
+        
+        svg {
+            padding-top: 5px;
+            margin-right: 5px;
+            color: #f2780c;
+        }
+
     }
+`;
+
+export const stat = css`
+    display: flex;
+    flex-direction: row;
 `;
 
 export const category = css`
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
 
     div {
-        margin-right: 8px;
         padding: 5px 10px;
+        width: fit-content;
         border: 1px solid #000000;
         border-radius: 36px;
         cursor: default;
