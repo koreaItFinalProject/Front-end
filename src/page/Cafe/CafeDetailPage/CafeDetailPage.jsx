@@ -4,8 +4,6 @@ import * as s from "./style";
 import { useLocation } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
-import { useQuery } from 'react-query';
-import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeApis/CafeLikeApi';
@@ -18,8 +16,7 @@ function CafeDetailPage() {
     const [selectMenu, setSelectMenu] = useState('review');
     const [averageRating, setAverageRating] = useState(0);
 
-    const { data: reviewList, refetch } = useReviewQuery(cafeItem.id);
-    console.log(reviewList);
+    const { data: reviewList, refetch } = useReviewQuery(cafeItem?.id);
 
     useEffect(() => {
         if (reviewList && reviewList?.reviews.length > 0) {

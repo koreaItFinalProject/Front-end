@@ -9,15 +9,21 @@ import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
-    { value: 'bakery', label: '베이커리' },
-    { value: 'brunch', label: '브런치' },
-    { value: 'mood', label: '분위기' },
-    { value: 'desert', label: '디저트' }
+    { value: 'interior', label: '인테리어가 멋져요' },
+    { value: 'music', label: '음악이 좋아요' },
+    { value: 'view', label: '뷰가 좋아요' },
+    { value: 'photo', label: '사진이 잘 나와요' },
+    { value: 'concentrate', label: '집중하기 좋아요' },
+    { value: 'parking', label: '주차하기 편해요' },
+    { value: 'pet', label: '반려동물과 가기 좋아요' },
+    { value: 'children', label: '아이와 가기 좋아요' },
+    
 ];
 
 function CafeReviewPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
+    const MAX_LENGTH = 400;
     const { cafeItem } = location.state || {};
     const textareaRef = useRef(null);
     const queryClient = useQueryClient();
@@ -44,10 +50,13 @@ function CafeReviewPage(props) {
 
     const handleTextareaChange = (e) => {
         adjustTextareaHeight(textareaRef.current);
+        if (e.target.value.length > MAX_LENGTH) {
+            e.target.value = e.target.value.slice(0, MAX_LENGTH);
+        }
         setReviewData(review => ({
             ...review,
-            [e.target.name]: e.target.value
-        }))
+            review: e.target.value
+        }));
     };
 
     const handleCategoryOnClick = (e) => {
@@ -92,9 +101,9 @@ function CafeReviewPage(props) {
             return;
         }
         reviewMutation.mutateAsync();
-    }
+    };
 
-    console.log(reviewData);
+    console.log(cafeItem);
 
     return (
         <div css={s.layout}>
@@ -108,7 +117,7 @@ function CafeReviewPage(props) {
                     setisClick={setisClick} />
             </div>
             <div css={s.category}>
-                <div>어떤 카페인가요?</div>
+                <h1>어떤 점이 좋았나요?</h1>
                 <div css={s.buttons}>
                     {categories.map(category => (
                         <button
@@ -123,17 +132,24 @@ function CafeReviewPage(props) {
                 </div>
             </div>
             <div css={s.review}>
-                <h2>후기를 작성해 보세요!</h2>
+                <h1>후기를 작성해 보세요!</h1>
                 <div css={s.textarea}>
                     <textarea
                         name="review"
+                        maxLength={MAX_LENGTH}
                         value={reviewData.review}
                         ref={textareaRef}
                         onChange={handleTextareaChange}
-                        placeholder='유용한 팁을 알려주세요! 작성한 내용은 마이페이지 카페 상세페이지에 노출 됩니다.'>
+                        placeholder=
+                        '유용한 팁을 알려주세요! 작성한 내용은 카페 상세페이지에 노출 됩니다.'
+                        >
                     </textarea>
                 </div>
-                <button onClick={handleSubmitOnClick}>작성 완료</button>
+                <div css={s.count}>
+                    <span>{reviewData.review.length}</span>
+                    <span>/{MAX_LENGTH.toLocaleString()}</span>
+                </div>
+                <button onClick={handleSubmitOnClick}>리뷰 등록</button>
             </div>
         </div>
     );
