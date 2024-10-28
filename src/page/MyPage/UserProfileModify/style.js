@@ -6,8 +6,7 @@ export const layout = css`
     display: flex;
     flex-direction: column; 
     overflow-y: auto;
-    padding: 0px 140px;
-    padding-top: 50px;
+    /* padding-top: 50px; */
     *{
         color: #ffffff;
         & button {
@@ -17,6 +16,7 @@ export const layout = css`
         }
         button:disabled {
         cursor: not-allowed;
+    
     }
     }
 `;
@@ -37,6 +37,7 @@ export const Info = css`
     }
     & input {
         padding-left: 10px;
+        color: #E94334;
     }
 
     & > div{
