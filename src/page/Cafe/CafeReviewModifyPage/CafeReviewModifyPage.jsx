@@ -6,18 +6,23 @@ import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
-    { value: 'bakery', label: '베이커리' },
-    { value: 'brunch', label: '브런치' },
-    { value: 'mood', label: '분위기' },
-    { value: 'desert', label: '디저트' }
+    { value: 'interior', label: '인테리어가 멋져요' },
+    { value: 'music', label: '음악이 좋아요' },
+    { value: 'view', label: '뷰가 좋아요' },
+    { value: 'photo', label: '사진이 잘 나와요' },
+    { value: 'concentrate', label: '집중하기 좋아요' },
+    { value: 'parking', label: '주차하기 편해요' },
+    { value: 'pet', label: '반려동물과 가기 좋아요' },
+    { value: 'children', label: '아이와 가기 좋아요' },
 ];
 
 function CafeReviewModifyPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    const { reviewId, reviewItem, cafeItem } = location.state || {};
+    const { reviewId, reviewItem, cafeDetail } = location.state || {};
     const textareaRef = useRef(null);
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
@@ -83,31 +88,30 @@ function CafeReviewModifyPage(props) {
         {
             onSuccess: response => {
                 alert("리뷰가 수정되었습니다");
-                navigate(`/cafe/detail/${cafeItem.id}`, { state: { cafeItem } });
+                navigate(`/cafe/detail/${cafeDetail?.id}`, { state: { cafeDetail } });
             }
         }
     )
 
     const handleSubmitOnClick = async () => {
-        if(!reviewData.rating) {
+        if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if(!reviewData.category) {
+        } else if (!reviewData.category) {
             alert("카테고리를 선택해주세요.");
             return;
-        } else if(reviewData.review.trim("") === "") {
+        } else if (reviewData.review.trim("") === "") {
             alert("후기를 작성해주세요.");
             return;
         }
         reviewModifyMutation.mutateAsync();
     }
 
-    console.log(reviewData);
-
     return (
         <div css={s.layout}>
+            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeDetail?.id}`} />
             <div css={s.rating}>
-                <h1>{cafeItem.cafeName}</h1>
+                <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating
                     score={score}
                     setScore={setScore}
@@ -115,7 +119,7 @@ function CafeReviewModifyPage(props) {
                     setisClick={setisClick} />
             </div>
             <div css={s.category}>
-                <div>어떤 카페인가요?</div>
+                <h1>어떤 점이 좋았나요?</h1>
                 <div css={s.buttons}>
                     {categories.map(category => (
                         <button

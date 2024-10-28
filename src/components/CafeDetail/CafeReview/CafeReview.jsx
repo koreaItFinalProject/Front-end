@@ -1,13 +1,27 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../../../apis/util/starRating';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
+import { IoPencil } from "react-icons/io5";
 
-function CafeReview({ cafeItem, review, averageRating, refetch }) {
+const categories = [
+    { label: '인테리어가 멋져요' },
+    { label: '음악이 좋아요' },
+    { label: '뷰가 좋아요' },
+    { label: '반려동물과 가기 좋아요' },
+    { label: '집중하기 좋아요' },
+    { label: '주차하기 편해요' },
+    { label: '사진이 잘 나와요' },
+    { label: '아이와 가기 좋아요' },
+];
+
+function CafeReview({ cafeDetail, review, averageRating, refetch }) {
     const navigate = useNavigate();
+    const params = useParams();
+    const cafeId = params.cafeId;
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
 
@@ -30,11 +44,11 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
             alert("로그인 후 작성 가능합니다.");
             return;
         }
-        navigate(`/cafe/review/${cafeItem.id}`, { state: { cafeItem } });
+        navigate(`/cafe/review/${cafeId}`, { state: { cafeDetail } });
     };
 
     const handleModifyReviewClick = (reviewId, reviewItem) => {
-        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeItem } });
+        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeDetail } });
     };
 
     const handleDeleteReviewOnClick = (reviewId) => {
@@ -45,21 +59,22 @@ function CafeReview({ cafeItem, review, averageRating, refetch }) {
         <div css={s.layout}>
             <h1>Review</h1>
             <div css={s.reviewStat}>
-                <div>{averageRating.toFixed(1)} 점</div>
-                <StarRating averageRating={averageRating} />
-            </div>
-            <div css={s.categoryContainer}>
-                <div css={s.category}>
-                    <div>베이커리</div>
-                    <div>브런치</div>
-                    <div>분위기</div>
-                    <div>디저트</div>
+                <div css={s.stat}>
+                    <div>{averageRating.toFixed(1)} 점</div>
+                    <StarRating averageRating={averageRating} />
                 </div>
-                <button onClick={handleWriteReviewClick}>리뷰 쓰기</button>
+                <button onClick={handleWriteReviewClick}><IoPencil />리뷰 쓰기</button>
+            </div>
+            <div css={s.category}>
+                {
+                    categories.map(category => (
+                        <div>{category.label}</div>
+                    ))
+                }
             </div>
             {
-                review?.reviews.map(reviewItem =>
-                    <div key={reviewItem.id} css={s.review}>
+                review?.reviews.map((reviewItem, index) =>
+                    <div key={index} css={s.review}>
                         <div css={s.reviewInfo}>
                             <div css={s.profileImg}>
                                 <img src="" alt="" />

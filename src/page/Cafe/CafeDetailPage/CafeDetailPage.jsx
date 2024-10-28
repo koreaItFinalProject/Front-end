@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
-import { useQuery } from 'react-query';
-import { instance } from '../../../apis/util/instance';
 import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeApis/CafeLikeApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import { useReviewQuery } from '../../../apis/ReviewApis/getReviewList';
+import { useCafeDetailQuery } from '../../../apis/CafeApis/getCafeDetailApi';
 
 function CafeDetailPage() {
-    const location = useLocation();
-    const { cafeItem } = location.state || {};
+    const params = useParams();
+    const cafeId = params.cafeId;
     const [selectMenu, setSelectMenu] = useState('review');
     const [averageRating, setAverageRating] = useState(0);
 
-    const { data: reviewList, refetch } = useReviewQuery(cafeItem.id);
-    console.log(reviewList);
+    const { data: cafeDetail } = useCafeDetailQuery(cafeId);
+    const { data: reviewList, refetch } = useReviewQuery(cafeId);
+    const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
+    const likeMutation = useLikeMutation(cafeId, refetchCafeLike);
+    const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
 
     useEffect(() => {
         if (reviewList && reviewList?.reviews.length > 0) {
@@ -28,10 +30,6 @@ function CafeDetailPage() {
             setAverageRating(average);
         }
     }, [reviewList]);
-
-    const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeItem?.id);
-    const likeMutation = useLikeMutation(cafeItem?.id, refetchCafeLike);
-    const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
 
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
@@ -51,7 +49,7 @@ function CafeDetailPage() {
             <div css={s.detailHeader}>
                 <div css={s.titleLike}>
                     <div>
-                        <h1>{cafeItem?.cafeName}</h1>
+                        <h1>{cafeDetail?.cafeName}</h1>
                     </div>
                     <div css={s.heart}>
                         {
@@ -67,13 +65,13 @@ function CafeDetailPage() {
                         }
                     </div>
                 </div>
-                <div>{cafeItem?.address}</div>
+                <div>{cafeDetail?.address}</div>
                 <div css={s.reviewStat}>
                     <StarRating averageRating={averageRating} />
                     <div>{averageRating.toFixed(1)}</div>
                 </div>
                 <div css={s.detailInfo}>
-                    <div>{cafeItem?.category}</div>
+                    <div>{cafeDetail?.category}</div>
                     <div>리뷰 {reviewList?.reviewCount}</div>
                 </div>
             </div>
@@ -95,7 +93,7 @@ function CafeDetailPage() {
                 {
                     selectMenu === 'review'
                         ? <CafeReview
-                            cafeItem={cafeItem}
+                            cafeDetail={cafeDetail}
                             review={reviewList}
                             averageRating={averageRating}
                             refetch={refetch}
