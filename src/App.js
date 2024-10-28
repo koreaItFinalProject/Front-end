@@ -53,7 +53,7 @@ function App() {
   const cafe = useQuery(
     ["cafeQuery", check, inputvalue],
     async () => {
-      return instance.get(`/cafe/get/${check}/${inputvalue}`);
+      return instance.get(`cafe/get?category=${check}&search=${inputvalue}`);
     },
     {
       refetchOnWindowFocus: false,
