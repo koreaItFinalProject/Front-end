@@ -1,38 +1,38 @@
 import { css } from "@emotion/react";
 
 export const mainLayout = css`
-    display: flex;
-    align-items: center;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
     height: 100%;
     width: 100%;
+    flex-grow: 1;
+    overflow: auto;
 `
 
 export const content = css`
-    display: flex;
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
-    flex-direction: column;
-`
-
-export const contentBox = css`
-    display: flex;
+    height: 28px;
     width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-around;
+    border-collapse: collapse; // 테이블 경계 간격 제거
 
-    padding-right: 230px;
-`
-export const layout = css`
-    display: flex;
-    width: 100%;
-    height: 100%;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
+    th, td {
+        border: 1px solid #dbdbdb; // 테두리 설정
+        padding: 10px; // 패딩 추가
+        text-align: center; // 중앙 정렬
+        border-left: none;
+        :nth-last-child(1){
+            border-right: none;
+        }
+    }
+
+    th{
+        border-top: none;
+    }
+
+    thead{
+        position: sticky;
+        top: 0px;
+        background-color: #f0f0f0;
+    }
 `

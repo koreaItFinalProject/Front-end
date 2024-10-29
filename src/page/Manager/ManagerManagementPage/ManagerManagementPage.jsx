@@ -4,12 +4,15 @@ import * as s from './style';
 import { useMutation, useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import ReactModal from 'react-modal';
-import UserContent from '../../../components/UserContent/UserContent';
+import UserInfo from '../../../components/Info/UserInfo/UserInfo';
+import BoardInfo from '../../../components/Info/BoardInfo/BoardInfo';
+import CommentInfo from '../../../components/Info/CommentInfo/CommentInfo';
+import ReviewInfo from '../../../components/Info/ReviewInfo/ReviewInfo';
 function ManagerManagementPage(props) {
     const [role, setRole] = useState("user");
     const [isOpen, setIsOpen] = useState(false);
-    const [ check, setCheck ] = useState("user");
-    const [ info, setInfo ] = useState({
+    const [check, setCheck] = useState("user");
+    const [info, setInfo] = useState({
         user: {},
         board: {},
         comment: {},
@@ -40,8 +43,7 @@ function ManagerManagementPage(props) {
             }
         }
     );
-    const handleDeleteOnclick = (e) => {
-        const id = e.target.value;
+    const handleDeleteOnclick = (id) => {
         console.log(id);
         deleteUserMutaion.mutateAsync(id);
     };
@@ -53,6 +55,7 @@ function ManagerManagementPage(props) {
         // response = await instance.get("/manager/info");
         console.log(response);
         setInfo(response?.data);
+        setCheck("user");
         openModal();
     }
 
@@ -62,47 +65,80 @@ function ManagerManagementPage(props) {
                 <button value={"user"} onClick={handleRoleOnClick}>일반 회원</button>
                 <button value={"owner"} onClick={handleRoleOnClick}>기업 회원</button>
             </div>
-            <table css={s.userList}>
-                <tr>
-                    <th>number</th>
-                    {role === "owner" &&
-                        <th>cafename</th>
+            <div css={s.listContainer}>
+                <table css={s.userList}>
+                    <tr>
+                        <th>number</th>
+                        {role === "owner" &&
+                            <th>cafename</th>
+                        }
+                        <th>username</th>
+                        <th>name</th>
+                        <th>email</th>
+                        <th>phonenumber</th>
+                        <th>삭제</th>
+                    </tr>
+                    {
+                        AllList?.data?.data.map((result, index) => (
+                            <>
+                                <tr key={index} >
+                                    <td onClick={() => hanldeGetInfoOnClick(result.id)}>{index + 1}</td>
+                                    {role === "owner" &&
+                                        <td onClick={() => hanldeGetInfoOnClick(result.id)}>{result.cafeName}</td>
+                                    }
+                                    <td onClick={() => hanldeGetInfoOnClick(result.id)}>{result.username}</td>
+                                    <td onClick={() => hanldeGetInfoOnClick(result.id)}>{result.name}</td>
+                                    <td onClick={() => hanldeGetInfoOnClick(result.id)}>{result.email}</td>
+                                    <td onClick={() => hanldeGetInfoOnClick(result.id)}>{result.phoneNumber}</td>
+                                    {/* <td>{result.id}</td> */}
+                                    <td onClick={() => handleDeleteOnclick(result.id)}>삭제</td>
+                                </tr>
+                            </>
+                        ))
                     }
-                    <th>username</th>
-                    <th>name</th>
-                    <th>email</th>
-                    <th>phonenumber</th>
-                </tr>
-                {
-                    AllList?.data?.data.map((result, index) => (
-                        <>
-                            <tr key={index} onClick={() => hanldeGetInfoOnClick(result.id)}>
-                                <td>{index + 1}</td>
-                                {role === "owner" &&
-                                    <td>{result.cafeName}</td>
-                                }
-                                <td>{result.username}</td>
-                                <td>{result.name}</td>
-                                <td>{result.email}</td>
-                                <td>{result.phoneNumber}</td>
-                                <td>{result.id}</td>
-                                <button value={result.id} onClick={handleDeleteOnclick}>삭제</button>
-                            </tr>
-                        </>
-                    ))
-                }
-            </table>
+                </table>
+            </div>
             <ReactModal isOpen={isOpen} style={s.modalStyles}>
-                <button onClick={closeModal}>Close</button>
-                <div css={s.layout}>
-                    <div css={s.contentBox}>
-                        <div onClick={() => setCheck("user")}>사용자 정보</div>
-                        <div onClick={() => setCheck("board")}>게시글 기록</div>
-                        <div onClick={() => setCheck("comment")}>댓글 기록</div>
-                        <div onClick={() => setCheck("review")}>리뷰 기록</div>
+                <div css={s.boxlayout}>
+                    <div css={s.selects}>
+                        <button onClick={closeModal}>Close</button>
+                        {
+                            check !== "user" && (
+                                <div css={s.radioContainer}>
+                                    <label css={s.radioLabel}>
+                                        <input type="radio" id="select" name="shop" />
+                                        <span>최신순</span>
+                                    </label>
+                                    <label css={s.radioLabel}>
+                                        <input type="radio" id="select2" name="shop" />
+                                        <span>오래된 순</span>
+                                    </label>
+                                </div>
+
+                            )
+                        }
                     </div>
-                    <div css={s.content}>
-                        <UserContent check={check} info={info[check]}/>
+                    <div css={s.layout2}>
+                        <div css={s.contentBox}>
+                            <div style={{ backgroundColor: check === 'user' ? "#7e7e7e" : "" }} onClick={() => setCheck("user")}>사용자 정보</div>
+                            <div style={{ backgroundColor: check === 'board' ? "#7e7e7e" : "" }} onClick={() => setCheck("board")}>게시글 기록</div>
+                            <div style={{ backgroundColor: check === 'comment' ? "#7e7e7e" : "" }} onClick={() => setCheck("comment")}>댓글 기록</div>
+                            <div style={{ backgroundColor: check === 'review' ? "#7e7e7e" : "" }} onClick={() => setCheck("review")}>리뷰 기록</div>
+                        </div>
+                        <div css={s.content}>
+                            {
+                                check === "user" ?
+                                    <UserInfo info={info[check]} />
+                                    :
+                                    check === "board" ?
+                                        <BoardInfo info={info[check]} />
+                                        :
+                                        check === "comment" ?
+                                            <CommentInfo info={info[check]} />
+                                            :
+                                            <ReviewInfo info={info[check]} />
+                            }
+                        </div>
                     </div>
                 </div>
             </ReactModal>
