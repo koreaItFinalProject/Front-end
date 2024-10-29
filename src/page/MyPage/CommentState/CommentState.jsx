@@ -3,13 +3,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as s from "./style";
 import { useNavigate, useParams } from 'react-router-dom';
 
-function CommentState({ comment, board }) {
+function CommentState({ isCount }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
-    const sortedPosts = [...comment].sort((a, b) => b.id - a.id);
+    const sortedPosts = [...isCount].sort((a, b) => b.id - a.id);
 
-    console.log(comment);
-    console.log(board);
+    console.log(isCount);
 
     const handeleOnRecentClick = () => {
         setRecent(!recent);
@@ -25,24 +24,18 @@ function CommentState({ comment, board }) {
         }
     }
 
-    const handleDateCut = useCallback((write_date) => {
-        if (write_date) {
-            const dateOnly = new Date(write_date).toISOString().split('T')[0];
-            console.log(dateOnly); // "YYYY-MM-DD" 형식의 날짜만 출력
-            return dateOnly;
-        }
-        return null;
-    }, [comment.write_date])
-
-    useEffect(() => {
-        handleDateCut(comment.write_date);
-    }, [comment.write_date]);
+    const extractImageTags = (content) => {
+        const imgTags = content.match(/<img[^>]*\/?>/i) || [];
+        return imgTags.map((img, index) => (
+            <div key={index} dangerouslySetInnerHTML={{ __html: img }} />
+        ));
+    };
 
     return (
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
                 <p>
-                    게시글 수 : {comment.length}
+                    게시글 수 : {isCount.length}
                 </p>
             </div>
             <div css={s.select}>
@@ -55,19 +48,23 @@ function CommentState({ comment, board }) {
             </div>
             <di>
                 {sortedPosts.map((result) => (
-                    <div css={s.layout} key={result.id} >
+                    <div css={s.layout} key={result.boardId} >
                         <div css={s.view}>
-                            <p>입력 날짜 : {result.write_date}</p>
+                            <p>입력 날짜 : {result.commentWriteDate}</p>
                         </div>
                         <div css={s.imgTitle}>
-                            <div css={s.title} onClick={() => navigate(`/board/detail/${result.board_id}`)} >
-                                <p>{result.content}</p>
+                            <div css={s.img}>
+                                {extractImageTags(result.boardContent)}
+                            </div>
+                            <div css={s.title} onClick={() => navigate(`/board/detail/${result.boardId}`)} >
+                                <p>{result.boardTitle} 에 단 댓글 내용</p>
+                                <p>{result.commentContent}</p>
                             </div>
                         </div>
                         <div>
                         </div>
                         <div css={s.button}>
-                            <button onClick={() => handleDeleteClick(result.id)}>삭제</button>
+                            <button onClick={() => handleDeleteClick(result.boardId)}>삭제</button>
                         </div>
                     </div>
                 ))}

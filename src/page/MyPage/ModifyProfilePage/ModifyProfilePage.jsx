@@ -30,6 +30,7 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
+        console.log(file);
         if (file === undefined) {
             setImageModify(modifyUserInfo.img !== userInfoProfile.img ? true : false);
             setModifyUserInfo(user => ({
@@ -54,6 +55,10 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
                         ...user,
                         img: url
                     }));
+                    setUserInfoProfile(user => ({
+                        ...user,
+                        img:url
+                    }))
                     setImageModify(true);
                 } catch (error) {
                     console.error("다운로드 에러");
@@ -62,14 +67,17 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
         );
     };
 
-    const handleProfileImageClick = async (id, imgurl) => {
-        const response = await mypageProfileApi(id, imgurl);
+    const handleProfileImageClick = async (imgurl) => {
+        const response = await mypageProfileApi(imgurl);
+        setImageModify(false);
+        console.log(response);
         console.log(userInfoProfile);
         if (response.status === 200) {
             alert("이미지 변경 성공");
         }
     }
 
+    // 체크해봐야할듯
     const handleProfileImageCancel = useCallback(() => {
         setImageModify(false);
         setModifyUserInfo((imgs) => ({
@@ -98,7 +106,7 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
                     {
                         imageModify === true ?
                             <div>
-                                <button onClick={() => handleProfileImageClick(userInfoProfile.id, modifyUserInfo.img)}>확인</button>
+                                <button onClick={() => handleProfileImageClick(modifyUserInfo.img)}>확인</button>
                                 <button onClick={handleProfileImageCancel}>취소</button>
                             </div>
                             : <></>

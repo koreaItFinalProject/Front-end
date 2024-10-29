@@ -177,7 +177,7 @@ function UserProfileModify({ isCount ,}) {
             <div css={s.Info}>
                 <div css={s.logo}>
                     <h1>
-                        회원가입
+                        수정
                     </h1>
                 </div>
                 <div>
@@ -244,7 +244,7 @@ function UserProfileModify({ isCount ,}) {
                 <div css={s.signupbutton}>
                     <button
                         onClick={handlesignuppageOnClick}
-                        disabled={!complete}>가입하기</button>
+                        disabled={!complete}>수정하기</button>
                 </div>
             </div>
         </div>
