@@ -87,7 +87,7 @@ function PostModify({ isCount }) {
                     <div css={s.layout} key={result.id} >
                         <div css={s.view}>
                             <p>조회수 : {result.view_count}</p>
-                            <p>입력 날짜 : {result.write_date}</p>
+                            <p>입력 날짜 : {result.writeDate}</p>
                         </div>
                         <div css={s.imgTitle}>
                             <div css={s.img}>

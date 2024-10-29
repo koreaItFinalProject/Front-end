@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as s from "./style";
 import { useNavigate, useParams } from 'react-router-dom';
 
+
 function CommentState({ isCount }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
