@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid';
 import * as s from "./style";
 import ReactModal from 'react-modal';
 
-function ModifyProfilePage({ handleOnModalClick, setIsOpen, isOpen, closeModal, value }) {
+function ModifyProfilePage({ handleOnModalClick, value }) {
     const user = useRecoilValue(State);
     const [modifyState, setModifySelect] = useState(true);
     const [userInfo, setUserInfo] = useState({});
@@ -19,17 +19,7 @@ function ModifyProfilePage({ handleOnModalClick, setIsOpen, isOpen, closeModal, 
     const [modifyUserInfo, setModifyUserInfo] = useState({})
     const [check, setCheck] = useState("user");
 
-    const handleOnInput = (e) => {
-        const { name, value } = e.target;
-        if (name === 'phoneNumber' && value.length > 11) {
-            return; // 11자리를 초과하면 입력을 무시
-        }
-        setModifyUserInfo({
-            ...modifyUserInfo,
-            [name]: value
-        })
-        console.log(modifyUserInfo);
-    }
+    console.log(modifyState);
 
     useEffect(() => {
         if (user) {
@@ -70,7 +60,7 @@ function ModifyProfilePage({ handleOnModalClick, setIsOpen, isOpen, closeModal, 
     return (
         <div css={s.layout}>
             <div css={s.modifyButton}>
-                <button onClick={handleOnModalClick} value={value}>수정하기<FaPencilAlt /></button>
+                <button onClick={handleOnModalClick} value={value} >수정하기<FaPencilAlt /></button>
             </div>
 
             <div css={s.profileBox}>

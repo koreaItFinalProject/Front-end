@@ -226,6 +226,9 @@ export const box = css`
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    p {
+        pointer-events: none; 
+    }
 `;
 
 export const modalStyles = {
