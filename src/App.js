@@ -32,6 +32,7 @@ import ReactModal from 'react-modal';
 import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import OwnerMyPage from './page/Owner/OwnerMyPage/OwnerMyPage';
+import CafeModifyPage from './page/Owner/CafeModifyPage/CafeModifyPage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -82,9 +83,9 @@ function App() {
       refetchOnWindowFocus: false,
       onSuccess: response => {
         const permitAllPaths = ["/user/auth/", "/owner"];
-        for (let permitAllPasth of permitAllPaths) {
-          if (location.pathname.startsWith(permitAllPasth)) {
-            console.log(permitAllPasth);
+        for (let permitAllPath of permitAllPaths) {
+          if (location.pathname.startsWith(permitAllPath)) {
+            console.log(permitAllPath);
             const blockPaths = ["/user"];
             for (let blockPath of blockPaths) {
               if (location.pathname.startsWith(blockPath)) {
@@ -141,6 +142,7 @@ function App() {
             <Routes>
               <Route path='/mypage' element={<OwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
+              <Route path='/cafe/modify/:cafeId' element={<CafeModifyPage />} />
             </Routes>
           </MainLayout>
         } />

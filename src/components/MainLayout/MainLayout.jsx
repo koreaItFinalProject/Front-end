@@ -6,6 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 function MainLayout({ children, setCheck, setInputvalue }) {
     const location = useLocation();
+    const noFooterPaths = ['/board/detail', '/cafe/modify'];
+
+    const isNoFooter = noFooterPaths.some(path => location.pathname.includes(path));
 
     return (
         <div css={s.background}>
@@ -23,11 +26,11 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                     <div css={s.header}>
                         <Header />
                     </div>
-                    <div css={s.children}>
+                    <div css={s.children(isNoFooter)}>
                         {children}
                     </div>
                     {
-                        location.pathname.includes('/board/detail')
+                        isNoFooter
                             ?
                             <></>
                             :

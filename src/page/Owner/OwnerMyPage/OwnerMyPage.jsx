@@ -34,22 +34,14 @@ function OwnerMyPage(props) {
     })
     const [isOpen, setIsOpen] = useState();
 
-    const boardId = async () => {
-        try {
-            await instance.get(`/cafe`)
-        } catch (error) {
-            
-        }
-    }
-
     const openModal = () => {
         setIsOpen(true)
         console.log(isOpen);
     };
+
     const closeModal = () => {
         setIsOpen(false)
         console.log(isOpen);
-
     };
 
     // const startTimer = useCallback(() => {
@@ -94,18 +86,25 @@ function OwnerMyPage(props) {
         console.log(check);
     };
 
-    const handleCafeManageOnClick = () => {
-
-    }
-
-    console.log(userManagement);
+    const handleCafeManageOnClick = async () => {
+        const userId = userManagement?.data?.data?.user.id;
+        if (userId) {
+            try {
+                const response = await instance.get(`/cafe/user`);
+                navigate(`/owner/cafe/modify/${response?.data}`);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
 
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
                 <ModifyProfilePage
                     handleOnModalClick={() => handleOnModalClick("userinfo")}
-                    setIsOpen={setIsOpen} value={"userinfo"}
+                    setIsOpen={setIsOpen}
+                    value={"userinfo"}
                     closeModal={closeModal}
                     isOpen={isOpen}
                 />

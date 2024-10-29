@@ -26,15 +26,20 @@ function CafeDetailPage() {
 
     const handleLikeOnClick = () => {
         likeMutation.mutateAsync();
-    }
+    };
 
     const handleDislikeOnClick = () => {
         dislikeMutation.mutateAsync();
-    }
+    };
+
+    console.log(cafeDetail);
 
     return (
         <div css={s.layout}>
             <BackButton prevPage={'카페 리스트'} prevPageUrl={'/cafe/list'} />
+            <div css={s.bannerImg}>
+                <img src={cafeDetail?.img} alt="Banner Image" />
+            </div>
             <div css={s.detailHeader}>
                 <div css={s.titleLike}>
                     <div>
@@ -67,16 +72,16 @@ function CafeDetailPage() {
             <div css={s.detailContent}>
                 <div css={s.menuButtons}>
                     <button
-                        css={selectMenu === 'review' ? s.activeButton : null}
-                        onClick={handleMenuOnClick}
-                        value={"review"}>
-                        Review
-                    </button>
-                    <button
                         css={selectMenu === 'menu' ? s.activeButton : null}
                         onClick={handleMenuOnClick}
                         value={"menu"}>
                         Menu
+                    </button>
+                    <button
+                        css={selectMenu === 'review' ? s.activeButton : null}
+                        onClick={handleMenuOnClick}
+                        value={"review"}>
+                        Review
                     </button>
                 </div>
                 {
