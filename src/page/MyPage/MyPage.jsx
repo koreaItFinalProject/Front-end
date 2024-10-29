@@ -63,6 +63,7 @@ function MyPage(props) {
         },
         {
             retry: 0,
+            refetchOnWindowFocus: false,
             enabled: !user?.username,
             onSuccess: response => {
                 setUser(response.data);
@@ -154,7 +155,7 @@ function MyPage(props) {
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
-                <button onClick={closeModal}>Close</button>
+                <button css={s.closeButton} onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
                         <UserProfileModify isCount={isCount.user} />
@@ -163,7 +164,7 @@ function MyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={isCount.comment} />
+                                <CommentState isCount={{ comment: isCount.comment, board: isCount.board }} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

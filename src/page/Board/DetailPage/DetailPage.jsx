@@ -11,6 +11,7 @@ import BackButton from "../../../components/BackButton/BackButton";
 import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
 import useGetComments from "../../../apis/CommentApis/getCommentsApi";
+import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
 
 function DetailPage(props) {
     const navigate = useNavigate();
@@ -19,6 +20,7 @@ function DetailPage(props) {
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
+    const deleteBoard = useDeleteBoardMutation(boardId);
 
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
@@ -53,16 +55,6 @@ function DetailPage(props) {
 
     const comments = useGetComments(boardId);
 
-    const deleteBoardMutation = useMutation(
-        async () => await instance.delete(`/board/${boardId}`),
-        {
-            onSuccess: response => {
-                alert("게시글을 삭제하였습니다.");
-                navigate("/board?page=1");
-            }
-        }
-    );
-
     const likeMutation = useMutation(
         async () => {
             return await instance.post(`/board/${boardId}/like`);
@@ -88,7 +80,7 @@ function DetailPage(props) {
     const handleDeleteBoardOnClick = () => {
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
         if (selection) {
-            deleteBoardMutation.mutateAsync();
+            deleteBoard.mutateAsync();
         } else {
             navigate(`/board/detail/${boardId}`);
         }
