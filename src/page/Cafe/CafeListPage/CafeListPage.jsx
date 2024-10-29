@@ -27,8 +27,8 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         navigate(`/cafe/detail/${cafeItem.id}`);
     };
 
+    console.log(cafeList);
 
-    console.log(check);
     return (
         <div css={s.layout}>
             <h1 css={s.title}>Cafe List</h1>
@@ -54,7 +54,9 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                 {
                     cafeList?.map((cafeItem, index) => (
                         <div css={s.listbox} key={index} onClick={() => handleCafeClick(cafeItem)}>
-                            <div css={s.pictureBox}></div>
+                            <div css={s.pictureBox}>
+                                <img src={cafeItem.img} alt="CafeImg" />
+                            </div>
                             <div css={s.showBox}>
                                 <div css={s.spanBox}>
                                     <h1>{cafeItem.cafeName}</h1>

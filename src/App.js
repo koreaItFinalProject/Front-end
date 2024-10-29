@@ -85,7 +85,6 @@ function App() {
         const permitAllPaths = ["/user/auth/", "/owner"];
         for (let permitAllPath of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPath)) {
-            console.log(permitAllPath);
             const blockPaths = ["/user"];
             for (let blockPath of blockPaths) {
               if (location.pathname.startsWith(blockPath)) {

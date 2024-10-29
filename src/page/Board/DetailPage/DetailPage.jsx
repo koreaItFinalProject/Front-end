@@ -165,7 +165,7 @@ function DetailPage(props) {
                                 <div css={s.boardInfo}>
                                     <div>{board?.data?.data.writeDate}</div>
                                     <div>조회수 {board?.data?.data.viewCount}</div>
-                                    <div>추천수 {boardLike?.data?.data.likeCount}</div>
+                                    <div>좋아요 {boardLike?.data?.data.likeCount}</div>
                                 </div>
                                 <div css={s.buttonLayout}>
                                     <div>
