@@ -7,18 +7,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { IoPencil } from "react-icons/io5";
 
-const categories = [
-    { label: '인테리어가 멋져요' },
-    { label: '음악이 좋아요' },
-    { label: '뷰가 좋아요' },
-    { label: '반려동물과 가기 좋아요' },
-    { label: '집중하기 좋아요' },
-    { label: '주차하기 편해요' },
-    { label: '사진이 잘 나와요' },
-    { label: '아이와 가기 좋아요' },
-];
-
-function CafeReview({ cafeDetail, review, averageRating, refetch }) {
+function CafeReview({ cafeDetail, refetch }) {
     const navigate = useNavigate();
     const params = useParams();
     const cafeId = params.cafeId;
@@ -47,8 +36,8 @@ function CafeReview({ cafeDetail, review, averageRating, refetch }) {
         navigate(`/cafe/review/${cafeId}`, { state: { cafeDetail } });
     };
 
-    const handleModifyReviewClick = (reviewId, reviewItem) => {
-        navigate(`/cafe/review/modify/${reviewId}`, { state: { reviewId, reviewItem, cafeDetail } });
+    const handleModifyReviewClick = (reviewItem) => {
+        navigate(`/cafe/review/modify/${reviewItem.id}`, { state: { reviewItem, cafeDetail } });
     };
 
     const handleDeleteReviewOnClick = (reviewId) => {
@@ -57,29 +46,32 @@ function CafeReview({ cafeDetail, review, averageRating, refetch }) {
 
     return (
         <div css={s.layout}>
-            <h1>Review</h1>
+            <div css={s.title}>
+                <h1>Review</h1>
+                <div>{cafeDetail?.reviewCount}</div>
+            </div>
             <div css={s.reviewStat}>
                 <div css={s.stat}>
-                    <div>{averageRating.toFixed(1)} 점</div>
-                    <StarRating averageRating={averageRating} />
+                    <div>{cafeDetail?.totalRating} 점</div>
+                    <StarRating averageRating={cafeDetail?.totalRating} />
                 </div>
                 <button onClick={handleWriteReviewClick}><IoPencil />리뷰 쓰기</button>
             </div>
             <div css={s.category}>
                 {
-                    categories.map(category => (
-                        <div>{category.label}</div>
+                    cafeDetail?.reviewCategoryCounts.map((category, index) => (
+                        <div key={index}>{category.category.categoryNameKor} {category.categoryCount}</div>
                     ))
                 }
             </div>
             {
-                review?.reviews.map((reviewItem, index) =>
+                cafeDetail?.reviews.map((reviewItem, index) =>
                     <div key={index} css={s.review}>
                         <div css={s.reviewInfo}>
                             <div css={s.profileImg}>
                                 <img src="" alt="" />
                             </div>
-                            <div>{reviewItem.nickname}</div>
+                            <div>{reviewItem.user.nickname}</div>
                             <div>{reviewItem.writeDate}</div>
                         </div>
                         <div css={s.stars}>
@@ -91,7 +83,7 @@ function CafeReview({ cafeDetail, review, averageRating, refetch }) {
                                 userInfoData?.data?.userId === reviewItem.writerId
                                     ?
                                     <div>
-                                        <button onClick={() => handleModifyReviewClick(reviewItem.id, reviewItem)}>수정</button>
+                                        <button onClick={() => handleModifyReviewClick(reviewItem)}>수정</button>
                                         <button onClick={() => handleDeleteReviewOnClick(reviewItem.id)}>삭제</button>
                                     </div>
                                     :

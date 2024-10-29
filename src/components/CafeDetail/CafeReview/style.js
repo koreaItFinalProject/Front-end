@@ -5,10 +5,22 @@ export const layout = css`
     flex-direction: column;
     padding: 10px 10px;
     gap: 10px;
+`;
 
+export const title = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
     h1 {
         margin: 0;
+        margin-right: 5px;
         font-size: 24px;
+    }
+    
+    div {
+        font-size: 24px;
+        color: #00000081;
     }
 `;
 
@@ -35,13 +47,13 @@ export const reviewStat = css`
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0;
         color: #f2780c;
         font-weight: 600;
         
         svg {
-            padding-top: 5px;
             margin-right: 5px;
-            color: #f2780c;
+            fill: #f2780c;
         }
 
     }

@@ -9,14 +9,14 @@ import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
-    { value: 'interior', label: '인테리어가 멋져요' },
-    { value: 'music', label: '음악이 좋아요' },
-    { value: 'view', label: '뷰가 좋아요' },
-    { value: 'photo', label: '사진이 잘 나와요' },
-    { value: 'concentrate', label: '집중하기 좋아요' },
-    { value: 'parking', label: '주차하기 편해요' },
-    { value: 'pet', label: '반려동물과 가기 좋아요' },
-    { value: 'children', label: '아이와 가기 좋아요' },
+    { value: 1, label: '인테리어가 멋져요' },
+    { value: 2, label: '음악이 좋아요' },
+    { value: 3, label: '뷰가 좋아요' },
+    { value: 4, label: '반려동물과 가기 좋아요' },
+    { value: 5, label: '집중하기 좋아요' },
+    { value: 6, label: '주차하기 편해요' },
+    { value: 7, label: '사진이 잘 나와요' },
+    { value: 8, label: '아이와 가기 좋아요' },
 ];
 
 function CafeReviewPage(props) {
@@ -34,11 +34,9 @@ function CafeReviewPage(props) {
     const [reviewData, setReviewData] = useState({
         cafeId: cafeId,
         rating: score,
-        category: selectedCategory,
+        categoryIds: selectedCategory,
         review: ""
     });
-
-    console.log(reviewData);
 
     useEffect(() => {
         adjustTextareaHeight(textareaRef.current);
@@ -54,7 +52,7 @@ function CafeReviewPage(props) {
     useEffect(() => {
         setReviewData(review => ({
             ...review,
-            category: selectedCategory
+            categoryIds: selectedCategory
         }));
     }, [selectedCategory]);
 
@@ -96,7 +94,7 @@ function CafeReviewPage(props) {
         if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if (reviewData.category.length === 0) {
+        } else if (reviewData.categoryIds.length === 0) {
             alert("어떤점이 좋았는지 선택해주세요!");
             return;
         } else if (reviewData.review.trim("") === "") {
@@ -120,9 +118,9 @@ function CafeReviewPage(props) {
             <div css={s.category}>
                 <h1>어떤 점이 좋았나요?</h1>
                 <div css={s.buttons}>
-                    {categories.map(category => (
+                    {categories.map((category, index) => (
                         <button
-                            key={category.value}
+                            key={index}
                             onClick={() => handleCategoryOnClick(category.value)}
                             style={{
                                 backgroundColor: selectedCategory.includes(category.value) ? '#f2780c' : '#ffffff'

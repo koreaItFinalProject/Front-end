@@ -94,3 +94,13 @@ export const textarea = css`
         overflow: hidden;
     }
 `;
+
+export const count = css`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    
+    span {
+        font-size: 14px;
+    }
+`;
