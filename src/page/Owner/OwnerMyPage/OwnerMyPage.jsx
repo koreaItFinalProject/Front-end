@@ -161,7 +161,7 @@ function OwnerMyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={isCount.comment} />
+                                <CommentState comment={isCount.comment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

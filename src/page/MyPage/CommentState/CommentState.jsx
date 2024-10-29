@@ -4,11 +4,11 @@ import * as s from "./style";
 import { useNavigate, useParams } from 'react-router-dom';
 
 function CommentState({ comment, board }) {
+    console.log(comment);
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
     const sortedPosts = [...comment].sort((a, b) => b.id - a.id);
 
-    console.log(comment);
     console.log(board);
 
     const handeleOnRecentClick = () => {
@@ -25,18 +25,18 @@ function CommentState({ comment, board }) {
         }
     }
 
-    const handleDateCut = useCallback((write_date) => {
-        if (write_date) {
-            const dateOnly = new Date(write_date).toISOString().split('T')[0];
+    const handleDateCut = useCallback((writeDate) => {
+        if (writeDate) {
+            const dateOnly = new Date(writeDate).toISOString().split('T')[0];
             console.log(dateOnly); // "YYYY-MM-DD" 형식의 날짜만 출력
             return dateOnly;
         }
         return null;
-    }, [comment.write_date])
+    }, [comment.writeDate])
 
     useEffect(() => {
-        handleDateCut(comment.write_date);
-    }, [comment.write_date]);
+        handleDateCut(comment.writeDate);
+    }, [comment.writeDate]);
 
     return (
         <div css={s.mainLayout}>
@@ -57,7 +57,7 @@ function CommentState({ comment, board }) {
                 {sortedPosts.map((result) => (
                     <div css={s.layout} key={result.id} >
                         <div css={s.view}>
-                            <p>입력 날짜 : {result.write_date}</p>
+                            <p>입력 날짜 : {result.writeDate}</p>
                         </div>
                         <div css={s.imgTitle}>
                             <div css={s.title} onClick={() => navigate(`/board/detail/${result.board_id}`)} >
