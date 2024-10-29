@@ -12,7 +12,7 @@ export const layout = css`
 export const bannerImg = css`
     box-sizing: border-box;
     width: 100%;
-    height: 200px;
+    height: 220px;
     padding: 10px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -22,6 +22,7 @@ export const bannerImg = css`
         width: 100%;
         height: 100%;
         border-radius: 10px;
+        object-fit: cover;
     }
 `;
 

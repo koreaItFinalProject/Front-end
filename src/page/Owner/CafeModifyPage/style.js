@@ -11,7 +11,7 @@ export const layout = css`
 `;
 
 export const closeButton = css`
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     height: 40px;
     background-color: #ffffff;
 
@@ -27,6 +27,21 @@ export const closeButton = css`
     }
 `;
 
+export const bannerImg = css`
+    box-sizing: border-box;
+    width: 100%;
+    height: 220px;
+    padding: 10px;
+    background-color: #ffffff;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+`;
+
 export const detailHeader = css`
     display: flex;
     flex-direction: column;
@@ -39,6 +54,19 @@ export const detailHeader = css`
     h1 {
         font-size: 36px;
         margin: 0;
+    }
+`;
+
+export const imgChangeButton = css`
+    display: flex;
+    justify-content: flex-start;
+    padding: 0 10px;
+    width: 100%;
+    background-color: #ffffff;
+
+    button {
+        padding: 0;
+        margin-right: 10px;
     }
 `;
 
@@ -65,11 +93,12 @@ export const cafeNameInput = css`
 
 export const editButton = css`
     position: absolute;
-    right: 0; 
+    right: 10px; 
 
     svg {
         width: 30px;
         height: 30px;
+        fill: #f2780c;
         cursor: pointer;
     }
 `;

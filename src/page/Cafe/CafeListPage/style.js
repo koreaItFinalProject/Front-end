@@ -88,10 +88,16 @@ export const listbox = css`
 export const pictureBox = css`
     box-sizing: border-box;
     margin-right: 20px;
-    border: 1px solid #dbdbdb;
     border-radius: 10px;
-    width: 250px;
+    width: 300px;
     height: 130px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
 `;
 
 export const showBox = css`

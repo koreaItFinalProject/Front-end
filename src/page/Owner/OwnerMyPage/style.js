@@ -24,9 +24,8 @@ export const profileBox = css`
     justify-content: center;
     width: 100%;
     height: 225px;
+    border-bottom: 3px solid #f2780c;
     background-color: #ffffff;
-    border-radius: 20px;
-    margin-bottom: 10px;
 `;
 
 export const menuContainer = css`
@@ -36,9 +35,7 @@ export const menuContainer = css`
     align-items: center;
     flex-grow: 1;
     width: 100%;
-    padding: 10px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+    padding: 0 20px 10px 20px;
     background-color: #ffffff;
 `;
 
@@ -49,32 +46,26 @@ export const menu = css`
     align-items: center;
     padding: 0 10px;
     width: 100%;
-    height: 95px;
-    border-bottom: 3px solid #f2780c;
+    height: 100%;
+    border-bottom: 1px solid #f2780c;
     cursor: pointer;
-
-    p {
-        font-size: 16px;
-        color: #f2780c;
-        font-weight: 500;
-    }
-`;
-
-export const menuName = css`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-right: 10px;
-
+    
     svg {
-        margin-right: 20px;
-        width: 30px;
-        height: 30px;
+        margin-right: 10px;
+        width: 25px;
+        height: 25px;
     }
 
     p:nth-of-type(1) {
+        margin-right: 20px;
         font-size: 16px;
         color: black;
+        font-weight: 500;
+    }
+
+    p:nth-of-type(2) {
+        font-size: 16px;
+        color: #f2780c;
         font-weight: 500;
     }
 `;

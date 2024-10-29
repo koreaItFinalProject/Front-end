@@ -69,13 +69,25 @@ function OwnerMyPage(props) {
             onSuccess: response => {
                 setUser(response.data);
                 setCount(response.data);
-                console.log(user);
             },
             onError: response => {
                 alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
             }
         }
     );
+
+    const cafeData = useQuery(
+        ["cafeDataQuery"],
+        async () => {
+            const response = await instance.get('/cafe/owner');
+            return response?.data;
+        },
+        {
+            enabled: userManagement.isSuccess && !!userManagement?.data?.data,
+            retry: 0,
+            refetchOnWindowFocus: false,
+        }
+    )
 
     const handleOnModalClick = (value) => {
         if (value) {
@@ -87,15 +99,7 @@ function OwnerMyPage(props) {
     };
 
     const handleCafeManageOnClick = async () => {
-        const userId = userManagement?.data?.data?.user.id;
-        if (userId) {
-            try {
-                const response = await instance.get(`/cafe/user`);
-                navigate(`/owner/cafe/modify/${response?.data}`);
-            } catch (error) {
-                console.error(error);
-            }
-        }
+        navigate(`/owner/cafe/modify/${cafeData?.data?.cafeId}`);
     };
 
     return (
@@ -111,44 +115,32 @@ function OwnerMyPage(props) {
             </div>
             <div css={s.menuContainer}>
                 <div css={s.menu} onClick={() => handleOnModalClick("post")}>
-                    <div css={s.menuName}>
-                        <BsFillFileEarmarkPostFill />
-                        <p>게시글 관리</p>
-                    </div>
+                    <BsFillFileEarmarkPostFill />
+                    <p>작성한 게시글</p>
                     <p>{isCount.board.length === 0 ? '0' : isCount.board.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("comment")}>
-                    <div css={s.menuName}>
-                        <FaRegCommentDots />
-                        <p>댓글 관리</p>
-                    </div>
-                    <p>{isCount.comment.length === 0 ? '0' : isCount.comment.length}
-                    </p>
+                    <FaRegCommentDots />
+                    <p>작성한 댓글</p>
+                    <p>{isCount.comment.length === 0 ? '0' : isCount.comment.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("review")}>
-                    <div css={s.menuName}>
-                        <MdOutlineRateReview />
-                        <p>리뷰 관리</p>
-                    </div>
+                    <MdOutlineRateReview />
+                    <p>작성한 리뷰</p>
                     <p>{isCount.review.length === 0 ? '0' : isCount.review.length}</p>
                 </div>
                 <div css={s.menu} onClick={handleCafeManageOnClick}>
-                    <div css={s.menuName}>
-                        <PiCoffee />
-                        <p>카페 관리</p>
-                    </div>
+                    <PiCoffee />
+                    <p>카페 관리</p>
+                    <p>{cafeData?.data?.cafeName}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("review")}>
-                    <div css={s.menuName}>
-                        <VscMegaphone />
-                        <p>공지사항</p>
-                    </div>
+                    <VscMegaphone />
+                    <p>공지사항</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
-                    <div css={s.menuName}>
-                        <RiAlarmWarningFill />
-                        <p>알림 정보</p>
-                    </div>
+                    <RiAlarmWarningFill />
+                    <p>알림</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
