@@ -5,7 +5,7 @@ import * as s from "./style";
 function AlramInfoPage(props) {
     return (
         <div>
-            
+
         </div>
     );
 }
