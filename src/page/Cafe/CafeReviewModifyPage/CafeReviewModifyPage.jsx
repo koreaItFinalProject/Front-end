@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
@@ -9,45 +9,46 @@ import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
-    { value: 'interior', label: '인테리어가 멋져요' },
-    { value: 'music', label: '음악이 좋아요' },
-    { value: 'view', label: '뷰가 좋아요' },
-    { value: 'photo', label: '사진이 잘 나와요' },
-    { value: 'concentrate', label: '집중하기 좋아요' },
-    { value: 'parking', label: '주차하기 편해요' },
-    { value: 'pet', label: '반려동물과 가기 좋아요' },
-    { value: 'children', label: '아이와 가기 좋아요' },
+    { value: 1, label: '인테리어가 멋져요' },
+    { value: 2, label: '음악이 좋아요' },
+    { value: 3, label: '뷰가 좋아요' },
+    { value: 4, label: '반려동물과 가기 좋아요' },
+    { value: 5, label: '집중하기 좋아요' },
+    { value: 6, label: '주차하기 편해요' },
+    { value: 7, label: '사진이 잘 나와요' },
+    { value: 8, label: '아이와 가기 좋아요' },
 ];
 
 function CafeReviewModifyPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
-    const { reviewId, reviewItem, cafeDetail } = location.state || {};
+    const MAX_LENGTH = 400;
+    const { reviewItem, cafeDetail } = location.state || {};
     const textareaRef = useRef(null);
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState([]);
     const [reviewData, setReviewData] = useState({
-        reviewId: reviewId,
+        reviewId: reviewItem.id,
         rating: score,
-        category: "",
+        categoryIds: [],
         review: ""
     });
 
     useEffect(() => {
-        setScore(reviewItem.rating);
-        setSelectedCategory(reviewItem.category);
-        setReviewData({
-            reviewId: reviewId,
-            rating: reviewItem.rating,
-            category: reviewItem.category,
-            review: reviewItem.review
-        });
-    }, [reviewItem]);
-
-    useEffect(() => {
         adjustTextareaHeight(textareaRef.current);
     }, []);
+
+    useEffect(() => {
+        const selectedCategories = cafeDetail?.reviewCategories.find(rc => rc.reviewId === reviewItem.id)?.categoryId || [];
+        setReviewData({
+            rating: reviewItem.rating,
+            categoryIds: selectedCategories,
+            review: reviewItem.review
+        });
+        setScore(reviewItem.rating);
+        setSelectedCategory(selectedCategories);
+    }, [reviewItem, cafeDetail]);
 
     useEffect(() => {
         setReviewData(review => ({
@@ -56,39 +57,42 @@ function CafeReviewModifyPage(props) {
         }));
     }, [score]);
 
-    const handleTextareaChange = (e) => {
-        adjustTextareaHeight(textareaRef.current);
+    useEffect(() => {
         setReviewData(review => ({
             ...review,
-            [e.target.name]: e.target.value
-        }))
+            categoryIds: selectedCategory
+        }));
+    }, [selectedCategory]);
+
+    const handleTextareaChange = (e) => {
+        adjustTextareaHeight(textareaRef.current);
+        if (e.target.value.length > MAX_LENGTH) {
+            e.target.value = e.target.value.slice(0, MAX_LENGTH);
+        }
+        setReviewData(review => ({
+            ...review,
+            review: e.target.value
+        }));
     };
 
-    const handleCategoryOnClick = (e) => {
-        const category = e.target.value;
-        if (selectedCategory === category) {
-            setSelectedCategory("");
-            setReviewData(prevData => ({
-                ...prevData,
-                category: ""
-            }));
-        } else {
-            setSelectedCategory(category);
-            setReviewData(prevData => ({
-                ...prevData,
-                category: category
-            }));
-        }
+    const handleCategoryOnClick = (category) => {
+        setSelectedCategory(prevCategories => {
+            if (prevCategories.includes(category)) {
+                return prevCategories.filter(c => c !== category);
+            } else {
+                return [...prevCategories, category];
+            }
+        });
     };
 
     const reviewModifyMutation = useMutation(
         async () => {
-            return await instance.put(`/review/${reviewId}`, reviewData);
+            return await instance.put(`/review/${reviewItem.id}`, reviewData);
         },
         {
             onSuccess: response => {
                 alert("리뷰가 수정되었습니다");
-                navigate(`/cafe/detail/${cafeDetail?.id}`, { state: { cafeDetail } });
+                navigate(`/cafe/detail/${cafeDetail?.id}`);
             }
         }
     )
@@ -121,12 +125,13 @@ function CafeReviewModifyPage(props) {
             <div css={s.category}>
                 <h1>어떤 점이 좋았나요?</h1>
                 <div css={s.buttons}>
-                    {categories.map(category => (
+                    {categories.map((category, index) => (
                         <button
-                            key={category.value}
-                            onClick={handleCategoryOnClick}
-                            value={category.value}
-                            css={selectedCategory === category.value ? s.activeButton : null}
+                            key={index}
+                            onClick={() => handleCategoryOnClick(category.value)}
+                            style={{
+                                backgroundColor: selectedCategory.includes(category.value) ? '#f2780c' : '#ffffff'
+                            }}
                         >
                             {category.label}
                         </button>
@@ -138,11 +143,16 @@ function CafeReviewModifyPage(props) {
                 <div css={s.textarea}>
                     <textarea
                         name="review"
+                        maxLength={MAX_LENGTH}
                         value={reviewData.review}
                         ref={textareaRef}
                         onChange={handleTextareaChange}
                         placeholder='유용한 팁을 알려주세요! 작성한 내용은 마이페이지 카페 상세페이지에 노출 됩니다.'>
                     </textarea>
+                </div>
+                <div css={s.count}>
+                    <span>{reviewData.review.length}</span>
+                    <span>/{MAX_LENGTH.toLocaleString()}</span>
                 </div>
                 <button onClick={handleSubmitOnClick}>수정 완료</button>
             </div>

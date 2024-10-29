@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
@@ -8,28 +8,17 @@ import StarRating from '../../../apis/util/starRating';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeApis/CafeLikeApi';
 import BackButton from '../../../components/BackButton/BackButton';
-import { useReviewQuery } from '../../../apis/ReviewApis/getReviewList';
 import { useCafeDetailQuery } from '../../../apis/CafeApis/getCafeDetailApi';
 
 function CafeDetailPage() {
     const params = useParams();
     const cafeId = params.cafeId;
     const [selectMenu, setSelectMenu] = useState('review');
-    const [averageRating, setAverageRating] = useState(0);
 
     const { data: cafeDetail } = useCafeDetailQuery(cafeId);
-    const { data: reviewList, refetch } = useReviewQuery(cafeId);
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
     const likeMutation = useLikeMutation(cafeId, refetchCafeLike);
     const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
-
-    useEffect(() => {
-        if (reviewList && reviewList?.reviews.length > 0) {
-            const totalRating = reviewList?.reviews.reduce((sum, reviewList) => sum + reviewList.rating, 0);
-            const average = totalRating / reviewList?.reviews.length;
-            setAverageRating(average);
-        }
-    }, [reviewList]);
 
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
@@ -67,12 +56,12 @@ function CafeDetailPage() {
                 </div>
                 <div>{cafeDetail?.address}</div>
                 <div css={s.reviewStat}>
-                    <StarRating averageRating={averageRating} />
-                    <div>{averageRating.toFixed(1)}</div>
+                    <StarRating averageRating={cafeDetail?.totalRating} />
+                    <div>{cafeDetail?.totalRating}</div>
                 </div>
                 <div css={s.detailInfo}>
                     <div>{cafeDetail?.category}</div>
-                    <div>리뷰 {reviewList?.reviewCount}</div>
+                    <div>리뷰 {cafeDetail?.reviewCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>
@@ -92,12 +81,7 @@ function CafeDetailPage() {
                 </div>
                 {
                     selectMenu === 'review'
-                        ? <CafeReview
-                            cafeDetail={cafeDetail}
-                            review={reviewList}
-                            averageRating={averageRating}
-                            refetch={refetch}
-                        />
+                        ? <CafeReview cafeDetail={cafeDetail} />
                         : <CafeMenu />
                 }
             </div>
