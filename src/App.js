@@ -31,6 +31,7 @@ import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
 import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
+import OwnerMyPage from './page/Owner/OwnerMyPage/OwnerMyPage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -84,7 +85,7 @@ function App() {
         for (let permitAllPasth of permitAllPaths) {
           if (location.pathname.startsWith(permitAllPasth)) {
             console.log(permitAllPasth);
-            const blockPaths = ["/user", "/owner"];
+            const blockPaths = ["/user"];
             for (let blockPath of blockPaths) {
               if (location.pathname.startsWith(blockPath)) {
                 alert("잘못된 요청입니다.")
@@ -133,6 +134,15 @@ function App() {
               <Route path='/setting' element={<ManagerSetting />} />
             </Routes>
           </ManagerMainLayout>
+        } />
+
+        <Route path='/owner/*' element={
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='/mypage' element={<OwnerMyPage />} />
+              <Route path='/mypage/modify' element={<ModifyProfilePage />} />
+            </Routes>
+          </MainLayout>
         } />
 
         <Route path='/cafe/*' element={
