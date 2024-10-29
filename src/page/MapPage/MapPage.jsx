@@ -6,6 +6,7 @@ import { useQueryClient } from "react-query";
 import { Link } from "react-router-dom";
 import SelectCategory from "../../components/SelectCategory/SelectCategory";
 import { IoIosSearch } from "react-icons/io";
+import { useCafeQuery } from "../../apis/CafeApis/getCafeListApi";
 
 function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const [inputdata, setInputData] = useState("");
@@ -14,8 +15,8 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
         lng: 129.059978704814,
     });
     const queryClient = useQueryClient();
-    const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
-    const cafe = cafelist?.data;
+    const { data: cafeList } = useCafeQuery(check, inputvalue);
+    const cafe = cafeList;
     const [currentCafeIndex, setCurrentCafeIndex] = useState(0);
     const [slide, setSlide] = useState(0);
 
