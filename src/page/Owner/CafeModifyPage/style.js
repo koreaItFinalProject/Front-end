@@ -5,23 +5,25 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    flex-grow: 1;
     overflow-y: auto;
     background-color: #191919;
 `;
 
-export const bannerImg = css`
-    box-sizing: border-box;
-    width: 100%;
-    height: 200px;
+export const closeButton = css`
     padding: 10px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    height: 40px;
     background-color: #ffffff;
 
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        svg {
+            width: 40px;
+            height: 40px;
+        }
     }
 `;
 
@@ -31,7 +33,7 @@ export const detailHeader = css`
     justify-content: center;
     align-items: center;
     gap: 10px;
-    padding: 10px 10px;
+    padding: 0 10px;
     background-color: #ffffff;
 
     h1 {
@@ -40,22 +42,41 @@ export const detailHeader = css`
     }
 `;
 
-export const titleLike = css`
+export const title = css`
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
     position: relative;
+
+    input {
+        padding: 0;
+        border: none;
+        font-size: 36px;
+        font-weight: 600;
+        text-align: center;
+    }
 `;
 
-export const heart = css`
+export const cafeNameInput = css`
+    height: 45px;
+    border-bottom: 1px solid #f2780c;
+`;
+
+export const editButton = css`
     position: absolute;
     right: 0; 
+
     svg {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         cursor: pointer;
     }
+`;
+
+export const addressInput = css`
+    text-align: center;
+    padding: 0;
 `;
 
 export const reviewStat = css`
@@ -84,6 +105,14 @@ export const detailInfo = css`
 
     div:nth-of-type(2) {
         font-size: 14px;
+    }
+
+    select {
+        width: 90px;
+        height: 30px;
+        text-align: center;
+        margin-right: 10px;
+        border-radius: 30px;
     }
 `;
 

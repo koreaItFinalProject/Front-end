@@ -82,12 +82,12 @@ export const header = css`
     top: 0;
 `;
 
-export const children = css`
+export const children = (isNoFooter) => css`
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: 60px;
+    padding-bottom: ${isNoFooter ? '0' : '60px'};
     height: 100%;
     border-radius: 20px;
 `;

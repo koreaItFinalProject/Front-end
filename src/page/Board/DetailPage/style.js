@@ -136,7 +136,6 @@ export const footer = css`
     height: 60px;
     background-color: #F4F4F6;
     border-radius: 0px 0px 10px 10px;
-    border-top: 1px solid #c9c9c9;
     position: absolute;
-    top: 100%;
+    top: 821px;
 `;
