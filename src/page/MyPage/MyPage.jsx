@@ -164,7 +164,7 @@ function MyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={{ comment: isCount.comment, board: isCount.board }} />
+                                <CommentState comment={isCount.comment} board={isCount.board } />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />
