@@ -50,18 +50,6 @@ function App() {
     }
   }, [location.pathname]);
 
-
-  const cafe = useQuery(
-    ["cafeQuery", check, inputvalue],
-    async () => {
-      return instance.get(`cafe/get?category=${check}&search=${inputvalue}`);
-    },
-    {
-      refetchOnWindowFocus: false,
-      retry: 0,
-    }
-  );
-
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery"],
     async ({ pageParam = 1 }) => await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`),

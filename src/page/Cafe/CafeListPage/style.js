@@ -5,8 +5,9 @@ export const layout = css`
     width: 100%;
     height: 100%;
     padding: 0 15px;
-    overflow-y: hidden;
     background-color: #191919;
+    display: flex;
+    flex-direction: column;
 `;
 
 export const title = css`
