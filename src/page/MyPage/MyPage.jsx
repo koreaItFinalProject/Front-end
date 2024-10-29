@@ -27,7 +27,8 @@ function MyPage(props) {
         user: {},
         board: {},
         review: {},
-        comment: {}
+        comment: {},
+        boardComment:{}
     })
     const [isOpen, setIsOpen] = useState();
     const openModal = () => {
@@ -88,6 +89,7 @@ function MyPage(props) {
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
+                {/* 필요없는거 지우셈 */}
                 <ModifyProfilePage handleOnModalClick={handleOnModalClick} setIsOpen={setIsOpen} value={"userinfo"} closeModal={closeModal} isOpen={isOpen} />
             </div>
             <div css={s.mainBox}>
@@ -164,7 +166,7 @@ function MyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState comment={isCount.comment} board={isCount.board } />
+                                <CommentState isCount={ isCount.boardComment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

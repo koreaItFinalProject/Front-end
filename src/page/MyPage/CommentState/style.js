@@ -76,6 +76,7 @@ export const title = css`
   width: 500px;
   font-weight: 700;
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-left: 10px;
   box-sizing: border-box;

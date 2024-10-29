@@ -2,27 +2,35 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate, useParams } from 'react-router-dom';
-import useDeleteBoardMutation from '../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation';
 import boardDeleteApi from '../../../apis/boardApis/boardDeleteApi';
 
 function PostModify({ isCount }) {
-    const [recent, setRecent] = useState(false);
+    const [recent, setRecent] = useState(true);
     // const [modifyTitle, setModifyTitle] = useState(false);
     const [modifyText, setModifyText] = useState("");
     const params = useParams();
     const boardId = params.id;
     const navigate = useNavigate();
-    const sortedPosts = [...isCount].sort((a, b) => b.id - a.id);
+    const [isAscending, setIsAscending] = useState(false);
+    const [isView , setView] = useState(false);
+    const sortedPosts = [...isCount].sort((a, b) => {
+        if (isView) {
+            return isView  ? b.view_count - a.view_count : a.view_count - b.view_count;
+        } 
+        else if(recent){
+            return isAscending ? a.id - b.id :  b.id - a.id;
+        }
+    })
 
-
-    const handeleOnRecentClick = () => {
+    const handleOnRecentClick = () => {
         setRecent(!recent);
-        if (recent === true) {
+        setIsAscending(!isAscending);
+        setView(false);
+    }
 
-        }
-        if (recent === false) {
-
-        }
+    const handleOnViewClick = () => {
+        setView(!isView);
+        setIsAscending(false);
     }
 
     // const handleModifyClick = (e, id) => {
@@ -44,14 +52,12 @@ function PostModify({ isCount }) {
         if (selection) {
             response = await boardDeleteApi(id);
             console.log(response);
-        } else if (response.status !== 200) {
-            alert("삭제 실패")
         }
     }
 
-    const handleOnChange = (e) => {
-        setModifyText(e.target.value);
-    }
+    // const handleOnChange = (e) => {
+    //     setModifyText(e.target.value);
+    // }
 
     const extractImageTags = (content) => {
         const imgTags = content.match(/<img[^>]*\/?>/i) || [];
@@ -70,11 +76,11 @@ function PostModify({ isCount }) {
             <div css={s.select}>
                 {
                     !recent ?
-                        <button onClick={handeleOnRecentClick}>오름차순</button>
-                        :
-                        <button onClick={handeleOnRecentClick}>내림차순</button>
+                    <button onClick={handleOnRecentClick}>내림차순</button>
+                    :
+                    <button onClick={handleOnRecentClick}>오름차순</button>
                 }
-                <button>조회수</button>
+                <button onClick={handleOnViewClick}>조회수</button>
             </div>
             <div css={s.content}>
                 {sortedPosts.map((result) => (
