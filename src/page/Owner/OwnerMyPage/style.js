@@ -50,15 +50,32 @@ export const menu = css`
     padding: 0 10px;
     width: 100%;
     height: 95px;
-    font-size: 20px;
-    font-weight: 600;
     border-bottom: 3px solid #f2780c;
     cursor: pointer;
+
+    p {
+        font-size: 16px;
+        color: #f2780c;
+        font-weight: 500;
+    }
+`;
+
+export const menuName = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
 
     svg {
         margin-right: 20px;
         width: 30px;
         height: 30px;
+    }
+
+    p:nth-of-type(1) {
+        font-size: 16px;
+        color: black;
+        font-weight: 500;
     }
 `;
 

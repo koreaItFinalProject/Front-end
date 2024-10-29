@@ -33,6 +33,15 @@ function OwnerMyPage(props) {
         comment: {}
     })
     const [isOpen, setIsOpen] = useState();
+
+    const boardId = async () => {
+        try {
+            await instance.get(`/cafe`)
+        } catch (error) {
+            
+        }
+    }
+
     const openModal = () => {
         setIsOpen(true)
         console.log(isOpen);
@@ -43,20 +52,18 @@ function OwnerMyPage(props) {
 
     };
 
-    const startTimer = useCallback(() => {
-        const timer = setInterval(() => {
-            setAlram(prevAlram => !prevAlram);
-        }, 1000);
+    // const startTimer = useCallback(() => {
+    //     const timer = setInterval(() => {
+    //         setAlram(prevAlram => !prevAlram);
+    //     }, 1000);
 
-        return () => clearInterval(timer)
-    }, [alram])
+    //     return () => clearInterval(timer)
+    // }, [alram])
 
-    useEffect(() => {
-        const clearTimer = startTimer();
-        return clearTimer;
-    }, [startTimer]);
-
-
+    // useEffect(() => {
+    //     const clearTimer = startTimer();
+    //     return clearTimer;
+    // }, [startTimer]);
 
     const userManagement = useQuery(
         ["userManagementInfo"],
@@ -76,46 +83,73 @@ function OwnerMyPage(props) {
                 alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
             }
         }
-    )
+    );
 
-    const handleOnModalClick = (e) => {
-        if (e.target.value) {
-            console.log("e" + e.target.value);
-            setCheck(e.target.value);
+    const handleOnModalClick = (value) => {
+        if (value) {
+            console.log("e" + value);
+            setCheck(value);
             setIsOpen(true);
         }
         console.log(check);
     };
 
+    const handleCafeManageOnClick = () => {
+
+    }
+
+    console.log(userManagement);
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
-                <ModifyProfilePage handleOnModalClick={handleOnModalClick} setIsOpen={setIsOpen} value={"userinfo"} closeModal={closeModal} isOpen={isOpen} />
+                <ModifyProfilePage
+                    handleOnModalClick={() => handleOnModalClick("userinfo")}
+                    setIsOpen={setIsOpen} value={"userinfo"}
+                    closeModal={closeModal}
+                    isOpen={isOpen}
+                />
             </div>
             <div css={s.menuContainer}>
-                <div css={s.menu} onClick={handleOnModalClick} value={"post"}>
-                    <BsFillFileEarmarkPostFill />
-                    게시글 관리
+                <div css={s.menu} onClick={() => handleOnModalClick("post")}>
+                    <div css={s.menuName}>
+                        <BsFillFileEarmarkPostFill />
+                        <p>게시글 관리</p>
+                    </div>
+                    <p>{isCount.board.length === 0 ? '0' : isCount.board.length}</p>
                 </div>
-                <div css={s.menu} onClick={handleOnModalClick} value={"comment"}>
-                    <FaRegCommentDots />
-                    댓글 관리
+                <div css={s.menu} onClick={() => handleOnModalClick("comment")}>
+                    <div css={s.menuName}>
+                        <FaRegCommentDots />
+                        <p>댓글 관리</p>
+                    </div>
+                    <p>{isCount.comment.length === 0 ? '0' : isCount.comment.length}
+                    </p>
                 </div>
-                <div css={s.menu} onClick={handleOnModalClick} value={"review"}>
-                    <MdOutlineRateReview />
-                    리뷰 관리
+                <div css={s.menu} onClick={() => handleOnModalClick("review")}>
+                    <div css={s.menuName}>
+                        <MdOutlineRateReview />
+                        <p>리뷰 관리</p>
+                    </div>
+                    <p>{isCount.review.length === 0 ? '0' : isCount.review.length}</p>
                 </div>
-                <div css={s.menu}>
-                    <PiCoffee />
-                    카페 관리
+                <div css={s.menu} onClick={handleCafeManageOnClick}>
+                    <div css={s.menuName}>
+                        <PiCoffee />
+                        <p>카페 관리</p>
+                    </div>
                 </div>
-                <div css={s.menu}>
-                    <VscMegaphone />
-                    공지사항
+                <div css={s.menu} onClick={() => handleOnModalClick("review")}>
+                    <div css={s.menuName}>
+                        <VscMegaphone />
+                        <p>공지사항</p>
+                    </div>
                 </div>
-                <div css={s.menu}>
-                    <RiAlarmWarningFill />
-                    알림 정보
+                <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
+                    <div css={s.menuName}>
+                        <RiAlarmWarningFill />
+                        <p>알림 정보</p>
+                    </div>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
@@ -138,7 +172,6 @@ function OwnerMyPage(props) {
                                         : <></>
                 }
             </ReactModal>
-
         </div>
     );
 }

@@ -4,7 +4,6 @@ import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
 
 function PostModify({isCount}) {
-    console.log(isCount);
     const [recent , setRecent] = useState(false);
     const [modifyTitle , setModifyTitle] = useState(false);
     const [modifyText , setModifyText] = useState("");
@@ -31,7 +30,6 @@ function PostModify({isCount}) {
 
     const extractImageTags = (content) => {
         const imgTags = content.match(/<img[^>]*\/?>/gi) || [];
-        console.log(imgTags);
         return imgTags.map((img, index) => (
             
             <div key={index} dangerouslySetInnerHTML={{ __html: img }} />
