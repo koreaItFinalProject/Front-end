@@ -7,7 +7,7 @@ export const layout = css`
     box-sizing: border-box;
     border-radius: 10px;
     width: 350px;
-    height: 913px;
+    height: 100%;
     background: linear-gradient(180deg, rgba(249,249,249,1) 0%, rgba(239,236,232,1) 100%);
     overflow: hidden;
 

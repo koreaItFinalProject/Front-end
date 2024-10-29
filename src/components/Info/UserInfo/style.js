@@ -14,8 +14,6 @@ export const header = css`
 `
 export const layout = css`
     display: flex;
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
     padding: 20px;
     margin: 10px auto;

@@ -6,25 +6,31 @@ export const mainLayout = css`
     padding: 0px;
     height: 100%;
     width: 100%;
+    overflow: auto;
 `
 
 export const content = css`
-    width: 100%;
-`
-
-export const contentBox = css`
-    /* display: flex; */
-    width: 100%;
-    height: 100%;
     box-sizing: border-box;
-    /* align-items: center; */
-
-    padding-right: 230px;
-`
-export const layout = css`
-    /* display: flex; */
+    height: 28px;
     width: 100%;
-    height: 100%;
-    align-items: center;
-    flex-direction: row;
+    border-collapse: collapse; // 테이블 경계 간격 제거
+    th, td {
+        border: 1px solid #dbdbdb; // 테두리 설정
+        padding: 10px; // 패딩 추가
+        text-align: center; // 중앙 정렬
+        border-left: none;
+        :nth-last-child(1){
+            border-right: none;
+        }
+    }
+
+    th{
+        border-top: none;
+    }
+
+    thead{
+        position: sticky;
+        top: 0px;
+        background-color: #f0f0f0;
+    }
 `

@@ -56,7 +56,6 @@ function PostModify({ isCount }) {
     const extractImageTags = (content) => {
         const imgTags = content.match(/<img[^>]*\/?>/i) || [];
         return imgTags.map((img, index) => (
-
             <div key={index} dangerouslySetInnerHTML={{ __html: img }} />
         ));
     };

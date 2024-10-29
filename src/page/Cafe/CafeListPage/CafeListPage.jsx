@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQueryClient } from 'react-query';
@@ -27,6 +27,8 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         navigate(`/cafe/detail/${cafeItem.id}`);
     };
 
+
+    console.log(check);
     return (
         <div css={s.layout}>
             <h1 css={s.title}>Cafe List</h1>

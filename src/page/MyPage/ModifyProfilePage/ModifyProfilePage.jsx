@@ -16,9 +16,6 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
     const [modifyUserInfo, setModifyUserInfo] = useState({})
     const [imageModify, setImageModify] = useState(false);
 
-    // console.log(modifyUserInfo?.img);
-    // console.log(userInfoProfile?.img);
-
     useEffect(() => {
         if (user) {
             setModifyUserInfo(user.user);
