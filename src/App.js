@@ -195,7 +195,6 @@ function App() {
             <Routes>
               <Route path='/map' element={<MapPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/mypage' element={<MyPage />} />
-              <Route path='/mypage/modify' element={<ModifyProfilePage />} />
             </Routes>
           </MainLayout>
         } />

@@ -27,7 +27,7 @@ export const profileBox = css`
     margin-top: 20px;
     display: flex;
     width: 100%;
-    height: 180px;
+    height: 200px;
     padding-left: 40px;
     box-sizing: border-box;
     flex-direction: row;
@@ -35,22 +35,39 @@ export const profileBox = css`
 `;
 
 export const profileimage = css`
-    display: flex;
-    align-items: center;
+    box-sizing: border-box;
     padding-right: 40px;
-    & img {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    & div:nth-of-type(1) {
         width: 160px;
         height: 160px;
-        border-radius: 50%;
-        border: 1px solid black;
+        & img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 1px solid #1c1c1b;
+            box-sizing: border-box;
+        }
+    }
+    & input{
+        width: 160px;
+        height: 160px;
         box-sizing: border-box;
-        margin-bottom: 10px;
+    }
+
+    & button {
+        width: 50px;
+        height: 35px;
     }
 `
 
 export const userInfo = css`
     width: 100%;
     margin-bottom: 10px;
+    height: 200px;
     & > div {
         display: flex;
         align-items: center;
@@ -61,7 +78,7 @@ export const userInfo = css`
             justify-content: center;
             flex-direction: column;
             width: 80px;
-            height: 100%;
+            height:100%;
             box-sizing: border-box;
         }
         & > div:nth-child(2) {
@@ -69,7 +86,7 @@ export const userInfo = css`
             justify-content: center;
             flex-direction: column;
             height:100%;
-            & input {
+            & p {
                 width: 100%;
                 height: 24px;
                 margin: 5px 0px;

@@ -9,17 +9,26 @@ export const mainLayout = css`
   }
 `;
 
+export const AllPost = css`
+  & p {
+    font-weight: 550;
+  }
+`;
+
 export const select = css`
   display: flex;
   justify-content: end;
+  border-bottom: 5px solid #F2780C;
+  margin-bottom:10px;
   & button {
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
     border: 1px solid black;
-    margin-right: 10px;
+    margin-right: 5px;
     width: 80px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 20px;
+    margin-bottom:10px;
     &:active{
       box-shadow: 2px 2px 1px inset;
     }
@@ -36,12 +45,16 @@ export const select = css`
 `;
 
 export const content = css`
-  
+  & p {
+    font-weight: 500;
+  }
 `;
 export const layout = css`
   position: relative;
-  border-bottom: 1px solid black;
-  margin-bottom: 5px;
+  display: flex;
+  border-bottom: 1px solid #F2780C;
+  margin-bottom: 15px;
+  height: 100px;
 `;
 
 export const view = css`
@@ -50,8 +63,8 @@ export const view = css`
   flex-direction: column;
   align-items: end;
   position: absolute;
-  right: 0;
-  
+  right: 10px;
+  top: 7px;
 `;
 
 export const imgTitle = css`
@@ -59,22 +72,18 @@ export const imgTitle = css`
   display: flex;
   width: 100%;
   height: 100%;
-
- 
 `;
 
 export const img = css`
   box-sizing: border-box;
-  width: 100px !important;
-  height: 100px !important;
+  display: flex;
+  width: 100px;
   margin-right: 20px;
   & img {
     width: 100%;
-    height: 100%;
-    object-fit: cover; 
+    flex-grow: 1;
+    box-sizing: border-box;
   }
-  
-
 `;
 
 export const title = css`
@@ -84,8 +93,9 @@ export const title = css`
   align-items: center;
   margin-left: 10px;
   box-sizing: border-box;
+  cursor: pointer;
   & input {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     width: 100%;
     padding: 0;
@@ -95,15 +105,12 @@ export const title = css`
 
 export const button = css`
   position: absolute;
-  right: 0;
+  right: 7px;
   bottom: 3px;
   display: flex;
   justify-content: end;
 `;
 
-export const contentBox = css`
-  
-`;
 
 
 

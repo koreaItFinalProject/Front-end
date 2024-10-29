@@ -21,7 +21,7 @@ export const profileBox = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 225px;
+    height: 250px;
     width: 100%;
     background-color: #ffffff;
     box-sizing: border-box;
@@ -41,7 +41,6 @@ export const mainBoxLayout = css`
     flex-direction: column;
     box-sizing: border-box;
     height: 100%;
-    
     & > div {
         height: 50%;
         width: 100%;
@@ -62,7 +61,6 @@ export const mainBoxLayout = css`
             border-radius: 20px;
         }
     }
-
     * svg {
         position: relative;
         width: 30px;
@@ -73,7 +71,7 @@ export const mainBoxLayout = css`
 
 export const post = css`
     box-sizing: border-box;
-    margin-right: 5px;
+    margin-right: 7px;
     & > div {
         position: relative;
         box-sizing: border-box;
@@ -109,7 +107,7 @@ export const postInventory = css`
 
 export const comment = css`
     box-sizing: border-box;
-    margin-left: 5px;
+    margin-left: 7px;
     & > div {
         position: relative;
         box-sizing: border-box;
@@ -141,7 +139,7 @@ export const commentInventory = css`
 
 export const review = css`
     box-sizing: border-box;
-    margin-right: 5px;
+    margin-right: 7px;
     & > div {
         position: relative;
         box-sizing: border-box;
@@ -176,7 +174,7 @@ export const reviewInventory = css`
 
 export const information = css`
     box-sizing: border-box;
-    margin-left: 5px;
+    margin-left: 7px;
     & > div {
         position: relative;
         box-sizing: border-box;
@@ -247,3 +245,12 @@ export const modalStyles = {
         overflow: 'hidden',
     },
 };
+
+export const closeButton = css`
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid #1c1c1b;
+`;
