@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
-import myPageDeleteApi from '../../../apis/myPageDeleteApi/myPageDeleteApi';
+import { useMyPageDeleteMutation } from '../../../apis/useMyPageDeleteMutation/useMyPageDeleteMutation';
+
 
 function PostModify({ isCount }) {
     const [recent, setRecent] = useState(false);
@@ -10,20 +11,19 @@ function PostModify({ isCount }) {
     const param = "board";
     const [isAscending, setIsAscending] = useState(false);
     const [isView, setView] = useState(false);
-    const [sortedPosts, setSortedPosts] = useState([]);
+    const [state, setState] = useState(false);
+    const deleteMutation = useMyPageDeleteMutation(param);
 
-    useEffect(() => {
-        setSortedPosts = [...isCount].sort((a, b) => {
-            if (recent) {
-                return isView ? b.view_count - a.view_count : a.view_count - b.view_count;
-            }
-            else if (!recent) {
-                return !isAscending ?
-                    new Date(b.writeDate) - new Date(a.writeDate) :
-                    new Date(a.writeDate) - new Date(b.writeDate);
-            }
-        })
-    }, [isCount, isAscending, isView])
+    const sortedPosts = [...isCount].sort((a, b) => {
+        if (recent) {
+            return isView ? b.view_count - a.view_count : a.view_count - b.view_count;
+        }
+        else if (!recent) {
+            return !isAscending ?
+                new Date(b.writeDate) - new Date(a.writeDate) :
+                new Date(a.writeDate) - new Date(b.writeDate);
+        }
+    })
 
     const handleOnRecentClick = () => {
         console.log(isAscending);
@@ -36,13 +36,13 @@ function PostModify({ isCount }) {
         setRecent(true);
     }
 
-    const handleDeleteClick = async (Param, id) => {
+    const handleDeleteClick = (id) => {
+        console.log(id);
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
-        let response = null;
         if (selection) {
-            response = await myPageDeleteApi(Param, id);
-
-            console.log(response);
+            console.log(id);
+            deleteMutation.mutateAsync(id);
+            setState(!state)
         }
     }
 
@@ -52,6 +52,10 @@ function PostModify({ isCount }) {
             <div key={index} dangerouslySetInnerHTML={{ __html: img }} />
         ));
     };
+
+    useEffect(() => {
+        console.log("확인");
+    }, [state])
 
     return (
         <div css={s.mainLayout}>
@@ -78,7 +82,7 @@ function PostModify({ isCount }) {
                         </div>
                         <div css={s.imgTitle}>
                             <div css={s.img}>
-                                {extractImageTags(result.content)}
+                                {extractImageTags(result?.content)}
                             </div>
                             <div css={s.title} onClick={() => navigate(`/board/detail/${result.id}`)} >
                                 <p>{result.title}</p>
@@ -87,7 +91,7 @@ function PostModify({ isCount }) {
                         <div>
                         </div>
                         <div css={s.button}>
-                            <button onClick={() => handleDeleteClick(param, result.id)}>삭제</button>
+                            <button onClick={() => handleDeleteClick(result.id)}>삭제</button>
                         </div>
                     </div>
                 ))}

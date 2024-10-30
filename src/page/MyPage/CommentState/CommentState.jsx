@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
-import myPageDeleteApi from '../../../apis/myPageDeleteApi/myPageDeleteApi';
+import { useMyPageDeleteMutation } from '../../../apis/useMyPageDeleteMutation/useMyPageDeleteMutation';
 
 
 function CommentState({ isCount }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
-    const Param = "comment"
+    const param = "comment"
+    const deleteMutation = useMyPageDeleteMutation(param);
+    console.log(isCount);
     const sortedPosts = [...isCount].sort((a, b) => {
         return !recent ?
             new Date(b.commentWriteDate) - new Date(a.commentWriteDate) :
             new Date(a.commentWriteDate) - new Date(b.commentWriteDate);
     });
-    console.log(isCount);
 
     const handeleOnRecentClick = () => {
         setRecent(!recent);
@@ -22,16 +23,10 @@ function CommentState({ isCount }) {
         console.log(sortedPosts);
     }
 
-    const handleDeleteClick = async (commentParam, id) => {
+    const handleDeleteClick = (id) => {
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
-        let response = null;
-        console.log(commentParam);
-        console.log(id);
         if (selection) {
-            const response = await myPageDeleteApi(commentParam, id)
-            console.log(response);
-        } else if (response.status !== 200) {
-            alert("삭제 실패")
+            deleteMutation.mutateAsync(id)
         }
     }
 
@@ -57,19 +52,19 @@ function CommentState({ isCount }) {
                         <button onClick={handeleOnRecentClick}>과거순</button>
                 }
             </div>
-            <di>
+            <div>
                 {sortedPosts.map((result) => (
-                    <div css={s.layout} key={result.boardId} >
+                    <div css={s.layout} key={result.commentId} >
                         <div css={s.view}>
                             <p>입력 날짜 : {result.commentWriteDate}</p>
                         </div>
                         <div css={s.imgTitle}>
                             <div css={s.img}>
-                                {extractImageTags(result.boardContent)}
+                                {extractImageTags(result?.boardContent)}
                             </div>
                             <div css={s.title} >
                                 <div>
-                                    <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.boardTitle} </p>
+                                    <p onClick={() => navigate(`/board/detail/${result.commentId}`)}>{result.boardTitle} </p>
                                     <p>에 단 댓글 내용</p>
                                 </div>
                                 <p>{result.commentContent}</p>
@@ -78,11 +73,11 @@ function CommentState({ isCount }) {
                         <div>
                         </div>
                         <div css={s.button}>
-                            <button onClick={() => handleDeleteClick(Param, result.commentId)}>삭제</button>
+                            <button onClick={() => handleDeleteClick(result.commentId)}>삭제</button>
                         </div>
                     </div>
                 ))}
-            </di>
+            </div>
         </div>
     );
 }
