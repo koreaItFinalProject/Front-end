@@ -15,6 +15,7 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
     const inputRef = useRef(null);
     const [modifyUserInfo, setModifyUserInfo] = useState({})
     const [imageModify, setImageModify] = useState(false);
+    const [checkButton, setCheckButton] = useState(false); // 이미지 변경 최종 확인 상태값
 
     useEffect(() => {
         if (user) {
@@ -55,10 +56,8 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
                         ...user,
                         img: url
                     }));
-                    setUserInfoProfile(user => ({
-                        ...user,
-                        img:url
-                    }))
+
+
                     setImageModify(true);
                 } catch (error) {
                     console.error("다운로드 에러");
@@ -72,6 +71,10 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
         setImageModify(false);
         console.log(response);
         console.log(userInfoProfile);
+        setUserInfoProfile(user => ({
+            ...user,
+            img: modifyUserInfo.img
+        }));
         if (response.status === 200) {
             alert("이미지 변경 성공");
         }

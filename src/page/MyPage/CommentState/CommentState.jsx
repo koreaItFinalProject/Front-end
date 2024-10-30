@@ -57,8 +57,8 @@ function CommentState({ isCount }) {
                             <div css={s.img}>
                                 {extractImageTags(result.boardContent)}
                             </div>
-                            <div css={s.title} onClick={() => navigate(`/board/detail/${result.boardId}`)} >
-                                <p>{result.boardTitle} 에 단 댓글 내용</p>
+                            <div css={s.title} >
+                                <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.boardTitle} 에 단 댓글 내용</p>
                                 <p>{result.commentContent}</p>
                             </div>
                         </div>

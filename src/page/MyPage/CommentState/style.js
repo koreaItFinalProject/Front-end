@@ -80,12 +80,15 @@ export const title = css`
   align-items: center;
   margin-left: 10px;
   box-sizing: border-box;
-  cursor: pointer;
   & p {
     font-size: 16px;
     width: 100%;
     padding: 0;
     box-sizing: border-box;
+    &:nth-of-type(1){
+      cursor: pointer;
+      color: #f2780c;
+    }
   }
 `;
 
