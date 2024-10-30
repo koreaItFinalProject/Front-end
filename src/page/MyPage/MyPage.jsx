@@ -87,7 +87,6 @@ function MyPage(props) {
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
-                {/* 필요없는거 지우셈 */}
                 <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
             </div>
             <div css={s.mainBox}>

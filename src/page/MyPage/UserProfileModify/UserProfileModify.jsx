@@ -9,6 +9,7 @@ import emailApi from '../../../apis/emailApis/emailApi';
 import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
 import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 
 function UserProfileModify({ isCount }) {
@@ -26,7 +27,6 @@ function UserProfileModify({ isCount }) {
     const [modifyUser, setModifyUser] = useState(isCount)
     const [passwordCheck, setPasswordCheck] = useState(isCount.password);
 
-    console.log(isCount);
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
         password: <></>,
@@ -183,6 +183,10 @@ function UserProfileModify({ isCount }) {
                     </h1>
                 </div>
                 <div css={s.userInfoCheck}>
+                    <div>
+                        <p>기본 정보</p>
+                        <AiOutlineExclamationCircle />
+                    </div>
                     <div >
                         <div css={s.usernameInput}>
                             <input type="text" name='username' value={modifyUser.username} onChange={handleInputOnChange(setModifyUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />

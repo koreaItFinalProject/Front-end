@@ -6,13 +6,13 @@ export const layout = css`
     display: flex;
     flex-direction: column; 
     overflow-y: auto;
-    /* padding-top: 50px; */
     *{
         color: #ffffff;
         & button {
             background-color: #F2780C;
             border: none;
             border-radius: 20px;
+            margin-right: 8px;
         }
         button:disabled {
         cursor: not-allowed;
@@ -22,28 +22,19 @@ export const layout = css`
 `;
 
 export const Info = css`
-    
     box-sizing: border-box;
     display: flex;
     align-items: center;
     flex-direction: column; 
     & p{
-        display: flex;
-        justify-content: center;
         font-size: 12px;
-        width: 100%;
-        color: #E94334;
+        color: #F2780C;
         margin: 0;
     }
     & input {
         padding-left: 10px;
-        color: #E94334;
+        color: #F2780C;
     }
-
-    & > div{
-        margin-bottom: 30px;
-    }
-
 `;
 
 export const logo = css`
@@ -52,16 +43,43 @@ export const logo = css`
         font-size: 30px;
         color: #F2780C;
     }
+    margin-bottom: 10px;
 `;
 
 export const userInfoCheck = css`
-
+    border: 2px solid #F2780c;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 10px;
+    & div:nth-of-type(1){
+        width: 100%;
+        display: flex;
+        text-align: start;
+        align-items: center;
+        margin: 10px 0px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #a1a1a1;
+        & p {
+            font-size: 16px;
+            margin-left: 10px;
+            font-weight: 600;
+            color:#a1a1a1
+        }
+        & svg{
+            color:#a1a1a1;
+            height: 18px;
+            width: 18px;
+            margin-left: 5px;
+            & .path {
+                color: #a1a1a1;
+            }
+        }
+    }
 `;
 
 export const usernameInput = css`
     height: 40px;
     box-sizing: border-box;
-    border-bottom: 1px solid #F2780C;
     & input {
         height: 40px;
         width: 300px;
@@ -128,7 +146,6 @@ export const emailTimer = css`
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    border-bottom: 1px solid #F2780C;
     width: 380px;
     & input {
         width: 245px;
@@ -166,7 +183,6 @@ export const registerButton = css`
 
 export const nickNameStyle = css`
     width: 380px;
-    border-bottom: 1px solid #F2780C;
     margin: 0;
     & input {
         width: 300px;
@@ -180,7 +196,7 @@ export const nickNameStyle = css`
 `;
 
 export const emailPhoneCheck = css`
-
+    border: 1px solid #f2780c;
 `;
 
 export const signupbutton = css`
