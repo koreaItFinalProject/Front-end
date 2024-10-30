@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import { instance } from "../util/instance";
 
 
-const useWriteCommentMutation = (commentData, setCommentData, comments) => {
+const useWriteCommentMutation = (commentData, setCommentData, comments, boardId) => {
     return useMutation(
         async () => {
             return await instance.post("/comment", commentData);
@@ -10,7 +10,7 @@ const useWriteCommentMutation = (commentData, setCommentData, comments) => {
         {
             onSuccess: response => {
                 setCommentData({
-                    commentId: 0,
+                    boardId,
                     parentId: null,
                     content: ""
                 });

@@ -9,7 +9,7 @@ import useModifyCommentMutation from '../../../apis/CommentApis/modifyCommentApi
 function BoardFooter({ mode, boardId, commentData, setCommentData, replyTo }) {
 
     const comments = useGetComments(boardId);
-    const writeCommentMutation = useWriteCommentMutation(commentData, setCommentData, comments);
+    const writeCommentMutation = useWriteCommentMutation(commentData, setCommentData, comments, boardId);
     const modifyCommentMutation = useModifyCommentMutation(commentData, setCommentData, comments)
 
     const handleCommentInputOnChange = (e) => {
@@ -38,7 +38,7 @@ function BoardFooter({ mode, boardId, commentData, setCommentData, replyTo }) {
                     onChange={handleCommentInputOnChange}
                     placeholder={replyTo ? `${replyTo}님에게 답글 작성` : '댓글을 입력하세요.'} />
                 <button onClick={handleCommentSubmitOnClick}>
-                    <FaArrowCircleUp size={30} fill='#f2780c'/>
+                    <FaArrowCircleUp size={30} fill='#f2780c' />
                 </button>
             </div>
         </div>

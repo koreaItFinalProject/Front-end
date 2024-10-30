@@ -7,6 +7,7 @@ export const layout = css`
     width: 100%;
     height: 100%;
     background-color: #191919;
+    overflow: auto;
 `;
 
 export const subLayout = css`
@@ -14,7 +15,7 @@ export const subLayout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
+    overflow: auto;
 `;
 
 export const header = css`
@@ -136,6 +137,4 @@ export const footer = css`
     height: 60px;
     background-color: #F4F4F6;
     border-radius: 0px 0px 10px 10px;
-    position: absolute;
-    top: 821px;
 `;
