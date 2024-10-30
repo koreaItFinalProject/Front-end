@@ -19,7 +19,7 @@ function NoticeWritePage(props) {
     const [board, setBoard] = useState({
         title: "",
         content: "",
-        category: "notice"
+        category: "공지사항"
     });
 
     const quillRef = useRef(null);

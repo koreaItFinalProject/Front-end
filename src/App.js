@@ -44,6 +44,7 @@ function App() {
   const [inputvalue, setInputvalue] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
+  const [category, setCategory] = useState("공지사항");
   const limit = 20;
 
 
@@ -54,8 +55,17 @@ function App() {
   }, [location.pathname]);
 
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
-    ["boardListQuery"],
-    async ({ pageParam = 1 }) => await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`),
+    ["boardListQuery", category],
+    async ({ pageParam = 1 }) => await instance.get('/board/list', {
+      params: {
+        page: pageParam,
+        limit: limit,
+        searchFilter: searchFilter,
+        searchValue: searchValue,
+        category: category
+      }
+      // await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`), url 파라미터가 너무 길어져서 param 객체로 묶어서 요청 보냄
+    }),
     {
       getNextPageParam: (lastPage, allPage) => {
         const totalPageCount = lastPage.data.totalCount % limit === 0
@@ -171,6 +181,8 @@ function App() {
                 setSearchFilter={setSearchFilter}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
+                category={category}
+                setCategory={setCategory}
               />} />
               <Route path='write' element={<BoardWritePage />} />
               <Route path='modify/:boardId' element={<BoardModifyPage />} />

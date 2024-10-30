@@ -1,6 +1,8 @@
 import { instance } from "./util/instance"
 
 export const writeBoardApi = async (board, navigate) => {
+
+    console.log(board);
     try {
         const response = await instance.post("/board", board);
         console.log(response.data);

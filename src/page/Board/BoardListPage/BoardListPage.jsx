@@ -8,8 +8,7 @@ import { useQueryClient } from "react-query";
 import BoardList from "../../../components/Board/BoardList/BoardList";
 import { FaPlus } from "react-icons/fa6";
 
-function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue }) {
-    const [selectedButton, setSelectedButton] = useState('공지');
+function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue, category, setCategory }) {
     const loadMoreRef = useRef(null);
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -53,8 +52,8 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
         }
     }
 
-    const handleNavButtonClick = (buttonName) => {
-        setSelectedButton(buttonName);
+    const handleNavButtonClick = (category) => {
+        setCategory(category);
     }
 
     const handleWriteOnClick = () => {
@@ -86,8 +85,16 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                 </select>
             </div>
             <div css={s.boardNavigater}>
-                <button onClick={() => handleNavButtonClick('공지사항')}>공지사항</button>
-                <button onClick={() => handleNavButtonClick('자유')}>자유</button>
+                <button
+                    css={[s.categoryButton, category === '공지사항' && s.activeButton]}
+                    onClick={() => handleNavButtonClick('공지사항')}
+                >공지사항
+                </button>
+                <button
+                    css={[s.categoryButton, category === '자유글' && s.activeButton]}
+                    onClick={() => handleNavButtonClick('자유글')}
+                >자유
+                </button>
             </div>
             <div css={s.boardListLayout}>
                 <BoardList boardList={boardList} loadMoreRef={loadMoreRef} />
