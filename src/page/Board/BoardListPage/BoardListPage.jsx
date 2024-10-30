@@ -55,7 +55,7 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
 
     const handleNavButtonClick = (buttonName) => {
         setSelectedButton(buttonName);
-    };
+    }
 
     const handleWriteOnClick = () => {
         if (!accessCheck?.data) {
@@ -70,23 +70,23 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
         <div css={s.layout}>
             <h1 css={s.title}>Community</h1>
             <button css={s.writeButton} onClick={handleWriteOnClick}><FaPlus /></button>
-                <div css={s.searchContainer}>
-                    <input
-                        type="text"
-                        placeholder='검색어를 입력하세요'
-                        onChange={handleSearchInputOnChange}
-                        onKeyDown={handleEnterInput}
-                        name=""
-                        value={searchValue}
-                    />
-                    <button onClick={handleSearchOnClick}>검색</button>
+            <div css={s.searchContainer}>
+                <input
+                    type="text"
+                    placeholder='검색어를 입력하세요'
+                    onChange={handleSearchInputOnChange}
+                    onKeyDown={handleEnterInput}
+                    name=""
+                    value={searchValue}
+                />
+                <button onClick={handleSearchOnClick}>검색</button>
                 <select name="searchFilter" onChange={handleFilterOnChange}>
                     <option name="title" value={"title"}>제목</option>
                     <option name="writer" value={"writer"}>작성자</option>
                 </select>
-                </div>
+            </div>
             <div css={s.boardNavigater}>
-                <button onClick={() => handleNavButtonClick('공지')}>공지사항</button>
+                <button onClick={() => handleNavButtonClick('공지사항')}>공지사항</button>
                 <button onClick={() => handleNavButtonClick('자유')}>자유</button>
             </div>
             <div css={s.boardListLayout}>
