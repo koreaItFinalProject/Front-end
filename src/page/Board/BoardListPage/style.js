@@ -83,7 +83,9 @@ export const boardNavigater = css`
     height: 30px;
     margin-bottom: 15px;
 
-    button {
+`;
+
+export const categoryButton = css`
         border-radius: 20px;
         border: none;
         color: black;
@@ -95,7 +97,11 @@ export const boardNavigater = css`
         outline: none;
         background-color: #ffffff;
         cursor: pointer;
-    }
+`;
+
+export const activeButton = css`
+    background-color: #f2780c;
+    color: #111111;
 `;
 
 export const boardListLayout = css`

@@ -32,8 +32,6 @@ function CafeDetailPage() {
         dislikeMutation.mutateAsync();
     };
 
-    console.log(cafeDetail);
-
     return (
         <div css={s.layout}>
             <BackButton prevPage={'카페 리스트'} prevPageUrl={'/cafe/list'} />
