@@ -30,7 +30,8 @@ function OwnerMyPage(props) {
         user: {},
         board: {},
         review: {},
-        comment: {}
+        comment: {},
+        boardComment: {}
     })
     const [isOpen, setIsOpen] = useState();
 
@@ -98,8 +99,8 @@ function OwnerMyPage(props) {
         console.log(check);
     };
 
-    const handleCafeManageOnClick = async () => {
-        navigate(`/owner/cafe/modify/${cafeData?.data?.cafeId}`);
+    const handleCafeManageOnClick = () => {
+        ;
     };
 
     return (
@@ -122,19 +123,19 @@ function OwnerMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("comment")}>
                     <FaRegCommentDots />
                     <p>작성한 댓글</p>
-                    <p>{isCount.comment.length === 0 ? '0' : isCount.comment.length}</p>
+                    <p>{isCount.boardComment.length === 0 ? '0' : isCount.boardComment.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("review")}>
                     <MdOutlineRateReview />
                     <p>작성한 리뷰</p>
                     <p>{isCount.review.length === 0 ? '0' : isCount.review.length}</p>
                 </div>
-                <div css={s.menu} onClick={handleCafeManageOnClick}>
+                <div css={s.menu} onClick={() => navigate(`/owner/cafe/modify/${cafeData?.data?.cafeId}`)}>
                     <PiCoffee />
                     <p>카페 관리</p>
                     <p>{cafeData?.data?.cafeName}</p>
                 </div>
-                <div css={s.menu} onClick={() => handleOnModalClick("review")}>
+                <div css={s.menu} onClick={() => navigate('/owner/notice/write')}>
                     <VscMegaphone />
                     <p>공지사항</p>
                 </div>
@@ -153,7 +154,7 @@ function OwnerMyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState comment={isCount.comment} />
+                                <CommentState isCount={isCount.boardComment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

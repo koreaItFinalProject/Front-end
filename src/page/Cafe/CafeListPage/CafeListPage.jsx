@@ -1,7 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
 import { MdRateReview } from "react-icons/md";
@@ -26,8 +25,6 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const handleCafeClick = (cafeItem) => {
         navigate(`/cafe/detail/${cafeItem.id}`);
     };
-
-    console.log(cafeList);
 
     return (
         <div css={s.layout}>

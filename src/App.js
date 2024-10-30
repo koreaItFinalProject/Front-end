@@ -6,15 +6,12 @@ import { useInfiniteQuery, useQuery } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
-import WritePage from './page/Board/WritePage/WritePage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
 import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfilePage';
 import ManagerDashBoardPage from './page/Manager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerManagementPage';
-import DetailPage from './page/Board/DetailPage/DetailPage';
 import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
-import ModifyPage from './page/Board/ModifyPage/ModifyPage';
 import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
@@ -33,6 +30,10 @@ import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import OwnerMyPage from './page/Owner/OwnerMyPage/OwnerMyPage';
 import CafeModifyPage from './page/Owner/CafeModifyPage/CafeModifyPage';
+import NoticeWritePage from './page/Owner/NoticeWritePage/NoticeWritePage';
+import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
+import BoardModifyPage from './page/Board/BoardModifyPage/BoardModifyPage';
+import BoardWritePage from './page/Board/BoardWritePage/BoardWritePage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -142,6 +143,7 @@ function App() {
               <Route path='/mypage' element={<OwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
               <Route path='/cafe/modify/:cafeId' element={<CafeModifyPage />} />
+              <Route path='/notice/write' element={<NoticeWritePage />} />
             </Routes>
           </MainLayout>
         } />
@@ -170,9 +172,9 @@ function App() {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
               />} />
-              <Route path='write' element={<WritePage />} />
-              <Route path='modify/:boardId' element={<ModifyPage />} />
-              <Route path='detail/:boardId' element={<DetailPage />} />
+              <Route path='write' element={<BoardWritePage />} />
+              <Route path='modify/:boardId' element={<BoardModifyPage />} />
+              <Route path='detail/:boardId' element={<BoardDetailPage />} />
             </Routes>
           </MainLayout>
         } />

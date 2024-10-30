@@ -23,35 +23,19 @@ function CafeModifyPage(props) {
     const [selectMenu, setSelectMenu] = useState('review');
     const [viewMode, setViewMode] = useState('user');
     const [imageModify, setImageModify] = useState(false);
-    const [modifyImg, setModifyImg] = useState({});
-    const [modifyCafeInfo, setModifyCafeInfo] = useState({
-        cafeId,
-        cafeName: "",
-        address: "",
-        category: ""
-    })
+    const [modifyCafeInfo, setModifyCafeInfo] = useState({});
+    const [cafeInfo, setCafeInfo] = useState({});
+
 
     const { data: cafeDetail, refetch } = useCafeDetailQuery(cafeId);
 
     useEffect(() => {
         if (cafeDetail) {
-            setModifyImg(img => ({
-                ...img,
-                img: cafeDetail?.img
-            }));
+            setModifyCafeInfo(cafeDetail);
+            setCafeInfo(cafeDetail);
         }
     }, [cafeDetail])
 
-    useEffect(() => {
-        if (cafeDetail) {
-            setModifyCafeInfo(({
-                cafeId,
-                cafeName: cafeDetail.cafeName,
-                address: cafeDetail.address,
-                category: cafeDetail.category
-            }));
-        }
-    }, [cafeDetail])
 
     const saveCafeInfoMutation = useMutation(
         async () => {
@@ -66,9 +50,9 @@ function CafeModifyPage(props) {
             onError: () => {
                 alert("카페 정보 수정 실패");
                 setModifyCafeInfo(({
-                    cafeName: cafeDetail.cafeName,
-                    address: cafeDetail.address,
-                    category: cafeDetail.category
+                    cafeName: modifyCafeInfo.cafeName,
+                    address: modifyCafeInfo.address,
+                    category: modifyCafeInfo.category
                 }));
             }
         }
@@ -87,22 +71,21 @@ function CafeModifyPage(props) {
     }
 
     const handleImageChangeClick = () => {
-        inputRef.current.click(); // 파일 선택창 열기
-        console.log(inputRef.current);
+        inputRef.current.click();
     }
 
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file === undefined) {
-            setImageModify(modifyImg.img !== cafeDetail?.img ? true : false);
-            setModifyImg(img => ({
+            setImageModify(modifyCafeInfo.img !== cafeInfo?.img ? true : false);
+            setModifyCafeInfo(img => ({
                 ...img,
-                img: modifyImg.img
+                img: modifyCafeInfo.img
             }));
             return;
         }
         console.log(file);
-        const storageRef = ref(storage, `cafe/banner/${cafeDetail?.cafeName}/${uuid()}_${cafeDetail?.cafeName}`);
+        const storageRef = ref(storage, `cafe/banner/${modifyCafeInfo?.cafeName}/${uuid()}_${modifyCafeInfo?.cafeName}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadTask.on(
@@ -113,8 +96,8 @@ function CafeModifyPage(props) {
                 try {
                     console.log("check");
                     const url = await getDownloadURL(storageRef)
-                    setModifyImg(img => ({
-                        ...img,
+                    setModifyCafeInfo(cafe => ({
+                        ...cafe,
                         img: url
                     }));
                     setImageModify(true);
@@ -126,20 +109,24 @@ function CafeModifyPage(props) {
     }
 
     const handleConfirmOnClick = async () => {
-        const response = await modifyCafeBannerApi(cafeId, modifyImg.img);
+        const response = await modifyCafeBannerApi(cafeId, modifyCafeInfo.img);
+        setImageModify(false);
+        setCafeInfo(img => ({
+            ...img,
+            img: modifyCafeInfo.img
+        }))
         if (response.status === 200) {
-            setImageModify(false);
             alert("이미지 변경 성공");
         }
     }
 
-    const handleProfileImageCancel = useCallback(() => {
+    const handleImageCancelOnClick = useCallback(() => {
         setImageModify(false);
-        setModifyImg((imgs) => ({
+        setModifyCafeInfo((imgs) => ({
             ...imgs,
-            img: cafeDetail?.img
+            img: cafeInfo?.img
         }))
-    }, [])
+    }, [modifyCafeInfo?.img])
 
     const handleTitleInputOnChange = (e) => {
         setModifyCafeInfo(prevInfo => ({
@@ -170,12 +157,15 @@ function CafeModifyPage(props) {
     const handleCancelOnClick = () => {
         setModifyCafeInfo(({
             cafeId,
-            cafeName: cafeDetail.cafeName,
-            address: cafeDetail.address,
-            category: cafeDetail.category
+            cafeName: modifyCafeInfo.cafeName,
+            address: modifyCafeInfo.address,
+            category: modifyCafeInfo.category
         }));
         setViewMode('user');
     }
+
+    console.log(modifyCafeInfo.img);
+    console.log(modifyCafeInfo?.img);
 
     return (
         <div css={s.layout}>
@@ -189,7 +179,7 @@ function CafeModifyPage(props) {
                     <div css={s.closeButton}></div>
             }
             <div css={s.bannerImg}>
-                <img src={modifyImg.img} alt="배너 이미지" />
+                <img src={modifyCafeInfo.img} alt="배너 이미지" />
             </div>
             <div css={s.imgChangeButton}>
                 <button onClick={handleImageChangeClick}>이미지 변경</button>
@@ -204,7 +194,7 @@ function CafeModifyPage(props) {
                     imageModify === true ?
                         <div>
                             <button onClick={handleConfirmOnClick}>확인</button>
-                            <button onClick={handleProfileImageCancel}>취소</button>
+                            <button onClick={handleImageCancelOnClick}>취소</button>
                         </div>
                         : <></>
                 }
@@ -216,7 +206,7 @@ function CafeModifyPage(props) {
                             ?
                             <>
                                 <div>
-                                    <h1>{cafeDetail?.cafeName}</h1>
+                                    <h1>{modifyCafeInfo?.cafeName}</h1>
                                 </div>
                                 <div css={s.editButton}>
                                     <button onClick={handleEditButtonOnClick}><FaRegEdit /></button>
@@ -245,7 +235,7 @@ function CafeModifyPage(props) {
                 {
                     viewMode === 'user'
                         ?
-                        <div>{cafeDetail?.address}</div>
+                        <div>{modifyCafeInfo?.address}</div>
                         :
                         viewMode === 'owner'
                             ?
@@ -258,14 +248,14 @@ function CafeModifyPage(props) {
                             <></>
                 }
                 <div css={s.reviewStat}>
-                    <StarRating averageRating={cafeDetail?.totalRating} />
-                    <div>{cafeDetail?.totalRating}</div>
+                    <StarRating averageRating={modifyCafeInfo?.totalRating} />
+                    <div>{modifyCafeInfo?.totalRating}</div>
                 </div>
                 <div css={s.detailInfo}>
                     {
                         viewMode === 'user'
                             ?
-                            <div>{cafeDetail?.category}</div>
+                            <div>{modifyCafeInfo?.category}</div>
                             :
                             viewMode === 'owner'
                                 ?
@@ -278,7 +268,7 @@ function CafeModifyPage(props) {
                                 :
                                 <></>
                     }
-                    <div>리뷰 {cafeDetail?.reviewCount}</div>
+                    <div>리뷰 {modifyCafeInfo?.reviewCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>

@@ -10,6 +10,7 @@ import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
 import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 
+
 function UserProfileModify({ isCount }) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
@@ -91,7 +92,6 @@ function UserProfileModify({ isCount }) {
             ...prevState,
             password: ""
         }))
-
     }, [])
 
     useEffect(() => {
