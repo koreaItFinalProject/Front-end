@@ -54,7 +54,7 @@ export const layout = css`
   display: flex;
   border-bottom: 1px solid #F2780C;
   margin-bottom: 15px;
-  height: 100px;
+  height: 110px;
 `;
 
 export const view = css`

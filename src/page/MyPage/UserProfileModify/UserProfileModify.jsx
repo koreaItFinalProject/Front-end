@@ -10,7 +10,8 @@ import checkUsernameApi from '../../../apis/checkUsernameApi/checkUsernameApi';
 import checkNicknameApi from '../../../apis/checkNicknameApi/checkNicknameApi';
 import mypageProfileModify from '../../../apis/mypageProfileModify/mypageProfileModify';
 
-function UserProfileModify({ isCount, }) {
+
+function UserProfileModify({ isCount }) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
@@ -22,8 +23,10 @@ function UserProfileModify({ isCount, }) {
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
     const [inputUser, setInputUser] = useState(isCount)
+    const [modifyUser, setModifyUser] = useState()
     const [passwordCheck, setPasswordCheck] = useState(isCount.password);
 
+    console.log(isCount);
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
         password: <></>,
@@ -85,7 +88,7 @@ function UserProfileModify({ isCount, }) {
     }
 
     useEffect(() => {
-        setInputUser((prevState) => ({
+        setModifyUser((prevState) => ({
             ...prevState,
             password: ""
         }))
@@ -126,13 +129,12 @@ function UserProfileModify({ isCount, }) {
     }
 
     const checkUsername = async () => {
-        if (inputUser.username === '') {
+        if (modifyUser.username === '') {
             alert("빈 값을 넣으면 안됩니다")
             return
         }
-        console.log(inputUser.username);
         try {
-            const response = await checkUsernameApi(inputUser.username);
+            const response = await checkUsernameApi(modifyUser.username);
             console.log(response);
             if (response.isSuccess) {
                 alert('사용가능한 이름입니다.');
@@ -155,7 +157,7 @@ function UserProfileModify({ isCount, }) {
         }
         console.log(inputUser.nickname);
         try {
-            const response = await checkNicknameApi(inputUser.nickname);
+            const response = await checkNicknameApi(modifyUser.nickname);
             console.log(response);
             if (response.isSuccess) {
                 alert('사용가능합니다.');
@@ -182,27 +184,27 @@ function UserProfileModify({ isCount, }) {
                 </div>
                 <div>
                     <div css={s.usernameInput}>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />
+                        <input type="text" name='username' value={modifyUser.username} onChange={handleInputOnChange(setModifyUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />
                         <button onClick={checkUsername}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}
                 </div>
                 <div>
-                    <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                    <input type="password" name='password' value={modifyUser.password} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호' />
                     {fieldErrorMessages.password}
                 </div>
                 <div>
-                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
+                    <input type="password" name='checkPassword' value={modifyUser.checkPassword} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호 확인' />
                     {fieldErrorMessages.checkPassword}
                     {fieldErrorMessages.passwordMatching}
                 </div>
                 <div>
-                    <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                    <input type="text" name='name' value={modifyUser.name} onChange={handleInputOnChange(setModifyUser)} placeholder='이름' />
                     {fieldErrorMessages.name}
                 </div>
                 <div css={s.emailCheck}>
-                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
-                    <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
+                    <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' disabled={emailCheckState} />
+                    <button onClick={() => startTimer(modifyUser.email)}>이메일 인증</button>
                 </div>
                 {fieldErrorMessages.email}
                 <div css={s.emailButton}>
@@ -219,7 +221,7 @@ function UserProfileModify({ isCount, }) {
                                     !emailCheckState ?
                                         <></>
                                         :
-                                        <button onClick={() => startTimer(inputUser.email)}>재요청</button>
+                                        <button onClick={() => startTimer(modifyUser.email)}>재요청</button>
                                 }
                                 <button onClick={handleOnEmailCheckClick}>확인</button>
                             </div>
@@ -228,7 +230,7 @@ function UserProfileModify({ isCount, }) {
                 </div>
                 <div>
                     <div css={s.nickNameStyle}>
-                        <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                        <input type="text" name='nickname' value={modifyUser.nickname} onChange={handleInputOnChange(setModifyUser)} placeholder='닉네임' />
                         <button onClick={checkNickName}>중복 확인</button>
                     </div>
                 </div>
@@ -237,7 +239,7 @@ function UserProfileModify({ isCount, }) {
                     <input
                         type="text"
                         name='phoneNumber'
-                        value={inputUser.phoneNumber}
+                        value={modifyUser.phoneNumber}
                         onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
                     {fieldErrorMessages.phoneNumber}
                 </div>

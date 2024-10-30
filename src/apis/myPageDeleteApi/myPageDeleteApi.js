@@ -1,10 +1,11 @@
 import { instance } from "../util/instance";
 
-const boardDeleteApi = async (id) => {
+const myPageDeleteApi = async (search, id) => {
     console.log(id);
+    console.log(search);
     let response = null;
     try {
-        response = await instance.delete(`/board/${id}`);
+        response = await instance.delete(`/${search}/${id}`);
         if (response.status === 200) {
             alert("삭제 성공");
             return response
@@ -17,4 +18,4 @@ const boardDeleteApi = async (id) => {
     }
 }
 
-export default boardDeleteApi;
+export default myPageDeleteApi;
