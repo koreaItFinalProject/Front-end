@@ -54,6 +54,10 @@ export const logo = css`
     }
 `;
 
+export const userInfoCheck = css`
+
+`;
+
 export const usernameInput = css`
     height: 40px;
     box-sizing: border-box;
@@ -173,7 +177,11 @@ export const nickNameStyle = css`
         width: 80px;
         height: 30px;
     }
-`
+`;
+
+export const emailPhoneCheck = css`
+
+`;
 
 export const signupbutton = css`
     display: flex;

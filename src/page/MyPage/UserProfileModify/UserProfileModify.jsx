@@ -23,7 +23,7 @@ function UserProfileModify({ isCount }) {
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
     const [inputUser, setInputUser] = useState(isCount)
-    const [modifyUser, setModifyUser] = useState()
+    const [modifyUser, setModifyUser] = useState(isCount)
     const [passwordCheck, setPasswordCheck] = useState(isCount.password);
 
     console.log(isCount);
@@ -63,7 +63,7 @@ function UserProfileModify({ isCount }) {
             console.log(signupData.fieldErrors);
             console.log(newFieldErrors);
             setFieldErrorMessages(newFieldErrors);
-            alert(`회원가입 실패`);
+            alert(`수정 성공`);
         } else {
             alert("가입 성공");
             navigate("/user/signin");
@@ -179,70 +179,75 @@ function UserProfileModify({ isCount }) {
             <div css={s.Info}>
                 <div css={s.logo}>
                     <h1>
-                        수정
+                        프로필
                     </h1>
                 </div>
-                <div>
-                    <div css={s.usernameInput}>
-                        <input type="text" name='username' value={modifyUser.username} onChange={handleInputOnChange(setModifyUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />
-                        <button onClick={checkUsername}>중복 확인</button>
+                <div css={s.userInfoCheck}>
+                    <div >
+                        <div css={s.usernameInput}>
+                            <input type="text" name='username' value={modifyUser.username} onChange={handleInputOnChange(setModifyUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#F2780C' }} />
+                            <button onClick={checkUsername}>중복 확인</button>
+                        </div>
+                        {fieldErrorMessages.username}
                     </div>
-                    {fieldErrorMessages.username}
-                </div>
-                <div>
-                    <input type="password" name='password' value={modifyUser.password} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호' />
-                    {fieldErrorMessages.password}
-                </div>
-                <div>
-                    <input type="password" name='checkPassword' value={modifyUser.checkPassword} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호 확인' />
-                    {fieldErrorMessages.checkPassword}
-                    {fieldErrorMessages.passwordMatching}
-                </div>
-                <div>
-                    <input type="text" name='name' value={modifyUser.name} onChange={handleInputOnChange(setModifyUser)} placeholder='이름' />
-                    {fieldErrorMessages.name}
-                </div>
-                <div css={s.emailCheck}>
-                    <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' disabled={emailCheckState} />
-                    <button onClick={() => startTimer(modifyUser.email)}>이메일 인증</button>
-                </div>
-                {fieldErrorMessages.email}
-                <div css={s.emailButton}>
                     <div>
-                        <div css={s.emailcert}>
-                            <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState} />
-                                <div>
-                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                        <input type="password" name='password' value={modifyUser.password} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호' />
+                        {fieldErrorMessages.password}
+                    </div>
+                    <div>
+                        <input type="password" name='checkPassword' value={modifyUser.checkPassword} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호 확인' />
+                        {fieldErrorMessages.checkPassword}
+                        {fieldErrorMessages.passwordMatching}
+                    </div>
+                    <div>
+                        <input type="text" name='name' value={modifyUser.name} onChange={handleInputOnChange(setModifyUser)} placeholder='이름' />
+                        {fieldErrorMessages.name}
+                    </div>
+                    <div>
+                        <div css={s.nickNameStyle}>
+                            <input type="text" name='nickname' value={modifyUser.nickname} onChange={handleInputOnChange(setModifyUser)} placeholder='닉네임' />
+                            <button onClick={checkNickName}>중복 확인</button>
+                        </div>
+                    </div>
+                    {fieldErrorMessages.nickname}
+                </div>
+                <div css={s.emailPhoneCheck}>
+                    <div css={s.emailCheck}>
+                        <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' disabled={emailCheckState} />
+                        <button onClick={() => startTimer(modifyUser.email)}>이메일 인증</button>
+                    </div>
+                    {fieldErrorMessages.email}
+                    <div css={s.emailButton}>
+                        <div>
+                            <div css={s.emailcert}>
+                                <div css={s.emailTimer}>
+                                    <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState} />
+                                    <div>
+                                        {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                    </div>
+                                </div>
+                                <div css={s.emailCheckButton}>
+                                    {
+                                        !emailCheckState ?
+                                            <></>
+                                            :
+                                            <button onClick={() => startTimer(modifyUser.email)}>재요청</button>
+                                    }
+                                    <button onClick={handleOnEmailCheckClick}>확인</button>
                                 </div>
                             </div>
-                            <div css={s.emailCheckButton}>
-                                {
-                                    !emailCheckState ?
-                                        <></>
-                                        :
-                                        <button onClick={() => startTimer(modifyUser.email)}>재요청</button>
-                                }
-                                <button onClick={handleOnEmailCheckClick}>확인</button>
-                            </div>
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                name='phoneNumber'
+                                value={modifyUser.phoneNumber}
+                                onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                            {fieldErrorMessages.phoneNumber}
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div css={s.nickNameStyle}>
-                        <input type="text" name='nickname' value={modifyUser.nickname} onChange={handleInputOnChange(setModifyUser)} placeholder='닉네임' />
-                        <button onClick={checkNickName}>중복 확인</button>
-                    </div>
-                </div>
-                {fieldErrorMessages.nickname}
-                <div>
-                    <input
-                        type="text"
-                        name='phoneNumber'
-                        value={modifyUser.phoneNumber}
-                        onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
-                    {fieldErrorMessages.phoneNumber}
-                </div>
+
                 <div css={s.signupbutton}>
                     <button
                         onClick={handlesignuppageOnClick}
