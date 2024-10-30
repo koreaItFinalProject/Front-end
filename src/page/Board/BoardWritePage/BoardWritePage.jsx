@@ -1,57 +1,56 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useCallback, useMemo, useRef, useState } from 'react';
-import ReactQuill, { Quill } from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import ImageResize from 'quill-image-resize';
-import { v4 as uuid } from "uuid";
-import { storage } from '../../../firebase/firebase';
+import { Link, useNavigate } from 'react-router-dom';
+import { writeBoardApi } from '../../../apis/writeBoardApi';
+import { PuffLoader } from "react-spinners";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { modifyBoardApi } from '../../../apis/modifyBoardApi';
-import { useQueryClient } from 'react-query';
-import { RingLoader } from "react-spinners";
+import { storage } from '../../../firebase/firebase';
+import { v4 as uuid } from "uuid";
+import ReactQuill, { Quill } from 'react-quill';
+import ImageResize from 'quill-image-resize';
+import 'react-quill/dist/quill.snow.css';
+import { IoCloseOutline } from "react-icons/io5";
 Quill.register("modules/imageResize", ImageResize);
 
-function ModifyPage(props) {
-    const params = useParams();
-    const boardId = params.boardId;
-    const queryClient = useQueryClient();
-    const boardData = queryClient.getQueryData(['boardQuery', boardId]);
+function BoardWritePage(props) {
 
     const navigate = useNavigate();
+
+    const [board, setBoard] = useState({
+        title: "",
+        content: "",
+        category: "자유글"
+    });
 
     const quillRef = useRef(null);
 
     const [isUploading, setUploading] = useState(false);
 
-    const [modifyBoard, setModifyBoard] = useState({
-        boardId,
-        title: boardData?.data?.title,
-        content: boardData?.data?.content,
-    });
-
-    const handleModifySubmitOnClick = async () => {
-        const selection = window.confirm("게시글을 수정하시겠습니까?");
-        if (selection) {
-            await modifyBoardApi(modifyBoard, boardId, navigate);
-        } else {
-            navigate(`/board/modify/${boardId}`);
-        }
-    }
-
     const handleTitleInputOnChange = (e) => {
-        setModifyBoard(board => ({
+        setBoard(board => ({
             ...board,
-            title: e.target.value,
+            [e.target.name]: e.target.value,
         }));
     }
 
     const handleQuillValueOnChange = (value) => {
-        setModifyBoard(board => ({
+        setBoard(board => ({
             ...board,
             content: quillRef.current.getEditor().getText().trim() === "" ? "" : value,
         }));
+    }
+
+    const handleWriteSubmitOnClick = async () => {
+        if (board.title.trim() === "") {
+            alert("제목을 입력해주세요.");
+            return;
+        }
+        if (!board.content) {
+            alert("내용을 입력하세요.");
+            return;
+        }
+        await writeBoardApi(board, navigate);
     }
 
     const handleImageLoad = useCallback(() => {
@@ -60,14 +59,13 @@ function ModifyPage(props) {
         input.click();
 
         input.onchange = () => {
-            const editor = quillRef.current.getEditor();
+            const editor = quillRef.current.getEditor(); // getEditor(): quill 내장 메소드, editor 객체를 가져옴
             const files = Array.from(input.files);
             const imgFile = files[0];
 
             const editPoint = editor.getSelection(true);
 
             const storageRef = ref(storage, `board/img/${uuid()}_${imgFile.name}`);
-            console.log(storageRef);
             const task = uploadBytesResumable(storageRef, imgFile);
             setUploading(true);
             task.on(
@@ -76,46 +74,45 @@ function ModifyPage(props) {
                 () => { },
                 async () => {
                     const url = await getDownloadURL(storageRef);
-                    editor.insertEmbed(editPoint.index, "image", url);
-                    editor.setSelection(editPoint.index + 1);
-                    editor.insertText(editPoint.index + 1, "\n");
+                    editor.insertEmbed(editPoint.index, "image", url); // 이미지를 quill editor에 띄운다.
+                    editor.setSelection(editPoint.index + 1); // 이미지 위치보다 커서를 +1칸 이동
+                    editor.insertText(editPoint.index + 1, "\n"); // 이미지 다음줄로 넘어감
                     setUploading(false);
-                    setModifyBoard(board => ({
+                    setBoard(board => ({
                         ...board,
                         content: editor.root.innerHTML
                     }));
                 }
             );
         }
-
     }, []);
 
     const toolbarOptions = useMemo(() => [
-        ['image'],
+        ['image']
     ], []);
 
     return (
         <div css={s.layout}>
             <div css={s.boardHeader}>
                 <div css={s.buttonLayout}>
-                    <button onClick={() => navigate(`/board/detail/${boardId}`)}>취소</button>
-                    <h1>글수정</h1>
-                    <button onClick={handleModifySubmitOnClick}>수정하기</button>
+                    <button onClick={() => navigate("/board?page=1")}><IoCloseOutline /></button>
+                    <h1>글쓰기</h1>
+                    <button onClick={handleWriteSubmitOnClick}>등록하기</button>
                 </div>
-                <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
+                <input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 {
                     isUploading &&
                     <div css={s.loadingLayout}>
-                        <RingLoader />
+                        <PuffLoader />
                     </div>
                 }
                 <ReactQuill
                     ref={quillRef}
-                    theme='snow'
-                    value={modifyBoard.content}
+                    theme="snow"
                     onChange={handleQuillValueOnChange}
+                    placeholder="내용을 입력하세요"
                     modules={{
                         toolbar: {
                             container: toolbarOptions,
@@ -129,9 +126,8 @@ function ModifyPage(props) {
                     }}
                 />
             </div>
-            
         </div>
     );
 }
 
-export default ModifyPage;
+export default BoardWritePage;

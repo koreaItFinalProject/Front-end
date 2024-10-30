@@ -13,7 +13,7 @@ import { useState } from "react";
 import useGetComments from "../../../apis/CommentApis/getCommentsApi";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
 
-function DetailPage(props) {
+function BoardDetailPage(props) {
     const navigate = useNavigate();
     const params = useParams();
     const boardId = params.boardId;
@@ -227,4 +227,4 @@ function DetailPage(props) {
     );
 }
 
-export default DetailPage;
+export default BoardDetailPage;
