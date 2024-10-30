@@ -28,7 +28,7 @@ function MyPage(props) {
         board: {},
         review: {},
         comment: {},
-        boardComment:{}
+        boardComment: {}
     })
     const [isOpen, setIsOpen] = useState();
     const openModal = () => {
@@ -166,7 +166,7 @@ function MyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={ isCount.boardComment} />
+                                <CommentState isCount={isCount.boardComment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

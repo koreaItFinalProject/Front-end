@@ -33,6 +33,7 @@ import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import OwnerMyPage from './page/Owner/OwnerMyPage/OwnerMyPage';
 import CafeModifyPage from './page/Owner/CafeModifyPage/CafeModifyPage';
+import NoticeWritePage from './page/Owner/NoticeWritePage/NoticeWritePage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -142,6 +143,7 @@ function App() {
               <Route path='/mypage' element={<OwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
               <Route path='/cafe/modify/:cafeId' element={<CafeModifyPage />} />
+              <Route path='/notice/write' element={<NoticeWritePage />} />
             </Routes>
           </MainLayout>
         } />
