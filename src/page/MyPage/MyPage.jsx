@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { RiAlarmWarningLine, RiAlarmWarningFill } from "react-icons/ri";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
@@ -19,7 +18,6 @@ import ReviewState from './ReviewState/ReviewState';
 import AlramInfo from './AlramInfo/AlramInfo';
 
 function MyPage(props) {
-    const navigate = useNavigate();
     const [alram, setAlram] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
@@ -28,7 +26,7 @@ function MyPage(props) {
         board: {},
         review: {},
         comment: {},
-        boardComment:{}
+        boardComment: {}
     })
     const [isOpen, setIsOpen] = useState();
     const openModal = () => {
@@ -90,7 +88,7 @@ function MyPage(props) {
         <div css={s.layout}>
             <div css={s.profileBox}>
                 {/* 필요없는거 지우셈 */}
-                <ModifyProfilePage handleOnModalClick={handleOnModalClick} setIsOpen={setIsOpen} value={"userinfo"} closeModal={closeModal} isOpen={isOpen} />
+                <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
             </div>
             <div css={s.mainBox}>
                 <div css={s.mainBoxLayout}>
@@ -118,7 +116,7 @@ function MyPage(props) {
                                 <button css={s.box} onClick={handleOnModalClick} value={"comment"}>
                                     <p>댓글 수 :
                                         {
-                                            isCount.comment.length === 0 ? '0' : isCount.comment.length
+                                            isCount.boardComment.length === 0 ? '0' : isCount.boardComment.length
                                         }
                                     </p>
                                 </button>
@@ -166,7 +164,7 @@ function MyPage(props) {
                             <PostModify isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={ isCount.boardComment} />
+                                <CommentState isCount={isCount.boardComment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

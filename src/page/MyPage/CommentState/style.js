@@ -50,7 +50,7 @@ export const view = css`
   align-items: end;
   position: absolute;
   right: 10px;
-  top: 7px;
+  top: 0px;
 `;
 
 export const imgTitle = css`
@@ -77,17 +77,26 @@ export const title = css`
   font-weight: 700;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   margin-left: 10px;
   box-sizing: border-box;
   & p {
     font-size: 16px;
-    width: 100%;
     padding: 0;
     box-sizing: border-box;
-    &:nth-of-type(1){
+    }
+  & div {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    & p:nth-of-type(1){
       cursor: pointer;
       color: #f2780c;
+      box-sizing: border-box;
+      text-decoration: underline;
+    }
+    & p:nth-of-type(2){
+      color: #1c1c1b;
     }
   }
 `;
