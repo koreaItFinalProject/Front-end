@@ -5,32 +5,37 @@ import { useNavigate, useParams } from 'react-router-dom';
 import boardDeleteApi from '../../../apis/boardApis/boardDeleteApi';
 
 function PostModify({ isCount }) {
-    const [recent, setRecent] = useState(true);
+    const [recent, setRecent] = useState(false);
     // const [modifyTitle, setModifyTitle] = useState(false);
     const [modifyText, setModifyText] = useState("");
     const params = useParams();
     const boardId = params.id;
     const navigate = useNavigate();
     const [isAscending, setIsAscending] = useState(false);
-    const [isView , setView] = useState(false);
+    const [isView, setView] = useState(false);
     const sortedPosts = [...isCount].sort((a, b) => {
-        if (isView) {
-            return isView  ? b.view_count - a.view_count : a.view_count - b.view_count;
-        } 
-        else if(recent){
-            return isAscending ? a.id - b.id :  b.id - a.id;
+        if (recent) {
+            return isView ? b.view_count - a.view_count : a.view_count - b.view_count;
+        }
+        else if (!recent) {
+            return !isAscending ?
+                new Date(b.writeDate) - new Date(a.writeDate) :
+                //b.id - a.id : a.id - b.id;
+                new Date(a.writeDate) - new Date(b.writeDate);
         }
     })
 
+    console.log(sortedPosts);
+
     const handleOnRecentClick = () => {
-        setRecent(!recent);
-        setIsAscending(!isAscending);
-        setView(false);
+        console.log(isAscending);
+        setIsAscending(isAscending === true ? false : true);
+        setRecent(false);
     }
 
     const handleOnViewClick = () => {
         setView(!isView);
-        setIsAscending(false);
+        setRecent(true);
     }
 
     // const handleModifyClick = (e, id) => {
@@ -75,10 +80,10 @@ function PostModify({ isCount }) {
             </div>
             <div css={s.select}>
                 {
-                    !recent ?
-                    <button onClick={handleOnRecentClick}>내림차순</button>
-                    :
-                    <button onClick={handleOnRecentClick}>오름차순</button>
+                    !isAscending ?
+                        <button onClick={handleOnRecentClick}>최신순</button>
+                        :
+                        <button onClick={handleOnRecentClick}>과거순</button>
                 }
                 <button onClick={handleOnViewClick}>조회수</button>
             </div>
