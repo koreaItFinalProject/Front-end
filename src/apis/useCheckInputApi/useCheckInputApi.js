@@ -1,28 +1,34 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "../util/instance";
 
-const useCheckInputApi = async (modifyUser, inputUser, Check) => {
+
+const useCheckInputApi = () => {
   const queryClient = useQueryClient();
 
   const mutation = useMutation(
-    async (id) => {
-      await instance.get(`/user/check/${Check}`);
+    async ({ modifyUser ,check }) => {
+      let user ={
+        [check]: modifyUser 
+      }
+      const response = await instance.get(`/user/check/${modifyUser}`);
+      
+      await instance.put(`/user/${check}`, user);
 
+      return response;
     },
     {
       onSuccess: (response) => {
-        instance.put(`/user/${Check}`, modifyUser);
-        alert("성공");
-        console.log(response);
-        queryClient.invalidateQueries(`userManagementInfo`);
+        console.log("성공:", response);
+        alert(`${response.data}`);
+        queryClient.invalidateQueries("userManagementInfo");
       },
       onError: (error) => {
-        alert(error.response.data);
+        alert(error + "오류가 발생했습니다.");
       }
     }
   );
 
-  return Check;
-}
+  return mutation;
+};
 
 export default useCheckInputApi;
