@@ -52,8 +52,8 @@ function CafeReview({ cafeDetail, refetch }) {
             </div>
             <div css={s.reviewStat}>
                 <div css={s.stat}>
-                    <div>{cafeDetail?.totalRating} 점</div>
-                    <StarRating averageRating={cafeDetail?.totalRating} />
+                    <div>{cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} 점</div>
+                    <StarRating averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} />
                 </div>
                 <button onClick={handleWriteReviewClick}><IoPencil />리뷰 쓰기</button>
             </div>

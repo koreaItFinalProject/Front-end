@@ -150,22 +150,13 @@ function CafeModifyPage(props) {
     }
 
     const handleSaveOnClick = async () => {
-        console.log(modifyCafeInfo);
         saveCafeInfoMutation.mutateAsync();
     }
 
     const handleCancelOnClick = () => {
-        setModifyCafeInfo(({
-            cafeId,
-            cafeName: modifyCafeInfo.cafeName,
-            address: modifyCafeInfo.address,
-            category: modifyCafeInfo.category
-        }));
+        setModifyCafeInfo(modifyCafeInfo);
         setViewMode('user');
     }
-
-    console.log(modifyCafeInfo.img);
-    console.log(modifyCafeInfo?.img);
 
     return (
         <div css={s.layout}>
@@ -181,24 +172,30 @@ function CafeModifyPage(props) {
             <div css={s.bannerImg}>
                 <img src={modifyCafeInfo.img} alt="배너 이미지" />
             </div>
-            <div css={s.imgChangeButton}>
-                <button onClick={handleImageChangeClick}>이미지 변경</button>
-                <input
-                    type="file"
-                    accept="image/*"
-                    ref={inputRef}
-                    style={{ display: 'none' }} // 숨겨진 input
-                    onChange={handleImageChange}
-                />
-                {
-                    imageModify === true ?
-                        <div>
-                            <button onClick={handleConfirmOnClick}>확인</button>
-                            <button onClick={handleImageCancelOnClick}>취소</button>
-                        </div>
-                        : <></>
-                }
-            </div>
+            {
+                viewMode === 'owner'
+                ?
+                <div css={s.imgChangeButton}>
+                    <button onClick={handleImageChangeClick}>이미지 변경</button>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        ref={inputRef}
+                        style={{ display: 'none' }} // 숨겨진 input
+                        onChange={handleImageChange}
+                    />
+                    {
+                        imageModify === true ?
+                            <div>
+                                <button onClick={handleConfirmOnClick}>확인</button>
+                                <button onClick={handleImageCancelOnClick}>취소</button>
+                            </div>
+                            : <></>
+                    }
+                    </div>
+                    :
+                    <></>
+            }
             <div css={s.detailHeader}>
                 <div css={s.title}>
                     {
