@@ -5,9 +5,8 @@ export const layout = css`
     height: 100%;
     display: flex;
     flex-direction: column; 
-    overflow-y: auto;
+    
     *{
-        color: #ffffff;
         & button {
             background-color: #F2780C;
             border: none;
@@ -16,8 +15,11 @@ export const layout = css`
         }
         button:disabled {
         cursor: not-allowed;
-    
-    }
+        }
+        input::placeholder {
+            color: #a1a1a1;
+            }
+        
     }
 `;
 
@@ -26,9 +28,11 @@ export const Info = css`
     display: flex;
     align-items: center;
     flex-direction: column; 
+    padding: 10px 68px;
+    overflow-y: auto;
     & p{
-        font-size: 12px;
-        color: #F2780C;
+        font-size: 14px;
+        /* color: #F2780C; */
         margin: 0;
     }
     & input {
@@ -47,44 +51,47 @@ export const logo = css`
 `;
 
 export const userInfoCheck = css`
+    width: 100%;
     border: 2px solid #F2780c;
     box-sizing: border-box;
     border-radius: 20px;
-    padding: 10px;
-    & div:nth-of-type(1){
-        width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+`;
+export const basicInfo = css`
+        width: 380px;
         display: flex;
         text-align: start;
         align-items: center;
-        margin: 10px 0px;
+        margin: 20px 0px;
         padding-bottom: 8px;
-        border-bottom: 1px solid #a1a1a1;
+        border-bottom: 2px solid #a1a1a1;
         & p {
-            font-size: 16px;
+            font-size: 14px;
             margin-left: 10px;
             font-weight: 600;
-            color:#a1a1a1
+            color:#a1a1a1;
         }
         & svg{
             color:#a1a1a1;
-            height: 18px;
-            width: 18px;
             margin-left: 5px;
-            & .path {
+            & path {
+                height: 18px;
+                width: 18px;
                 color: #a1a1a1;
+                background-color: #a1a1a1;
             }
         }
-    }
 `;
-
-export const usernameInput = css`
+export const InputBox = css`
     height: 40px;
     box-sizing: border-box;
     & input {
         height: 40px;
         width: 300px;
-        font-size: 18px;
+        font-size: 14px;
         border: none;
+        border-bottom: 1px solid #f2780c;
     }
     & button {
         box-sizing: border-box;
@@ -93,126 +100,61 @@ export const usernameInput = css`
     }
 `;
 
+export const userPasswordCheck = css`
+    width: 100%;
+    border: 2px solid #F2780c;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+`;
+
 export const emailCheck = css`
     display: flex;
+    align-items: center;
     & input {
-        width: 290px;
+        width: 300px;
     }
     & button {
-        width: 90px;
+        width: 80px;
+        height: 30px;
     }
 `;
 
-export const emailButton = css`
-    display: flex;
-    justify-content: end;
-    align-items: start;
-    width: 380px;
-    box-sizing: border-box;
-    height:100px;
-    & input {
-    }
-    & button{
-        height: 35px;
-        width: 100px;
-    }
-    & p{
-        width: 100px;
-        font-size: 14px;
-    }
-`;
-
-export const emailcert = css`
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height:100px;
-    padding-bottom: 0;
-    margin-bottom: 0;
-    padding: 0;
-    & div {
-        display: flex;
-        justify-content: end;
-        align-items: end;
-        padding-bottom: 0;
-        margin-bottom: 0;
-        & input{
-            height: 50px;
-        }
-    }
-`;
 
 export const emailTimer = css`
     display: flex;
-    /* justify-content: center; */
-    align-items: center;
-    width: 380px;
-    & input {
-        width: 245px;
-        border: none;
-    }
-    & div {
-        padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    & > div {
         display: flex;
-        justify-content: center;
         align-items: center;
-        height: 50px;
-        width: 135px;
+        p {
+            width: 80px;
+
+        }
+    }
+    & input {
+        width: 300px;
     }
 `;
 
 export const emailCheckButton = css`
-    padding: 0px;
+    margin-top: 10px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 380px;
-    padding-top: 10px ;
-    & input {
-        width: 300px;
-    }
-    & button{
-        width: 80px;
-    }
-`;
-
-export const registerButton = css`
-    height: 30px;
-    width: 80px;
-`;
-
-export const nickNameStyle = css`
-    width: 380px;
-    margin: 0;
-    & input {
-        width: 300px;
-        border: none;
-        padding-left: 10px;
-    }
-    & button{
+    justify-content: end;
+    & button {
         width: 80px;
         height: 30px;
     }
 `;
 
 export const emailPhoneCheck = css`
-    border: 1px solid #f2780c;
-`;
-
-export const signupbutton = css`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
     width: 100%;
-    padding: 20px 0px;
-    & button {
-        width: 200px;
-        height: 40px;
-        box-sizing: border-box;
-    }
-    button:disabled {
-        cursor: not-allowed;
-    }
+    border: 2px solid #F2780c;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
 `;
 
