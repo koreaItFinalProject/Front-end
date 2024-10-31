@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-function CommentInfo({ info, sortOrder}) {
+function CommentInfo({ info, sortOrder }) {
     console.log(info)
     return (
         <div css={s.mainLayout}>

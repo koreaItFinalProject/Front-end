@@ -8,11 +8,6 @@ import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
-import ManagerProfilePage from './page/Manager/ManagerProfilePage/ManagerProfilePage';
-import ManagerDashBoardPage from './page/Manager/ManagerDashBoardPage/ManagerDashBoardPage';
-import ManagerManagementPage from './page/Manager/ManagerManagementPage/ManagerManagementPage';
-import ManagerStoreManagementPage from './page/Manager/ManagerStoreManagementPage/ManagerStoreManagementPage';
-import ManagerSetting from './page/Manager/ManagerSetting/ManagerSetting';
 import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
@@ -28,12 +23,19 @@ import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
 import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
-import OwnerMyPage from './page/Owner/OwnerMyPage/OwnerMyPage';
-import CafeModifyPage from './page/Owner/CafeModifyPage/CafeModifyPage';
-import NoticeWritePage from './page/Owner/NoticeWritePage/NoticeWritePage';
+import CafeModifyPage from './page/CafeOwner/CafeModifyPage/CafeModifyPage';
+import NoticeWritePage from './page/CafeOwner/NoticeWritePage/NoticeWritePage';
 import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
 import BoardModifyPage from './page/Board/BoardModifyPage/BoardModifyPage';
 import BoardWritePage from './page/Board/BoardWritePage/BoardWritePage';
+import ManagerProfilePage from './page/Admin/WebManager/ManagerProfilePage/ManagerProfilePage';
+import ManagerDashBoardPage from './page/Admin/WebManager/ManagerDashBoardPage/ManagerDashBoardPage';
+import ManagerManagementPage from './page/Admin/WebManager/ManagerManagementPage/ManagerManagementPage';
+import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreManagementPage/ManagerStoreManagementPage';
+import ManagerSetting from './page/Admin/WebManager/ManagerSetting/ManagerSetting';
+import MobileAdminMyPage from './page/Admin/MobileAdmin/MobileAdminMyPage';
+import CafeOwnerMyPage from './page/CafeOwner/CafeOwnerMyPage/CafeOwnerMyPage';
+import NoticeListPage from './page/CafeOwner/NoticeListPage/NoticeListPage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -135,11 +137,11 @@ function App() {
     <>
       <Global styles={reset} />
       <Routes>
-        <Route path='/manager/*' element={
+        <Route path='/manager/web/*' element={
           <ManagerMainLayout>
             <Routes>
-              <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/home' element={<ManagerDashBoardPage />} />
+              <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/setting' element={<ManagerSetting />} />
@@ -147,12 +149,21 @@ function App() {
           </ManagerMainLayout>
         } />
 
+        <Route path='/admin/mobile/*' element={
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+            <Routes>
+              <Route path='/mypage' element={<MobileAdminMyPage />} />
+            </Routes>
+          </MainLayout>
+        } />
+
         <Route path='/owner/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
-              <Route path='/mypage' element={<OwnerMyPage />} />
+              <Route path='/mypage' element={<CafeOwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
               <Route path='/cafe/modify/:cafeId' element={<CafeModifyPage />} />
+              <Route path='/notice/list' element={<NoticeListPage />} />
               <Route path='/notice/write' element={<NoticeWritePage />} />
             </Routes>
           </MainLayout>

@@ -93,7 +93,7 @@ function NoticeWritePage(props) {
         <div css={s.layout}>
             <div css={s.boardHeader}>
                 <div css={s.buttonLayout}>
-                    <button onClick={() => navigate("/board?page=1")}><IoCloseOutline /></button>
+                    <button onClick={() => navigate("/owner/notice/list")}><IoCloseOutline /></button>
                     <h1>공지사항</h1>
                     <button onClick={handleWriteSubmitOnClick}>등록하기</button>
                 </div>

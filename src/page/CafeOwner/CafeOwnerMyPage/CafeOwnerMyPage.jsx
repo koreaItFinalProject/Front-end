@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { useQuery } from 'react-query';
@@ -13,17 +13,15 @@ import PostModify from '../../MyPage/PostModify/PostModify';
 import CommentState from '../../MyPage/CommentState/CommentState';
 import ReviewState from '../../MyPage/ReviewState/ReviewState';
 import AlramInfoPage from '../../MyPage/AlramInfo/AlramInfo';
-import { RiAlarmWarningLine, RiAlarmWarningFill } from "react-icons/ri";
+import { RiAlarmWarningFill } from "react-icons/ri";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { PiCoffee } from "react-icons/pi";
 import { VscMegaphone } from "react-icons/vsc";
 
-
-function OwnerMyPage(props) {
+function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
-    const [alram, setAlram] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
     const [isCount, setCount] = useState({
@@ -44,19 +42,6 @@ function OwnerMyPage(props) {
         setIsOpen(false)
         console.log(isOpen);
     };
-
-    // const startTimer = useCallback(() => {
-    //     const timer = setInterval(() => {
-    //         setAlram(prevAlram => !prevAlram);
-    //     }, 1000);
-
-    //     return () => clearInterval(timer)
-    // }, [alram])
-
-    // useEffect(() => {
-    //     const clearTimer = startTimer();
-    //     return clearTimer;
-    // }, [startTimer]);
 
     const userManagement = useQuery(
         ["userManagementInfo"],
@@ -99,10 +84,6 @@ function OwnerMyPage(props) {
         console.log(check);
     };
 
-    const handleCafeManageOnClick = () => {
-        ;
-    };
-
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -135,7 +116,7 @@ function OwnerMyPage(props) {
                     <p>카페 관리</p>
                     <p>{cafeData?.data?.cafeName}</p>
                 </div>
-                <div css={s.menu} onClick={() => navigate('/owner/notice/write')}>
+                <div css={s.menu} onClick={() => navigate('/owner/notice/list')}>
                     <VscMegaphone />
                     <p>공지사항</p>
                 </div>
@@ -168,4 +149,4 @@ function OwnerMyPage(props) {
     );
 }
 
-export default OwnerMyPage;
+export default CafeOwnerMyPage;
