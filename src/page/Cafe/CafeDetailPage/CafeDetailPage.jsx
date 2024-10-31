@@ -59,7 +59,7 @@ function CafeDetailPage() {
                 </div>
                 <div>{cafeDetail?.address}</div>
                 <div css={s.reviewStat}>
-                    <StarRating averageRating={cafeDetail?.totalRating} />
+                    <StarRating averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} />
                     <div>{cafeDetail?.totalRating}</div>
                 </div>
                 <div css={s.detailInfo}>

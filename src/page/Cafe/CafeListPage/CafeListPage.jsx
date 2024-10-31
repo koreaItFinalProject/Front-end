@@ -14,17 +14,17 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
 
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
-    };
+    }
 
     const handleInputKeyPress = (e) => {
         if (e.key === "Enter") {
             setInputvalue(inputdata);
         }
-    };
+    }
 
     const handleCafeClick = (cafeItem) => {
         navigate(`/cafe/detail/${cafeItem.id}`);
-    };
+    }
 
     return (
         <div css={s.layout}>
