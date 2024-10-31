@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
 import { useMutation, useQuery } from 'react-query';
-import { instance } from '../../../apis/util/instance';
 import ReactModal from 'react-modal';
-import UserInfo from '../../../components/Info/UserInfo/UserInfo';
-import BoardInfo from '../../../components/Info/BoardInfo/BoardInfo';
-import CommentInfo from '../../../components/Info/CommentInfo/CommentInfo';
-import ReviewInfo from '../../../components/Info/ReviewInfo/ReviewInfo';
+
+import { instance } from '../../../../apis/util/instance';
+import UserInfo from '../../../../components/Info/UserInfo/UserInfo';
+import BoardInfo from '../../../../components/Info/BoardInfo/BoardInfo';
+import CommentInfo from '../../../../components/Info/CommentInfo/CommentInfo';
+import ReviewInfo from '../../../../components/Info/ReviewInfo/ReviewInfo';
 
 function ManagerManagementPage(props) {
     const [role, setRole] = useState("user");
@@ -70,8 +71,8 @@ function ManagerManagementPage(props) {
     }
 
     const list = Array.isArray(info[check]) ? info[check].slice().sort((a, b) => {
-        return sortOrder === "latest" 
-            ? new Date(b.writeDate) - new Date(a.writeDate) 
+        return sortOrder === "latest"
+            ? new Date(b.writeDate) - new Date(a.writeDate)
             : new Date(a.writeDate) - new Date(b.writeDate);
     }) : [];
 
@@ -116,20 +117,20 @@ function ManagerManagementPage(props) {
                         {check !== "user" && (
                             <div css={s.radioContainer}>
                                 <label css={s.radioLabel}>
-                                    <input 
-                                        type="radio" 
-                                        name="shop" 
-                                        checked={sortOrder === "latest"} 
-                                        onChange={() => handleSortOrderChange("latest")} 
+                                    <input
+                                        type="radio"
+                                        name="shop"
+                                        checked={sortOrder === "latest"}
+                                        onChange={() => handleSortOrderChange("latest")}
                                     />
                                     <span>최신순</span>
                                 </label>
                                 <label css={s.radioLabel}>
-                                    <input 
-                                        type="radio" 
-                                        name="shop" 
-                                        checked={sortOrder === "oldest"} 
-                                        onChange={() => handleSortOrderChange("oldest")} 
+                                    <input
+                                        type="radio"
+                                        name="shop"
+                                        checked={sortOrder === "oldest"}
+                                        onChange={() => handleSortOrderChange("oldest")}
                                     />
                                     <span>오래된 순</span>
                                 </label>
@@ -144,10 +145,10 @@ function ManagerManagementPage(props) {
                             <div style={{ backgroundColor: check === 'review' ? "#7e7e7e" : "" }} onClick={() => handleCheckOnClick("review")}>리뷰 기록</div>
                         </div>
                         <div css={s.content}>
-                            {check === "user" ? <UserInfo info={info[check]} /> 
+                            {check === "user" ? <UserInfo info={info[check]} />
                                 : check === "board" ? <BoardInfo info={list} />
-                                : check === "comment" ? <CommentInfo info={list} />
-                                : <ReviewInfo info={list} />}
+                                    : check === "comment" ? <CommentInfo info={list} />
+                                        : <ReviewInfo info={list} />}
                         </div>
                     </div>
                 </div>

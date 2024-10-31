@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
-import { Link } from 'react-router-dom';
-import SideBar from '../../../components/SideBar/SideBar';
-import { instance } from '../../../apis/util/instance';
-import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { instance } from '../../../../apis/util/instance';
 
 function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue }) {
     const queryClient = useQueryClient();

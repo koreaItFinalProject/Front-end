@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
-function BoardInfo({ info, sortOrder}) {
+function BoardInfo({ info, sortOrder }) {
     console.log(info)
     return (
         <div css={s.mainLayout}>
