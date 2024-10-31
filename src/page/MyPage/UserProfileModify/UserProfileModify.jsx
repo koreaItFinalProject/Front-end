@@ -6,8 +6,7 @@ import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/hand
 import emailApi from '../../../apis/emailApis/emailApi';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { CiUnlock, CiMail } from "react-icons/ci";
-import checkInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
-
+import useCheckInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
 
 function UserProfileModify({ isCount }) {
     const navigate = useNavigate();
@@ -20,6 +19,7 @@ function UserProfileModify({ isCount }) {
     const [modifyUser, setModifyUser] = useState(isCount)
     const [modifyCheck, setModifyCheck] = useState('');
     const [emailCheckState, setEmailCheckState] = useState(false);
+    const mutation = useCheckInputApi();
 
     const handleInputCheckChange = (e) => {
         setEmailCheck(e.target.value);
@@ -84,14 +84,15 @@ function UserProfileModify({ isCount }) {
         }
     }
 
-    const checkDuplicate = async (modifyUser, inputUser, check) => {
-
-        try {
-            const response = await checkInputApi(modifyUser, inputUser, check);
-            console.log(response);
-        } catch (error) {
-
-        }
+    const checkDuplicate = (modifyUser, inputUser, check) => {
+        // if(modifyUser !== ''){
+            console.log("빈 값은 수정할 수 없습니다.");
+            if(modifyUser !== inputUser){  
+                const response = mutation.mutate({ modifyUser , check }); 
+                console.log("1" + response);
+            }
+        // }
+        console.log(modifyUser + inputUser + check);
     }
 
     return (
