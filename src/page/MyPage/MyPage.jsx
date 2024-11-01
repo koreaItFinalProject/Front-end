@@ -157,7 +157,7 @@ function MyPage(props) {
                 <button css={s.closeButton} onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
-                        <UserProfileModify isCount={isCount.user} />
+                        <UserProfileModify user={isCount.user} />
                         :
                         check === "post" ?
                             <PostModify isCount={isCount.board} />
