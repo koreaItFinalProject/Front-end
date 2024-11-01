@@ -1,34 +1,65 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "../util/instance";
+import { useEffect, useState } from "react";
 
 
 const useCheckInputApi = () => {
   const queryClient = useQueryClient();
+  const [errorData, setErrorData] = useState({
+    isError: false,
+    errorField: "",
+    errorName: "",
+    errorMessage: "",
+    error: null,
+  })
+
+  useEffect(() => {
+    if (errorData.isError) {
+      alert(errorData.errorMessage);
+    }
+  }, [errorData])
 
   const mutation = useMutation(
-    async ({ modifyUser ,check }) => {
-      let user ={
-        [check]: modifyUser 
-      }
-      const response = await instance.get(`/user/check/${modifyUser}`);
-      
-      await instance.put(`/user/${check}`, user);
-
-      return response;
-    },
-    {
-      onSuccess: (response) => {
-        console.log("성공:", response);
-        alert(`${response.data}`);
-        queryClient.invalidateQueries("userManagementInfo");
-      },
-      onError: (error) => {
-        alert(error + "오류가 발생했습니다.");
-      }
-    }
+    "updateUserField",
+    async ({ fieldName, value }) => await instance.put(`/user/info/${fieldName}`, { fieldName, value })
   );
 
-  return mutation;
+  const duplicatedCheck = async (fieldName, value) => {
+    let getResponse;
+    let putResponse;
+
+    try {
+      getResponse = await instance.get(`/user/duplicated/${fieldName}?value=${value}`);
+      try {
+        putResponse = await mutation.mutateAsync({ fieldName, value });
+        alert("변경완료");
+        setErrorData({
+          idError: false,
+          errorField: "",
+          errorName: "",
+          errorMessage: "",
+          error: null,
+        })
+        queryClient.invalidateQueries("userManagementInfo");
+      } catch (e) {
+        alert("변경실패");
+      }
+    } catch (e) {
+      console.log("중복!!!")
+      setErrorData(errorData => ({
+        ...errorData,
+        isError: true,
+        errorField: fieldName,
+        errorName: `${fieldName}중복`,
+        errorMessage: e.response.data.errorMessage,
+      }));
+    }
+  };
+
+  return {
+    duplicatedCheck,
+    errorData
+  }
 };
 
 export default useCheckInputApi;

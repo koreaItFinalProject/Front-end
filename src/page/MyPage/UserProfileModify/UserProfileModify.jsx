@@ -8,22 +8,34 @@ import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { CiUnlock, CiMail } from "react-icons/ci";
 import useCheckInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
 
-function UserProfileModify({ isCount }) {
+function UserProfileModify({ user }) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
     const [isTimerStopped, setIsTimerStopped] = useState();
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber, setEmailNumber] = useState("");
-    const [inputUser, setInputUser] = useState(isCount)
-    const [modifyUser, setModifyUser] = useState(isCount)
+    const [inputUser, setInputUser] = useState(user);
+    const [modifyUser, setModifyUser] = useState(user);
     const [modifyCheck, setModifyCheck] = useState('');
     const [emailCheckState, setEmailCheckState] = useState(false);
-    const mutation = useCheckInputApi();
+    const { duplicatedCheck, errorData } = useCheckInputApi();
 
     const handleInputCheckChange = (e) => {
         setEmailCheck(e.target.value);
     }
+    console.log(user);
+    const isEmptyAndIsEqualsCheckFieldValue = (oldValue, newValue) => {
+        if (!(newValue.trim())) {
+            alert("공백으로는 변경할 수 없습니다.");
+            return true;
+        }
+        if (oldValue === newValue) {
+            alert("동일한 정보로는 변경할 수 없습니다.");
+            return true;
+        }
+        return false;
+    };
 
     const handleOnEmailCheckClick = async () => {
         console.log("이메일 넘버" + emailNumber);
@@ -40,6 +52,17 @@ function UserProfileModify({ isCount }) {
                 alert("인증번호가 일치하지 않습니다.");
             }
         }
+    }
+
+    const handleModifyFiledValue = (e) => {
+        const { name } = e.target;
+        console.log(name);
+        console.log(inputUser[name], modifyUser[name])
+        if (isEmptyAndIsEqualsCheckFieldValue(inputUser[name], modifyUser[name])) {
+            return;
+        }
+
+        duplicatedCheck(name, modifyUser[name]);
     }
 
     const handleOnEmailCancelClick = () => {
@@ -84,17 +107,6 @@ function UserProfileModify({ isCount }) {
         }
     }
 
-    const checkDuplicate = (modifyUser, inputUser, check) => {
-        // if(modifyUser !== ''){
-            console.log("빈 값은 수정할 수 없습니다.");
-            if(modifyUser !== inputUser){  
-                const response = mutation.mutate({ modifyUser , check }); 
-                console.log("1" + response);
-            }
-        // }
-        console.log(modifyUser + inputUser + check);
-    }
-
     return (
         <div css={s.layout}>
             <div css={s.Info}>
@@ -110,15 +122,15 @@ function UserProfileModify({ isCount }) {
                     </div>
                     <div css={s.InputBox}>
                         <input type="text" name='name' value={modifyUser.name} onChange={handleInputOnChange(setModifyUser)} placeholder='이름' />
-                        <button onClick={() => checkDuplicate(modifyUser.name, inputUser.name, 'name')}>확인</button>
+                        <button name='name' onClick={handleModifyFiledValue}>확인</button>
                     </div>
                     <div css={s.InputBox}>
                         <input type="text" name='username' value={modifyUser.username} onChange={handleInputOnChange(setModifyUser)} placeholder='아이디' />
-                        <button onClick={() => checkDuplicate(modifyUser.username, inputUser.username, 'username')}>확인</button>
+                        <button name='username' onClick={handleModifyFiledValue}>확인</button>
                     </div>
                     <div css={s.InputBox}>
                         <input type="text" name='nickname' value={modifyUser.nickname} onChange={handleInputOnChange(setModifyUser)} placeholder='닉네임' />
-                        <button onClick={() => checkDuplicate(modifyUser.nickname, inputUser.nickname, 'nickname')}>확인</button>
+                        <button name='nickname' onClick={handleModifyFiledValue}>확인</button>
                     </div>
                 </div>
                 <div css={s.userPasswordCheck}>
@@ -128,7 +140,7 @@ function UserProfileModify({ isCount }) {
                     </div>
                     <div css={s.InputBox}>
                         <input type="password" name='password' value={modifyUser.password} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호' />
-                        {/* <button onClick={() => checkPassword(modifyUser.password, inputUser.password)}>확인</button> */}
+                        <button onClick={handleModifyFiledValue}>확인</button>
                     </div>
                     <div>
                         <input type="password" name='checkPassword' value={modifyUser.checkPassword} onChange={handleInputOnChange(setModifyUser)} placeholder='비밀번호 확인' />
@@ -170,6 +182,7 @@ function UserProfileModify({ isCount }) {
                                 name='phoneNumber'
                                 value={modifyUser.phoneNumber}
                                 onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                            <button onClick={handleModifyFiledValue}>확인</button>
                         </div>
                     </div>
                 </div>

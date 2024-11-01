@@ -24,6 +24,7 @@ function PostModify({ isCount }) {
                 new Date(a.writeDate) - new Date(b.writeDate);
         }
     })
+    console.log(isCount);
 
     const handleOnRecentClick = () => {
         console.log(isAscending);
