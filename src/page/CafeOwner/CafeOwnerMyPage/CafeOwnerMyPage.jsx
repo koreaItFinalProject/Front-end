@@ -9,8 +9,7 @@ import ReactModal from 'react-modal';
 import { State } from '../../../atom/userState';
 import ModifyProfilePage from '../../MyPage/ModifyProfilePage/ModifyProfilePage';
 import UserProfileModify from '../../MyPage/UserProfileModify/UserProfileModify';
-import PostModify from '../../MyPage/PostModify/PostModify';
-import CommentState from '../../MyPage/CommentState/CommentState';
+import CommentBoard from '../../MyPage/CommentBoard/CommentBoard';
 import ReviewState from '../../MyPage/ReviewState/ReviewState';
 import AlramInfoPage from '../../MyPage/AlramInfo/AlramInfo';
 import { RiAlarmWarningFill } from "react-icons/ri";
@@ -19,6 +18,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { PiCoffee } from "react-icons/pi";
 import { VscMegaphone } from "react-icons/vsc";
+import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 
 function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
@@ -132,10 +132,10 @@ function CafeOwnerMyPage(props) {
                         <UserProfileModify isCount={isCount.user} />
                         :
                         check === "post" ?
-                            <PostModify isCount={isCount.board} />
+                            <NoticeBoard isCount={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={isCount.boardComment} />
+                                <CommentBoard isCount={isCount.boardComment} />
                                 :
                                 check === "review" ?
                                     <ReviewState isCount={isCount.review} />

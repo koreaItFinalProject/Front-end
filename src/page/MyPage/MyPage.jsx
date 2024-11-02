@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery } from 'react-query';
-import { RiAlarmWarningLine, RiAlarmWarningFill } from "react-icons/ri";
+import { MdNotifications , MdNotificationsActive  } from "react-icons/md";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
+import { AiOutlineNotification } from "react-icons/ai";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { instance } from '../../apis/util/instance';
@@ -12,21 +13,22 @@ import { useRecoilState } from 'recoil';
 import ModifyProfilePage from './ModifyProfilePage/ModifyProfilePage';
 import ReactModal from 'react-modal';
 import UserProfileModify from './UserProfileModify/UserProfileModify';
-import PostModify from './PostModify/PostModify';
-import CommentState from './CommentState/CommentState';
+import CommentBoard from './CommentBoard/CommentBoard';
 import ReviewState from './ReviewState/ReviewState';
 import AlramInfo from './AlramInfo/AlramInfo';
+import NoticeBoard from './NoticeBoard/NoticeBoard';
 
 function MyPage(props) {
     const [alram, setAlram] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
-    const [isCount, setCount] = useState({
+    const [infoBoard, setInfoBoard] = useState({
         user: {},
         board: {},
         review: {},
         comment: {},
-        boardComment: {}
+        boardComment: {},
+        alram:{}
     })
     const [isOpen, setIsOpen] = useState();
     const openModal = () => {
@@ -39,18 +41,13 @@ function MyPage(props) {
 
     };
 
-    const startTimer = useCallback(() => {
+    useEffect(() => {
         const timer = setInterval(() => {
             setAlram(prevAlram => !prevAlram);
         }, 1000);
-
-        return () => clearInterval(timer)
-    }, [alram])
-
-    useEffect(() => {
-        const clearTimer = startTimer();
-        return clearTimer;
-    }, [startTimer]);
+    
+        return () => clearInterval(timer);
+    }, []); 
 
 
 
@@ -66,7 +63,7 @@ function MyPage(props) {
             enabled: !user?.username,
             onSuccess: response => {
                 setUser(response.data);
-                setCount(response.data);
+                setInfoBoard(response.data);
                 console.log(user);
             },
             onError: response => {
@@ -101,7 +98,7 @@ function MyPage(props) {
                                 <button css={s.box} onClick={handleOnModalClick} value={"post"}>
                                     <p>게시글 수 :
                                         {
-                                            isCount.board.length === 0 ? '0' : isCount.board.length
+                                            infoBoard.board.length === 0 ? '0' : infoBoard.board.length
                                         }</p>
                                 </button>
                             </div>
@@ -115,7 +112,7 @@ function MyPage(props) {
                                 <button css={s.box} onClick={handleOnModalClick} value={"comment"}>
                                     <p>댓글 수 :
                                         {
-                                            isCount.boardComment.length === 0 ? '0' : isCount.boardComment.length
+                                            infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length
                                         }
                                     </p>
                                 </button>
@@ -131,18 +128,25 @@ function MyPage(props) {
                                 </div>
                                 <button css={s.box} onClick={handleOnModalClick} value={"review"}>
                                     <p>리뷰 수 :
-                                        {isCount.review.length === 0 ? '0' : isCount.review.length}</p>
+                                        {infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
                                 </button>
                             </div>
                         </div>
                         <div css={s.information}>
                             <div >
-                                <div css={s.alarm}>
+                                <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
                                     {
-                                        alram ?
-                                            <RiAlarmWarningLine className='white-alarm-icon' /> :
-                                            <RiAlarmWarningFill className='red-alarm-icon' />
+                                        alram.length >= 1 ?(
+                                            //일반
+                                            <MdNotificationsActive/>
+                                        ):(
+                                            //알림
+                                            <MdNotifications className='alarm-icon'/>
+                                        )
                                     }
+                                </div>
+                                <div css={s.alarm}>
+                                    <AiOutlineNotification/>
                                     <p>알림정보</p>
                                 </div>
                                 <button css={s.box} onClick={handleOnModalClick} value={"alram"}>
@@ -153,23 +157,23 @@ function MyPage(props) {
                     </div>
                 </div>
             </div>
-            <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
+            <ReactModal isOpen={isOpen} check={check} infoBoard ={infoBoard[check]} style={s.modalStyles}>
                 <button css={s.closeButton} onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
-                        <UserProfileModify user={isCount.user} />
+                        <UserProfileModify user={infoBoard.user} />
                         :
                         check === "post" ?
-                            <PostModify isCount={isCount.board} />
+                            <NoticeBoard board={infoBoard.board} />
                             :
                             check === "comment" ?
-                                <CommentState isCount={isCount.boardComment} />
+                                <CommentBoard comment={infoBoard.boardComment} />
                                 :
                                 check === "review" ?
-                                    <ReviewState isCount={isCount.review} />
+                                    <ReviewState review={infoBoard.review} />
                                     :
                                     check === "alram" ?
-                                        <AlramInfo isCount={isCount} />
+                                        <AlramInfo alram={infoBoard.alram} />
                                         : <></>
                 }
             </ReactModal>

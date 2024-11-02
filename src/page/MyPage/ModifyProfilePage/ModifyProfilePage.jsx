@@ -15,7 +15,6 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
     const inputRef = useRef(null);
     const [modifyUserInfo, setModifyUserInfo] = useState({})
     const [imageModify, setImageModify] = useState(false);
-    const [checkButton, setCheckButton] = useState(false); // 이미지 변경 최종 확인 상태값
 
     useEffect(() => {
         if (user) {
@@ -80,7 +79,6 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
         }
     }
 
-    // 체크해봐야할듯
     const handleProfileImageCancel = useCallback(() => {
         setImageModify(false);
         setModifyUserInfo((imgs) => ({

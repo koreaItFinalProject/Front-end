@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMyPageDeleteMutation } from '../../../apis/useMyPageDeleteMutation/useMyPageDeleteMutation';
 
 
-function PostModify({ isCount }) {
+function NoticeBoard({ board }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
     const param = "board";
@@ -14,7 +14,7 @@ function PostModify({ isCount }) {
     const [state, setState] = useState(false);
     const deleteMutation = useMyPageDeleteMutation(param);
 
-    const sortedPosts = [...isCount].sort((a, b) => {
+    const sortedPosts = [...board].sort((a, b) => {
         if (recent) {
             return isView ? b.view_count - a.view_count : a.view_count - b.view_count;
         }
@@ -24,7 +24,6 @@ function PostModify({ isCount }) {
                 new Date(a.writeDate) - new Date(b.writeDate);
         }
     })
-    console.log(isCount);
 
     const handleOnRecentClick = () => {
         console.log(isAscending);
@@ -62,7 +61,7 @@ function PostModify({ isCount }) {
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
                 <p>
-                    게시글 수 : {isCount.length}
+                    게시글 수 : {board.length}
                 </p>
             </div>
             <div css={s.select}>
@@ -101,4 +100,4 @@ function PostModify({ isCount }) {
     );
 }
 
-export default PostModify;
+export default NoticeBoard;

@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { useMyPageDeleteMutation } from '../../../apis/useMyPageDeleteMutation/useMyPageDeleteMutation';
 
 
-function CommentState({ isCount }) {
+function CommentBoard({ comment }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
     const param = "comment"
     const deleteMutation = useMyPageDeleteMutation(param);
-    console.log(isCount);
-    const sortedPosts = [...isCount].sort((a, b) => {
+    const sortedPosts = [...comment].sort((a, b) => {
         return !recent ?
             new Date(b.commentWriteDate) - new Date(a.commentWriteDate) :
             new Date(a.commentWriteDate) - new Date(b.commentWriteDate);
@@ -41,7 +40,7 @@ function CommentState({ isCount }) {
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
                 <p>
-                    게시글 수 : {isCount.length}
+                    게시글 수 : {comment.length}
                 </p>
             </div>
             <div css={s.select}>
@@ -82,4 +81,4 @@ function CommentState({ isCount }) {
     );
 }
 
-export default CommentState;
+export default CommentBoard;
