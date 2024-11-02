@@ -7,6 +7,8 @@ import emailApi from '../../../apis/emailApis/emailApi';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { CiUnlock, CiMail } from "react-icons/ci";
 import useCheckInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
+import isEmptyAndIsEqualsCheckFieldValue from '../../../apis/EmptyDuplicateCheckValue/EmptyDuplicateCheckValue';
+import { userInfo } from '../ModifyProfilePage/style';
 
 function UserProfileModify({ user }) {
     const navigate = useNavigate();
@@ -20,22 +22,6 @@ function UserProfileModify({ user }) {
     const [modifyCheck, setModifyCheck] = useState('');
     const [emailCheckState, setEmailCheckState] = useState(false);
     const { duplicatedCheck, errorData } = useCheckInputApi();
-
-    const handleInputCheckChange = (e) => {
-        setEmailCheck(e.target.value);
-    }
-    console.log(user);
-    const isEmptyAndIsEqualsCheckFieldValue = (oldValue, newValue) => {
-        if (!(newValue.trim())) {
-            alert("공백으로는 변경할 수 없습니다.");
-            return true;
-        }
-        if (oldValue === newValue) {
-            alert("동일한 정보로는 변경할 수 없습니다.");
-            return true;
-        }
-        return false;
-    };
 
     const handleOnEmailCheckClick = async () => {
         console.log("이메일 넘버" + emailNumber);
@@ -87,17 +73,17 @@ function UserProfileModify({ user }) {
         return () => clearInterval(interval);
     }, [isTimerRunning, timer, isTimerStopped]);
 
-    const startTimer = async (email) => {
+    const startTimer = async (e) => {
+        const { name } = e.target;
         try {
-            if (email.trim() === '') {
-                alert('빈 값은 입력할 수 없습니다.');
+            if (isEmptyAndIsEqualsCheckFieldValue(inputUser[name], modifyUser[name])) {
                 return;
             }
             setIsTimerStopped(false);
             setIsTimerRunning(true);
             setEmailCheckState(true);
             setTimer(180);
-            const response = await emailApi(email);
+            const response = await emailApi(modifyUser.email);
             const verificationCode = response.number;
             setEmailNumber(verificationCode);
 
@@ -153,12 +139,12 @@ function UserProfileModify({ user }) {
                     </div>
                     <div css={s.emailCheck}>
                         <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' disabled={emailCheckState} />
-                        <button onClick={() => startTimer(modifyUser.email)}>이메일 인증</button>
+                        <button name="email" onClick={startTimer}>이메일 인증</button>
                     </div>
                     <div>
                         <div>
                             <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} placeholder='이메일 확인' readOnly={!emailCheckState} />
+                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일 확인' readOnly={!emailCheckState} />
                                 <div>
                                     {isTimerRunning && <p>{Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
@@ -169,7 +155,7 @@ function UserProfileModify({ user }) {
                                         <></>
                                         :
                                         <>
-                                            <button onClick={() => startTimer(modifyUser.email)}>재요청</button>
+                                            <button onClick={startTimer}>재요청</button>
                                             <button onClick={handleOnEmailCheckClick}>확인</button>
                                             <button onClick={handleOnEmailCancelClick}>취소</button>
                                         </>

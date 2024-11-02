@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
@@ -189,6 +189,36 @@ export const information = css`
     }
 `;
 
+export const blinkIcon= keyframes`
+    0%,100% {
+        color:black;
+        transform: rotate(15deg);
+    }
+    25% { 
+        transform: rotate(-15deg);
+    }
+    50% { 
+        color:red;
+        transform: rotate(15deg);
+    }
+    75% { 
+        transform: rotate(-15deg);
+    }
+`;
+
+export const noticeAlarm = css`
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    & svg {
+        width: 50px;
+        height: 50px;
+    }
+    .alarm-icon > path{
+        animation: ${blinkIcon} 1.5s infinite;
+        transform-origin: center;
+    }
+`;
 
 export const alarm = css`
     position: absolute;
@@ -202,12 +232,10 @@ export const alarm = css`
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    .red-alarm-icon > path{
-        color: red;
+    & svg {
+        transform: none;
     }
-    .white-alarm-icon > path {
-        color: #000000;
-    }
+    
     display: flex;
     justify-content: space-around;
 `;

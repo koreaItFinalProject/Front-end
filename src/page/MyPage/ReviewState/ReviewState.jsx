@@ -5,12 +5,12 @@ import * as s from "./style";
 import StarRating from '../../../apis/util/starRating';
 import { useMyPageDeleteMutation } from '../../../apis/useMyPageDeleteMutation/useMyPageDeleteMutation';
 
-function ReviewState({ isCount }) {
+function ReviewState({ review }) {
     const [recent, setRecent] = useState(false);
     const navigate = useNavigate();
     const param = "review";
     const deleteMutation = useMyPageDeleteMutation(param);
-    const sortedPosts = [...isCount].sort((a, b) => {
+    const sortedPosts = [...review].sort((a, b) => {
         return !recent ?
             new Date(b.writeDate) - new Date(a.writeDate) :
             new Date(a.writeDate) - new Date(b.writeDate);
@@ -31,7 +31,7 @@ function ReviewState({ isCount }) {
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
                 <p>
-                    게시글 수 : {isCount.length}
+                    게시글 수 : {review.length}
                 </p>
             </div>
             <div css={s.select}>
