@@ -22,6 +22,7 @@ import { VscMegaphone } from "react-icons/vsc";
 
 function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState();
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
     const [isCount, setCount] = useState({
@@ -31,17 +32,22 @@ function CafeOwnerMyPage(props) {
         comment: {},
         boardComment: {}
     })
-    const [isOpen, setIsOpen] = useState();
+
+    // "자유글"만 담은 배열 생성, isCount에 데이터가 들어오기 전에는 실행 되지 않도록 삼항연산자 사용
+    const freePosts = Array.isArray(isCount.board) ? isCount.board.filter(post => post.category === '자유글') : [];
+
+    // "공지사항"만 담은 배열 생성
+    const noticePosts = Array.isArray(isCount.board) ? isCount.board.filter(post => post.category === '공지사항') : [];
 
     const openModal = () => {
         setIsOpen(true)
         console.log(isOpen);
-    };
+    }
 
     const closeModal = () => {
         setIsOpen(false)
         console.log(isOpen);
-    };
+    }
 
     const userManagement = useQuery(
         ["userManagementInfo"],
@@ -60,7 +66,7 @@ function CafeOwnerMyPage(props) {
                 alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
             }
         }
-    );
+    )
 
     const cafeData = useQuery(
         ["cafeDataQuery"],
@@ -82,7 +88,7 @@ function CafeOwnerMyPage(props) {
             setIsOpen(true);
         }
         console.log(check);
-    };
+    }
 
     return (
         <div css={s.layout}>
@@ -99,7 +105,7 @@ function CafeOwnerMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("post")}>
                     <BsFillFileEarmarkPostFill />
                     <p>작성한 게시글</p>
-                    <p>{isCount.board.length === 0 ? '0' : isCount.board.length}</p>
+                    <p>{freePosts === 0 ? '0' : freePosts.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("comment")}>
                     <FaRegCommentDots />
@@ -118,7 +124,8 @@ function CafeOwnerMyPage(props) {
                 </div>
                 <div css={s.menu} onClick={() => navigate('/owner/notice/list')}>
                     <VscMegaphone />
-                    <p>공지사항</p>
+                    <p>공지사항 관리</p>
+                    <p>{noticePosts === 0 ? '0' : noticePosts.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
                     <RiAlarmWarningFill />
@@ -132,7 +139,7 @@ function CafeOwnerMyPage(props) {
                         <UserProfileModify isCount={isCount.user} />
                         :
                         check === "post" ?
-                            <PostModify isCount={isCount.board} />
+                            <PostModify isCount={freePosts} />
                             :
                             check === "comment" ?
                                 <CommentState isCount={isCount.boardComment} />
