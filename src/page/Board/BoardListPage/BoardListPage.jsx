@@ -24,7 +24,7 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                 fetchNextPage();
             }
         }, {
-            rootMargin: '1000px',
+            rootMargin: '200px',
             threshold: 0.1
         });
 
