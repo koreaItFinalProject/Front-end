@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { IoMdHeart } from 'react-icons/io';
+import { BsEye } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
+
 
 function BoardList({ boardList, loadMoreRef }) {
     const navigate = useNavigate();
@@ -63,7 +65,10 @@ function BoardList({ boardList, loadMoreRef }) {
                                                 <span>by </span>
                                                 <p>{board.nickname}</p>
                                             </div>
-                                            <div><IoMdHeart /><span>{board.likeCount}</span></div>
+                                            <div css={s.counts}>
+                                                <div><IoMdHeart />{board.likeCount}</div>
+                                                <div><BsEye />{board.viewCount}</div>
+                                            </div>
                                         </footer>
                                     </li>
                                 );

@@ -125,3 +125,9 @@ export const cardFooter = css`
             }
         }
 `;
+
+export const counts = css`
+    div:nth-of-type(1) {
+        margin-right: 15px;
+    }
+`;
