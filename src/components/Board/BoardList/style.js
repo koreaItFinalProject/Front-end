@@ -36,6 +36,9 @@ export const cardImg = css`
 
     & > img {
         width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 10px;
     }
 `;
 
@@ -121,4 +124,10 @@ export const cardFooter = css`
                 line-height: 10px;
             }
         }
+`;
+
+export const counts = css`
+    div:nth-of-type(1) {
+        margin-right: 15px;
+    }
 `;
