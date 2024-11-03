@@ -13,7 +13,7 @@ import { useCafeDetailQuery } from '../../../apis/CafeApis/getCafeDetailApi';
 function CafeDetailPage() {
     const params = useParams();
     const cafeId = params.cafeId;
-    const [selectMenu, setSelectMenu] = useState('review');
+    const [selectMenu, setSelectMenu] = useState('menu');
 
     const { data: cafeDetail } = useCafeDetailQuery(cafeId);
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
@@ -32,61 +32,76 @@ function CafeDetailPage() {
         dislikeMutation.mutateAsync();
     };
 
+    console.log(cafeDetail);
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={'카페 리스트'} prevPageUrl={'/cafe/list'} />
-            <div css={s.bannerImg}>
-                <img src={cafeDetail?.img} alt="Banner Image" />
-            </div>
-            <div css={s.detailHeader}>
-                <div css={s.titleLike}>
-                    <div>
-                        <h1>{cafeDetail?.cafeName}</h1>
+            <div css={s.subLayout}>
+                <div css={s.bannerImg}>
+                    <img src={cafeDetail?.img} alt="Banner Image" />
+                </div>
+                <div css={s.detailHeader}>
+                    <div css={s.titleLike}>
+                        <div>
+                            <h1>{cafeDetail?.cafeName}</h1>
+                        </div>
+                        <div css={s.heart}>
+                            {
+                                !!cafeLike?.cafeLikeId
+                                    ?
+                                    <button onClick={handleDislikeOnClick}>
+                                        <IoMdHeart style={{ fill: '#f2780c' }} />
+                                    </button>
+                                    :
+                                    <button onClick={handleLikeOnClick}>
+                                        <IoMdHeartEmpty />
+                                    </button>
+                            }
+
+                        </div>
                     </div>
-                    <div css={s.heart}>
-                        {
-                            !!cafeLike?.cafeLikeId
+                    <div css={s.address}>{cafeDetail?.address}</div>
+                    <div css={s.reviewStat}>
+                        <StarRating
+                            averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating}
+                            dimension={"30px"}
+                            spacing={5}
+                        />
+                        <div>{cafeDetail?.totalRating}</div>
+                    </div>
+                    <div css={s.detailInfo}>
+                        <div>{cafeDetail?.category}</div>
+                        <div>리뷰 {cafeDetail?.reviewCount}</div>
+                        <div>좋아요 {cafeLike?.likeCount}</div>
+                    </div>
+                </div>
+                <div css={s.detailContent}>
+                    <div css={s.menuButtons}>
+                        <button
+                            css={selectMenu === 'menu' ? s.activeButton : null}
+                            onClick={handleMenuOnClick}
+                            value={"menu"}>
+                            메뉴
+                        </button>
+                        <button
+                            css={selectMenu === 'review' ? s.activeButton : null}
+                            onClick={handleMenuOnClick}
+                            value={"review"}>
+                            리뷰
+                        </button>
+                    </div>
+                    {
+                        selectMenu === 'review'
+                            ? <CafeReview cafeDetail={cafeDetail} />
+                            :
+                            selectMenu === 'menu'
                                 ?
-                                <button onClick={handleDislikeOnClick}>
-                                    <IoMdHeart style={{ fill: '#f2780c' }} />
-                                </button>
+                                <CafeMenu />
                                 :
-                                <button onClick={handleLikeOnClick}>
-                                    <IoMdHeartEmpty />
-                                </button>
-                        }
-                    </div>
+                                <></>
+                    }
                 </div>
-                <div>{cafeDetail?.address}</div>
-                <div css={s.reviewStat}>
-                    <StarRating averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} />
-                    <div>{cafeDetail?.totalRating}</div>
-                </div>
-                <div css={s.detailInfo}>
-                    <div>{cafeDetail?.category}</div>
-                    <div>리뷰 {cafeDetail?.reviewCount}</div>
-                </div>
-            </div>
-            <div css={s.detailContent}>
-                <div css={s.menuButtons}>
-                    <button
-                        css={selectMenu === 'menu' ? s.activeButton : null}
-                        onClick={handleMenuOnClick}
-                        value={"menu"}>
-                        Menu
-                    </button>
-                    <button
-                        css={selectMenu === 'review' ? s.activeButton : null}
-                        onClick={handleMenuOnClick}
-                        value={"review"}>
-                        Review
-                    </button>
-                </div>
-                {
-                    selectMenu === 'review'
-                        ? <CafeReview cafeDetail={cafeDetail} />
-                        : <CafeMenu />
-                }
             </div>
         </div>
     );

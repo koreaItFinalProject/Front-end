@@ -49,7 +49,7 @@ export const searchContainer = css`
 
     input {
         width: 550px;
-        padding: 10px 70px 10px 20px;
+        padding: 10px 50px 10px 20px;
         border: none;
         border-radius: 20px;
         background-color: #ffffff;
@@ -60,14 +60,19 @@ export const searchContainer = css`
     }
 
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
         position: absolute;
         right: 87px;
         top: 50%;
         transform: translateY(-50%);
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-weight: 600;
-        background-color: #f2780c;
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
     }
 
     select {
