@@ -21,7 +21,6 @@ import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
 import OAuth2MergePage from './page/SignupPage/OAuth2Page/OAuth2MergePage';
 import ReactModal from 'react-modal';
-import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import CafeModifyPage from './page/CafeOwner/CafeModifyPage/CafeModifyPage';
 import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
