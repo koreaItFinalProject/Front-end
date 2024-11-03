@@ -7,18 +7,18 @@ import { useQuery } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import ReactModal from 'react-modal';
 import { State } from '../../../atom/userState';
-import ModifyProfilePage from '../../MyPage/ModifyProfilePage/ModifyProfilePage';
-import UserProfileModify from '../../MyPage/UserProfileModify/UserProfileModify';
-import ReviewState from '../../MyPage/ReviewState/ReviewState';
-import AlramInfoPage from '../../MyPage/AlramInfo/AlramInfo';
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { PiCoffee } from "react-icons/pi";
 import { VscMegaphone } from "react-icons/vsc";
+import ModifyProfilePage from "../../MyPage/ModifyProfilePage/ModifyProfilePage";
+import UserProfileModify from "../../MyPage/UserProfileModify/UserProfileModify";
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 import CommentBoard from "../../MyPage/CommentBoard/CommentBoard";
+import ReviewState from "../../MyPage/ReviewState/ReviewState";
+import AlramInfoPage from "../../MyPage/AlramInfo/AlramInfo";
 
 function MobileAdminMyPage(props) {
     const navigate = useNavigate();
@@ -129,19 +129,19 @@ function MobileAdminMyPage(props) {
                 <button onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
-                        <UserProfileModify isCount={isCount.user} />
+                        <UserProfileModify user={isCount.user} />
                         :
                         check === "post" ?
-                            <NoticeBoard isCount={isCount.board} />
+                            <NoticeBoard board={isCount.board} />
                             :
                             check === "comment" ?
-                                <CommentBoard isCount={isCount.boardComment} />
+                                <CommentBoard comment={isCount.boardComment} />
                                 :
                                 check === "review" ?
-                                    <ReviewState isCount={isCount.review} />
+                                    <ReviewState review={isCount.review} />
                                     :
                                     check === "alram" ?
-                                        <AlramInfoPage isCount={isCount} />
+                                        <AlramInfoPage alram={isCount} />
                                         : <></>
                 }
             </ReactModal>
