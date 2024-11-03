@@ -24,7 +24,6 @@ import ReactModal from 'react-modal';
 import { useCafeQuery } from './apis/CafeApis/getCafeListApi';
 import ManagerMainLayout from './components/Manager/ManagerMainLayout/ManagerMainLayout';
 import CafeModifyPage from './page/CafeOwner/CafeModifyPage/CafeModifyPage';
-import NoticeWritePage from './page/CafeOwner/NoticeWritePage/NoticeWritePage';
 import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
 import BoardModifyPage from './page/Board/BoardModifyPage/BoardModifyPage';
 import BoardWritePage from './page/Board/BoardWritePage/BoardWritePage';
@@ -35,7 +34,10 @@ import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreMana
 import ManagerSetting from './page/Admin/WebManager/ManagerSetting/ManagerSetting';
 import MobileAdminMyPage from './page/Admin/MobileAdmin/MobileAdminMyPage';
 import CafeOwnerMyPage from './page/CafeOwner/CafeOwnerMyPage/CafeOwnerMyPage';
-import NoticeListPage from './page/CafeOwner/NoticeListPage/NoticeListPage';
+import CafeNoticeListPage from './page/CafeOwner/CafeNoticeListPage/CafeNoticeListPage';
+import CafeNoticeWritePage from './page/CafeOwner/CafeNoticeWritePage/CafeNoticeWritePage';
+import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoticeDetailPage';
+import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -163,8 +165,14 @@ function App() {
               <Route path='/mypage' element={<CafeOwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
               <Route path='/cafe/modify/:cafeId' element={<CafeModifyPage />} />
-              <Route path='/notice/list' element={<NoticeListPage />} />
-              <Route path='/notice/write' element={<NoticeWritePage />} />
+              <Route path='/notice/list' element={<CafeNoticeListPage
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                refetch={refetch}
+              />} />
+              <Route path='/notice/detail/:boardId' element={<CafeNoticeDetailPage />} />
+              <Route path='/notice/write' element={<CafeNoticeWritePage />} />
+              <Route path='/notice/modify/:boardId' element={<CafeNoticeModifyPage />} />
             </Routes>
           </MainLayout>
         } />
