@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery } from 'react-query';
@@ -86,75 +86,58 @@ function MyPage(props) {
             <div css={s.profileBox}>
                 <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
             </div>
-            <div css={s.mainBox}>
-                <div css={s.mainBoxLayout}>
-                    <div>
-                        <div css={s.post}>
-                            <div>
-                                <div css={s.postInventory} >
-                                    <BsFillFileEarmarkPostFill />
-                                    <p>게시글</p>
-                                </div>
-                                <button css={s.box} onClick={handleOnModalClick} value={"post"}>
-                                    <p>게시글 수 :
-                                        {
-                                            infoBoard.board.length === 0 ? '0' : infoBoard.board.length
-                                        }</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div css={s.comment}>
-                            <div >
-                                <div css={s.commentInventory}>
-                                    <FaRegCommentDots />
-                                    <p>댓글관리</p>
-                                </div>
-                                <button css={s.box} onClick={handleOnModalClick} value={"comment"}>
-                                    <p>댓글 수 :
-                                        {
-                                            infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length
-                                        }
-                                    </p>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div css={s.review}>
-                            <div>
-                                <div css={s.reviewInventory}>
-                                    <MdOutlineRateReview />
-                                    <p>리뷰관리</p>
-                                </div>
-                                <button css={s.box} onClick={handleOnModalClick} value={"review"}>
-                                    <p>리뷰 수 :
-                                        {infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
-                                </button>
-                            </div>
-                        </div>
-                        <div css={s.information}>
-                            <div >
-                                <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
-                                    {
-                                        alram.length >= 1 ?(
-                                            //일반
-                                            <MdNotificationsActive/>
-                                        ):(
-                                            //알림
-                                            <MdNotifications className='alarm-icon'/>
-                                        )
-                                    }
-                                </div>
+            <div css={s.menuContainer} >
+                <div css={s.menu}>
+                    <button onClick={handleOnModalClick} value={"post"}>
+                    <BsFillFileEarmarkPostFill />
+                    <p>게시글</p>
+                    <p>게시글 수 :
+                        {
+                            infoBoard.board.length === 0 ? '0' : infoBoard.board.length
+                        }</p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnModalClick} value={"comment"}>
+                    <FaRegCommentDots />
+                    <p>댓글관리</p>
+                        <p>댓글 수 :
+                            {
+                                infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length
+                            }
+                        </p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnModalClick} value={"review"}>
+                    <MdOutlineRateReview />
+                    <p>리뷰관리</p>
+                        <p>리뷰 수 :
+                            {infoBoard.review.length === 0 ? '0' : infoBoard.review.length}
+                        </p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
+                        {
+                            alram.length >= 1 ?(
+                                //일반
+                                <MdNotificationsActive/>
+                            ):(
+                                //알림
                                 <div css={s.alarm}>
-                                    <AiOutlineNotification/>
-                                    <p>알림정보</p>
+                                    <MdNotificationsActive className='alarm-icon'/>
+                                    <p>알람이 왔습니다</p>
                                 </div>
-                                <button css={s.box} onClick={handleOnModalClick} value={"alram"}>
-                                    <p>알림 수 : {0}</p>
-                                </button>
-                            </div>
-                        </div>
+                                // <MdNotifications className='alarm-icon'/>
+                            )
+                        }
                     </div>
+                    <button onClick={handleOnModalClick} value={"alram"}>
+                    <AiOutlineNotification/>
+                    <p>알림정보</p>
+                        <p>알림 수 : {0}</p>
+                    </button>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard ={infoBoard[check]} style={s.modalStyles}>
