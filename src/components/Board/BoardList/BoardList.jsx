@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { IoMdHeart } from 'react-icons/io';
-import { BsEye } from "react-icons/bs";
+import { IoMdEye } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
-
 
 function BoardList({ boardList, loadMoreRef }) {
     const navigate = useNavigate();
@@ -20,7 +19,7 @@ function BoardList({ boardList, loadMoreRef }) {
         <ul css={s.cardLayout} ref={listRef}>
             {
                 boardList?.pages.map((page, pageIndex) => (
-                    <>
+                    <React.Fragment key={pageIndex}>
                         {
                             page.data.boards.map(board => {
                                 const mainImgStartIndex = board.content.indexOf("<img");
@@ -67,13 +66,13 @@ function BoardList({ boardList, loadMoreRef }) {
                                             </div>
                                             <div css={s.counts}>
                                                 <div><IoMdHeart />{board.likeCount}</div>
-                                                <div><BsEye />{board.viewCount}</div>
+                                                <div><IoMdEye />{board.viewCount}</div>
                                             </div>
                                         </footer>
                                     </li>
                                 );
                             })}
-                    </>
+                    </React.Fragment>
                 ))
             }
         </ul>

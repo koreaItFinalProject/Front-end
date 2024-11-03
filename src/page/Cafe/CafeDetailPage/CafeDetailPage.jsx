@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import CafeMenu from '../../../components/CafeDetail/CafeMenu/CafeMenu';
 import CafeReview from '../../../components/CafeDetail/CafeReview/CafeReview';
 import StarRating from '../../../apis/util/starRating';
@@ -9,30 +9,41 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useCafeLikeQuery, useDislikeMutation, useLikeMutation } from '../../../apis/CafeApis/CafeLikeApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import { useCafeDetailQuery } from '../../../apis/CafeApis/getCafeDetailApi';
+import NoticeList from "../../../components/NoticeList/NoticeList";
+import { useCafeNoticeListQuery } from "../../../apis/CafeApis/getCafeNoticeListApi";
+import { useEffect } from "react";
 
 function CafeDetailPage() {
+    const location = useLocation();
     const params = useParams();
     const cafeId = params.cafeId;
-    const [selectMenu, setSelectMenu] = useState('menu');
+    const [selectMenu, setSelectMenu] = useState(new URLSearchParams(location.search).get('selectMenu') || 'menu');
 
     const { data: cafeDetail } = useCafeDetailQuery(cafeId);
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
+    const { data: cafeNoticeList } = useCafeNoticeListQuery(cafeDetail?.ownerId, {
+        enabled: !!cafeDetail?.ownerId, // ownerId가 존재할 때만 쿼리 실행
+    });
     const likeMutation = useLikeMutation(cafeId, refetchCafeLike);
     const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
 
+    useEffect(() => {
+        if (selectMenu === '') {
+            setSelectMenu('menu');
+        }
+    }, [selectMenu])
+
     const handleMenuOnClick = (e) => {
         setSelectMenu(e.target.value);
-    };
+    }
 
     const handleLikeOnClick = () => {
         likeMutation.mutateAsync();
-    };
+    }
 
     const handleDislikeOnClick = () => {
         dislikeMutation.mutateAsync();
-    };
-
-    console.log(cafeDetail);
+    }
 
     return (
         <div css={s.layout}>
@@ -90,16 +101,32 @@ function CafeDetailPage() {
                             value={"review"}>
                             리뷰
                         </button>
+                        <button
+                            css={selectMenu === 'notice' ? s.activeButton : null}
+                            onClick={handleMenuOnClick}
+                            value={"notice"}>
+                            공지사항
+                        </button>
                     </div>
                     {
-                        selectMenu === 'review'
-                            ? <CafeReview cafeDetail={cafeDetail} />
+                        selectMenu === 'menu'
+                            ?
+                            <CafeMenu />
                             :
-                            selectMenu === 'menu'
+                            selectMenu === 'review'
                                 ?
-                                <CafeMenu />
+                                <CafeReview cafeDetail={cafeDetail} />
                                 :
-                                <></>
+                                selectMenu === 'notice'
+                                    ?
+                                    <NoticeList
+                                        sortedNoticeList={cafeNoticeList?.boards}
+                                        prevPage={'detail'}
+                                        cafeId={cafeId}
+                                        cafeName={cafeDetail?.cafeName}
+                                    />
+                                    :
+                                    <></>
                     }
                 </div>
             </div>

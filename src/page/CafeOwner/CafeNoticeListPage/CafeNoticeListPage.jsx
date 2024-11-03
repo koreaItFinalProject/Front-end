@@ -6,8 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { FaPlus } from "react-icons/fa6";
-import { BsEye } from "react-icons/bs";
-import { CiChat1 } from "react-icons/ci";
+import NoticeList from '../../../components/NoticeList/NoticeList';
 
 function CafeNoticeListPage(props) {
     const loadMoreRef = useRef(null);
@@ -33,13 +32,12 @@ function CafeNoticeListPage(props) {
         },
         {
             getNextPageParam: (lastPage, allPage) => {
-                const totalPageCount = lastPage.totalCount % limit === 0
-                    ? lastPage.data.totalCount / limit
-                    : Math.floor(lastPage.totalCount / limit) + 1
+                const totalPageCount = lastPage?.totalCount % limit === 0
+                    ? lastPage?.totalCount / limit
+                    : Math.floor(lastPage?.totalCount / limit) + 1
                 return totalPageCount !== allPage.length ? allPage.length + 1 : null;
             },
             onSuccess: (response) => {
-                console.log(response.pages);
                 setLoadedNoticeList(response.pages.flatMap(page => page.boards));
             },
             retry: 0,
@@ -105,6 +103,8 @@ function CafeNoticeListPage(props) {
         setIsAscending(true);
     }
 
+    console.log(noticeList);
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={'마이페이지'} prevPageUrl={'/owner/mypage'} />
@@ -132,35 +132,7 @@ function CafeNoticeListPage(props) {
                 >오래된순
                 </button>
             </div>
-            <div css={s.boardListLayout}>
-                {
-                    sortedNoticeList?.map((board, index) => {
-                        const mainImgStartIndex = board.content.indexOf("<img");
-                        let mainImg = board.content.slice(mainImgStartIndex);
-                        mainImg = mainImg.slice(0, mainImg.indexOf(">") + 1);
-                        const mainImgSrc = mainImg.slice(mainImg.indexOf("src") + 5, mainImg.length - 2);
-
-                        return (
-                            <div key={index} css={s.noticeLayout} onClick={() => navigate(`/owner/notice/detail/${board.id}`)}>
-                                <div css={s.noticeInfoLayout}>
-                                    <h1>{board.title}</h1>
-                                    <div css={s.writerAndWriteDate}>
-                                        <p>{board.nickname} </p>
-                                        <p>{board.writeDate}</p>
-                                    </div>
-                                    <div css={s.counts}>
-                                        <p><BsEye />{board.viewCount}</p>
-                                        <p><CiChat1 />{board.commentCount}</p>
-                                    </div>
-                                </div>
-                                <div css={s.noticeImgContainer}>
-                                    <img src={mainImgSrc} alt="" />
-                                </div>
-                            </div>
-                        );
-                    })
-                }
-            </div>
+            <NoticeList sortedNoticeList={sortedNoticeList} prevPage={'list'} />
             <div ref={loadMoreRef}></div>
         </div>
     );
