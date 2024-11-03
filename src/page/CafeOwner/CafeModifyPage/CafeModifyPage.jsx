@@ -14,6 +14,9 @@ import CafeMenu from "../../../components/CafeDetail/CafeMenu/CafeMenu";
 import modifyCafeBannerApi from "../../../apis/CafeApis/modifyCafeBannerApi";
 import { useMutation } from "react-query";
 import { instance } from "../../../apis/util/instance";
+import NoticeList from "../../../components/NoticeList/NoticeList";
+import { useCafeNoticeListQuery } from "../../../apis/CafeApis/getCafeNoticeListApi";
+import { useCafeLikeQuery } from "../../../apis/CafeApis/CafeLikeApi";
 
 function CafeModifyPage(props) {
     const navigate = useNavigate();
@@ -26,8 +29,11 @@ function CafeModifyPage(props) {
     const [modifyCafeInfo, setModifyCafeInfo] = useState({});
     const [cafeInfo, setCafeInfo] = useState({});
 
-
     const { data: cafeDetail, refetch } = useCafeDetailQuery(cafeId);
+    const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
+    const { data: cafeNoticeList } = useCafeNoticeListQuery(cafeDetail?.ownerId, {
+        enabled: !!cafeDetail?.ownerId, // ownerId가 존재할 때만 쿼리 실행
+    });
 
     useEffect(() => {
         if (cafeDetail) {
@@ -174,24 +180,24 @@ function CafeModifyPage(props) {
             </div>
             {
                 viewMode === 'owner'
-                ?
-                <div css={s.imgChangeButton}>
-                    <button onClick={handleImageChangeClick}>이미지 변경</button>
-                    <input
-                        type="file"
-                        accept="image/*"
-                        ref={inputRef}
-                        style={{ display: 'none' }} // 숨겨진 input
-                        onChange={handleImageChange}
-                    />
-                    {
-                        imageModify === true ?
-                            <div>
-                                <button onClick={handleConfirmOnClick}>확인</button>
-                                <button onClick={handleImageCancelOnClick}>취소</button>
-                            </div>
-                            : <></>
-                    }
+                    ?
+                    <div css={s.imgChangeButton}>
+                        <button onClick={handleImageChangeClick}>이미지 변경</button>
+                        <input
+                            type="file"
+                            accept="image/*"
+                            ref={inputRef}
+                            style={{ display: 'none' }} // 숨겨진 input
+                            onChange={handleImageChange}
+                        />
+                        {
+                            imageModify === true ?
+                                <div>
+                                    <button onClick={handleConfirmOnClick}>확인</button>
+                                    <button onClick={handleImageCancelOnClick}>취소</button>
+                                </div>
+                                : <></>
+                        }
                     </div>
                     :
                     <></>
@@ -232,7 +238,7 @@ function CafeModifyPage(props) {
                 {
                     viewMode === 'user'
                         ?
-                        <div>{modifyCafeInfo?.address}</div>
+                        <div css={s.address}>{cafeDetail?.address}</div>
                         :
                         viewMode === 'owner'
                             ?
@@ -245,7 +251,11 @@ function CafeModifyPage(props) {
                             <></>
                 }
                 <div css={s.reviewStat}>
-                    <StarRating averageRating={modifyCafeInfo?.totalRating} />
+                    <StarRating
+                        averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating}
+                        dimension={"30px"}
+                        spacing={5}
+                    />
                     <div>{modifyCafeInfo?.totalRating}</div>
                 </div>
                 <div css={s.detailInfo}>
@@ -266,6 +276,7 @@ function CafeModifyPage(props) {
                                 <></>
                     }
                     <div>리뷰 {modifyCafeInfo?.reviewCount}</div>
+                    <div>좋아요 {cafeLike?.likeCount}</div>
                 </div>
             </div>
             <div css={s.detailContent}>
@@ -274,19 +285,40 @@ function CafeModifyPage(props) {
                         css={selectMenu === 'menu' ? s.activeButton : null}
                         onClick={handleMenuOnClick}
                         value={"menu"}>
-                        Menu
+                        메뉴
                     </button>
                     <button
                         css={selectMenu === 'review' ? s.activeButton : null}
                         onClick={handleMenuOnClick}
                         value={"review"}>
-                        Review
+                        리뷰
+                    </button>
+                    <button
+                        css={selectMenu === 'notice' ? s.activeButton : null}
+                        onClick={handleMenuOnClick}
+                        value={"notice"}>
+                        공지사항
                     </button>
                 </div>
                 {
-                    selectMenu === 'review'
-                        ? <CafeReview cafeDetail={cafeDetail} />
-                        : <CafeMenu />
+                    selectMenu === 'menu'
+                        ?
+                        <CafeMenu />
+                        :
+                        selectMenu === 'review'
+                            ?
+                            <CafeReview cafeDetail={cafeDetail} />
+                            :
+                            selectMenu === 'notice'
+                                ?
+                                <NoticeList
+                                    sortedNoticeList={cafeNoticeList?.boards}
+                                    prevPage={'detail'}
+                                    cafeId={cafeId}
+                                    cafeName={cafeDetail?.cafeName}
+                                />
+                                :
+                                <></>
                 }
             </div>
         </div>

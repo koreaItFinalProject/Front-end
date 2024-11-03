@@ -103,6 +103,12 @@ export const editButton = css`
     }
 `;
 
+export const address = css`
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 600;
+`;
+
 export const addressInput = css`
     text-align: center;
     padding: 0;
@@ -124,16 +130,18 @@ export const reviewStat = css`
 export const detailInfo = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    gap: 15px;
 
-    div:nth-of-type(1) {
-        margin-right: 10px;
-        color: #f2780c;
-        font-size: 14px;
+    div {
+        font-size: 16px;
+        font-weight: 500;
     }
 
-    div:nth-of-type(2) {
-        font-size: 14px;
+    div:nth-of-type(1) {
+        color: #f2780c;
     }
 
     select {
@@ -156,18 +164,19 @@ export const detailContent = css`
 export const menuButtons = css`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid #f2780c;
 
     button {
         border: 1px solid #000000;
         border-radius: 20px;
-        margin-right: 5px;
-        padding: 5px 50px;
+        margin-left: 10px;
+        padding: 5px 20px;
         font-weight: 600;
+    }
 
-        :active {
-            background-color: #f2780c;
-        }
+    button:nth-of-type(1) {
+        margin: 0;
     }
 `;
 

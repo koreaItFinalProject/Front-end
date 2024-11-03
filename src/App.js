@@ -37,6 +37,7 @@ import CafeNoticeListPage from './page/CafeOwner/CafeNoticeListPage/CafeNoticeLi
 import CafeNoticeWritePage from './page/CafeOwner/CafeNoticeWritePage/CafeNoticeWritePage';
 import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoticeDetailPage';
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
+import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
 
 ReactModal.setAppElement('#root');
 function App() {
@@ -181,6 +182,7 @@ function App() {
             <Routes>
               <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='detail/:cafeId' element={<CafeDetailPage />} />
+              <Route path='notice/detail/:boardId' element={<NoticeDetailPage />} />
               <Route path='review/:cafeId' element={<CafeReviewPage />} />
               <Route path='review/modify/:cafeId' element={<CafeReviewModifyPage />} />
             </Routes>

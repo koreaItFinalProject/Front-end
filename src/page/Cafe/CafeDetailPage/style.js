@@ -139,12 +139,13 @@ export const menuButtons = css`
     button {
         border: 1px solid #000000;
         border-radius: 20px;
+        margin-left: 10px;
         padding: 5px 20px;
         font-weight: 600;
     }
 
-    button:nth-of-type(2) {
-        margin-left: 10px;
+    button:nth-of-type(1) {
+        margin: 0;
     }
 `;
 

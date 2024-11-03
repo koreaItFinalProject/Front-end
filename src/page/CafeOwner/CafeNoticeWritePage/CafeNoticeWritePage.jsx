@@ -2,7 +2,6 @@
 import * as s from "./style";
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { writeBoardApi } from '../../../apis/writeBoardApi';
 import { PuffLoader } from "react-spinners";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
@@ -11,6 +10,7 @@ import ReactQuill, { Quill } from 'react-quill';
 import ImageResize from 'quill-image-resize';
 import 'react-quill/dist/quill.snow.css';
 import { IoCloseOutline } from "react-icons/io5";
+import { writeNoticeApi } from "../../../apis/writeNoticeApi";
 Quill.register("modules/imageResize", ImageResize);
 
 function CafeNoticeWritePage(props) {
@@ -49,7 +49,7 @@ function CafeNoticeWritePage(props) {
             alert("내용을 입력하세요.");
             return;
         }
-        await writeBoardApi(board, navigate);
+        await writeNoticeApi(board, navigate);
     }
 
     const handleImageLoad = useCallback(() => {
