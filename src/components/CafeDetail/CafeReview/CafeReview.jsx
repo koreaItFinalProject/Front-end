@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../../../apis/util/starRating';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
-import { IoPencil } from "react-icons/io5";
+import { BsPencilSquare } from "react-icons/bs";
 
 function CafeReview({ cafeDetail, refetch }) {
     const navigate = useNavigate();
@@ -46,21 +46,29 @@ function CafeReview({ cafeDetail, refetch }) {
 
     return (
         <div css={s.layout}>
-            <div css={s.title}>
-                <h1>Review</h1>
-                <div>{cafeDetail?.reviewCount}</div>
+            <div css={s.titleAndWrite}>
+                <div css={s.title}>
+                    방문자 리뷰
+                    <p>{cafeDetail?.reviewCount}</p>
+                </div>
+                <button onClick={handleWriteReviewClick}><BsPencilSquare />리뷰 쓰기</button>
             </div>
             <div css={s.reviewStat}>
                 <div css={s.stat}>
-                    <div>{cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} 점</div>
-                    <StarRating averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} />
+                    <p>{cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating} 점</p>
+                    <StarRating
+                        averageRating={cafeDetail?.totalRating === null ? 0 : cafeDetail?.totalRating}
+                        dimension={"20px"}
+                        spacing={1}
+                    />
                 </div>
-                <button onClick={handleWriteReviewClick}><IoPencil />리뷰 쓰기</button>
             </div>
             <div css={s.category}>
                 {
                     cafeDetail?.reviewCategoryCounts.map((category, index) => (
-                        <div key={index}>{category.category.categoryNameKor} {category.categoryCount}</div>
+                        <div key={index} css={s.gradientBackground(category.categoryCount)}>
+                            {category.category.categoryNameKor} {category.categoryCount}
+                        </div>
                     ))
                 }
             </div>
@@ -75,7 +83,11 @@ function CafeReview({ cafeDetail, refetch }) {
                             <div>{reviewItem.writeDate}</div>
                         </div>
                         <div css={s.stars}>
-                            <StarRating averageRating={reviewItem.rating} />
+                            <StarRating
+                                averageRating={reviewItem.rating}
+                                dimension={"15px"}
+                                spacing={1}
+                            />
                         </div>
                         <div css={s.contentBox}>
                             <div>{reviewItem.review}</div>

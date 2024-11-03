@@ -34,8 +34,8 @@ function CafeNoticeListPage(props) {
         {
             getNextPageParam: (lastPage, allPage) => {
                 const totalPageCount = lastPage.totalCount % limit === 0
-                ? lastPage.data.totalCount / limit
-                : Math.floor(lastPage.totalCount / limit) + 1
+                    ? lastPage.data.totalCount / limit
+                    : Math.floor(lastPage.totalCount / limit) + 1
                 return totalPageCount !== allPage.length ? allPage.length + 1 : null;
             },
             onSuccess: (response) => {

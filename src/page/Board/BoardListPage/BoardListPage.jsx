@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from "react-query";
 import BoardList from "../../../components/Board/BoardList/BoardList";
 import { FaPlus } from "react-icons/fa6";
+import { IoIosSearch } from "react-icons/io";
 
 function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue, category, setCategory }) {
     const loadMoreRef = useRef(null);
@@ -78,7 +79,7 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                     name=""
                     value={searchValue}
                 />
-                <button onClick={handleSearchOnClick}>검색</button>
+                <button onClick={handleSearchOnClick}><IoIosSearch /></button>
                 <select name="searchFilter" onChange={handleFilterOnChange}>
                     <option name="title" value={"title"}>제목</option>
                     <option name="writer" value={"writer"}>작성자</option>

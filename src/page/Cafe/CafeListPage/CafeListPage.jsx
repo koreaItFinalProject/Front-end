@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
+import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
 import { MdRateReview } from "react-icons/md";
 import { IoMdHeart } from "react-icons/io";
-import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
+import { IoIosSearch } from "react-icons/io";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
@@ -38,7 +39,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                     placeholder='카페를 검색하세요'
                     required
                 />
-                <button onClick={handleInputKeyPress}>검색</button>
+                <button onClick={handleInputKeyPress}><IoIosSearch /></button>
                 <select name="" id="">
                     <option value="like">인기순</option>
                     <option value="review">리뷰순</option>

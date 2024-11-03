@@ -7,20 +7,43 @@ export const layout = css`
     gap: 10px;
 `;
 
+export const titleAndWrite = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        font-weight: 600;
+        
+        svg {
+            padding-top: 3px;
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            fill: #f2780c;
+        }
+    }
+`;
+
 export const title = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    
-    h1 {
+    margin: 0;
+    margin-right: 5px;
+    font-size: 24px;
+    font-weight: 600;
+
+    p {
         margin: 0;
-        margin-right: 5px;
+        margin-left: 10px;
         font-size: 24px;
-    }
-    
-    div {
-        font-size: 24px;
-        color: #00000081;
+        color: #aaaaaa;
     }
 `;
 
@@ -31,37 +54,24 @@ export const reviewStat = css`
     justify-content: space-between;
     align-items: center;
 
-    div {
-        height: 100%;
-        margin-right: 10px;
-        font-size: 20px;
-        font-weight: 600;
-    }
-
-    svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-        color: #f2780c;
-        font-weight: 600;
-        
-        svg {
-            margin-right: 5px;
-            fill: #f2780c;
-        }
-
-    }
 `;
 
 export const stat = css`
     display: flex;
     flex-direction: row;
+    align-items: center;
+
+    p {
+        margin: 0;
+        margin-right: 5px;
+        height: 100%;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    div {
+        padding-top: 3px;
+    }
 `;
 
 export const category = css`
@@ -75,10 +85,15 @@ export const category = css`
     div {
         padding: 5px 10px;
         width: fit-content;
-        border: 1px solid #000000;
+        border: 1px solid #f2780c;
         border-radius: 36px;
+        font-weight: 500;
         cursor: default;
     }
+`;
+
+export const gradientBackground = (categoryCount) => css`
+    background: linear-gradient(to right, #f2780c ${categoryCount * 10}%, #ffffff 0%);
 `;
 
 export const review = css`

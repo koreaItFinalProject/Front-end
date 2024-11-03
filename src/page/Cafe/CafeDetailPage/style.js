@@ -5,6 +5,13 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
+`;
+
+export const subLayout = css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
     overflow-y: auto;
     background-color: #191919;
 `;
@@ -31,7 +38,6 @@ export const detailHeader = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
     padding: 10px 10px;
     background-color: #ffffff;
 
@@ -39,6 +45,7 @@ export const detailHeader = css`
         font-size: 36px;
         margin: 0;
     }
+    
 `;
 
 export const titleLike = css`
@@ -46,17 +53,40 @@ export const titleLike = css`
     flex-direction: row;
     width: 100%;
     justify-content: center;
+    margin-bottom: 10px;
     position: relative;
 `;
 
 export const heart = css`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     position: absolute;
-    right: 0; 
-    svg {
-        width: 40px;
-        height: 40px;
-        cursor: pointer;
+    top: 10px;
+    right: 20px;
+
+    div {
+        font-size: 20px;
     }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        padding: 0;
+    }
+
+    svg {
+        width: 35px;
+        height: 35px;
+    }
+`;
+
+export const address = css`
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-weight: 600;
 `;
 
 export const reviewStat = css`
@@ -64,27 +94,31 @@ export const reviewStat = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+    gap: 10px;
 
     div {
-        height: 100%;
-        margin-left: 10px;
         font-size: 20px;
+        padding-top: 5px;
     }
 `;
 
 export const detailInfo = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    gap: 15px;
 
-    div:nth-of-type(1) {
-        margin-right: 10px;
-        color: #f2780c;
-        font-size: 14px;
+    div {
+        font-size: 16px;
+        font-weight: 500;
     }
 
-    div:nth-of-type(2) {
-        font-size: 14px;
+    div:nth-of-type(1) {
+        color: #f2780c;
     }
 `;
 
@@ -99,18 +133,18 @@ export const detailContent = css`
 export const menuButtons = css`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    padding: 10px;
+    border-bottom: 1px solid #f2780c;
 
     button {
         border: 1px solid #000000;
         border-radius: 20px;
-        margin-right: 5px;
-        padding: 5px 50px;
+        padding: 5px 20px;
         font-weight: 600;
+    }
 
-        :active {
-            background-color: #f2780c;
-        }
+    button:nth-of-type(2) {
+        margin-left: 10px;
     }
 `;
 
