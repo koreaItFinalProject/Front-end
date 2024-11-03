@@ -17,23 +17,58 @@ export const layout = css`
 `;
 
 export const profileBox = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 250px;
     width: 100%;
+    height: 225px;
+    border-bottom: 3px solid #f2780c;
     background-color: #ffffff;
-    box-sizing: border-box;
-    border-radius: 0px 0px 20px 20px;
-    margin-bottom: 7px;
 `;
 
-export const mainBox = css`
+export const menuContainer = css`
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0 20px 10px 20px;
+    background-color: #ffffff;
+`;
+
+export const menu = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 10px;
     width: 100%;
     height: 100%;
-    flex-grow: 1;
+    border-bottom: 1px solid #f2780c;
+    svg {
+        margin-right: 10px;
+        width: 25px;
+        height: 25px;
+    }
+    p:nth-of-type(1) {
+        margin-right: 20px;
+        font-size: 16px;
+        color: black;
+        font-weight: 500;
+    }
+    & button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        color: #f2780c;
+        font-weight: 500;
+        cursor: pointer;
+    }
 `;
 
 export const mainBoxLayout = css`
@@ -69,125 +104,6 @@ export const mainBoxLayout = css`
     }
 `;
 
-export const post = css`
-    box-sizing: border-box;
-    margin-right: 7px;
-    & > div {
-        position: relative;
-        box-sizing: border-box;
-        padding: 10px 10px 25px 10px;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 1px solid #dbdbdb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
-export const postInventory = css`
-    position: absolute;
-    top: 18px;
-    left: 30px;
-    padding: 0;
-    margin: 0;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-around;
-    & svg {
-        width: 25px;
-        height: 25px;
-    }
-`;
-
-export const comment = css`
-    box-sizing: border-box;
-    margin-left: 7px;
-    & > div {
-        position: relative;
-        box-sizing: border-box;
-        padding: 10px 10px 25px 10px;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 1px solid #dbdbdb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
-export const commentInventory = css`
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    padding: 0;
-    margin: 0;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-around;
-`;
-
-export const review = css`
-    box-sizing: border-box;
-    margin-right: 7px;
-    & > div {
-        position: relative;
-        box-sizing: border-box;
-        padding: 10px 10px 25px 10px;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 1px solid #dbdbdb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-`;
-
-export const reviewInventory = css`
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    padding: 0;
-    margin: 0;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-around;
-    & svg {
-        transform: none;
-    }
-`;
-
-export const information = css`
-    box-sizing: border-box;
-    margin-left: 7px;
-    & > div {
-        position: relative;
-        box-sizing: border-box;
-        padding: 10px 10px 15px 10px;
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 1px solid #dbdbdb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-`;
 
 export const blinkIcon= keyframes`
     0%,100% {
@@ -206,56 +122,46 @@ export const blinkIcon= keyframes`
     }
 `;
 
+export const moveRightToLeft = keyframes`
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+`;
+
 export const noticeAlarm = css`
+    animation: ${moveRightToLeft} 1s ease-in-out;
     position: absolute;
-    top: 10px;
+    top: 50px;
     right: 5px;
     & svg {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
     }
     .alarm-icon > path{
         animation: ${blinkIcon} 1.5s infinite;
         transform-origin: center;
     }
+    & p {
+        font-size: 14px;
+    }
 `;
 
 export const alarm = css`
-    position: absolute;
-    top: 15px;
-    left: 30px;
-    padding: 0;
-    margin: 0;
+    background-color: #ffebb0;
     height: 40px;
-    width: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    & svg {
-        transform: none;
-    }
-    
-    display: flex;
-    justify-content: space-around;
-`;
-
-export const box = css`
-    width: 100%;
-    height: 200px;
-    padding: 10px;
-    margin-top: 20px ;
-    box-sizing: border-box;
-    border: 1px solid #000000;
+    width: 200px;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    p {
-        pointer-events: none; 
+    & p {
+        font-size: 16px !important;
     }
 `;
+
 
 export const modalStyles = {
     overlay: {
