@@ -7,7 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
 import { IoPersonAddSharp } from "react-icons/io5";
 
-function UsersSignupSelectPage(props) {
+function UserSignupSelectPage(props) {
      
     const navigate = useNavigate();
     const naverLocation = "http://localhost:8080/oauth2/authorization/naver";
@@ -62,4 +62,4 @@ function UsersSignupSelectPage(props) {
     );
 }
 
-export default UsersSignupSelectPage;
+export default UserSignupSelectPage;

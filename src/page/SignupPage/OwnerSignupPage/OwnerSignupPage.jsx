@@ -265,7 +265,7 @@ function OwnerSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <BackButton />
+            <BackButton prevPage={'회원가입'} prevPageUrl={'/user/select/signup'} />
             <div css={s.subLayout}>
                 <div css={s.logo}>
                     <h1>점주 회원가입</h1>
@@ -345,14 +345,12 @@ function OwnerSignupPage(props) {
                     <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={!proccess}>확인</button>
                 </div>
                 <div css={s.cafe}>
-                    <div css={s.cafeAddress}>
                         <input
                             value={isAddress.address} name='address'
                             disabled placeholder='주소' />
                         <input
                             value={isAddress.buildingName}
                             disabled placeholder='참고항목' />
-                    </div>
                 </div>
                 <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange} />
                 <div css={s.signupbutton}>

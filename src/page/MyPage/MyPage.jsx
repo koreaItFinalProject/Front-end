@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useQuery } from 'react-query';
-import { MdNotifications , MdNotificationsActive  } from "react-icons/md";
-import { BsFillFileEarmarkPostFill } from "react-icons/bs";
+import { MdNotifications, MdNotificationsActive } from "react-icons/md";
+import { BsChatLeftTextFill } from "react-icons/bs";
 import { AiOutlineNotification } from "react-icons/ai";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
@@ -17,6 +17,7 @@ import CommentBoard from './CommentBoard/CommentBoard';
 import ReviewState from './ReviewState/ReviewState';
 import AlramInfo from './AlramInfo/AlramInfo';
 import NoticeBoard from './NoticeBoard/NoticeBoard';
+import { FiLogOut } from "react-icons/fi";
 
 function MyPage(props) {
     const [alram, setAlram] = useState(false);
@@ -28,13 +29,15 @@ function MyPage(props) {
         review: {},
         comment: {},
         boardComment: {},
-        alram:{}
+        alram: {}
     })
     const [isOpen, setIsOpen] = useState();
+
     const openModal = () => {
         setIsOpen(true)
         console.log(isOpen);
     };
+
     const closeModal = () => {
         setIsOpen(false)
         console.log(isOpen);
@@ -45,9 +48,9 @@ function MyPage(props) {
         const timer = setInterval(() => {
             setAlram(prevAlram => !prevAlram);
         }, 1000);
-    
+
         return () => clearInterval(timer);
-    }, []); 
+    }, []);
 
 
 
@@ -81,6 +84,11 @@ function MyPage(props) {
         console.log(check);
     };
 
+    const handleLogoutClick = () => {
+        localStorage.removeItem("accessToken");
+        window.location.replace("/user/select/signup");
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -89,44 +97,35 @@ function MyPage(props) {
             <div css={s.menuContainer} >
                 <div css={s.menu}>
                     <button onClick={handleOnModalClick} value={"post"}>
-                    <BsFillFileEarmarkPostFill />
-                    <p>게시글</p>
-                    <p>게시글 수 :
-                        {
-                            infoBoard.board.length === 0 ? '0' : infoBoard.board.length
-                        }</p>
+                        <BsChatLeftTextFill />
+                        <p>게시글</p>
+                        <p>{infoBoard.board.length === 0 ? '0' : infoBoard.board.length}</p>
                     </button>
                 </div>
                 <div css={s.menu}>
                     <button onClick={handleOnModalClick} value={"comment"}>
-                    <FaRegCommentDots />
-                    <p>댓글관리</p>
-                        <p>댓글 수 :
-                            {
-                                infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length
-                            }
-                        </p>
+                        <FaRegCommentDots />
+                        <p>댓글관리</p>
+                        <p>{infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length}</p>
                     </button>
                 </div>
                 <div css={s.menu}>
                     <button onClick={handleOnModalClick} value={"review"}>
-                    <MdOutlineRateReview />
-                    <p>리뷰관리</p>
-                        <p>리뷰 수 :
-                            {infoBoard.review.length === 0 ? '0' : infoBoard.review.length}
-                        </p>
+                        <MdOutlineRateReview />
+                        <p>리뷰관리</p>
+                        <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
                     </button>
                 </div>
                 <div css={s.menu}>
                     <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
                         {
-                            alram.length >= 1 ?(
+                            alram.length >= 1 ? (
                                 //일반
-                                <MdNotificationsActive/>
-                            ):(
+                                <MdNotificationsActive />
+                            ) : (
                                 //알림
                                 <div css={s.alarm}>
-                                    <MdNotificationsActive className='alarm-icon'/>
+                                    <MdNotificationsActive className='alarm-icon' />
                                     <p>알람이 왔습니다</p>
                                 </div>
                                 // <MdNotifications className='alarm-icon'/>
@@ -134,13 +133,19 @@ function MyPage(props) {
                         }
                     </div>
                     <button onClick={handleOnModalClick} value={"alram"}>
-                    <AiOutlineNotification/>
-                    <p>알림정보</p>
-                        <p>알림 수 : {0}</p>
+                        <AiOutlineNotification />
+                        <p>알림정보</p>
+                        <p>{0}</p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleLogoutClick} value={"review"}>
+                        <FiLogOut />
+                        <p>로그아웃</p>
                     </button>
                 </div>
             </div>
-            <ReactModal isOpen={isOpen} check={check} infoBoard ={infoBoard[check]} style={s.modalStyles}>
+            <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>
                 <button css={s.closeButton} onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
@@ -156,7 +161,7 @@ function MyPage(props) {
                                     <ReviewState review={infoBoard.review} />
                                     :
                                     check === "alram" ?
-                                        <AlramInfo alram={infoBoard.alram} />
+                                        <AlramInfo alaram={infoBoard.alram} />
                                         : <></>
                 }
             </ReactModal>
