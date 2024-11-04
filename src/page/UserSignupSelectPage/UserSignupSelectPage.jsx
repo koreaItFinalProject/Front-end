@@ -32,13 +32,9 @@ function UserSignupSelectPage(props) {
                             <img src={google} alt="kakao Logo"/>
                             <p>google로 시작하기</p>
                         </button>
-                        <button onClilck = {() => navigate("/owner/signup") } css={s.ownerButton}>
+                        <button onClick = {() => navigate("/user/owner/signup") } css={s.ownerButton}>
                             <IoPersonAddSharp />
-                            <div>
-                                <button onClick={() => navigate("/user/owner/signup")}>
-                                    점주로 시작하기
-                                </button>
-                            </div>
+                            <p>점주로 시작하기</p>
                         </button>
                     </div>
                     <div css={s.emailbutton}>

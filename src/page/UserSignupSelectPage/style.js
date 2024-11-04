@@ -139,12 +139,7 @@ export const ownerButton =css`
             color: #FDF3F2;
         }
     }
-    & a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    & button {
+    & p {
         margin: 0px 20px 4px 0px ;
         color: #FDF3F2;
         font-size: 20px;

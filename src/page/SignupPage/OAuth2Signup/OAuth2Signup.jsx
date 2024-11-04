@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { oAuth2SignupApi } from '../../../apis/signUpApis/oauth2SignupApi';
 import emailApi from '../../../apis/emailApis/emailApi';
 import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
+import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 
 function OAuth2Signup(props) {
     const navigate = useNavigate();
@@ -32,15 +33,6 @@ function OAuth2Signup(props) {
         role: "USER",
     })
 
-    const handleInputEmailCheck = (e) => {
-        const { name, value } = e.target;
-        if (name === 'emailCheck' && !/^\d*$/.test(value)) {
-            alert("숫자만 입력가능합니다")
-            return; // 숫자가 아닌 입력은 무시 
-        }
-        setEmailCheck(value);
-    }
-
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
         password: <></>,
@@ -52,10 +44,18 @@ function OAuth2Signup(props) {
         oauth2Name: <></>
     });
 
+    const handleInputEmailCheck = (e) => {
+        const { name, value } = e.target;
+        if (name === 'emailCheck' && !/^\d*$/.test(value)) {
+            alert("숫자만 입력가능합니다")
+            return; // 숫자가 아닌 입력은 무시 
+        }
+        setEmailCheck(value);
+    }
+
     const handleMergepageOnClick = async () => {
-        console.log(inputUser);
-        console.log(searchParams.get("oAuth2Name"));
-        console.log(searchParams.get("provider"));
+        const oAuth2Name = searchParams.get("oAuth2Name");
+        const provider = searchParams.get("provider");
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
             if (inputUser.password !== inputUser.checkPassword) {
                 alert("비밀번호가 일치하지 않습니다")
@@ -69,8 +69,8 @@ function OAuth2Signup(props) {
             name: inputUser.name,
             nickname: inputUser.nickname,
             phoneNumber: inputUser.phoneNumber,
-            oauth2Name: searchParams.get("oAuth2Name"),
-            provider: searchParams.get("provider"),
+            oauth2Name: oAuth2Name,
+            provider: provider,
             role: 'USER'
         }
         console.log(mergeData);
@@ -90,12 +90,12 @@ function OAuth2Signup(props) {
         }
         if (response.isSuccess) {
             alert("통합 완료");
-            navigate("/oauth/oauth2");
+            navigate(`/user/oauth/oauth2?oAuth2Name=${oAuth2Name}&provider=${provider}`);
             console.log(mergeData);
         }
     }
 
-    const handleOnEmailCheckClick = async () => {
+    const handleOnEmailCheckClick = () => {
         console.log("이메일 넘버" + emailNumber);
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
@@ -112,20 +112,40 @@ function OAuth2Signup(props) {
         }
     }
 
+    useEffect(() => {
+        let interval;
+        if (isTimerRunning && timer > 0) {
+            interval = setInterval(() => {
+                setTimer(prevTimer => prevTimer - 1);
+            }, 1000);
+        } else if (timer === 0 && emailCheckState) {
+            setIsTimerRunning(false);
+            setEmailCheckState(false);
+            alert("인증시간을 초과하였습니다.");
+        }
+        return () => clearInterval(interval);
+    }, [isTimerRunning, timer, isTimerStopped]);
+
     const startTimer = async (email) => {
         try {
             if (email.trim() === '') {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
             }
-            setIsTimerStopped(false);
+            const emailCheck = await EmailDuplicateCheckValue(email);
+            if(!emailCheck.isSucceses){
+                alert('이메일 중복되었습니다.');
+                return;
+            }else if(emailCheck.isSucceses){
+                setIsTimerStopped(false);
             setEmailCheckState(true);
             setIsTimerRunning(true);
             setTimer(180);
+
             const response = await emailApi(email);
             const verificationCode = response.number;
             setEmailNumber(verificationCode);
-
+            }
         } catch (error) {
             console.error("Error occurred:", error);
             alert("이메일 인증 요청 중 오류가 발생했습니다.");
@@ -191,7 +211,7 @@ function OAuth2Signup(props) {
                             <div css={s.emailTimer}>
                                 <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputEmailCheck} readOnly={!emailCheckState} />
                                 <div>
-                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                    {isTimerRunning && <p>시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
                             </div>
                             <div css={s.emailCheckButton}>

@@ -198,3 +198,11 @@ export const cafe = css`
     align-items: center;
     width: 100%;
 `;
+
+export const businessNumber = css`
+    display: flex;
+    align-items: center;
+    & input {
+        width: 300px;
+    }
+`;
