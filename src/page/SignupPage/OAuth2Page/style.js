@@ -7,6 +7,7 @@ export const layout = css`
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #191919;
     * {
         color: #ffffff;
     }

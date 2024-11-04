@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import emailApi from '../../../apis/emailApis/emailApi';
+import BackButton from '../../../components/BackButton/BackButton';
 
 function UserSignupPage(props) {
     const navigate = useNavigate();
@@ -165,7 +166,8 @@ function UserSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <div css={s.Info}>
+            <BackButton prevPage={'로그인'} prevPageUrl={'/user/signin'}/>
+            <div css={s.subLayout}>
                 <div css={s.logo}>
                     <h1>
                         회원가입

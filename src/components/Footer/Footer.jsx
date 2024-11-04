@@ -6,34 +6,46 @@ import { FaList } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { BsChatLeftTextFill } from "react-icons/bs";
 import { FaUserLarge } from "react-icons/fa6";
+import { useQueryClient } from 'react-query';
 
 function Footer({ setCheck, setInputvalue }) {
-  const navigate = useNavigate();
-  const handleLogoutButtonOnClick = () => {
-    localStorage.removeItem("accessToken");
-    window.location.replace("/");
-  }
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const accessCheck = queryClient.getQueryData("userInfoQuery"); 
 
-  const handleListClick = () => {
-    navigate('/cafe/list');
-    setCheck("전체");
-    setInputvalue("");
-  }
+    const handleLogoutButtonOnClick = () => {
+        localStorage.removeItem("accessToken");
+        window.location.replace("/");
+    }
 
-  const handleMapClick = () => {
-    navigate('/map');
-    setCheck("전체");
-    setInputvalue("");
-  }
-  return (
-    <div css={s.layout}>
-      <button onClick={handleMapClick}><FaMap /></button>
-      <button onClick={handleListClick}><FaList /></button>
-      <button onClick={() => navigate('/board?page=1')}><BsChatLeftTextFill /></button>
-      <button onClick={() => navigate('/user/signin')}><FaUserLarge /></button>
-      <button onClick={handleLogoutButtonOnClick}>로그아웃</button>
-    </div>
-  );
+    const handleListClick = () => {
+        navigate('/cafe/list');
+        setCheck("전체");
+        setInputvalue("");
+    }
+
+    const handleMapClick = () => {
+        navigate('/map');
+        setCheck("전체");
+        setInputvalue("");
+    }
+
+    const handleMyPageOnClick = () => {
+        if (!accessCheck) {
+            navigate('/user/select/signup');
+            return;
+        }
+        navigate("/mypage");
+    }
+
+    return (
+        <div css={s.layout}>
+            <button onClick={handleMapClick}><FaMap /></button>
+            <button onClick={handleListClick}><FaList /></button>
+            <button onClick={() => navigate('/board?page=1')}><BsChatLeftTextFill /></button>
+            <button onClick={handleMyPageOnClick}><FaUserLarge /></button>
+        </div>
+    );
 }
 
 export default Footer;

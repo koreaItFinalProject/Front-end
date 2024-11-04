@@ -18,6 +18,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { PiCoffee } from "react-icons/pi";
 import { VscMegaphone } from "react-icons/vsc";
+import { FiLogOut } from "react-icons/fi";
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 
 function CafeOwnerMyPage(props) {
@@ -90,6 +91,11 @@ function CafeOwnerMyPage(props) {
         console.log(check);
     }
 
+    const handleLogoutClick = () => {
+        localStorage.removeItem("accessToken");
+        window.location.replace("/user/select/signup");
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -130,6 +136,10 @@ function CafeOwnerMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
                     <RiAlarmWarningFill />
                     <p>알림</p>
+                </div>
+                <div css={s.menu} onClick={handleLogoutClick}>
+                    <FiLogOut />
+                    <p>로그아웃</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>

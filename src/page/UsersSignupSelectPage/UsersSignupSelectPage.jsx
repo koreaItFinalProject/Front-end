@@ -35,7 +35,7 @@ function UsersSignupSelectPage(props) {
                         <button onClilck = {() => navigate("/owner/signup") } css={s.ownerButton}>
                             <IoPersonAddSharp />
                             <div>
-                                <button onClick={() => navigate("/owner/signup")}>
+                                <button onClick={() => navigate("/user/owner/signup")}>
                                     점주로 시작하기
                                 </button>
                             </div>

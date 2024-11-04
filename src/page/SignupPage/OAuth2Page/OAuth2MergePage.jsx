@@ -43,11 +43,10 @@ function OAuth2MergePage(props) {
       }
       if(response.isSuccess){
           alert("통합 완료");
-          navigate("/oauth/oauth2");
+          navigate("/mypage");
           console.log(mergeData);
       }
   }
-
 
   return (
           <div css={s.layout}>

@@ -10,6 +10,7 @@ import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
+import BackButton from '../../../components/BackButton/BackButton';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -264,7 +265,8 @@ function OwnerSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <div css={s.Info}>
+            <BackButton />
+            <div css={s.subLayout}>
                 <div css={s.logo}>
                     <h1>점주 회원가입</h1>
                 </div>
@@ -311,7 +313,6 @@ function OwnerSignupPage(props) {
                         </div>
                     </div>
                 </div>
-
                 <div>
                     <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
                 </div>

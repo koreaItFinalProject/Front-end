@@ -1,6 +1,15 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+`;
+
+export const subLayout = css`
     width: 100%;
     height: 100%;
     display: flex;
@@ -8,6 +17,7 @@ export const layout = css`
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    background-color: #191919;
     * {
         color: #ffffff;
     }
@@ -21,7 +31,9 @@ export const login = css`
     width: 100%;
     border-top: none;
     border-radius: 0px 0px 10px 10px;
+    margin-bottom: 10px;
     padding: 0px 140px;
+
     * p{
         display: flex;
         justify-content: center;
@@ -64,8 +76,10 @@ export const loginInput = css`
 
 export const loginTitle =css`
     & p {
+        margin: 0;
+        margin-bottom: 20px;
         color: #F2780C;
-        font-size: 30px;
+        font-size: 60px;
         font-weight: 700;
     }
 `;
@@ -78,6 +92,11 @@ export const loginInputState = css`
 `;
 
 export const foundInfo = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 40px;
     box-sizing: border-box;
     
