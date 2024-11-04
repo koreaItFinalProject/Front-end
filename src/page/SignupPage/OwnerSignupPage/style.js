@@ -1,13 +1,23 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+    background-color: #191919;
+`;
+
+export const subLayout = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column; 
-    overflow-y: auto;
-    padding: 0px 140px;
-    padding-top: 50px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
     *{
         color: #ffffff;
         & button {
@@ -17,15 +27,9 @@ export const layout = css`
         }
         button:disabled {
         cursor: not-allowed;
+        }
     }
-    }
-`;
-export const Info = css`
-    
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: column; 
+
     & p{
         display: flex;
         justify-content: center;
@@ -41,7 +45,12 @@ export const Info = css`
     & > div{
         margin-bottom: 30px;
     }
-
+`;
+export const Info = css`
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
 `;
 
 export const logo = css`
@@ -51,6 +60,7 @@ export const logo = css`
         color: #F2780C;
     }
 `;
+
 export const usernameInput = css`
     width: 100%;
     height: 40px;
@@ -77,7 +87,6 @@ export const emailCheck = css`
     & button {
         width: 90px;
         }
-
 `;
 
 export const emailButton = css`
@@ -170,7 +179,7 @@ export const nickNameStyle = css`
         width: 80px;
         height: 30px;
     }
-`
+`;
 
 export const signupbutton = css`
     display: flex;

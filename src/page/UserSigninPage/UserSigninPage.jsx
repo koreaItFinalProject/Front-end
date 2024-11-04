@@ -7,6 +7,7 @@ import { usersignInApi } from '../../apis/signInApis/usersignInApi';
 import { instance } from '../../apis/util/instance';
 import { showFieldErrorMessage } from '../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../apis/util/handleInputOnChange/handleInputOnChange';
+import BackButton from '../../components/BackButton/BackButton';
 
 function UserSigninPage(props) {
     const navigate = useNavigate();
@@ -37,30 +38,33 @@ function UserSigninPage(props) {
                 config.headers['Authorization'] = localStorage.getItem('accessToken');
                 return config;
             });
-            navigate("/");
+            navigate("/map");
         }
     }
 
     return (
         <div css={s.layout}>
-            <div css={s.login}>
-                <div css={s.loginInput}>
-                    <div css={s.loginTitle}>
-                        <p>Login</p>
+            <BackButton prevPage={'회원가입'} prevPageUrl={'/user/select/signup'}/>
+            <div css={s.subLayout}>
+                <div css={s.login}>
+                    <div css={s.loginInput}>
+                        <div css={s.loginTitle}>
+                            <p>Login</p>
+                        </div>
+                        <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디' />
+                        <p>{fieldErrorMessages.username}</p>
+                        <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호' />
+                        <p>{fieldErrorMessages.password}</p>
+                        <button onClick={handleOnLoginClick}>로그인</button>
                     </div>
-                    <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디' />
-                    <p>{fieldErrorMessages.username}</p>
-                    <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호' />
-                    <p>{fieldErrorMessages.password}</p>
-                    <button onClick={handleOnLoginClick}>로그인</button>
                 </div>
-            </div>
-            <div css={s.foundInfo}>
-                <ol>
-                    <li><button onClick={() => navigate()}>아이디 찾기</button></li>
-                    <li><button onClick={() => navigate()}>비밀번호 찾기</button></li>
-                    <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
-                </ol>
+                <div css={s.foundInfo}>
+                    <ol>
+                        <li><button onClick={() => navigate()}>아이디 찾기</button></li>
+                        <li><button onClick={() => navigate()}>비밀번호 찾기</button></li>
+                        <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
+                    </ol>
+                </div>
             </div>
         </div>
     );

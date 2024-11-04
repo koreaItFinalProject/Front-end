@@ -1,13 +1,22 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
+`;
+
+export const subLayout = css`
     display: flex;
     flex-direction: column; 
-    overflow-y: auto;
-    padding: 0px 140px;
-    padding-top: 50px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #191919;
+
     *{
         color: #ffffff;
         & button {
@@ -15,19 +24,13 @@ export const layout = css`
             border: none;
             border-radius: 20px;
         }
+
         button:disabled {
         cursor: not-allowed;
+        }
     }
-    }
-`;
 
-export const Info = css`
-    
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: column; 
-    & p{
+    & p {
         display: flex;
         justify-content: center;
         font-size: 12px;
@@ -40,9 +43,16 @@ export const Info = css`
     }
 
     & > div{
-        margin-bottom: 30px;
+        margin-bottom: 20px;
     }
+`;
 
+export const Info = css`
+    
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
 `;
 
 export const logo = css`
@@ -60,7 +70,7 @@ export const usernameInput = css`
     & input {
         height: 40px;
         width: 300px;
-        font-size: 18px;
+        font-size: 16px;
         border: none;
     }
     & button {
