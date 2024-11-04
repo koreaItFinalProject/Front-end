@@ -13,7 +13,6 @@ function UserSigninPage(props) {
     const [inputUser, setInputUser] = useState({
         username: "",
         password: "",
-        role: "USER"
     });
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,

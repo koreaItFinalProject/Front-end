@@ -4,7 +4,7 @@ import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
-import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
+import { instance } from '../../../apis/util/instance';
 
 function OAuth2MergePage(props) {
     const navigate = useNavigate();
@@ -25,23 +25,20 @@ function OAuth2MergePage(props) {
             oauth2Name: searchParams.get("oAuth2Name"),
             provider: searchParams.get("provider")
         }
-        const oauth = searchParams.get("oAuth2Name")
-        console.log(oauth);
+
         const response = await oauth2MergeApi(mergeData);
-        console.log(response);
         if (!response.isSuccess) {
-            if (response.errorStatus === "loginError") {
-                alert(response.error);
-                return;
-            }
-            if (response.errorStatus === "fieldError") {
-                const newErrors = showFieldErrorMessage(response.error);
-                setFieldErrorMessages(newErrors);
-                return;
-            }
+            alert(response.error);
+            setFieldErrorMessages(response.error);
+            return;
         }
         if (response.isSuccess) {
             alert("통합 완료");
+            localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
+            instance.interceptors.request.use((config) => {
+                config.headers['Authorization'] = localStorage.getItem('accessToken');
+                return config;
+            });
             navigate("/mypage");
             console.log(mergeData);
         }

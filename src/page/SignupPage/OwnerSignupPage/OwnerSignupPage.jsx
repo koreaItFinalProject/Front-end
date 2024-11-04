@@ -11,6 +11,8 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
+import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
+import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -26,7 +28,7 @@ function OwnerSignupPage(props) {
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
     const [isCheckUsername, setCheckUsername] = useState(false);
-    const [isChecknickname, setChecknickname] = useState(false);
+    const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [coordinates, setCoordinates] = useState({
         latitude: '',
         longitude: ''
@@ -164,7 +166,7 @@ function OwnerSignupPage(props) {
         }
     }
 
-    const handleOnEmailCheckClick = async () => {
+    const handleOnEmailCheckClick = () => {
         console.log("이메일 넘버" + emailNumber);
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
@@ -216,51 +218,24 @@ function OwnerSignupPage(props) {
         }
     }
 
-    const checkUsername = async () => {
-        if (inputUser.username === '') {
-            alert("빈 값을 넣으면 안됩니다")
-            return
+    const handleCheckUser = (e) => {
+        const { name } = e.target;
+        console.log(inputUser[name]);
+        if (name === 'password' || name === 'checkPassword') {
+            if (inputUser.password && inputUser.checkPassword) {
+                if (inputUser.password !== inputUser.checkPassword) {
+                    alert("비밀번호와 확인번호 다시 확인해주세요.")
+                    return;
+                }
+            } else {
+                alert("빈 값입니다.");
+                return
+            }
         }
-        console.log(inputUser.username);
-        try {
-
-            // const response = await useCheckInputApi(inputUser.username);
-            // console.log(response);
-            // if (response.isSuccess) {
-            //     setCheckUsername(true);
-            //     alert('사용가능한 이름입니다.');
-            // } else {
-            //     alert(response.data);
-            //     setCheckUsername(false);
-            // }
-        } catch (error) {
-            console.error('Username check error:', error.response.data);
-            setCheckUsername(false);
-            alert(error.response.data);
+        if (SignupDuplicateCheckValue(inputUser[name])) {
+            return;
         }
-    }
-
-    const checkNickName = async () => {
-        if (inputUser.nickname === '') {
-            alert("빈 값을 넣으면 안됩니다")
-            return
-        }
-        console.log(inputUser.nickname);
-        try {
-            // const response = await checkNicknameApi(inputUser.nickname);
-            // console.log(response);
-            // if (response.isSuccess) {
-            //     alert('사용가능합니다.');
-            //     setChecknickname(true);
-            // } else {
-            //     alert(response.data);
-            //     setCheckUsername(false);
-            // }
-        } catch (error) {
-            console.error('Nickname check error:', error.response.data);
-            setChecknickname(false);
-            alert(error.response.data);
-        }
+        duplicatedCheckValue(name, inputUser[name])
     }
 
     return (
@@ -273,7 +248,7 @@ function OwnerSignupPage(props) {
                 <div>
                     <div css={s.usernameInput}>
                         <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#ffffff' }} />
-                        <button onClick={checkUsername}>확인</button>
+                        <button name='username' onClick={handleCheckUser}>확인</button>
                         {fieldErrorMessages.username}
                     </div>
                 </div>
@@ -319,7 +294,7 @@ function OwnerSignupPage(props) {
                 {fieldErrorMessages.name}
                 <div css={s.nickNameStyle}>
                     <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
-                    <button onClick={checkNickName}>중복 확인</button>
+                    <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                 </div>
                 {fieldErrorMessages.nickname}
                 <div>
@@ -340,7 +315,7 @@ function OwnerSignupPage(props) {
                         name='businessNumber' value={businessNumber}
                         onChange={handleInputChange} placeholder='사업자 등록번호' disabled={!proccess} />
                 </div>
-                <div>
+                <div css={s.businessNumber}>
                     <input type="file" name='ownerImage' onChange={handleImageChange} disabled={!proccess} />
                     <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={!proccess}>확인</button>
                 </div>

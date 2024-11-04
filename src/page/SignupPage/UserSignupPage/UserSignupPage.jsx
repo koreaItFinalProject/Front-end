@@ -7,18 +7,21 @@ import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/hand
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
+import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
+import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
+import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 
 function UserSignupPage(props) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
     const [isCheckUsername, setCheckUsername] = useState(false);
-    const [isChecknickname, setChecknickname] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState();
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber, setEmailNumber] = useState("");
     const [complete, setComplete] = useState(false);
+    const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [inputUser, setInputUser] = useState({
         username: '',
         password: '',
@@ -40,12 +43,16 @@ function UserSignupPage(props) {
         phoneNumber: <></>,
     });
 
-    const handleInputCheckChange = (e) => {
-        setEmailCheck(e.target.value);
+    const handleInputEmailCheck = (e) => {
+        const { name, value } = e.target;
+        if (name === 'emailCheck' && !/^\d*$/.test(value)) {
+            alert("숫자만 입력가능합니다")
+            return; // 숫자가 아닌 입력은 무시 
+        }
+        setEmailCheck(value);
     }
 
     const handlesignuppageOnClick = async () => {
-        console.log(inputUser);
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
             if (inputUser.password !== inputUser.checkPassword) {
                 alert("비밀번호가 일치하지 않습니다")
@@ -66,7 +73,7 @@ function UserSignupPage(props) {
         }
     }
 
-    const handleOnEmailCheckClick = async () => {
+    const handleOnEmailCheckClick = () => {
         console.log("이메일 넘버" + emailNumber);
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
@@ -99,69 +106,49 @@ function UserSignupPage(props) {
 
     const startTimer = async (email) => {
         try {
+            
             if (email.trim() === '') {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
             }
-            setIsTimerStopped(false);
+            const emailCheck = await EmailDuplicateCheckValue(email);
+            if(!emailCheck.isSucceses){
+                alert('이메일 중복되었습니다.');
+                return;
+            }else if(emailCheck.isSucceses){
+                setIsTimerStopped(false);
             setEmailCheckState(true);
             setIsTimerRunning(true);
             setTimer(180);
+
             const response = await emailApi(email);
             const verificationCode = response.number;
             setEmailNumber(verificationCode);
-
+            }
         } catch (error) {
             console.error("Error occurred:", error);
             alert("이메일 인증 요청 중 오류가 발생했습니다.");
         }
     }
 
-    const checkUsername = async () => {
-        if (inputUser.username === '') {
-            alert("빈 값을 넣으면 안됩니다")
-            return
+    const handleCheckUser = (e) => {
+        const { name } = e.target;
+        console.log(inputUser[name]);
+        if (name === 'password' || name === 'checkPassword') {
+            if (inputUser.password && inputUser.checkPassword) {
+                if (inputUser.password !== inputUser.checkPassword) {
+                    alert("비밀번호와 확인번호 다시 확인해주세요.")
+                    return;
+                }
+            } else {
+                alert("빈 값입니다.");
+                return
+            }
         }
-        console.log(inputUser.username);
-        try {
-            // const response = await useCheckInputApi(inputUser.username);
-            // console.log(response);
-            // if (response.isSuccess) {
-            //     alert('사용가능한 이름입니다.');
-            //     setCheckUsername(true);
-            // } else {
-            //     alert(response.data);
-            //     setCheckUsername(false);
-            // }
-        } catch (error) {
-            console.error('Username check error:', error.response.data);
-            setCheckUsername(false);
-            alert(error.response.data);
+        if (SignupDuplicateCheckValue(inputUser[name])) {
+            return;
         }
-    }
-
-    const checkNickName = async () => {
-        if (inputUser.nickname === '') {
-            alert("빈 값을 넣으면 안됩니다")
-            return
-        }
-        console.log(inputUser.nickname);
-        try {
-            // const response = await checkNicknameApi(inputUser.nickname);
-            // console.log(response);
-            // if(response.isSuccess){
-            //     alert('사용가능합니다.');
-            //     setChecknickname(true);
-            //     setComplete(true)
-            // }else{
-            //     alert(response.data);
-            //     setCheckUsername(false);
-            // }
-        } catch (error) {
-            console.error('Nickname check error:', error.response.data);
-            setChecknickname(false);
-            alert(error.response.data);
-        }
+        duplicatedCheckValue(name, inputUser[name])
     }
 
     return (
@@ -176,7 +163,7 @@ function UserSignupPage(props) {
                 <div>
                     <div css={s.usernameInput}>
                         <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#ffffff' }} />
-                        <button onClick={checkUsername}>중복 확인</button>
+                        <button name='username' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}
                 </div>
@@ -202,9 +189,9 @@ function UserSignupPage(props) {
                     <div>
                         <div css={s.emailcert}>
                             <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState} />
+                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputEmailCheck} readOnly={!emailCheckState} />
                                 <div>
-                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                    {isTimerRunning && <p>시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
                             </div>
                             <div css={s.emailCheckButton}>
@@ -222,7 +209,7 @@ function UserSignupPage(props) {
                 <div>
                     <div css={s.nickNameStyle}>
                         <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
-                        <button onClick={checkNickName}>중복 확인</button>
+                        <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                 </div>
                 {fieldErrorMessages.nickname}
@@ -237,7 +224,7 @@ function UserSignupPage(props) {
                 <div css={s.signupbutton}>
                     <button
                         onClick={handlesignuppageOnClick}
-                        disabled={!complete}>가입하기</button>
+                        disabled={complete}>가입하기</button>
                 </div>
             </div>
         </div>
