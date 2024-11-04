@@ -19,6 +19,7 @@ import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 import CommentBoard from "../../MyPage/CommentBoard/CommentBoard";
 import ReviewState from "../../MyPage/ReviewState/ReviewState";
 import AlramInfoPage from "../../MyPage/AlramInfo/AlramInfo";
+import AdminCafeList from "./AdminCafeList/AdminCafeList";
 
 function MobileAdminMyPage(props) {
     const navigate = useNavigate();
@@ -29,7 +30,8 @@ function MobileAdminMyPage(props) {
         board: {},
         review: {},
         comment: {},
-        boardComment: {}
+        boardComment: {},
+        cafemanager: {}
     })
     const [isOpen, setIsOpen] = useState();
 
@@ -62,19 +64,6 @@ function MobileAdminMyPage(props) {
         }
     );
 
-    const cafeData = useQuery(
-        ["cafeDataQuery"],
-        async () => {
-            const response = await instance.get('/cafe/owner');
-            return response?.data;
-        },
-        {
-            enabled: userManagement.isSuccess && !!userManagement?.data?.data,
-            retry: 0,
-            refetchOnWindowFocus: false,
-        }
-    )
-
     const handleOnModalClick = (value) => {
         if (value) {
             console.log("e" + value);
@@ -83,7 +72,8 @@ function MobileAdminMyPage(props) {
         }
         console.log(check);
     };
-    
+    console.log(isCount);
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -111,10 +101,10 @@ function MobileAdminMyPage(props) {
                     <p>작성한 리뷰</p>
                     <p>{isCount.review.length === 0 ? '0' : isCount.review.length}</p>
                 </div>
-                <div css={s.menu} onClick={() => navigate(`/owner/cafe/modify/${cafeData?.data?.cafeId}`)}>
+                <div css={s.menu} onClick={() => handleOnModalClick("cafemanager")}>
                     <PiCoffee />
                     <p>카페 관리</p>
-                    <p>{cafeData?.data?.cafeName}</p>
+                    <p>{isCount.cafemanager.length === 0 ? '0' : isCount.cafemanager.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => navigate('/owner/notice/write')}>
                     <VscMegaphone />
@@ -137,12 +127,15 @@ function MobileAdminMyPage(props) {
                             check === "comment" ?
                                 <CommentBoard comment={isCount.boardComment} />
                                 :
-                                check === "review" ?
-                                    <ReviewState review={isCount.review} />
+                                check === "cafemanager" ?
+                                    <AdminCafeList cafemanager={isCount.cafemanager} />
                                     :
-                                    check === "alram" ?
-                                        <AlramInfoPage alram={isCount} />
-                                        : <></>
+                                    check === "review" ?
+                                        <ReviewState review={isCount.review} />
+                                        :
+                                        check === "alram" ?
+                                            <AlramInfoPage alram={isCount} />
+                                            : <></>
                 }
             </ReactModal>
         </div>
