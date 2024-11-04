@@ -102,48 +102,57 @@ export const cafeContainer = css`
         padding-top: 5px;
         height: 50px;
         width: 50px;
-        background-color: #111111;
+        background-color: #191919;
         border-radius: 100%;
     }
 `;
 
 export const pictureBox = css`
     box-sizing: border-box;
-    border: 1px solid #dbdbdb;
-    background-color: white;
     border-radius: 10px;
-    width: 120px;
+    width: 150px;
     height: 110px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+    }
 `;
 
 export const cafeInfo = (slide) => css`
     display: flex;
     align-items: center;
-    padding: 10px;
-    background: #111111;
-    border-radius: 20px;
+    width: fit-content;
+    padding: 15px;
+    background: #191919;
+    border-radius: 10px;
+    cursor: pointer;
+    `;
+
+export const listBox = css`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    margin-left: 10px;
+    
     h3 {
         margin: 0;
-        padding: 10px 0px;
         font-size: 18px;
         font-weight: 600;
         color: #FFFFFF;
     }
+    
     p {
-        padding: 5px 0px;
-        margin: 5px 0 0;
+        margin: 0;
         font-size: 14px;
         color: #FFFFFF;
-
-        :nth-last-of-type(1){
+    
+        :nth-last-of-type(1) {
+            font-weight: 600;
             color: #F2780C;
         }
     }
 `;
-
-export const listBox = css`
-    display: flex;
-    padding-left: 15px;
-    flex-direction: column;
-
-`
