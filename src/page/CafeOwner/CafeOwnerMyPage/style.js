@@ -86,3 +86,12 @@ export const modalStyles = {
         overflow: 'hidden',
     },
 };
+
+export const closeButton = css`
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid #1c1c1b;
+`;

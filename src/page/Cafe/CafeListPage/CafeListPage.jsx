@@ -17,6 +17,10 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         setInputData(e.target.value);
     }
 
+    const handleSearchOnClick = () => {
+        setInputvalue(inputdata);
+    }
+
     const handleInputKeyPress = (e) => {
         if (e.key === "Enter") {
             setInputvalue(inputdata);
@@ -39,7 +43,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                     placeholder='카페를 검색하세요'
                     required
                 />
-                <button onClick={handleInputKeyPress}><IoIosSearch /></button>
+                <button onClick={handleSearchOnClick}><IoIosSearch /></button>
                 <select name="" id="">
                     <option value="like">인기순</option>
                     <option value="review">리뷰순</option>

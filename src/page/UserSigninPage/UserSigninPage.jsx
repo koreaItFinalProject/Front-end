@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { usersignInApi } from '../../apis/signInApis/usersignInApi';
 import { instance } from '../../apis/util/instance';
@@ -21,11 +20,8 @@ function UserSigninPage(props) {
         password: <></>
     });
 
-
     const handleOnLoginClick = async () => {
         const signinData = await usersignInApi(inputUser);
-        console.log(signinData);
-        console.log(signinData.error);
         if (!signinData.isSuccess) {
             const newFieldErrors = showFieldErrorMessage(signinData.error);
             alert("로그인 실패");

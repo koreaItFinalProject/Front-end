@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,8 @@ import { useQueryClient } from 'react-query';
 function Footer({ setCheck, setInputvalue }) {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
-    const accessCheck = queryClient.getQueryData("userInfoQuery"); 
-
-    const handleLogoutButtonOnClick = () => {
-        localStorage.removeItem("accessToken");
-        window.location.replace("/");
-    }
+    const loginCheck = queryClient.getQueryData("accessTokenValidQuery");
+    const accessCheck = queryClient.getQueryData("userInfoQuery");
 
     const handleListClick = () => {
         navigate('/cafe/list');
@@ -31,11 +27,18 @@ function Footer({ setCheck, setInputvalue }) {
     }
 
     const handleMyPageOnClick = () => {
-        if (!accessCheck) {
+        if (!loginCheck?.data) {
             navigate('/user/select/signup');
-            return;
+        } else if (loginCheck?.data) {
+            if (accessCheck?.data.role === "USER") {
+                navigate("/mypage");
+                return;
+            } else if (accessCheck?.data.role === "OWNER") {
+                navigate("/owner/mypage");
+                return;
+            }
+            else navigate("/admin/mobile/mypage");
         }
-        navigate("/mypage");
     }
 
     return (

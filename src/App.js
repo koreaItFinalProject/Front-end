@@ -8,7 +8,6 @@ import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
 import UserSignupPage from './page/SignupPage/UserSignupPage/UserSignupPage';
 import OwnerSignupPage from './page/SignupPage/OwnerSignupPage/OwnerSignupPage';
-import UsersSignupSelectPage from './page/UsersSignupSelectPage/UsersSignupSelectPage';
 import UserSigninPage from './page/UserSigninPage/UserSigninPage';
 import UserFindPage from './page/UserFindPage/UserFindPage';
 import MyPage from './page/MyPage/MyPage';
@@ -38,11 +37,12 @@ import CafeNoticeWritePage from './page/CafeOwner/CafeNoticeWritePage/CafeNotice
 import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoticeDetailPage';
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
-
+import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
 ReactModal.setAppElement('#root');
+
 function App() {
   const location = useLocation();
-  const navigete = useNavigate();
+  const navigate = useNavigate();
   const [authRefresh, setAuthRefresh] = useState(true);
   const [check, setCheck] = useState("전체");
   const [inputvalue, setInputvalue] = useState("");
@@ -50,7 +50,6 @@ function App() {
   const [searchFilter, setSearchFilter] = useState("title");
   const [category, setCategory] = useState("공지사항");
   const limit = 20;
-
 
   useEffect(() => {
     if (!authRefresh) {
@@ -96,27 +95,22 @@ function App() {
       enabled: authRefresh,
       retry: 0,
       refetchOnWindowFocus: false,
-      onSuccess: response => {
-        const permitAllPaths = ["/user/auth/", "/owner"];
-        for (let permitAllPath of permitAllPaths) {
-          if (location.pathname.startsWith(permitAllPath)) {
-            const blockPaths = ["/user"];
-            for (let blockPath of blockPaths) {
-              if (location.pathname.startsWith(blockPath)) {
-                alert("잘못된 요청입니다.")
-                navigete("/");
-                break;
-              }
-            }
+      onSuccess: () => {
+        const blockPaths = ["/user"];
+        for (let blockPath of blockPaths) {
+          if (location.pathname.startsWith(blockPath)) {
+            alert("잘못된 요청입니다.");
+            navigate(-1);
+            break;
           }
         }
       },
-      onError: error => {
-        const authPaths = ["/profile"];
+      onError: () => {
+        const authPaths = ["/mypage", "/owner", "/admin", "/manager"];
         for (let authPath of authPaths) {
           if (location.pathname.startsWith(authPath)) {
             alert("로그인 후 이용해주세요")
-            navigete("/user/login");
+            navigate('/user/select/signup');
             break;
           }
         }
@@ -212,7 +206,7 @@ function App() {
         } />
 
         <Route path='/user/*' element={
-          <MainLayout>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
             <Routes>
               <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
@@ -220,7 +214,7 @@ function App() {
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
-              <Route path='/select/signup' element={<UsersSignupSelectPage />} />
+              <Route path='/select/signup' element={<UserSignupSelectPage />} />
             </Routes>
           </MainLayout>
         } />

@@ -59,6 +59,11 @@ export const menu = css`
         color: black;
         font-weight: 500;
     }
+    p:nth-of-type(2) {
+        font-size: 16px;
+        color: #f2780c;
+        font-weight: 500;
+    }
     & button {
         display: flex;
         align-items: center;
