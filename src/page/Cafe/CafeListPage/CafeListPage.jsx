@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SelectCategory from '../../../components/SelectCategory/SelectCategory';
 import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
@@ -10,8 +10,28 @@ import { IoIosSearch } from "react-icons/io";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
+    const [sortOption, setSortOption] = useState('like');
+    const [sortedCafeList, setSortedCafeList] = useState([]);
     const [inputdata, setInputData] = useState("");
-    const { data: cafeList } = useCafeQuery(check, inputvalue);
+    const { data: cafeList } = useCafeQuery(check, inputvalue, {
+        onSuccess: (data) => {
+            setSortedCafeList(data);
+        }
+    });
+
+    useEffect(() => {
+        if (cafeList) {
+            const sortedList = [...cafeList].sort((a, b) => {
+                if (sortOption === 'like') {
+                    return b.likeCount - a.likeCount; // 인기순 정렬
+                } else if (sortOption === 'review') {
+                    return b.reviewCount - a.reviewCount; // 리뷰순 정렬
+                }
+                return 0;
+            });
+            setSortedCafeList(sortedList);
+        }
+    }, [cafeList, sortOption]);
 
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
@@ -31,6 +51,10 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
         navigate(`/cafe/detail/${cafeItem.id}`);
     }
 
+    const handleSortChange = (e) => {
+        setSortOption(e.target.value);
+    };
+
     return (
         <div css={s.layout}>
             <h1 css={s.title}>Cafe List</h1>
@@ -44,7 +68,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                     required
                 />
                 <button onClick={handleSearchOnClick}><IoIosSearch /></button>
-                <select name="" id="">
+                <select onChange={handleSortChange}>
                     <option value="like">인기순</option>
                     <option value="review">리뷰순</option>
                 </select>
@@ -54,7 +78,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
             </div>
             <div css={s.listContainer}>
                 {
-                    cafeList?.map((cafeItem, index) => (
+                    sortedCafeList?.map((cafeItem, index) => (
                         cafeItem.id ? (
                             <div css={s.listbox} key={index} onClick={() => handleCafeClick(cafeItem)}>
                                 <div css={s.pictureBox}>
