@@ -8,6 +8,7 @@ export const layout = css`
     overflow-y: auto;
     padding: 0px 140px;
     padding-top: 50px;
+    background-color: #191919;
     *{
         color: #ffffff;
         & button {
@@ -53,7 +54,7 @@ export const logo = css`
     }
 `;
 
-export const usernameInput = css`
+export const Inputvalue = css`
     height: 40px;
     box-sizing: border-box;
     border-bottom: 1px solid #F2780C;
@@ -154,25 +155,11 @@ export const emailCheckButton = css`
     }
 `;
 
-export const registerButton =css`
+export const registerButton = css`
     height: 30px;
     width: 80px;
 `;
 
-export const nickNameStyle = css`
-    width: 380px;
-    border-bottom: 1px solid #F2780C;
-    margin: 0;
-    & input {
-        width: 300px;
-        border: none;
-        padding-left: 10px;
-    }
-    & button{
-        width: 80px;
-        height: 30px;
-    }
-`
 
 export const signupbutton = css`
     display: flex;

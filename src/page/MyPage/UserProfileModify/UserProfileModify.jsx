@@ -19,10 +19,8 @@ function UserProfileModify({ user }) {
     const [inputUser, setInputUser] = useState(user);
     const [modifyUser, setModifyUser] = useState({
         ...user,
-        password:''
+        password: ''
     });
-    console.log(modifyUser);
-    console.log(inputUser);
     const [emailCheckState, setEmailCheckState] = useState(false);
     const { duplicatedCheck, errorData } = useCheckInputApi();
 
@@ -47,17 +45,17 @@ function UserProfileModify({ user }) {
         const { name } = e.target;
         console.log(name);
         console.log(inputUser[name], modifyUser[name]);
-        if(name === 'password' || name === 'checkPassword'){
-            if(modifyUser.password && modifyUser.checkPassword){
-                if(modifyUser.password !== modifyUser.checkPassword){
+        if (name === 'password' || name === 'checkPassword') {
+            if (modifyUser.password && modifyUser.checkPassword) {
+                if (modifyUser.password !== modifyUser.checkPassword) {
                     alert("비밀번호와 확인번호 다시 확인해주세요.")
                     return;
                 }
             }
-            // else{
-            //     alert("빈 값입니다.");
-            //     return
-            // }
+            else {
+                alert("빈 값입니다.");
+                return
+            }
         }
         if (isEmptyAndIsEqualsCheckFieldValue(inputUser[name], modifyUser[name])) {
             return;

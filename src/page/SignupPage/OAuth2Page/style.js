@@ -25,11 +25,11 @@ export const Info = css`
     border-radius: 0px 0px 10px 10px;
 `;
 
-export const loginLayout =css`
+export const loginLayout = css`
     width: 100%;
     height: 100%;
     & div {
-        padding: 20px 0px;
+        padding: 20px 0px 30px 0px;
     }
     & p {
         display: flex;
@@ -69,5 +69,23 @@ export const signupbutton = css`
     box-sizing: border-box;
     font-weight: 600;
     cursor: pointer;
+    padding: 0 !important;
+    &button {
+        box-sizing: border-box;
+        height: 100%;
+        width: 100%;
+    }
 `;
-
+export const ownerloginButton = css`
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+    & p {
+        padding: 10px 0px;
+        font-size: 15px;
+        margin: 0;
+        cursor: pointer;
+    }
+`;
