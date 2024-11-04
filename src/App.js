@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import { useEffect, useState } from 'react';
@@ -133,6 +133,8 @@ function App() {
     <>
       <Global styles={reset} />
       <Routes>
+        <Route path="/" element={<Navigate to="/map" />} />
+
         <Route path='/manager/web/*' element={
           <ManagerMainLayout>
             <Routes>

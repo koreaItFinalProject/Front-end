@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import React, { useEffect, useRef, useState } from 'react';
 import BackButton from '../../../components/BackButton/BackButton';
 import { useNavigate } from 'react-router-dom';
 import { useInfiniteQuery, useQueryClient } from 'react-query';

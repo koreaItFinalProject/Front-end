@@ -18,8 +18,6 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const [currentCafeIndex, setCurrentCafeIndex] = useState(0);
     const [slide, setSlide] = useState(0);
 
-    console.log(cafe);
-
     const handlePrevCafe = () => {
         setSlide(-100);
         setCurrentCafeIndex((prevIndex) => {
