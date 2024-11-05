@@ -7,7 +7,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { BsPencilSquare } from "react-icons/bs";
 
-function CafeReview({ cafeDetail, refetch }) {
+function CafeReview({ cafeDetail, refetchCafeDetail }) {
     const navigate = useNavigate();
     const params = useParams();
     const cafeId = params.cafeId;
@@ -19,11 +19,11 @@ function CafeReview({ cafeDetail, refetch }) {
         {
             onSuccess: () => {
                 alert("리뷰를 삭제하였습니다.");
-                refetch();
+                refetchCafeDetail();
             },
             onError: (error) => {
                 alert(error.response.data);
-                refetch();
+                refetchCafeDetail();
             }
         }
     );

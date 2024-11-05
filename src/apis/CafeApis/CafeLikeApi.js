@@ -1,8 +1,6 @@
 import { useMutation, useQuery } from "react-query";
 import { instance } from "../util/instance";
 
-
-
 export const useCafeLikeQuery = (cafeId) => {
     return useQuery(
         ["cafeLikeQuery"],
@@ -20,6 +18,7 @@ export const useCafeLikeQuery = (cafeId) => {
 export const useLikeMutation = (cafeId, refetchCafeLike) => {
     return useMutation(
         async () => {
+            console.log(cafeId);
             return await instance.post(`/cafe/${cafeId}/like`);
         },
         {
