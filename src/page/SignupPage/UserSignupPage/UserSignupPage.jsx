@@ -106,24 +106,24 @@ function UserSignupPage(props) {
 
     const startTimer = async (email) => {
         try {
-            
+
             if (email.trim() === '') {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
             }
             const emailCheck = await EmailDuplicateCheckValue(email);
-            if(!emailCheck.isSucceses){
+            if (!emailCheck.isSucceses) {
                 alert('이메일 중복되었습니다.');
                 return;
-            }else if(emailCheck.isSucceses){
+            } else if (emailCheck.isSucceses) {
                 setIsTimerStopped(false);
-            setEmailCheckState(true);
-            setIsTimerRunning(true);
-            setTimer(180);
+                setEmailCheckState(true);
+                setIsTimerRunning(true);
+                setTimer(180);
 
-            const response = await emailApi(email);
-            const verificationCode = response.number;
-            setEmailNumber(verificationCode);
+                const response = await emailApi(email);
+                const verificationCode = response.number;
+                setEmailNumber(verificationCode);
             }
         } catch (error) {
             console.error("Error occurred:", error);
@@ -153,7 +153,7 @@ function UserSignupPage(props) {
 
     return (
         <div css={s.layout}>
-            <BackButton prevPage={'로그인'} prevPageUrl={'/user/signin'}/>
+            <BackButton prevPage={'로그인'} prevPageUrl={'/user/signin'} />
             <div css={s.subLayout}>
                 <div css={s.logo}>
                     <h1>
@@ -167,7 +167,7 @@ function UserSignupPage(props) {
                     </div>
                     {fieldErrorMessages.username}
                 </div>
-                <div>
+                <div css={s.widthinput}>
                     <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
                     {fieldErrorMessages.password}
                 </div>
@@ -180,11 +180,11 @@ function UserSignupPage(props) {
                     <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
                     {fieldErrorMessages.name}
                 </div>
-                <div css={s.emailCheck}>
+                <div css={s.oppositeinput}>
                     <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
+                    {fieldErrorMessages.email}
                 </div>
-                {fieldErrorMessages.email}
                 <div css={s.emailButton}>
                     <div>
                         <div css={s.emailcert}>

@@ -80,8 +80,15 @@ export const usernameInput = css`
     }
 `;
 
-export const emailCheck = css`
+export const widthinput = css`
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+`;
+
+export const oppositeinput = css`
     & input {
         width: 290px;
     }
@@ -164,7 +171,7 @@ export const emailCheckButton = css`
     }
 `;
 
-export const registerButton =css`
+export const registerButton = css`
     height: 30px;
     width: 80px;
 `;
