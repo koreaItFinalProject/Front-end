@@ -38,6 +38,8 @@ import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoti
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
 import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 ReactModal.setAppElement('#root');
 
 function App() {
@@ -129,6 +131,7 @@ function App() {
     }
   );
 
+
   return (
     <>
       <Global styles={reset} />
@@ -209,15 +212,15 @@ function App() {
 
         <Route path='/user/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
-            <Routes>
-              <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
-              <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
-              <Route path='/find' element={<UserFindPage />} />
-              <Route path='/signup' element={<UserSignupPage />} />
-              <Route path='/signin' element={<UserSigninPage />} />
-              <Route path='/owner/signup' element={<OwnerSignupPage />} />
-              <Route path='/select/signup' element={<UserSignupSelectPage />} />
-            </Routes>
+                <Routes>
+                  <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
+                  <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
+                  <Route path='/find' element={<UserFindPage />} />
+                  <Route path='/signup' element={<UserSignupPage />} />
+                  <Route path='/signin' element={<UserSigninPage />} />
+                  <Route path='/owner/signup' element={<OwnerSignupPage />} />
+                  <Route path='/select/signup' element={<UserSignupSelectPage />} />
+                </Routes>
           </MainLayout>
         } />
 

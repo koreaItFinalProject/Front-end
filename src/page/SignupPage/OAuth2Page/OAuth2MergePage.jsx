@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { instance } from '../../../apis/util/instance';
+import { handleloginInputOnChange } from '../../../apis/util/handleloginInputOnChange/handleloginInputOnChange';
 
 function OAuth2MergePage(props) {
     const navigate = useNavigate();
@@ -54,11 +55,11 @@ function OAuth2MergePage(props) {
                         </h1>
                     </div>
                     <div>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setinputUser)} placeholder='아이디' />
+                        <input type="text" name='username' value={inputUser.username} autoComplete="off" onChange={handleloginInputOnChange(setinputUser)} placeholder='아이디' />
                         {fieldErrorMessages.username}
                     </div>
                     <div>
-                        <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setinputUser)} placeholder='비밀번호' />
+                        <input type="password" name='password' value={inputUser.password} autoComplete="off" onChange={handleloginInputOnChange(setinputUser)} placeholder='비밀번호' />
                         {fieldErrorMessages.password}
                     </div>
                     <div css={s.signupbutton}>

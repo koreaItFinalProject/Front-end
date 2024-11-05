@@ -15,12 +15,15 @@ function UserSignupPage(props) {
     const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
-    const [isCheckUsername, setCheckUsername] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState();
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber, setEmailNumber] = useState("");
-    const [complete, setComplete] = useState(false);
+    const [complete, setComplete] = useState({
+        username: false,
+        nickname: false,
+        email: false,
+    });
     const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [inputUser, setInputUser] = useState({
         username: '',
@@ -53,6 +56,12 @@ function UserSignupPage(props) {
     }
 
     const handlesignuppageOnClick = async () => {
+        const isComplete = !Object.values(complete).some(value => value === false);
+
+        if (!isComplete) {
+            alert("인증을 안받은 값이 존재합니다");
+            return;
+        }
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
             if (inputUser.password !== inputUser.checkPassword) {
                 alert("비밀번호가 일치하지 않습니다")
@@ -83,6 +92,10 @@ function UserSignupPage(props) {
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
+                setComplete({
+                    ...complete,
+                    email: true
+                });
             }
             if (emailNumber != emailCheck) {
                 alert("인증번호가 일치하지 않습니다.");
@@ -106,7 +119,6 @@ function UserSignupPage(props) {
 
     const startTimer = async (email) => {
         try {
-
             if (email.trim() === '') {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
@@ -120,7 +132,6 @@ function UserSignupPage(props) {
                 setEmailCheckState(true);
                 setIsTimerRunning(true);
                 setTimer(180);
-
                 const response = await emailApi(email);
                 const verificationCode = response.number;
                 setEmailNumber(verificationCode);
@@ -148,7 +159,7 @@ function UserSignupPage(props) {
         if (SignupDuplicateCheckValue(inputUser[name])) {
             return;
         }
-        duplicatedCheckValue(name, inputUser[name])
+        duplicatedCheckValue(name, inputUser[name], setComplete);
     }
 
     return (
@@ -161,8 +172,8 @@ function UserSignupPage(props) {
                     </h1>
                 </div>
                 <div>
-                    <div css={s.usernameInput}>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#ffffff' }} />
+                    <div css={s.duplicateinput}>
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#ffffff' }} />
                         <button name='username' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}
@@ -177,11 +188,11 @@ function UserSignupPage(props) {
                     {fieldErrorMessages.passwordMatching}
                 </div>
                 <div>
-                    <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
                     {fieldErrorMessages.name}
                 </div>
-                <div css={s.oppositeinput}>
-                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
+                <div css={s.duplicateinput}>
+                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
                     {fieldErrorMessages.email}
                 </div>
@@ -207,8 +218,8 @@ function UserSignupPage(props) {
                     </div>
                 </div>
                 <div>
-                    <div css={s.nickNameStyle}>
-                        <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                    <div css={s.duplicateinput}>
+                        <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='닉네임' />
                         <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                 </div>
@@ -218,13 +229,13 @@ function UserSignupPage(props) {
                         type="text"
                         name='phoneNumber'
                         value={inputUser.phoneNumber}
-                        onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                        onChange={handleInputOnChange(setInputUser)} autoComplete="off" placeholder='전화번호' />
                     {fieldErrorMessages.phoneNumber}
                 </div>
                 <div css={s.signupbutton}>
                     <button
                         onClick={handlesignuppageOnClick}
-                        disabled={complete}>가입하기</button>
+                        style={{ display: complete.username && complete.nickname && complete.email ? "block" : "none" }}>가입하기</button>
                 </div>
             </div>
         </div>

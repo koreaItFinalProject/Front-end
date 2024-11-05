@@ -1,21 +1,22 @@
- import { instance } from "../util/instance"
+import { instance } from "../util/instance"
 
- export const ownercheckApi = async(data) => {
+export const ownercheckApi = async (data) => {
     let cafeData = {
-        isSuccess:false,
+        isSuccess: false,
     }
-    
-    try{
-        const response = await instance.post("/cafe/add" , data);
+    console.log(data);
+
+    try {
+        const response = await instance.post("/cafe/add", data);
         console.log(response);
-        cafeData ={
-            isSuccess:true,
+        cafeData = {
+            isSuccess: true,
         }
         return cafeData;
-    }catch(error){
+    } catch (error) {
         console.error(error);
-        cafeData ={
-            isSuccess:false
+        cafeData = {
+            isSuccess: false
         }
     }
     return cafeData;

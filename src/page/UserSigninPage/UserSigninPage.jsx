@@ -7,6 +7,7 @@ import { instance } from '../../apis/util/instance';
 import { showFieldErrorMessage } from '../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { handleInputOnChange } from '../../apis/util/handleInputOnChange/handleInputOnChange';
 import BackButton from '../../components/BackButton/BackButton';
+import { handleloginInputOnChange } from "../../apis/util/handleloginInputOnChange/handleloginInputOnChange";
 
 function UserSigninPage(props) {
     const navigate = useNavigate();
@@ -39,16 +40,16 @@ function UserSigninPage(props) {
 
     return (
         <div css={s.layout}>
-            <BackButton prevPage={'회원가입'} prevPageUrl={'/user/select/signup'}/>
+            <BackButton prevPage={'회원가입'} prevPageUrl={'/user/select/signup'} />
             <div css={s.subLayout}>
                 <div css={s.login}>
                     <div css={s.loginInput}>
                         <div css={s.loginTitle}>
                             <p>Login</p>
                         </div>
-                        <input type="text" name="username" onChange={handleInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디' />
+                        <input type="text" name="username" autoComplete="off" onChange={handleloginInputOnChange(setInputUser)} value={inputUser.username} placeholder='아이디' />
                         <p>{fieldErrorMessages.username}</p>
-                        <input type="password" name="password" onChange={handleInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호' />
+                        <input type="password" name="password" autoComplete="off" onChange={handleloginInputOnChange(setInputUser)} value={inputUser.password} placeholder='비밀번호' />
                         <p>{fieldErrorMessages.password}</p>
                         <button onClick={handleOnLoginClick}>로그인</button>
                     </div>
