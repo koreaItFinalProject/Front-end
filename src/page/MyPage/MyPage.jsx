@@ -75,10 +75,10 @@ function MyPage(props) {
         }
     )
 
-    const handleOnModalClick = (e) => {
-        if (e.target.value) {
-            console.log("e" + e.target.value);
-            setCheck(e.target.value);
+    const handleOnModalClick = (value) => {
+        if (value) {
+            console.log(value);
+            setCheck(value);
             setIsOpen(true);
         }
         console.log(check);
@@ -95,51 +95,42 @@ function MyPage(props) {
                 <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
             </div>
             <div css={s.menuContainer} >
-                <div css={s.menu}>
-                    <button onClick={handleOnModalClick} value={"post"}>
-                        <BsChatLeftTextFill />
-                        <p>게시글</p>
-                        <p>{infoBoard.board.length === 0 ? '0' : infoBoard.board.length}</p>
-                    </button>
+                <div css={s.menu} onClick={() => handleOnModalClick("post")}>
+                    <BsChatLeftTextFill />
+                    <p>게시글</p>
+                    <p>{infoBoard.board.length === 0 ? '0' : infoBoard.board.length}</p>
+                </div>
+                <div css={s.menu} onClick={() => handleOnModalClick("comment")} >
+                    <FaRegCommentDots />
+                    <p>댓글관리</p>
+                    <p>{infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length}</p>
+                </div>
+                <div css={s.menu} onClick={() => handleOnModalClick("review")}>
+                    <MdOutlineRateReview />
+                    <p>리뷰관리</p>
+                    <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
+                </div>
+                <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
+                    {
+                        alram.length >= 1 ? (
+                            //일반
+                            <MdNotificationsActive />
+                        ) : (
+                            //알림
+                            <div css={s.alarm}>
+                                <MdNotificationsActive className='alarm-icon' />
+                                <p>알람이 왔습니다</p>
+                            </div>
+                        )
+                    }
+                </div>
+                <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
+                    <AiOutlineNotification />
+                    <p>알림정보</p>
+                    <p>{0}</p>
                 </div>
                 <div css={s.menu}>
-                    <button onClick={handleOnModalClick} value={"comment"}>
-                        <FaRegCommentDots />
-                        <p>댓글관리</p>
-                        <p>{infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length}</p>
-                    </button>
-                </div>
-                <div css={s.menu}>
-                    <button onClick={handleOnModalClick} value={"review"}>
-                        <MdOutlineRateReview />
-                        <p>리뷰관리</p>
-                        <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
-                    </button>
-                </div>
-                <div css={s.menu}>
-                    <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
-                        {
-                            alram.length >= 1 ? (
-                                //일반
-                                <MdNotificationsActive />
-                            ) : (
-                                //알림
-                                <div css={s.alarm}>
-                                    <MdNotificationsActive className='alarm-icon' />
-                                    <p>알람이 왔습니다</p>
-                                </div>
-                                // <MdNotifications className='alarm-icon'/>
-                            )
-                        }
-                    </div>
-                    <button onClick={handleOnModalClick} value={"alram"}>
-                        <AiOutlineNotification />
-                        <p>알림정보</p>
-                        <p>{0}</p>
-                    </button>
-                </div>
-                <div css={s.menu}>
-                    <button onClick={handleLogoutClick} value={"review"}>
+                    <button onClick={handleLogoutClick}>
                         <FiLogOut />
                         <p>로그아웃</p>
                     </button>
