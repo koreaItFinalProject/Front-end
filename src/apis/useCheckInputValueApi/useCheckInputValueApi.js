@@ -18,13 +18,17 @@ const useCheckInputValueApi = () => {
   }, [errorData])
 
 
-  const duplicatedCheckValue = async (fieldName, value) => {
+  const duplicatedCheckValue = async (fieldName, value, setComplete) => {
     let getResponse;
 
     try {
       getResponse = await instance.get(`/user/duplicated/${fieldName}?value=${value}`);
       if (getResponse.status === 200) {
         alert("중복 확인 완료");
+        setComplete((checkValue) => ({
+          ...checkValue,
+          [fieldName]: true
+        }))
       }
     } catch (e) {
       console.log("중복!!!")

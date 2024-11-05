@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
-import * as s from "./style";
+import * as s from "../UserSignupPage/style";
 import SearchAdress from '../../../apis/SearchAddress/SearchAdress';
 import { useNavigate } from 'react-router-dom';
 import { ownercheckApi } from '../../../apis/signUpApis/onwercheckApi';
@@ -13,6 +13,8 @@ import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
+import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
+import { ownerDeleteApi } from '../../../apis/signUpApis/ownerDeleteApi';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -23,11 +25,16 @@ function OwnerSignupPage(props) {
     const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
     const [proccess, setProccess] = useState(true);
     const [image, setImage] = useState();
+    const [isSelect, setSelect] = useState('');
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
     const [emailNumber, setEmailNumber] = useState("");
-    const [complete, setComplete] = useState(false);
-    const [isCheckUsername, setCheckUsername] = useState(false);
+    const [complete, setComplete] = useState({
+        username: false,
+        nickname: false,
+        email: false,
+        ownerImage: false
+    });
     const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [coordinates, setCoordinates] = useState({
         latitude: '',
@@ -42,6 +49,7 @@ function OwnerSignupPage(props) {
         checkPassword: '',
         nickname: '',
         phoneNumber: '',
+        cafename: '',
         role: "OWNER"
     })
 
@@ -52,9 +60,7 @@ function OwnerSignupPage(props) {
         address: '',
     });
 
-    const [isCafe, setCafe] = useState({
-        cafename: '',
-    });
+    console.log(complete);
 
     const [fieldErrorMessages, setFieldErrorMessages] = useState({
         username: <></>,
@@ -74,9 +80,9 @@ function OwnerSignupPage(props) {
         }
     }
 
-    const handleInputTextChange = (e) => {
-        setCafe(e.target.value);
-        console.log(isCafe);
+    const handleCategoryChange = (e) => {
+        setSelect(e.target.value);
+        console.log(isSelect);
     }
 
     const handleInputCheckChange = (e) => {
@@ -91,12 +97,23 @@ function OwnerSignupPage(props) {
         console.log("latitude " + coordinates.latitude);
         console.log("longitude " + coordinates.longitude);
     };
+
     const handleInputChange = (e) => {
         setBusinessNumber(e.target.value);
     };
     const handleSignup = async () => {
+        const isComplete = !Object.values(complete).some(value => value === false);
+
+        if (!isComplete) {
+            alert("인증을 안받은 값이 존재합니다");
+            return;
+        }
         if (isAddress.address === '') {
             alert("주소가 빈 값입니다");
+            return
+        }
+        if (isSelect === null) {
+            alert("카테고리를 선택해주세요");
             return
         }
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
@@ -117,15 +134,21 @@ function OwnerSignupPage(props) {
                 const data = {
                     ownerId: signupData.ok.user.id,
                     address: isAddress.address,
-                    cafename: isCafe.cafename,
+                    cafename: inputUser.cafename,
                     lat: coordinates.latitude,
                     lng: coordinates.longitude,
-                };
-                console.log(coordinates);
+                    category: isSelect
+                }
+                console.log(data);
                 const CafeData = await ownercheckApi(data);
                 if (CafeData.isSuccess) {
                     alert("가입 성공");
-                    navigate("/signin");
+                    navigate("/user/signin");
+                } else if (!CafeData.isSuccess) {
+                    alert("회원가입을 다시 진행해주세요");
+                    const DeleteData = await ownerDeleteApi(data.ownerId)
+                    console.log(DeleteData);
+                    return;
                 }
             }
         } catch (error) {
@@ -152,14 +175,19 @@ function OwnerSignupPage(props) {
                 alert('빈 값은 입력할 수 없습니다.');
                 return;
             }
-            setTimer(180);
-            setIsTimerStopped(false);
-            setIsTimerRunning(true);
-            setEmailCheckState(true);
-            const response = await emailApi(email);
-            const verificationCode = response.number;
-            setEmailNumber(verificationCode);
-
+            const emailCheck = await EmailDuplicateCheckValue(email);
+            if (!emailCheck.isSucceses) {
+                alert('이메일 중복되었습니다.');
+                return;
+            } else if (emailCheck.isSucceses) {
+                setTimer(180);
+                setIsTimerStopped(false);
+                setIsTimerRunning(true);
+                setEmailCheckState(true);
+                const response = await emailApi(email);
+                const verificationCode = response.number;
+                setEmailNumber(verificationCode);
+            }
         } catch (error) {
             console.error("Error occurred:", error);
             alert("이메일 인증 요청 중 오류가 발생했습니다.");
@@ -176,6 +204,10 @@ function OwnerSignupPage(props) {
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
+                setComplete({
+                    ...complete,
+                    email: true
+                });
             }
             if (emailNumber != emailCheck) {
                 alert("인증번호가 일치하지 않습니다.");
@@ -198,13 +230,15 @@ function OwnerSignupPage(props) {
                         console.log(`추출된 사업자 등록번호: ${number}`);
                         if (number === businessNumber) {
                             setProccess(false);
-                            setComplete(true);
                             console.log(proccess);
+                            setComplete({
+                                ...complete,
+                                ownerImage: true
+                            });
                             alert("사업자등록번호 인증을 완료하였습니다.")
                         } else if (number !== businessNumber) {
                             alert("일치하지 않습니다");
                             setProccess(true);
-                            setComplete(false);
                         }
                     })
                     .catch((error) => {
@@ -235,7 +269,7 @@ function OwnerSignupPage(props) {
         if (SignupDuplicateCheckValue(inputUser[name])) {
             return;
         }
-        duplicatedCheckValue(name, inputUser[name])
+        duplicatedCheckValue(name, inputUser[name], setComplete)
     }
 
     return (
@@ -246,8 +280,8 @@ function OwnerSignupPage(props) {
                     <h1>점주 회원가입</h1>
                 </div>
                 <div>
-                    <div css={s.usernameInput}>
-                        <input type="text" name='username' value={inputUser.username} onChange={handleInputOnChange(setInputUser)} placeholder='아이디' style={{ color: isCheckUsername ? '#adadad' : '#ffffff' }} />
+                    <div css={s.underlineInput}>
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#ffffff' }} />
                         <button name='username' onClick={handleCheckUser}>확인</button>
                         {fieldErrorMessages.username}
                     </div>
@@ -261,8 +295,8 @@ function OwnerSignupPage(props) {
                     <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
                 </div>
                 {fieldErrorMessages.checkPassword}
-                <div css={s.emailCheck}>
-                    <input type="email" name='email' value={inputUser.email} onChange={handleInputOnChange(setInputUser)} placeholder='이메일' disabled={emailCheckState} />
+                <div css={s.duplicateinput}>
+                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
                 </div>
                 {fieldErrorMessages.email}
@@ -270,12 +304,11 @@ function OwnerSignupPage(props) {
                     <div>
                         <div css={s.emailcert}>
                             <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState} />
+                                <input type="text" name='emailCheck' autoComplete="off" value={emailCheck} onChange={handleInputCheckChange} readOnly={!emailCheckState} />
                                 <div>
-                                    {isTimerRunning && <p>남은 시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
+                                    {isTimerRunning && <p>시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
                             </div>
-
                             <div css={s.emailCheckButton}>
                                 {
                                     !emailCheckState ?
@@ -289,47 +322,57 @@ function OwnerSignupPage(props) {
                     </div>
                 </div>
                 <div>
-                    <input type="text" name='name' value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
                 </div>
                 {fieldErrorMessages.name}
-                <div css={s.nickNameStyle}>
-                    <input type="text" name='nickname' value={inputUser.nickname} onChange={handleInputOnChange(setInputUser)} placeholder='닉네임' />
+                <div css={s.duplicateinput}>
+                    <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='닉네임' />
                     <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                 </div>
                 {fieldErrorMessages.nickname}
                 <div>
-                    <input type="text" name='phoneNumber' value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                    <input type="text" name='phoneNumber' autoComplete="off" value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
                     {fieldErrorMessages.phoneNumber}
                 </div>
                 <div>
-                    <input type="text" name='cafename' value={isCafe.cafename} onChange={handleInputTextChange} placeholder='카페명' />
+                    <input type="text" name='cafename' autoComplete="off" value={inputUser.cafename} onChange={handleInputOnChange(setInputUser)} placeholder='카페명' />
                 </div>
                 <p>
                     {
-                        isCafe.cafename === "" ? "카페명 입력해주세요"
+                        inputUser.cafename === "" ? "카페명 입력해주세요"
                             : ""
                     }
                 </p>
+                <div css={s.category}>
+                    <select onChange={handleCategoryChange}>
+                        <option value="베이커리">베이커리</option>
+                        <option value="디저트">디저트</option>
+                        <option value="분위기">분위기</option>
+                        <option value="브런치">브런치</option>
+                    </select>
+                </div>
                 <div>
                     <input type="text"
                         name='businessNumber' value={businessNumber}
-                        onChange={handleInputChange} placeholder='사업자 등록번호' disabled={!proccess} />
+                        onChange={handleInputChange} placeholder='사업자 등록번호' autoComplete="off" disabled={!proccess} />
                 </div>
-                <div css={s.businessNumber}>
+                <div css={s.underlineInput}>
                     <input type="file" name='ownerImage' onChange={handleImageChange} disabled={!proccess} />
                     <button css={s.registerButton} onClick={handleRegistrationNumberCheckOnClick} disabled={!proccess}>확인</button>
                 </div>
-                <div css={s.cafe}>
-                        <input
-                            value={isAddress.address} name='address'
-                            disabled placeholder='주소' />
-                        <input
-                            value={isAddress.buildingName}
-                            disabled placeholder='참고항목' />
+                <div css={s.widthinput}>
+                    <input
+                        value={isAddress.address} name='address'
+                        disabled placeholder='주소' />
+                    <input
+                        value={isAddress.buildingName}
+                        disabled placeholder='참고항목' />
+                    <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange} />
                 </div>
-                <SearchAdress setAddress={setAddress} setCoordinates={handleCoordinatesChange} />
                 <div css={s.signupbutton}>
-                    <button onClick={handleSignup} disabled={!complete}>가입하기</button>
+                    <button
+                        onClick={handleSignup}
+                        style={{ display: complete.ownerImage && complete.username && complete.nickname && complete.email ? "block" : "none" }}>가입하기</button>
                 </div>
             </div>
         </div>

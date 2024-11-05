@@ -6,30 +6,22 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    
 `;
 
 export const subLayout = css`
     display: flex;
     flex-direction: column; 
-    justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+    overflow-y: auto;
     background-color: #191919;
-
     *{
-        color: #ffffff;
-        & button {
-            background-color: #F2780C;
-            border: none;
-            border-radius: 20px;
-        }
-
         button:disabled {
         cursor: not-allowed;
         }
     }
-
     & p {
         display: flex;
         justify-content: center;
@@ -38,21 +30,19 @@ export const subLayout = css`
         color: #E94334;
         margin: 0;
     }
-    & input {
-        padding-left: 10px;
-    }
-
     & > div{
         margin-bottom: 20px;
     }
-`;
-
-export const Info = css`
-    
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: column; 
+    * input{
+        color: #ffffff;
+        padding-left: 10px;
+    }
+    & button {
+        background-color: #F2780C;
+        margin-left: 10px;
+        color: #ffffff;
+        border-radius: 20px;
+    }
 `;
 
 export const logo = css`
@@ -63,20 +53,25 @@ export const logo = css`
     }
 `;
 
-export const usernameInput = css`
+export const underlineInput = css`
     height: 40px;
     box-sizing: border-box;
     border-bottom: 1px solid #F2780C;
     & input {
         height: 40px;
-        width: 300px;
+        width: 290px;
         font-size: 16px;
         border: none;
     }
     & button {
         box-sizing: border-box;
-        height: 30px;
         width: 80px;
+        height: 35px;
+        background-color: #F2780C;
+        border: none;
+        border-radius: 20px;
+        margin-left: 10px;
+        color: #ffffff;
     }
 `;
 
@@ -88,11 +83,16 @@ export const widthinput = css`
     
 `;
 
-export const oppositeinput = css`
+export const duplicateinput = css`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
     & input {
-        width: 290px;
+        width: 280px;
     }
     & button {
+        box-sizing: border-box;
         width: 90px;
     }
 `;
@@ -176,21 +176,6 @@ export const registerButton = css`
     width: 80px;
 `;
 
-export const nickNameStyle = css`
-    width: 380px;
-    border-bottom: 1px solid #F2780C;
-    margin: 0;
-    & input {
-        width: 300px;
-        border: none;
-        padding-left: 10px;
-    }
-    & button{
-        width: 80px;
-        height: 30px;
-    }
-`
-
 export const signupbutton = css`
     display: flex;
     justify-content: center;
@@ -208,3 +193,19 @@ export const signupbutton = css`
     }
 `;
 
+export const category = css`
+    margin: 10px 0px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & select {
+        width: 250px;
+        border-radius: 20px;
+        padding:0px 10px;
+        & option {
+            background-color: #1c1c1b;
+            color: #F2780c;
+        }
+    }
+`;
