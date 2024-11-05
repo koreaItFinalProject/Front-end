@@ -3,10 +3,12 @@ import React from 'react';
 import * as s from "./style";
 import { useNavigate } from 'react-router-dom';
 import { BsEye } from "react-icons/bs";
-import { CiChat1 } from "react-icons/ci";
+import { IoMdHeartEmpty } from "react-icons/io";
 
 function NoticeList({ sortedNoticeList, prevPage, cafeId, cafeName }) {
     const navigate = useNavigate();
+
+    console.log(sortedNoticeList);
 
     return (
         <div css={s.boardListLayout}>
@@ -35,7 +37,7 @@ function NoticeList({ sortedNoticeList, prevPage, cafeId, cafeName }) {
                                 </div>
                                 <div css={s.counts}>
                                     <p><BsEye />{board.viewCount}</p>
-                                    <p><CiChat1 />{board.commentCount}</p>
+                                    <p><IoMdHeartEmpty />{board.likeCount === null ? 0 : board.likeCount}</p>
                                 </div>
                             </div>
                             <div css={s.noticeImgContainer}>

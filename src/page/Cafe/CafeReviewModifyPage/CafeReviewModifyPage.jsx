@@ -93,7 +93,7 @@ function CafeReviewModifyPage(props) {
         {
             onSuccess: response => {
                 alert("리뷰가 수정되었습니다");
-                navigate(`/cafe/detail/${cafeDetail?.id}`);
+                navigate(`/cafe/detail/${cafeDetail?.id}&selectMenu=review`);
             }
         }
     )
@@ -112,11 +112,9 @@ function CafeReviewModifyPage(props) {
         reviewModifyMutation.mutateAsync();
     }
 
-    console.log(reviewData);
-
     return (
         <div css={s.layout}>
-            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeDetail?.id}`} />
+            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeDetail?.id}?&selectMenu=review`} />
             <div css={s.rating}>
                 <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating

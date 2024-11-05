@@ -52,8 +52,6 @@ function MyPage(props) {
         return () => clearInterval(timer);
     }, []);
 
-
-
     const userManagement = useQuery(
         ["userManagementInfo"],
         async () => {
@@ -67,7 +65,6 @@ function MyPage(props) {
             onSuccess: response => {
                 setUser(response.data);
                 setInfoBoard(response.data);
-                console.log(user);
             },
             onError: response => {
                 alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);

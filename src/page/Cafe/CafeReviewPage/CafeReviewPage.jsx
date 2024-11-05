@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation, useQueryClient } from 'react-query';
@@ -85,7 +85,7 @@ function CafeReviewPage(props) {
             onSuccess: response => {
                 alert("리뷰가 작성되었습니다");
                 queryClient.refetchQueries(['reviews', cafeId]);
-                navigate(`/cafe/detail/${cafeId}`);
+                navigate(`/cafe/detail/${cafeId}?selectMenu=review`);
             }
         }
     );
@@ -106,7 +106,7 @@ function CafeReviewPage(props) {
 
     return (
         <div css={s.layout}>
-            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeId}`} />
+            <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeId}?&selectMenu=review`} />
             <div css={s.rating}>
                 <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating

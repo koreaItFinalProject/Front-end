@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import Comments from "../../../components/Comments/Comments";
@@ -16,16 +16,18 @@ import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutatio
 function NoticeDetailPage(props) {
     const navigate = useNavigate();
     const params = useParams();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const cafeId = queryParams.get('cafeId');
+    const cafeName = queryParams.get('cafeName');
     const boardId = params.boardId;
-    const cafeId = params.cafeId;
-    const cafeName = params.cafeName;
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
-    const deleteBoard = useDeleteBoardMutation(boardId);
-
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
+
+    const deleteBoard = useDeleteBoardMutation(boardId);
 
     const [commentData, setCommentData] = useState({
         boardId,

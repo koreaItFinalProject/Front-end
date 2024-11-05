@@ -5,7 +5,7 @@ export const useCafeDetailQuery = (cafeId) => {
     return useQuery(
         ["cafeDetailQuery"],
         async () => {
-            const cafeDetail = await instance.get(`/review/${cafeId}`);
+            const cafeDetail = await instance.get(`/cafe/detail/${cafeId}`);
             return cafeDetail.data;
         },
         {
