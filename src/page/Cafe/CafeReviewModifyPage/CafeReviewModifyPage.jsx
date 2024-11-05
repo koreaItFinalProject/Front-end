@@ -29,7 +29,7 @@ function CafeReviewModifyPage(props) {
     const [score, setScore] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState([]);
     const [reviewData, setReviewData] = useState({
-        reviewId: reviewItem.id,
+        reviewId: 0,
         rating: score,
         categoryIds: [],
         review: ""
@@ -42,6 +42,7 @@ function CafeReviewModifyPage(props) {
     useEffect(() => {
         const selectedCategories = cafeDetail?.reviewCategories.find(rc => rc.reviewId === reviewItem.id)?.categoryId || [];
         setReviewData({
+            reviewId: reviewItem.id,
             rating: reviewItem.rating,
             categoryIds: selectedCategories,
             review: reviewItem.review
@@ -73,7 +74,7 @@ function CafeReviewModifyPage(props) {
             ...review,
             review: e.target.value
         }));
-    };
+    }
 
     const handleCategoryOnClick = (category) => {
         setSelectedCategory(prevCategories => {
@@ -83,7 +84,7 @@ function CafeReviewModifyPage(props) {
                 return [...prevCategories, category];
             }
         });
-    };
+    }
 
     const reviewModifyMutation = useMutation(
         async () => {
@@ -101,7 +102,7 @@ function CafeReviewModifyPage(props) {
         if (!reviewData.rating) {
             alert("평점을 남겨주세요.");
             return;
-        } else if (!reviewData.category) {
+        } else if (reviewData.categoryIds.length === 0) {
             alert("카테고리를 선택해주세요.");
             return;
         } else if (reviewData.review.trim("") === "") {
@@ -110,6 +111,8 @@ function CafeReviewModifyPage(props) {
         }
         reviewModifyMutation.mutateAsync();
     }
+
+    console.log(reviewData);
 
     return (
         <div css={s.layout}>
