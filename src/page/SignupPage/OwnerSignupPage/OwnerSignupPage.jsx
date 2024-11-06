@@ -11,10 +11,10 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
-import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 import { ownerDeleteApi } from '../../../apis/signUpApis/ownerDeleteApi';
+import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();
@@ -266,7 +266,7 @@ function OwnerSignupPage(props) {
                 return
             }
         }
-        if (SignupDuplicateCheckValue(inputUser[name])) {
+        if (valueDuplicateCheckValue(inputUser[name])) {
             return;
         }
         duplicatedCheckValue(name, inputUser[name], setComplete)
