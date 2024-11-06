@@ -35,7 +35,7 @@ export const menuContainer = css`
     align-items: center;
     flex-grow: 1;
     width: 100%;
-    padding: 0 20px 10px 20px;
+    padding: 0 20px 0px 20px;
     background-color: #ffffff;
 `;
 
@@ -110,7 +110,7 @@ export const mainBoxLayout = css`
 `;
 
 
-export const blinkIcon= keyframes`
+export const blinkIcon = keyframes`
     0%,100% {
         color:black;
         transform: rotate(15deg);

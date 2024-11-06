@@ -38,6 +38,8 @@ import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoti
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
 import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
+import { pageCounter } from './atom/pageCount';
+import { useRecoilState } from 'recoil';
 
 ReactModal.setAppElement('#root');
 
@@ -50,14 +52,24 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
   const [category, setCategory] = useState("공지사항");
+  const [pageCount, setPageCount] = useRecoilState(pageCounter);
+
   const limit = 20;
+  const [historyStack, setHistoryStack] = useState([]);
 
   useEffect(() => {
     if (!authRefresh) {
       setAuthRefresh(true);
     }
+    setPageCount(pageCount + 1);
+    console.log(pageCount);
+    console.log("히스토리" + window.history.length);
   }, [location.pathname]);
 
+  useEffect(() => {
+    setHistoryStack(prevStack => [...prevStack, location.pathname])
+  }, [location.pathname])
+  console.log("히스토리 스택" + historyStack);
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery", category],
     async ({ pageParam = 1 }) => await instance.get('/board/list', {
@@ -188,20 +200,21 @@ function App() {
         } />
 
         <Route path='/board/*' element={
-          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
-            <Routes>
-              <Route path='' element={<BoardListPage
-                boardList={boardList}
-                fetchNextPage={fetchNextPage}
-                hasNextPage={hasNextPage}
-                refetch={refetch}
-                searchFilter={searchFilter}
-                setSearchFilter={setSearchFilter}
-                searchValue={searchValue}
-                setSearchValue={setSearchValue}
-                category={category}
-                setCategory={setCategory}
-              />} />
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} pageCount={pageCount} setPageCount={setPageCount}>
+            <Routes location={location} key={location.pathname}>
+              <Route path=''
+                element={<BoardListPage
+                  boardList={boardList}
+                  fetchNextPage={fetchNextPage}
+                  hasNextPage={hasNextPage}
+                  refetch={refetch}
+                  searchFilter={searchFilter}
+                  setSearchFilter={setSearchFilter}
+                  searchValue={searchValue}
+                  setSearchValue={setSearchValue}
+                  category={category}
+                  setCategory={setCategory}
+                />} />
               <Route path='write' element={<BoardWritePage />} />
               <Route path='modify/:boardId' element={<BoardModifyPage />} />
               <Route path='detail/:boardId' element={<BoardDetailPage />} />
@@ -211,15 +224,15 @@ function App() {
 
         <Route path='/user/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
-                <Routes>
-                  <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
-                  <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
-                  <Route path='/find' element={<UserFindPage />} />
-                  <Route path='/signup' element={<UserSignupPage />} />
-                  <Route path='/signin' element={<UserSigninPage />} />
-                  <Route path='/owner/signup' element={<OwnerSignupPage />} />
-                  <Route path='/select/signup' element={<UserSignupSelectPage />} />
-                </Routes>
+            <Routes location={location} key={location.pathname}>
+              <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
+              <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
+              <Route path='/find' element={<UserFindPage />} />
+              <Route path='/signup' element={<UserSignupPage />} />
+              <Route path='/signin' element={<UserSigninPage />} />
+              <Route path='/owner/signup' element={<OwnerSignupPage />} />
+              <Route path='/select/signup' element={<UserSignupSelectPage />} />
+            </Routes>
           </MainLayout>
         } />
 
