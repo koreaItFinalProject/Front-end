@@ -22,7 +22,7 @@ export const header = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     background-color: #ffffff;
@@ -31,13 +31,16 @@ export const header = css`
 export const writerInfo = css`
     display: flex;
     flex-direction: row;
+    align-items: center;
     font-weight: 600;
+    margin-bottom: 10px;
     cursor: default;
 
     img {
-        margin-right: 5px;
+        margin-right: 10px;
         width: 30px;
         height: 30px;
+        border: 1px solid #dddddd;
         border-radius: 30px;
         background-color: black;
     }
@@ -45,22 +48,18 @@ export const writerInfo = css`
 
 export const title = css`
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
     cursor: default;
-
-    div {
-        margin: 5px 0px;
-        font-size: 24px;
-        font-weight: 600;
-    }
-    
 `;
 
 export const boardInfoContainer = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    height: 30px;
     cursor: default;
 `;
 
@@ -70,14 +69,16 @@ export const boardInfo = css`
     align-items: center;
 
     div {
-        margin-right: 10px;
+        margin-right: 2px;
         font-size: 14px;
+        color: #555555;
     }
 `;
 
 export const buttonLayout = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
 
     svg {
@@ -87,9 +88,10 @@ export const buttonLayout = css`
 
     button {
         border: none;
-        margin-left: 5px;
-        padding: 5px;
-        font-size: 14px;
+        margin-left: 20px;
+        padding: 0;
+        font-size: 12px;
+        font-weight: 600;
     }
 `;
 
@@ -97,7 +99,6 @@ export const contentBox = css`
     box-sizing: border-box;
     background-color: #ffffff;
     cursor: default;
-    border-bottom: 5px solid #f2780c;
 
     img {
         border-radius: 20px;
@@ -105,25 +106,44 @@ export const contentBox = css`
     }
 
     .quill {
-        padding: 13px 10px;
+        padding: 0;
     }
 
     .ql-container.ql-snow {
         width: 100%;
         border: none;
         overflow-y: auto;
-        .q1-editor {
-            padding: 0px;
-        }
-    }
-
-    .ql-container.ql-snow {
-        border: none;
     }
 
     & img:not(img[width]) {
         width: 100%;
     }  
+`;
+
+export const likeContainer = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        padding: 0;
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    div {
+        font-size: 22px;
+    }
 `;
 
 export const commentContainer = css`

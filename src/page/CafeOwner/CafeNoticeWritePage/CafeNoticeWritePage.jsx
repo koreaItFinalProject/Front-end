@@ -11,11 +11,12 @@ import ImageResize from 'quill-image-resize';
 import 'react-quill/dist/quill.snow.css';
 import { IoCloseOutline } from "react-icons/io5";
 import { writeNoticeApi } from "../../../apis/writeNoticeApi";
+import { useQueryClient } from "react-query";
 Quill.register("modules/imageResize", ImageResize);
 
 function CafeNoticeWritePage(props) {
     const navigate = useNavigate();
-
+    const queryClient = useQueryClient();
     const [board, setBoard] = useState({
         title: "",
         content: "",
@@ -50,6 +51,8 @@ function CafeNoticeWritePage(props) {
             return;
         }
         await writeNoticeApi(board, navigate);
+        queryClient.invalidateQueries("noticeListQuery");
+        queryClient.invalidateQueries("boardListQuery");
     }
 
     const handleImageLoad = useCallback(() => {

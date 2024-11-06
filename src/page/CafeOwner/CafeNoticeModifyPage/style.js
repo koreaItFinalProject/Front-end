@@ -13,7 +13,7 @@ export const boardHeader = css`
     flex-direction: column;
     align-items: center;
     height: 100px;
-    padding: 10px;
+    padding: 15px 15px 0 15px;
     background-color: #ffffff;
 
     & div {
@@ -22,10 +22,9 @@ export const boardHeader = css`
     }
 
     & input {
-        padding: 5px 15px;
+        padding: 5px 0;
         width: 100%;
         height: 100%;
-        border: none;
         font-size: 20px;
         background: none;
         outline: none;
@@ -74,19 +73,23 @@ export const editorLayout = css`
         padding: 10px;
         width: 100%;
         height: 100%;
+
+        img {
+            border-radius: 10px;
+        }
     }
 
     .ql-toolbar.ql-snow {
         box-sizing: border-box;
-        padding: 15px 15px;
+        padding: 0 15px 15px 15px;
         border: none;
-        border-top: 3px solid #f2780c;
 
         span {
             margin: 0%;
             width: 100%;
             height: 100%;
         }
+
         button {
             width: 30px;
             height: 30px;
@@ -110,8 +113,6 @@ export const editorLayout = css`
     .ql-editor {
         padding: 0 15px;
     }
-
-
 `;
 
 

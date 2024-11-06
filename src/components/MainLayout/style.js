@@ -80,6 +80,11 @@ export const header = css`
     width: 100%;
     position: absolute;
     top: 0;
+    z-index: 99;
+
+    svg {
+        fill: #111111;
+    }
 `;
 
 export const children = (isNoFooter) => css`

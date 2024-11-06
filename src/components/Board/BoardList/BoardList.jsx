@@ -60,7 +60,7 @@ function BoardList({ boardList, loadMoreRef }) {
                                         </main>
                                         <footer css={s.cardFooter}>
                                             <div>
-                                                <img src={board.writerProfileImg} alt="" />
+                                                <img src={board.img} alt="" />
                                                 <span>by </span>
                                                 <p>{board.nickname}</p>
                                             </div>

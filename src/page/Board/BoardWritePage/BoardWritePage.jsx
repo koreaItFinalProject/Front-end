@@ -1,8 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { writeBoardApi } from '../../../apis/writeBoardApi';
+import { useNavigate } from 'react-router-dom';
+import { useWriteBoardMutation } from '../../../apis/writeBoardApi';
 import { PuffLoader } from "react-spinners";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
@@ -14,18 +14,15 @@ import { IoCloseOutline } from "react-icons/io5";
 Quill.register("modules/imageResize", ImageResize);
 
 function BoardWritePage(props) {
-
     const navigate = useNavigate();
-
+    const quillRef = useRef(null);
+    const [isUploading, setUploading] = useState(false);
     const [board, setBoard] = useState({
         title: "",
         content: "",
         category: "자유글"
     });
-
-    const quillRef = useRef(null);
-
-    const [isUploading, setUploading] = useState(false);
+    const writeBoardMutation = useWriteBoardMutation(navigate);
 
     const handleTitleInputOnChange = (e) => {
         setBoard(board => ({
@@ -50,21 +47,18 @@ function BoardWritePage(props) {
             alert("내용을 입력하세요.");
             return;
         }
-        await writeBoardApi(board, navigate);
+        writeBoardMutation.mutate(board);
     }
 
     const handleImageLoad = useCallback(() => {
         const input = document.createElement("input");
         input.setAttribute("type", "file");
         input.click();
-
         input.onchange = () => {
             const editor = quillRef.current.getEditor(); // getEditor(): quill 내장 메소드, editor 객체를 가져옴
             const files = Array.from(input.files);
             const imgFile = files[0];
-
             const editPoint = editor.getSelection(true);
-
             const storageRef = ref(storage, `board/img/${uuid()}_${imgFile.name}`);
             const task = uploadBytesResumable(storageRef, imgFile);
             setUploading(true);

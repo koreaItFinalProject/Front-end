@@ -91,7 +91,7 @@ function MyPage(props) {
             <div css={s.profileBox}>
                 <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
             </div>
-            <div css={s.menuContainer} >
+            <div css={s.menuContainer}>
                 <div css={s.menu} onClick={() => handleOnModalClick("post")}>
                     <BsChatLeftTextFill />
                     <p>게시글</p>

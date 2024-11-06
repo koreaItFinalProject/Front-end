@@ -87,7 +87,6 @@ export const searchContainer = css`
 export const boardNavigater = css`
     height: 30px;
     margin-bottom: 15px;
-
 `;
 
 export const categoryButton = css`

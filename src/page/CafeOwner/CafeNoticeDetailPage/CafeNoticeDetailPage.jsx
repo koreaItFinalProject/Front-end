@@ -21,16 +21,18 @@ function CafeNoticeDetailPage(props) {
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
     const deleteBoard = useDeleteBoardMutation(boardId);
-
+    
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
-
+    
     const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
         content: ""
     });
-
+    
+    const boardData = queryClient.getQueryData(['boardQuery', boardId]);
+    
     const board = useQuery(
         ["boardQuery", boardId],
         async () => {
@@ -77,10 +79,12 @@ function CafeNoticeDetailPage(props) {
         }
     );
 
-    const handleDeleteBoardOnClick = () => {
+    const handleDeleteBoardOnClick = async () => {
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
         if (selection) {
-            deleteBoard.mutateAsync();
+            await deleteBoard.mutateAsync();
+            queryClient.invalidateQueries("noticeListQuery");
+            navigate('/owner/notice/list');
         } else {
             navigate(`/board/detail/${boardId}`);
         }
@@ -88,7 +92,6 @@ function CafeNoticeDetailPage(props) {
     }
 
     const handleModifyBoardOnClick = () => {
-        const boardData = queryClient.getQueryData(['boardQuery', boardId]);
         if (!boardData) {
             queryClient.setQueryData(['boardQuery', boardId], board.data);
         }
@@ -162,33 +165,17 @@ function CafeNoticeDetailPage(props) {
                             </div>
                             <div css={s.boardInfoContainer}>
                                 <div css={s.boardInfo}>
-                                    <div>{board?.data?.data.writeDate}</div>
+                                    <div>{board?.data?.data.writeDate} ·</div>
                                     <div>조회수 {board?.data?.data.viewCount}</div>
-                                    <div>좋아요 {boardLike?.data?.data.likeCount}</div>
                                 </div>
                                 <div css={s.buttonLayout}>
-                                    <div>
-                                        {
-                                            !!boardLike?.data?.data?.boardLikeId
-                                                ?
-                                                <button onClick={handleDislikeOnClick}>
-                                                    <IoMdHeart />
-                                                </button>
-                                                :
-                                                <button onClick={handleLikeOnClick}>
-                                                    <IoMdHeartEmpty />
-                                                </button>
-                                        }
-                                    </div>
-                                    <div>
-                                        {
-                                            board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                            <>
-                                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                            </>
-                                        }
-                                    </div>
+                                    {
+                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
+                                        <>
+                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                        </>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -200,6 +187,20 @@ function CafeNoticeDetailPage(props) {
                                     toolbar: false
                                 }}
                             />
+                        </div>
+                        <div css={s.likeContainer}>
+                            {
+                                !!boardLike?.data?.data?.boardLikeId
+                                    ?
+                                    <button onClick={handleDislikeOnClick}>
+                                        <IoMdHeart style={{ fill: '#f2780c' }} />
+                                    </button>
+                                    :
+                                    <button onClick={handleLikeOnClick}>
+                                        <IoMdHeartEmpty />
+                                    </button>
+                            }
+                            <div>{boardLike?.data?.data.likeCount}</div>
                         </div>
                     </>
                 }

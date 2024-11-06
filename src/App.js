@@ -38,7 +38,6 @@ import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoti
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
 import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 ReactModal.setAppElement('#root');
 
@@ -130,7 +129,6 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
-
 
   return (
     <>

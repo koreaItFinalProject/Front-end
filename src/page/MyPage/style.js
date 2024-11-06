@@ -23,7 +23,6 @@ export const profileBox = css`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 225px;
     border-bottom: 3px solid #f2780c;
     background-color: #ffffff;
 `;
@@ -35,6 +34,7 @@ export const menuContainer = css`
     align-items: center;
     flex-grow: 1;
     width: 100%;
+    height: 100%;
     padding: 0 20px 10px 20px;
     background-color: #ffffff;
 `;
