@@ -7,7 +7,7 @@ function Menu({ title , icon , path }){
   const navigate = useNavigate();
   
   const handleClick = () => {
-      navigate(path);
+      navigate(`/manager/web/${path}`);
   }
 
   return (
