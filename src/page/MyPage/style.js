@@ -110,7 +110,7 @@ export const mainBoxLayout = css`
 `;
 
 
-export const blinkIcon= keyframes`
+export const blinkIcon = keyframes`
     0%,100% {
         color:black;
         transform: rotate(15deg);

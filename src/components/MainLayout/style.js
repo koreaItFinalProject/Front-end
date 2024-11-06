@@ -95,6 +95,7 @@ export const children = (isNoFooter) => css`
     padding-bottom: ${isNoFooter ? '0' : '60px'};
     height: 100%;
     border-radius: 20px;
+    
 `;
 
 export const footer = css`
@@ -105,4 +106,5 @@ export const footer = css`
     border-radius: 0px 0px 10px 10px;
     position: absolute;
     bottom: 0;
+    z-index: 1;
 `;
