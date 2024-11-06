@@ -12,32 +12,32 @@ export const Menus = [
   {
     title: '메인',
     icon:<HiOutlineHome/>,
-    path: '/manager/home'
+    path: 'home'
   },
   {
     title: '프로필',
     icon:<CgProfile/>,
-    path: '/manager/profile'
+    path: 'profile'
   },
   {
     title: '사용자 관리',
     icon:<MdManageAccounts/>,
-    path: '/manager/management'
+    path: 'management'
   },
   {
     title: '점포 관리',
     icon:<FaWindowRestore/>,
-    path: "/manager/storemanagement"
+    path: "storemanagement"
   },
   {
     title: '설정',
     icon:<IoMdSettings/>,
-    path: "/manager/setting"
+    path: "setting"
   },
   {
     title: '로그아웃',
     icon:<RiLogoutBoxLine/>,
-    path: "/manager/login"
+    path: "login"
   },
 
 ]
