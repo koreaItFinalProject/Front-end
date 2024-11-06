@@ -2,99 +2,100 @@ import { css } from "@emotion/react";
 
 export const layout = css`
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
-    position: relative;
-    & p {
-        margin: 5px 0px;
-        
-    }
-`;
+    padding: 30px;
 
-export const modifyButton = css`
-    position: absolute;
-    display: flex;
-    justify-content: end;
-    width: 100%;
-    margin-top: 20px;
-    height: 25px;
-    button {
-        padding-right: 30px;
+    p {
+        cursor: default;
     }
-`;
-
-export const profileBox = css`
-    margin-top: 20px;
-    display: flex;
-    width: 100%;
-    height: 200px;
-    padding-left: 40px;
-    box-sizing: border-box;
-    flex-direction: row;
-    /* background-color: #ffffff; */
 `;
 
 export const profileimage = css`
     box-sizing: border-box;
-    padding-right: 40px;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+
     & div:nth-of-type(1) {
-        width: 160px;
-        height: 160px;
+        width: 140px;
+        height: 140px;
+
         & img {
-            width: 160px;
-            height: 160px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            border: 1px solid #1c1c1b;
-            box-sizing: border-box;
+            border: 1px solid #dddddd;
+            object-fit: cover;
         }
     }
+
     & input{
-        width: 160px;
-        height: 160px;
+        width: 100%;
+        height: 100%;
         box-sizing: border-box;
     }
 
-    & button {
-        width: 50px;
-        height: 35px;
+    p {
+        font-size: 18px;
+        margin-top: 10px;
     }
-`
+`;
+
+export const profileButton = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    margin: 5px 0;
+
+    button {
+        padding: 0;
+    }
+`;
 
 export const userInfo = css`
-    width: 100%;
-    margin-bottom: 10px;
-    height: 200px;
-    & > div {
-        display: flex;
-        align-items: center;
-        height: 100%;
-        width: 100;
-        & > div:nth-child(1) {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            width: 80px;
-            height:100%;
-            box-sizing: border-box;
-        }
-        & > div:nth-child(2) {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            height:100%;
-            & p {
-                width: 100%;
-                height: 24px;
-                margin: 5px 0px;
-                padding: 0px;
-                color: #747474;
-                font-weight: 700;
-            }
-        }
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    margin-left: 50px;
+
+    button {
+        padding: 5px 10px;
+        border: 1px solid #111111;
+        border-radius: 20px;
+    }
+`;
+
+export const userDetailInfo = css`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 200px;
+
+    p {
+        margin: 0;
+    }
+
+    p:nth-of-type(1) {
+        font-size: 14px;
+    }
+
+    p:nth-of-type(2) {
+        font-size: 18px;
+        font-weight: 600;
+        border-bottom: 1px solid #f2780c;
     }
 `;
 

@@ -1,12 +1,11 @@
+import * as s from "./style";
+/** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { FaPencilAlt } from "react-icons/fa";
 import { useRecoilValue } from 'recoil';
 import { State } from '../../../atom/userState';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
-/** @jsxImportSource @emotion/react */
-import * as s from "./style";
 import mypageProfileApi from '../../../apis/mypageApis/mypageProfileApi';
 
 function ModifyProfilePage({ handleOnModalClick, value }) {
@@ -50,7 +49,7 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
             async (success) => {
                 try {
                     console.log("check");
-                    const url = await getDownloadURL(storageRef)
+                    const url = await getDownloadURL(storageRef);
                     setModifyUserInfo(user => ({
                         ...user,
                         img: url
@@ -89,48 +88,39 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
 
     return (
         <div css={s.layout}>
-            <div css={s.modifyButton}>
-                <button onClick={handleOnModalClick} value={value} >수정하기<FaPencilAlt /></button>
+            <div css={s.profileimage}>
+                <div onClick={handleImageClick}>
+                    <img src={modifyUserInfo?.img} alt="프로필 이미지" />
+                    <input
+                        type="file"
+                        accept="image/*"
+                        ref={inputRef}
+                        style={{ display: 'none' }} // 숨겨진 input
+                        onChange={handleImageChange}
+                    />
+                </div>
+                {
+                    imageModify === true
+                        ?
+                        <div css={s.profileButton}>
+                            <button onClick={() => handleProfileImageClick(modifyUserInfo.img)}>확인</button>
+                            <button onClick={handleProfileImageCancel}>취소</button>
+                        </div>
+                        :
+                        <></>
+                }
+                <p>{userInfoProfile?.name}</p>
             </div>
-            <div css={s.profileBox}>
-                <div css={s.profileimage}>
-                    <div onClick={handleImageClick} >
-                        <img src={modifyUserInfo?.img} alt="프로필 이미지" />
-                        <input
-                            type="file"
-                            accept="image/*"
-                            ref={inputRef}
-                            style={{ display: 'none' }} // 숨겨진 input
-                            onChange={handleImageChange}
-                        />
-                    </div>
-                    {
-                        imageModify === true ?
-                            <div>
-                                <button onClick={() => handleProfileImageClick(modifyUserInfo.img)}>확인</button>
-                                <button onClick={handleProfileImageCancel}>취소</button>
-                            </div>
-                            : <></>
-                    }
+            <div css={s.userInfo}>
+                <div css={s.userDetailInfo}>
+                    <p>별명</p>
+                    <p>{userInfoProfile?.nickname}</p>
                 </div>
-                <div css={s.userInfo}>
-                    <div>
-                        <div>
-                            <p>이름 :</p>
-                            <p>아이디 :</p>
-                            <p>닉네임 :</p>
-                            <p>이메일 :</p>
-                            <p>전화번호 :</p>
-                        </div>
-                        <div>
-                            <p>{userInfoProfile?.name}</p>
-                            <p>{userInfoProfile?.username}</p>
-                            <p>{userInfoProfile?.nickname}</p>
-                            <p>{userInfoProfile?.email}</p>
-                            <p>{userInfoProfile?.phoneNumber}</p>
-                        </div>
-                    </div>
+                <div css={s.userDetailInfo}>
+                    <p>Email</p>
+                    <p>{userInfoProfile?.email}</p>
                 </div>
+                <button onClick={handleOnModalClick} value={value}>프로필 관리</button>
             </div>
         </div>
     );

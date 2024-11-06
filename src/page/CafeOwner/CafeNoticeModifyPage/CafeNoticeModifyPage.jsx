@@ -7,8 +7,8 @@ import ImageResize from 'quill-image-resize';
 import { v4 as uuid } from "uuid";
 import { storage } from '../../../firebase/firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { modifyBoardApi } from '../../../apis/modifyBoardApi';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useModifyBoardMutation } from '../../../apis/modifyBoardApi';
 import { useQueryClient } from 'react-query';
 import { RingLoader } from "react-spinners";
 Quill.register("modules/imageResize", ImageResize);
@@ -18,23 +18,20 @@ function CafeNoticeModifyPage(props) {
     const boardId = params.boardId;
     const queryClient = useQueryClient();
     const boardData = queryClient.getQueryData(['boardQuery', boardId]);
-
     const navigate = useNavigate();
-
     const quillRef = useRef(null);
-
     const [isUploading, setUploading] = useState(false);
-
     const [modifyBoard, setModifyBoard] = useState({
         boardId,
         title: boardData?.data?.title,
         content: boardData?.data?.content,
     });
+    const modifyBoardMutation = useModifyBoardMutation(navigate);
 
     const handleModifySubmitOnClick = async () => {
         const selection = window.confirm("게시글을 수정하시겠습니까?");
         if (selection) {
-            await modifyBoardApi(modifyBoard, boardId, navigate);
+            modifyBoardMutation.mutate({ modifyBoard, boardId });
         } else {
             navigate(`/board/modify/${boardId}`);
         }
@@ -98,7 +95,7 @@ function CafeNoticeModifyPage(props) {
             <div css={s.boardHeader}>
                 <div css={s.buttonLayout}>
                     <button onClick={() => navigate(`/owner/notice/detail/${boardId}`)}>취소</button>
-                    <h1>글수정</h1>
+                    <h1>공지사항 수정</h1>
                     <button onClick={handleModifySubmitOnClick}>수정하기</button>
                 </div>
                 <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />

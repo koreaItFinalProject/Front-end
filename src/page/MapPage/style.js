@@ -14,7 +14,7 @@ export const box = css`
     box-sizing: border-box;
     position: absolute;
     z-index: 100;
-    top: 15px;
+    top: 20px;
     left: 15px;
     height: 50px;
     width: 631px;

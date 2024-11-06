@@ -9,13 +9,22 @@ export const layout = css`
   padding: 5px;
   width: 100%;
   height: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #dddddd;
 `;
 
 export const commentProfileImg = css`
     width: 40px;
     height: 40px;
     border-radius: 100%;
-    background-color: black;
+    border: 1px solid #dddddd;
+
+    img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+    }
 `;
 
 export const input = css`
@@ -26,17 +35,13 @@ export const input = css`
     width: 605px;
     height: 100%;
 
-    textarea {
-        padding: 10px 45px 10px 10px;
+    input {
+        padding: 10px 50px 10px 10px;
         width: 100%;
-        height: auto;
-        min-height: 30px;
-        max-height: 200px;
-        overflow: visible;
+        height: 100%;
         border-radius: 10px;
         border: none;
         outline: none;
-        resize: none;
         font-size: 20px;
         background-color: #B4B4B44D;
     }
@@ -50,10 +55,15 @@ export const input = css`
         justify-content: center;
         align-items: center;
         position: absolute;
-        left: 570px;
-        transform: translateY(35%);
+        left: 565px;
+        transform: translateY(20%);
         padding: 0;
         border-radius: 20px;
         cursor: pointer;
+
+        svg {
+            width: 35px;
+            height: 35px;
+        }
     }
 `;

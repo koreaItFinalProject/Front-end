@@ -110,9 +110,7 @@ function UserProfileModify({ user }) {
         <div css={s.layout}>
             <div css={s.Info}>
                 <div css={s.logo}>
-                    <h1>
-                        프로필
-                    </h1>
+                    <h1>프로필 관리</h1>
                 </div>
                 <div css={s.userInfoCheck}>
                     <div css={s.basicInfo}>

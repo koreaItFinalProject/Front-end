@@ -13,7 +13,7 @@ export const boardHeader = css`
     flex-direction: column;
     align-items: center;
     height: 100px;
-    padding: 10px;
+    padding: 15px 15px 0 15px;
     background-color: #ffffff;
 
     & div {
@@ -22,20 +22,19 @@ export const boardHeader = css`
     }
 
     & input {
-        padding: 5px 15px;
+        padding: 5px 0;
         width: 100%;
         height: 100%;
-        border: none;
         font-size: 20px;
         background: none;
         outline: none;
-
     }
 
     input::placeholder {
         color: #b4b4b4;
     }
 `;
+
 
 export const buttonLayout = css`
     display: flex;
@@ -50,13 +49,9 @@ export const buttonLayout = css`
     }
 
     button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         padding: 0;
         font-weight: 600;
         color: #f2780c;
-        
         svg {
             width: 30px;
             height: 30px;
@@ -78,19 +73,23 @@ export const editorLayout = css`
         padding: 10px;
         width: 100%;
         height: 100%;
+
+        img {
+            border-radius: 10px;
+        }
     }
 
     .ql-toolbar.ql-snow {
         box-sizing: border-box;
-        padding: 15px 15px;
+        padding: 0 15px 15px 15px;
         border: none;
-        border-top: 3px solid #f2780c;
 
         span {
             margin: 0%;
             width: 100%;
             height: 100%;
         }
+
         button {
             width: 30px;
             height: 30px;
@@ -114,20 +113,19 @@ export const editorLayout = css`
     .ql-editor {
         padding: 0 15px;
     }
-
-
 `;
+
 
 export const loadingLayout = css`
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 99;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    background-color: #00000066;
-`;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 99;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: #00000066;
+    `;

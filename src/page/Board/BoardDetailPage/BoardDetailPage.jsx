@@ -10,7 +10,6 @@ import "react-quill/dist/quill.snow.css";
 import BackButton from "../../../components/BackButton/BackButton";
 import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
-import useGetComments from "../../../apis/CommentApis/getCommentsApi";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
 
 function BoardDetailPage(props) {
@@ -21,15 +20,14 @@ function BoardDetailPage(props) {
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
     const deleteBoard = useDeleteBoardMutation(boardId);
-
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
-
     const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
         content: ""
     });
+    const boardData = queryClient.getQueryData(['boardQuery', boardId]);
 
     const board = useQuery(
         ["boardQuery", boardId],
@@ -53,8 +51,6 @@ function BoardDetailPage(props) {
         }
     );
 
-    const comments = useGetComments(boardId);
-
     const likeMutation = useMutation(
         async () => {
             return await instance.post(`/board/${boardId}/like`);
@@ -77,10 +73,12 @@ function BoardDetailPage(props) {
         }
     );
 
-    const handleDeleteBoardOnClick = () => {
+    const handleDeleteBoardOnClick = async () => {
         const selection = window.confirm("게시글을 삭제하시겠습니까?");
         if (selection) {
-            deleteBoard.mutateAsync();
+            await deleteBoard.mutateAsync();
+            queryClient.invalidateQueries('boardListQuery');
+            navigate(`/board`);
         } else {
             navigate(`/board/detail/${boardId}`);
         }
@@ -88,7 +86,6 @@ function BoardDetailPage(props) {
     }
 
     const handleModifyBoardOnClick = () => {
-        const boardData = queryClient.getQueryData(['boardQuery', boardId]);
         if (!boardData) {
             queryClient.setQueryData(['boardQuery', boardId], board.data);
         }
@@ -124,6 +121,7 @@ function BoardDetailPage(props) {
             alert("로그인 후 작성 가능합니다.");
             return;
         }
+        setMode('reply');
         setCommentData(comment => ({
             ...comment,
             content: "",
@@ -140,6 +138,8 @@ function BoardDetailPage(props) {
         setReplyTo("");
     };
 
+    console.log(board);
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={"게시판"} prevPageUrl={"/board"} />
@@ -155,41 +155,23 @@ function BoardDetailPage(props) {
                     <>
                         <div css={s.header}>
                             <div css={s.writerInfo}>
-                                <img src="" alt="" />
+                                <img src={board.data.data.img} alt="" />
                                 <div>{board.data.data.nickname}</div>
                             </div>
-                            <div css={s.title}>
-                                <div>{board.data.data.title}</div>
-                            </div>
+                            <div css={s.title}>{board.data.data.title}</div>
                             <div css={s.boardInfoContainer}>
                                 <div css={s.boardInfo}>
-                                    <div>{board?.data?.data.writeDate}</div>
+                                    <div>{board?.data?.data.writeDate} ·</div>
                                     <div>조회수 {board?.data?.data.viewCount}</div>
-                                    <div>좋아요 {boardLike?.data?.data.likeCount}</div>
                                 </div>
                                 <div css={s.buttonLayout}>
-                                    <div>
-                                        {
-                                            !!boardLike?.data?.data?.boardLikeId
-                                                ?
-                                                <button onClick={handleDislikeOnClick}>
-                                                    <IoMdHeart />
-                                                </button>
-                                                :
-                                                <button onClick={handleLikeOnClick}>
-                                                    <IoMdHeartEmpty />
-                                                </button>
-                                        }
-                                    </div>
-                                    <div>
-                                        {
-                                            board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                            <>
-                                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                            </>
-                                        }
-                                    </div>
+                                    {
+                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
+                                        <>
+                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                        </>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -202,10 +184,25 @@ function BoardDetailPage(props) {
                                 }}
                             />
                         </div>
+                        <div css={s.likeContainer}>
+                            {
+                                !!boardLike?.data?.data?.boardLikeId
+                                    ?
+                                    <button onClick={handleDislikeOnClick}>
+                                        <IoMdHeart style={{ fill: '#f2780c' }} />
+                                    </button>
+                                    :
+                                    <button onClick={handleLikeOnClick}>
+                                        <IoMdHeartEmpty />
+                                    </button>
+                            }
+                            <div>{boardLike?.data?.data.likeCount}</div>
+                        </div>
                     </>
                 }
                 <div css={s.commentContainer}>
                     <Comments
+                        setMode={setMode}
                         commentData={commentData}
                         handleModifyCommentButtonOnClick={handleModifyCommentButtonOnClick}
                         handleModifyCommentCancelButtonOnClick={handleModifyCommentCancelButtonOnClick}
@@ -217,10 +214,12 @@ function BoardDetailPage(props) {
             <div css={s.footer}>
                 <BoardFooter
                     mode={mode}
+                    setMode={setMode}
                     boardId={boardId}
                     commentData={commentData}
                     setCommentData={setCommentData}
                     replyTo={replyTo}
+                    setReplyTo={setReplyTo}
                 />
             </div>
         </div>

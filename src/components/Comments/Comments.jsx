@@ -5,13 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import useGetComments from "../../apis/CommentApis/getCommentsApi";
 import { instance } from "../../apis/util/instance";
 
-function Comments({
-    commentData,
-    handleModifyCommentButtonOnClick,
-    handleModifyCommentCancelButtonOnClick,
-    handleReplyButtonOnClick,
-    handleCancelReplyOnClick
-}) {
+function Comments({ setMode, commentData, handleModifyCommentButtonOnClick, handleModifyCommentCancelButtonOnClick, handleReplyButtonOnClick, handleCancelReplyOnClick }) {
     const params = useParams();
     const boardId = params.boardId;
 

@@ -13,7 +13,7 @@ export const title = css`
     margin-bottom: 15px;
 
     div{
-        font-size: 18px;
+        font-size: 22px;
         font-weight: 600;
         margin-right: 5px;
     }

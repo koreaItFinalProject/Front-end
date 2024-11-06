@@ -8,8 +8,6 @@ import { IoMdHeartEmpty } from "react-icons/io";
 function NoticeList({ sortedNoticeList, prevPage, cafeId, cafeName }) {
     const navigate = useNavigate();
 
-    console.log(sortedNoticeList);
-
     return (
         <div css={s.boardListLayout}>
             {
