@@ -8,8 +8,8 @@ import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/
 import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
-import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
+import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
 
 function UserSignupPage(props) {
     const navigate = useNavigate();
@@ -156,7 +156,7 @@ function UserSignupPage(props) {
                 return
             }
         }
-        if (SignupDuplicateCheckValue(inputUser[name])) {
+        if (valueDuplicateCheckValue(inputUser[name])) {
             return;
         }
         duplicatedCheckValue(name, inputUser[name], setComplete);

@@ -1,4 +1,4 @@
-const SignupDuplicateCheckValue = (newValue) => {
+const valueDuplicateCheckValue = (newValue) => {
     console.log(newValue);
     if (!(newValue.trim())) {
         alert("공백으로는 변경할 수 없습니다.");
@@ -7,4 +7,4 @@ const SignupDuplicateCheckValue = (newValue) => {
     return false;
 };
 
-export default SignupDuplicateCheckValue
+export default valueDuplicateCheckValue

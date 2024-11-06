@@ -6,17 +6,16 @@ import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/hand
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { oAuth2SignupApi } from '../../../apis/signUpApis/oauth2SignupApi';
 import emailApi from '../../../apis/emailApis/emailApi';
-import SignupDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/SignupDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 import BackButton from '../../../components/BackButton/BackButton';
+import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
 
 function OAuth2Signup(props) {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
-    const [isCheckUsername, setCheckUsername] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState();
     const [emailCheckState, setEmailCheckState] = useState(false);
     const [emailCheck, setEmailCheck] = useState("");
@@ -176,7 +175,7 @@ function OAuth2Signup(props) {
                 return
             }
         }
-        if (SignupDuplicateCheckValue(inputUser[name])) {
+        if (valueDuplicateCheckValue(inputUser[name])) {
             return;
         }
         duplicatedCheckValue(name, inputUser[name], setComplete);
