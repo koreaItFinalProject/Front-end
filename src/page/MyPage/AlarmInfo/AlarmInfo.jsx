@@ -12,6 +12,8 @@ function AlramInfoPage({ alarm }) {
     const [lastId, setLastId] = useState(null);
     const [eventSource, setEventSource] = useState(null);
 
+    console.log(alarm);
+
     // 처음 렌더링 시에만 초기 메시지 가져오기
     useEffect(() => {
         const fetchMessage = async () => {
