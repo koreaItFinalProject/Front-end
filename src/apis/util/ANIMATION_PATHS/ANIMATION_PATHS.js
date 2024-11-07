@@ -13,7 +13,6 @@ export const ANIMATION_PATHS = [
   '/cafe/notice/detail/:boardId',
   '/cafe/review/:cafeId',
   '/cafe/review/modify:cafeId',
-  '/owner/mypage',
   '/owner/mypage/modify',
   '/owner/cafe/modify/:cafeId',
   '/owner/notice/list',
