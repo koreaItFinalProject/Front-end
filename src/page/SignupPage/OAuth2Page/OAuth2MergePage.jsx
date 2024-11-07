@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
-import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import { instance } from '../../../apis/util/instance';
 import { handleloginInputOnChange } from '../../../apis/util/handleloginInputOnChange/handleloginInputOnChange';
 

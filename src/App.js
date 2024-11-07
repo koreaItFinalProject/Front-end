@@ -61,6 +61,7 @@ function App() {
     if (!authRefresh) {
       setAuthRefresh(true);
     }
+
     setPageCount(pageCount + 1);
     console.log(pageCount);
     console.log("히스토리" + window.history.length);
@@ -169,7 +170,7 @@ function App() {
         } />
 
         <Route path='/owner/*' element={
-          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} >
             <Routes>
               <Route path='/mypage' element={<CafeOwnerMyPage />} />
               <Route path='/mypage/modify' element={<ModifyProfilePage />} />
@@ -187,7 +188,7 @@ function App() {
         } />
 
         <Route path='/cafe/*' element={
-          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue}>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} >
             <Routes>
               <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='detail/:cafeId' element={<CafeDetailPage />} />
@@ -199,7 +200,7 @@ function App() {
         } />
 
         <Route path='/board/*' element={
-          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} pageCount={pageCount} setPageCount={setPageCount}>
+          <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} >
             <Routes location={location} key={location.pathname}>
               <Route path=''
                 element={<BoardListPage
@@ -243,7 +244,7 @@ function App() {
             </Routes>
           </MainLayout>
         } />
-      </Routes>
+      </Routes >
     </>
   );
 }

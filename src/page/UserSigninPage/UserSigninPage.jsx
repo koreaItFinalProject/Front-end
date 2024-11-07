@@ -12,6 +12,7 @@ import { Toast } from "../../apis/util/SweetAlert2/Toast/Toast";
 
 function UserSigninPage(props) {
     const navigate = useNavigate();
+    const [state , setState] = useState();
     const [inputUser, setInputUser] = useState({
         username: "",
         password: "",
@@ -57,8 +58,8 @@ function UserSigninPage(props) {
                 </div>
                 <div css={s.foundInfo}>
                     <ol>
-                        <li><button onClick={() => navigate()}>아이디 찾기</button></li>
-                        <li><button onClick={() => navigate()}>비밀번호 찾기</button></li>
+                        <li><button onClick={() => navigate("/user/find", { state: { mode: "findId" } })}>아이디 찾기</button></li>
+                        <li><button onClick={() => navigate("/user/find", { state: { mode: "findPassword" } })}>비밀번호 찾기</button></li>
                         <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
                     </ol>
                 </div>

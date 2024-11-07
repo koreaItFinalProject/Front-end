@@ -18,7 +18,7 @@ import UserProfileModify from "../../MyPage/UserProfileModify/UserProfileModify"
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 import CommentBoard from "../../MyPage/CommentBoard/CommentBoard";
 import ReviewState from "../../MyPage/ReviewState/ReviewState";
-import AlramInfoPage from "../../MyPage/AlramInfo/AlramInfo";
+import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
 import AdminCafeList from "./AdminCafeList/AdminCafeList";
 
 function MobileAdminMyPage(props) {
@@ -31,7 +31,8 @@ function MobileAdminMyPage(props) {
         review: {},
         comment: {},
         boardComment: {},
-        cafemanager: {}
+        cafemanager: {},
+        alarm: {}
     })
     const [isOpen, setIsOpen] = useState();
 
@@ -113,6 +114,7 @@ function MobileAdminMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
                     <RiAlarmWarningFill />
                     <p>알림</p>
+                    <p>{isCount.alarm.length === 0 ? '0' : isCount.alarm.length}</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>
@@ -134,7 +136,7 @@ function MobileAdminMyPage(props) {
                                         <ReviewState review={isCount.review} />
                                         :
                                         check === "alram" ?
-                                            <AlramInfoPage alram={isCount} />
+                                            <AlramInfoPage alram={isCount.alarm} />
                                             : <></>
                 }
             </ReactModal>
