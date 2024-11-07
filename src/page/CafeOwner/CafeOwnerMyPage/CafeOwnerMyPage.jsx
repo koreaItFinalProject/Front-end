@@ -19,7 +19,7 @@ import { PiCoffee } from "react-icons/pi";
 import { VscMegaphone } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
-import AlarmInfo from "../../MyPage/AlramInfo/AlramInfo";
+import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
 
 function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
@@ -32,7 +32,7 @@ function CafeOwnerMyPage(props) {
         review: {},
         comment: {},
         boardComment: {},
-        alarm: {}
+        alarm: {},
     })
 
     // "자유글"만 담은 배열 생성, isCount에 데이터가 들어오기 전에는 실행 되지 않도록 삼항연산자 사용
@@ -137,6 +137,7 @@ function CafeOwnerMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
                     <RiAlarmWarningFill />
                     <p>알림</p>
+                    <p>{infoBoard.alarm === 0 ? '0' : infoBoard.alarm.length}</p>
                 </div>
                 <div css={s.menu} onClick={handleLogoutClick}>
                     <FiLogOut />
@@ -159,7 +160,7 @@ function CafeOwnerMyPage(props) {
                                     <ReviewState review={infoBoard.review} />
                                     :
                                     check === "alram" ?
-                                        <AlarmInfo alarm={infoBoard.alarm} />
+                                        <AlramInfoPage alarm={infoBoard.alarm} />
                                         : <></>
                 }
             </ReactModal>

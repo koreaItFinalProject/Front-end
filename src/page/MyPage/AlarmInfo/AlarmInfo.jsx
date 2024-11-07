@@ -4,7 +4,7 @@ import * as s from "./style";
 import { instance } from '../../../apis/util/instance';
 import { useQueryClient } from 'react-query';
 
-function AlramInfoPage(props) {
+function AlramInfoPage({ alarm }) {
     const queryClient = useQueryClient();
     const accessCheck = queryClient.getQueryData("userInfoQuery");
     console.log(accessCheck.data.userId);
@@ -66,19 +66,20 @@ function AlramInfoPage(props) {
         }
     }, [accessCheck, lastId]);  // accessCheck와 lastId 변경 시마다 실행
 
-    console.log(notices);
-    console.log(lastId);
-
     return (
-        <div>
-            <h2>공지사항</h2>
-            <h3>{lastId}</h3>
-            <ul css={{ maxHeight: '600px', overflowY: 'auto' }}>
-                {notices.map((notice, index) => (
-                    <tr key={index}>
-                        <td>{notice.type}</td>
-                        <td >{notice.content}</td>
-                    </tr>
+        <div css={s.mainLayout}>
+            <div css={s.AllPost}>
+                <h2 >공지사항</h2>
+                <h3> 마지막 공지사항 : {lastId}</h3>
+            </div>
+            <ul css={s.AlramList}>
+                {notices.map((alarm, index) => (
+                    <div key={index} css={s.layout}>
+                        <tr>
+                            <td>{alarm.type}</td>
+                            <td >{alarm.content}</td>
+                        </tr>
+                    </div>
                 ))}
             </ul>
         </div>

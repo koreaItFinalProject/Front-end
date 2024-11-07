@@ -15,7 +15,7 @@ import ReactModal from 'react-modal';
 import UserProfileModify from './UserProfileModify/UserProfileModify';
 import CommentBoard from './CommentBoard/CommentBoard';
 import ReviewState from './ReviewState/ReviewState';
-import AlramInfo from './AlramInfo/AlramInfo';
+import AlramInfo from './AlarmInfo/AlarmInfo';
 import NoticeBoard from './NoticeBoard/NoticeBoard';
 import { FiLogOut } from "react-icons/fi";
 
@@ -29,7 +29,7 @@ function MyPage(props) {
         review: {},
         comment: {},
         boardComment: {},
-        alram: {}
+        alarm: {},
     })
     const [isOpen, setIsOpen] = useState();
 
@@ -124,7 +124,7 @@ function MyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
                     <AiOutlineNotification />
                     <p>알림정보</p>
-                    <p>{0}</p>
+                    <p>{infoBoard?.alarm?.length === 0 ? '0' : infoBoard?.alarm?.length}</p>
                 </div>
                 <div css={s.menu}>
                     <button onClick={handleLogoutClick}>
@@ -149,7 +149,7 @@ function MyPage(props) {
                                     <ReviewState review={infoBoard.review} />
                                     :
                                     check === "alram" ?
-                                        <AlramInfo alaram={infoBoard.alram} />
+                                        <AlramInfo alaram={infoBoard.alarm} />
                                         : <></>
                 }
             </ReactModal>
