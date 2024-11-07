@@ -22,7 +22,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
         setHistoryStack(prevStack => [...prevStack, location.pathname])
         setSelect(false);
 
-        if (location.pathname !== "/user/select/signup" && location.pathname !== "/user/signin") {
+        if (location.pathname !== "/user/select/signup" || '/owner/mypage' || '/mypage' && location.pathname !== "/user/signin") {
             setHistoryStack([]);
         }
     }, [location.pathname])
