@@ -20,7 +20,7 @@ import NoticeBoard from './NoticeBoard/NoticeBoard';
 import { FiLogOut } from "react-icons/fi";
 
 function MyPage(props) {
-    const [alram, setAlram] = useState(false);
+    const [alarm, setAlarm] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
     const [infoBoard, setInfoBoard] = useState({
@@ -46,7 +46,7 @@ function MyPage(props) {
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setAlram(prevAlram => !prevAlram);
+            setAlarm(prevAlarm => !prevAlarm);
         }, 1000);
 
         return () => clearInterval(timer);
@@ -107,9 +107,9 @@ function MyPage(props) {
                     <p>리뷰관리</p>
                     <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
                 </div>
-                <div css={s.noticeAlarm} style={{ display: alram.length > 0 ? 'none' : 'block' }}>
+                <div css={s.noticeAlarm} style={{ display: infoBoard?.alarm?.length > 0 ? 'none' : 'block' }}>
                     {
-                        alram.length >= 1 ? (
+                        infoBoard?.alarm.length >= 1 ? (
                             //일반
                             <MdNotificationsActive />
                         ) : (
@@ -121,7 +121,7 @@ function MyPage(props) {
                         )
                     }
                 </div>
-                <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
+                <div css={s.menu} onClick={() => handleOnModalClick("alarm")}>
                     <AiOutlineNotification />
                     <p>알림정보</p>
                     <p>{infoBoard?.alarm?.length === 0 ? '0' : infoBoard?.alarm?.length}</p>
@@ -148,12 +148,11 @@ function MyPage(props) {
                                 check === "review" ?
                                     <ReviewState review={infoBoard.review} />
                                     :
-                                    check === "alram" ?
+                                    check === "alarm" ?
                                         <AlramInfo alaram={infoBoard.alarm} />
                                         : <></>
                 }
             </ReactModal>
-
         </div>
     );
 }

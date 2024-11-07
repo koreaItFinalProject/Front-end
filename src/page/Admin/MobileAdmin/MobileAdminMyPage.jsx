@@ -111,7 +111,7 @@ function MobileAdminMyPage(props) {
                     <VscMegaphone />
                     <p>공지사항</p>
                 </div>
-                <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
+                <div css={s.menu} onClick={() => handleOnModalClick("alarm")}>
                     <RiAlarmWarningFill />
                     <p>알림</p>
                     <p>{isCount.alarm.length === 0 ? '0' : isCount.alarm.length}</p>
@@ -135,8 +135,8 @@ function MobileAdminMyPage(props) {
                                     check === "review" ?
                                         <ReviewState review={isCount.review} />
                                         :
-                                        check === "alram" ?
-                                            <AlramInfoPage alram={isCount.alarm} />
+                                        check === "alarm" ?
+                                            <AlramInfoPage alarm={isCount.alarm} />
                                             : <></>
                 }
             </ReactModal>

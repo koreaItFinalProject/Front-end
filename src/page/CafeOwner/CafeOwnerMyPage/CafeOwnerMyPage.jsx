@@ -117,12 +117,12 @@ function CafeOwnerMyPage(props) {
                 <div css={s.menu} onClick={() => handleOnModalClick("comment")}>
                     <FaRegCommentDots />
                     <p>작성한 댓글</p>
-                    <p>{infoBoard.boardComment.length === 0 ? '0' : infoBoard.boardComment.length}</p>
+                    <p>{infoBoard?.boardComment.length === 0 ? '0' : infoBoard?.boardComment.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("review")}>
                     <MdOutlineRateReview />
                     <p>작성한 리뷰</p>
-                    <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
+                    <p>{infoBoard?.review.length === 0 ? '0' : infoBoard?.review.length}</p>
                 </div>
                 <div css={s.menu} onClick={() => navigate(`/owner/cafe/modify/${cafeData?.data?.cafeId}`)}>
                     <PiCoffee />
@@ -134,10 +134,10 @@ function CafeOwnerMyPage(props) {
                     <p>공지사항 관리</p>
                     <p>{noticePosts === 0 ? '0' : noticePosts.length}</p>
                 </div>
-                <div css={s.menu} onClick={() => handleOnModalClick("alram")}>
+                <div css={s.menu} onClick={() => handleOnModalClick("alarm")}>
                     <RiAlarmWarningFill />
                     <p>알림</p>
-                    <p>{infoBoard.alarm === 0 ? '0' : infoBoard.alarm.length}</p>
+                    <p>{infoBoard?.alarm?.length === 0 ? '0' : infoBoard?.alarm?.length}</p>
                 </div>
                 <div css={s.menu} onClick={handleLogoutClick}>
                     <FiLogOut />
@@ -148,19 +148,19 @@ function CafeOwnerMyPage(props) {
                 <button css={s.closeButton} onClick={closeModal}>Close</button>
                 {
                     check === "userinfo" ?
-                        <UserProfileModify user={infoBoard.user} />
+                        <UserProfileModify user={infoBoard?.user} />
                         :
                         check === "post" ?
-                            <NoticeBoard board={infoBoard.board} />
+                            <NoticeBoard board={infoBoard?.board} />
                             :
                             check === "comment" ?
-                                <CommentBoard comment={infoBoard.boardComment} />
+                                <CommentBoard comment={infoBoard?.boardComment} />
                                 :
                                 check === "review" ?
-                                    <ReviewState review={infoBoard.review} />
+                                    <ReviewState review={infoBoard?.review} />
                                     :
-                                    check === "alram" ?
-                                        <AlramInfoPage alarm={infoBoard.alarm} />
+                                    check === "alarm" ?
+                                        <AlramInfoPage alarm={infoBoard?.alarm} />
                                         : <></>
                 }
             </ReactModal>
