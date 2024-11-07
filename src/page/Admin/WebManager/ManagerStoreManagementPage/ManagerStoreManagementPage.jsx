@@ -3,14 +3,20 @@ import React, { useEffect, useState } from 'react';
 import * as s from './style';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../../apis/util/instance';
+import { useCafeQuery } from '../../../../apis/CafeApis/getCafeListApi';
 
 function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue }) {
     const queryClient = useQueryClient();
-    const cafelist = queryClient.getQueryData(["cafeQuery", check, inputvalue]);
+    const [cafelistUp, setCafelistUp] = useState([]);
+    const { data: cafeList } = useCafeQuery(check, inputvalue, {
+        onSuccess: (data) => {
+            setCafelistUp(data);
+        }
+    })
 
-    const cafe = cafelist?.data;
     const [inputdata, setInputData] = useState("");
-    console.log(cafe);
+
+
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
     };
@@ -41,42 +47,41 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
     };
     return (
         <div css={s.mainLayout}>
-            <div css={s.mainBox}>
-                <div css={s.box}>
-                    <div css={s.ibBox}>
-                        <div css={s.inputSection}>
-                            <p>조회:</p>
-                            <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} />
-                        </div>
-                        <button css={s.button} onClick={() => setInputvalue(inputdata)}>검색</button>
-                    </div>
-
-                    <table border={1}>
-                        <tr>
-                            <th>number</th>
-                            <th>cafename</th>
-                            <th>address</th>
-                            <th>category</th>
-                        </tr>
-                        <tr>
-                        </tr>
-                        {
-                            cafe?.map((result, index) => (
-                                <>
-                                    <tr key={index}>
-                                        <td>{index}</td>
-                                        <td>{result.cafeName}</td>
-                                        {/* <input type="text" /> */}
-                                        <td>{result.address}</td>
-                                        <td>{result.category}</td>
-                                        <td>{result.id}</td>
-                                        <button value={result.id} onClick={handleDeleteOnclick}>삭제</button>
-                                    </tr>
-                                </>
-                            ))
-                        }
-                    </table>
+            <div css={s.ibBox}>
+                <div css={s.inputSection}>
+                    <p>조회:</p>
+                    <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} />
                 </div>
+                <button css={s.button} onClick={() => setInputvalue(inputdata)}>검색</button>
+            </div>
+            <div css={s.listContainer}>
+                <table css={s.cafeListTable}>
+                    <tr>
+                        <th>순번</th>
+                        <th>카페 이름</th>
+                        <th>주소</th>
+                        <th>카테고리</th>
+                        <th>카페 ID</th>
+                        <th>삭제</th>
+                    </tr>
+                    <tr>
+                    </tr>
+                    {
+                        cafeList?.map((result, index) => (
+                            <>
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{result.cafeName}</td>
+                                    {/* <input type="text" /> */}
+                                    <td>{result.address}</td>
+                                    <td>{result.category}</td>
+                                    <td>{result.id}</td>
+                                    <td onClick={() => handleDeleteOnclick(result.id)}>삭제</td>
+                                </tr>
+                            </>
+                        ))
+                    }
+                </table>
             </div>
         </div>
     );
