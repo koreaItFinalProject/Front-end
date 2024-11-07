@@ -43,7 +43,7 @@ function MyPage(props) {
         console.log(isOpen);
 
     };
-
+    console.log(infoBoard)
     useEffect(() => {
         const timer = setInterval(() => {
             setAlarm(prevAlarm => !prevAlarm);
@@ -89,7 +89,10 @@ function MyPage(props) {
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
-                <ModifyProfilePage handleOnModalClick={handleOnModalClick} value={"userinfo"} />
+                <ModifyProfilePage
+                    handleOnModalClick={() => handleOnModalClick("userinfo")}
+                    value={"userinfo"}
+                />
             </div>
             <div css={s.menuContainer}>
                 <div css={s.menu} onClick={() => handleOnModalClick("post")}>

@@ -10,7 +10,6 @@ import useCheckInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
 import isEmptyAndIsEqualsCheckFieldValue from '../../../apis/EmptyDuplicateCheckValue/EmptyDuplicateCheckValue';
 
 function UserProfileModify({ user }) {
-    const navigate = useNavigate();
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [timer, setTimer] = useState(0);
     const [isTimerStopped, setIsTimerStopped] = useState();
@@ -23,7 +22,7 @@ function UserProfileModify({ user }) {
     });
     const [emailCheckState, setEmailCheckState] = useState(false);
     const { duplicatedCheck, errorData } = useCheckInputApi();
-
+    console.log(user);
     const handleOnEmailCheckClick = async () => {
         console.log("이메일 넘버" + emailNumber);
         console.log("이메일 체크" + emailCheck);
