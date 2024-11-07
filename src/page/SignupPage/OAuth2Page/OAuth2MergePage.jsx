@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -17,6 +17,32 @@ function OAuth2MergePage(props) {
         username: <></>,
         password: <></>,
     });
+
+    useEffect(() => {
+        const oAuth2Name = searchParams.get("oAuth2Name");
+        const provider = searchParams.get("provider");
+        const data = {
+            username:'',
+            password:'',
+            oauth2Name:oAuth2Name,
+            provider:provider
+        }
+        if(oAuth2Name && provider) {
+            const checkOAuth2User = async () => {
+                console.log("시작");
+                const response = await oauth2MergeApi(data);
+                if(response.isSuccess){
+                    localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
+                    instance.interceptors.request.use((config) => {
+                        config.headers['Authorization'] = localStorage.getItem('accessToken');
+                        return config;
+                    });
+                    navigate("/mypage");
+                }
+            }
+            checkOAuth2User();
+        }
+    },[searchParams , navigate])
 
     const handleMergepageOnClick = async () => {
         const mergeData = {
