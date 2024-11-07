@@ -29,8 +29,6 @@ function CafeDetailPage() {
     const likeMutation = useLikeMutation(cafeId, refetchCafeLike);
     const dislikeMutation = useDislikeMutation(cafeLike?.cafeLikeId, refetchCafeLike);
 
-    console.log(cafeDetail);
-
     useEffect(() => {
         if (selectMenu !== initialSelectMenu) {
             navigate(`${location.pathname}?selectMenu=${selectMenu}`, { replace: true });

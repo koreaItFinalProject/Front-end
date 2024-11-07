@@ -42,7 +42,7 @@ function ReviewState({ review }) {
                         <button onClick={handeleOnRecentClick}>과거순</button>
                 }
             </div>
-            <di>
+            <div>
                 {sortedPosts.map((result) => (
                     <div css={s.layout} key={result.cafeId} >
                         <div css={s.view}>
@@ -56,6 +56,8 @@ function ReviewState({ review }) {
                                 <div css={s.reviewStat}>
                                     <StarRating
                                         averageRating={result.rating}
+                                        dimension={"15px"}
+                                        spacing={1}
                                     />
                                 </div>
                                 <div>
@@ -74,7 +76,7 @@ function ReviewState({ review }) {
                         </div>
                     </div>
                 ))}
-            </di>
+            </div>
         </div>
     );
 }

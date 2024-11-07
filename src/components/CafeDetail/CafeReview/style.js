@@ -92,9 +92,7 @@ export const category = css`
     }
 `;
 
-export const gradientBackground = (categoryCount) => css`
-    background: linear-gradient(to right, #f2780c ${categoryCount * 10}%, #ffffff 0%);
-`;
+
 
 export const review = css`
     display: flex;

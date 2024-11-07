@@ -102,7 +102,8 @@ export const cafeContainer = css`
         padding-top: 5px;
         height: 50px;
         width: 50px;
-        background-color: #191919;
+        border: 1px solid #bbbbbb;
+        background-color: #ffffff;
         border-radius: 100%;
     }
 `;
@@ -126,8 +127,9 @@ export const cafeInfo = (slide) => css`
     align-items: center;
     width: fit-content;
     padding: 15px;
-    background: #191919;
+    background: #ffffff;
     border-radius: 10px;
+    border: 1px solid #bbbbbb;
     cursor: pointer;
     `;
 
@@ -142,13 +144,13 @@ export const listBox = css`
         margin: 0;
         font-size: 18px;
         font-weight: 600;
-        color: #FFFFFF;
+        color: #111111;
     }
     
     p {
         margin: 0;
         font-size: 14px;
-        color: #FFFFFF;
+        color: #111111;
     
         :nth-last-of-type(1) {
             font-weight: 600;
