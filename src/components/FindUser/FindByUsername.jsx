@@ -12,17 +12,17 @@ function FindByUsername() {
   });
 
   const handleUsernameCheck = async () => {
-    if (valueDuplicateCheckValue(inputUser[value])) {
-      confirmAlert("해당 아이디로 메일을 보내겠습니다.")
-      return;
-    } else {
-      confirmAlert("해당 아이디로 찾을 수가 없습니다.")
-    }
-    const response = await DuplicateCheckValue("email", inputUser.email);
-    console.log(response.data);
-    if (response.status === 200) {
-      const mailResponse = await MailSendApi("email", inputUser, response?.data?.username);
-    }
+    // if (valueDuplicateCheckValue(inputUser[value])) {
+    //   confirmAlert("해당 아이디로 메일을 보내겠습니다.")
+    //   return;
+    // } else {
+    //   confirmAlert("해당 아이디로 찾을 수가 없습니다.")
+    // }
+    // const response = await DuplicateCheckValue("email", inputUser.email);
+    // console.log(response.data);
+    // if (response.status === 200) {
+    //   const mailResponse = await MailSendApi("email", inputUser, response?.data?.username);
+    // }
 
   }
 
