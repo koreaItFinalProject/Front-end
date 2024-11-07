@@ -22,6 +22,7 @@ function BoardWritePage(props) {
         content: "",
         category: "자유글"
     });
+
     const writeBoardMutation = useWriteBoardMutation(navigate);
 
     const handleTitleInputOnChange = (e) => {
@@ -38,15 +39,7 @@ function BoardWritePage(props) {
         }));
     }
 
-    const handleWriteSubmitOnClick = async () => {
-        if (board.title.trim() === "") {
-            alert("제목을 입력해주세요.");
-            return;
-        }
-        if (!board.content) {
-            alert("내용을 입력하세요.");
-            return;
-        }
+    const handleWriteSubmitOnClick = () => {
         writeBoardMutation.mutate(board);
     }
 
@@ -91,7 +84,12 @@ function BoardWritePage(props) {
                 <div css={s.buttonLayout}>
                     <button onClick={() => navigate("/board?page=1")}><IoCloseOutline /></button>
                     <h1>글쓰기</h1>
-                    <button onClick={handleWriteSubmitOnClick}>등록하기</button>
+                    <button
+                        onClick={handleWriteSubmitOnClick}
+                        disabled={board.title.trim() === '' || board.content.trim() === ""}
+                    >
+                        등록하기
+                    </button>
                 </div>
                 <input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>

@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 const categories = [
     { value: 1, label: '인테리어가 멋져요' },
@@ -22,6 +23,7 @@ const categories = [
 function CafeReviewModifyPage(props) {
     const navigate = useNavigate();
     const location = useLocation();
+    const queryClient = useQueryClient();
     const MAX_LENGTH = 400;
     const { reviewItem, cafeDetail } = location.state || {};
     const textareaRef = useRef(null);
@@ -91,22 +93,23 @@ function CafeReviewModifyPage(props) {
             return await instance.put(`/review/${reviewItem.id}`, reviewData);
         },
         {
-            onSuccess: response => {
-                alert("리뷰가 수정되었습니다");
-                navigate(`/cafe/detail/${cafeDetail?.id}&selectMenu=review`);
+            onSuccess: () => {
+                confirmAlert("리뷰가 수정되었습니다");
+                queryClient.invalidateQueries("cafeDetailQuery");
+                navigate(`/cafe/detail/${cafeDetail?.id}?selectMenu=review`);
             }
         }
     )
 
     const handleSubmitOnClick = async () => {
         if (!reviewData.rating) {
-            alert("평점을 남겨주세요.");
+            confirmAlert("평점을 남겨주세요.");
             return;
         } else if (reviewData.categoryIds.length === 0) {
-            alert("카테고리를 선택해주세요.");
+            confirmAlert("카테고리를 선택해주세요.");
             return;
         } else if (reviewData.review.trim("") === "") {
-            alert("후기를 작성해주세요.");
+            confirmAlert("후기를 작성해주세요.");
             return;
         }
         reviewModifyMutation.mutateAsync();

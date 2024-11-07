@@ -6,6 +6,7 @@ import StarRating from '../../../apis/util/starRating';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { BsPencilSquare } from "react-icons/bs";
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function CafeReview({ cafeDetail, refetchCafeDetail }) {
     const navigate = useNavigate();
@@ -18,11 +19,11 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
         async (reviewId) => await instance.delete(`/review/${reviewId}`),
         {
             onSuccess: () => {
-                alert("리뷰를 삭제하였습니다.");
+                confirmAlert("리뷰를 삭제하였습니다.");
                 refetchCafeDetail();
             },
             onError: (error) => {
-                alert(error.response.data);
+                confirmAlert(error.response.data);
                 refetchCafeDetail();
             }
         }

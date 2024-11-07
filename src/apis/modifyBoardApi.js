@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "./util/instance";
+import { confirmAlert } from "./util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 export const useModifyBoardMutation = (navigate) => {
     const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ export const useModifyBoardMutation = (navigate) => {
         },
         {
             onSuccess: (data) => {
-                alert("수정이 완료되었습니다.");
+                confirmAlert("게시글 수정 완료");
                 queryClient.invalidateQueries("boardListQuery");
                 navigate(`/board/detail/${data}`);
             },
@@ -18,13 +19,13 @@ export const useModifyBoardMutation = (navigate) => {
                 const fieldErrors = error.response.data;
                 for (let fieldError of fieldErrors) {
                     if (fieldError.field === "title") {
-                        alert(fieldError.defaultMessage);
+                        confirmAlert(fieldError.defaultMessage);
                         return;
                     }
                 }
                 for (let fieldError of fieldErrors) {
                     if (fieldError.field === "content") {
-                        alert(fieldError.defaultMessage);
+                        confirmAlert(fieldError.defaultMessage);
                         return;
                     }
                 }

@@ -61,6 +61,15 @@ export const input = css`
         border-radius: 20px;
         cursor: pointer;
 
+        &:disabled {
+            color: #aaaaaa;
+            cursor: default;
+
+            svg {
+                fill: #aaaaaa;
+            }
+        }
+
         svg {
             width: 35px;
             height: 35px;

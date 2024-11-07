@@ -7,6 +7,8 @@ import { instance } from '../../apis/util/instance';
 import { showFieldErrorMessage } from '../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import BackButton from '../../components/BackButton/BackButton';
 import { handleloginInputOnChange } from "../../apis/util/handleloginInputOnChange/handleloginInputOnChange";
+import { confirmAlert } from "../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { Toast } from "../../apis/util/SweetAlert2/Toast/Toast";
 
 function UserSigninPage(props) {
     const navigate = useNavigate();
@@ -24,11 +26,11 @@ function UserSigninPage(props) {
         const signinData = await usersignInApi(inputUser);
         if (!signinData.isSuccess) {
             const newFieldErrors = showFieldErrorMessage(signinData.error);
-            alert("로그인 실패");
+            confirmAlert("로그인 실패");
             setFieldErrorMessages(newFieldErrors);
             return;
         } else {
-            alert("로그인 성공");
+            new Toast("로그인 성공");
             localStorage.setItem("accessToken", "bearer " + signinData.token.accessToken);
             instance.interceptors.request.use((config) => {
                 config.headers['Authorization'] = localStorage.getItem('accessToken');
