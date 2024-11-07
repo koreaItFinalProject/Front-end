@@ -66,7 +66,7 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
             <div css={s.category}>
                 {
                     cafeDetail?.reviewCategoryCounts.map((category, index) => (
-                        <div key={index} css={s.gradientBackground(category.categoryCount)}>
+                        <div key={index}>
                             {category.category.categoryNameKor} {category.categoryCount}
                         </div>
                     ))

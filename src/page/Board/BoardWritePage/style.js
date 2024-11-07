@@ -13,7 +13,7 @@ export const boardHeader = css`
     flex-direction: column;
     align-items: center;
     height: 100px;
-    padding: 15px 15px 0 15px;
+    padding: 15px 15px 15px 15px;
     background-color: #ffffff;
 
     & div {
@@ -22,16 +22,18 @@ export const boardHeader = css`
     }
 
     & input {
-        padding: 5px 0;
-        width: 100%;
+        padding: 10px 20px;
+        width: 602px;
         height: 100%;
         font-size: 20px;
-        background: none;
+        background: #eeeeee;
         outline: none;
+        border: none;
+        border-radius: 20px;
     }
 
     input::placeholder {
-        color: #b4b4b4;
+        color: #616161ff;
     }
 `;
 
@@ -70,9 +72,10 @@ export const editorLayout = css`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 10px;
+        padding: 30px;
         width: 100%;
         height: 100%;
+        
 
         img {
             border-radius: 10px;
@@ -83,7 +86,7 @@ export const editorLayout = css`
         box-sizing: border-box;
         padding: 0 15px 15px 15px;
         border: none;
-
+        
         span {
             margin: 0%;
             width: 100%;
@@ -106,12 +109,14 @@ export const editorLayout = css`
         position: relative;
         width: 100%;
         border: none;
-        padding: 10px 0;
         overflow-y: auto;
+        border-radius: 20px;
+        background-color: #eeeeee;
+        
     }
 
     .ql-editor {
-        padding: 0 15px;
+        padding: 15px;
     }
 `;
 

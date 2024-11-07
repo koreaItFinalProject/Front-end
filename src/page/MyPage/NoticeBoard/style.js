@@ -77,12 +77,14 @@ export const imgTitle = css`
 export const img = css`
   box-sizing: border-box;
   display: flex;
-  width: 100px;
+  width: 150px;
+  height: 100px;
   margin-right: 20px;
+
   & img {
     width: 100%;
-    flex-grow: 1;
-    box-sizing: border-box;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 

@@ -87,12 +87,12 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
             </div>
             <div css={s.boardNavigater}>
                 <button
-                    css={[s.categoryButton, category === '공지사항' && s.activeButton]}
+                    css={category === '공지사항' ? s.activeButton : s.button}
                     onClick={() => handleNavButtonClick('공지사항')}
                 >공지사항
                 </button>
                 <button
-                    css={[s.categoryButton, category === '자유글' && s.activeButton]}
+                    css={category === '자유글' ? s.activeButton : s.button}
                     onClick={() => handleNavButtonClick('자유글')}
                 >자유
                 </button>
