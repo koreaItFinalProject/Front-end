@@ -32,7 +32,7 @@ function Footer({ setCheck, setInputvalue }) {
 
     const handleMyPageOnClick = () => {
         if (!loginCheck?.data) {
-            setPageCount(1);
+            setPageCount(0);
             navigate('/user/select/signup', { replace: true });
         } else if (loginCheck?.data) {
             if (accessCheck?.data.role === "USER") {
@@ -44,7 +44,10 @@ function Footer({ setCheck, setInputvalue }) {
                 navigate("/owner/mypage", { replace: true });
                 return;
             }
-            else navigate("/admin/mobile/mypage", { replace: true });
+            else {
+                navigate("/admin/mobile/mypage", { replace: true });
+                setPageCount(0);
+            };
         }
     }
 
