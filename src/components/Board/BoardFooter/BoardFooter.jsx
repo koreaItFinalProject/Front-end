@@ -42,7 +42,10 @@ function BoardFooter({ mode, setMode, boardId, commentData, setCommentData, repl
                     onChange={handleCommentInputOnChange}
                     placeholder={replyTo ? `${replyTo}님에게 답글 작성` : '댓글 추가...'}
                 />
-                <button onClick={handleCommentSubmitOnClick}>
+                <button
+                    onClick={handleCommentSubmitOnClick}
+                    disabled={commentData.content.trim() === ''}
+                >
                     <FaArrowCircleUp size={30} fill='#f2780c' />
                 </button>
             </div>

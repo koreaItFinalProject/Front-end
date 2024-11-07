@@ -11,6 +11,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useModifyBoardMutation } from '../../../apis/modifyBoardApi';
 import { useQueryClient } from 'react-query';
 import { RingLoader } from "react-spinners";
+import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
 Quill.register("modules/imageResize", ImageResize);
 
 function CafeNoticeModifyPage(props) {
@@ -29,10 +30,10 @@ function CafeNoticeModifyPage(props) {
     const modifyBoardMutation = useModifyBoardMutation(navigate);
 
     const handleModifySubmitOnClick = async () => {
-        const selection = window.confirm("게시글을 수정하시겠습니까?");
+        const selection = await confirmCancelAlert("게시글을 수정하시겠습니까?");
         if (selection) {
             modifyBoardMutation.mutate({ modifyBoard, boardId });
-        } else {
+        } else if(!selection) {
             navigate(`/board/modify/${boardId}`);
         }
     }
@@ -96,7 +97,12 @@ function CafeNoticeModifyPage(props) {
                 <div css={s.buttonLayout}>
                     <button onClick={() => navigate(`/owner/notice/detail/${boardId}`)}>취소</button>
                     <h1>공지사항 수정</h1>
-                    <button onClick={handleModifySubmitOnClick}>수정하기</button>
+                    <button
+                        onClick={handleModifySubmitOnClick}
+                        disabled={modifyBoard?.title.trim() === '' || modifyBoard?.content.trim() === ''}
+                    >
+                        수정하기
+                    </button>
                 </div>
                 <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
             </div>

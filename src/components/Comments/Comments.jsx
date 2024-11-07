@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import useGetComments from "../../apis/CommentApis/getCommentsApi";
 import { instance } from "../../apis/util/instance";
+import { confirmCancelAlert } from "../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
 
-function Comments({ setMode, commentData, handleModifyCommentButtonOnClick, handleModifyCommentCancelButtonOnClick, handleReplyButtonOnClick, handleCancelReplyOnClick }) {
+function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyCommentCancelButtonOnClick, handleReplyButtonOnClick, handleCancelReplyOnClick }) {
     const params = useParams();
     const boardId = params.boardId;
 
@@ -17,14 +18,15 @@ function Comments({ setMode, commentData, handleModifyCommentButtonOnClick, hand
     const deleteCommentMutation = useMutation(
         async (commentId) => await instance.delete(`/comment/${commentId}`),
         {
-            onSuccess: response => {
+            onSuccess: () => {
                 comments.refetch();
             }
         }
     );
 
     const handleDeleteCommentButtonOnClick = (commentId) => {
-        const selection = window.confirm("댓글을 삭제하시겠습니까?");
+        const selection = confirmCancelAlert("댓글을 삭제하시겠습니까?");
+        confirmCancelAlert("댓글을 삭제하시겠습니까?");
         if (selection) {
             deleteCommentMutation.mutateAsync(commentId);
         }

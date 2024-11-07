@@ -10,8 +10,8 @@ import "react-quill/dist/quill.snow.css";
 import BackButton from "../../../components/BackButton/BackButton";
 import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
-import useGetComments from "../../../apis/CommentApis/getCommentsApi";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
+import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
 
 function CafeNoticeDetailPage(props) {
     const navigate = useNavigate();
@@ -20,19 +20,18 @@ function CafeNoticeDetailPage(props) {
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
-    const deleteBoard = useDeleteBoardMutation(boardId);
-    
+    const deleteBoard = useDeleteBoardMutation(boardId, "noticeListQuery");
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
-    
+
     const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
         content: ""
     });
-    
+
     const boardData = queryClient.getQueryData(['boardQuery', boardId]);
-    
+
     const board = useQuery(
         ["boardQuery", boardId],
         async () => {
@@ -55,14 +54,12 @@ function CafeNoticeDetailPage(props) {
         }
     );
 
-    const comments = useGetComments(boardId);
-
     const likeMutation = useMutation(
         async () => {
             return await instance.post(`/board/${boardId}/like`);
         },
         {
-            onSuccess: response => {
+            onSuccess: () => {
                 boardLike.refetch();
             }
         }
@@ -73,20 +70,19 @@ function CafeNoticeDetailPage(props) {
             return await instance.delete(`/board/like/${boardLike.data?.data.boardLikeId}`);
         },
         {
-            onSuccess: response => {
+            onSuccess: () => {
                 boardLike.refetch();
             }
         }
     );
 
     const handleDeleteBoardOnClick = async () => {
-        const selection = window.confirm("게시글을 삭제하시겠습니까?");
+        const selection = await confirmCancelAlert("게시글을 삭제하시겠습니까?");
         if (selection) {
-            await deleteBoard.mutateAsync();
-            queryClient.invalidateQueries("noticeListQuery");
+            deleteBoard.mutateAsync();
             navigate('/owner/notice/list');
-        } else {
-            navigate(`/board/detail/${boardId}`);
+        } else if (!selection) {
+            navigate(`/owner/notice/detail/${boardId}`);
         }
 
     }

@@ -1,20 +1,18 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { instance } from "../../util/instance";
-import { useNavigate } from "react-router-dom";
 
-const useDeleteBoardMutation = (id) => {
-    const navigate = useNavigate();
-
+const useDeleteBoardMutation = (id, query) => {
+    const queryClient = useQueryClient();
     return useMutation(
         async () => {
-            return await instance.delete(`/board/${id}`)
+            await instance.delete(`/board/${id}`);
         },
         {
-            onSuccess: response => {
-                alert("게시글을 삭제하였습니다.");
-                navigate("/board?page=1");
+            onSuccess: () => {
+                queryClient.invalidateQueries(query);
             }
         }
     );
 };
+
 export default useDeleteBoardMutation;

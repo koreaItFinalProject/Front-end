@@ -42,14 +42,6 @@ function CafeNoticeWritePage(props) {
     }
 
     const handleWriteSubmitOnClick = async () => {
-        if (board.title.trim() === "") {
-            alert("제목을 입력해주세요.");
-            return;
-        }
-        if (!board.content) {
-            alert("내용을 입력하세요.");
-            return;
-        }
         await writeNoticeApi(board, navigate);
         queryClient.invalidateQueries("noticeListQuery");
         queryClient.invalidateQueries("boardListQuery");
@@ -98,7 +90,12 @@ function CafeNoticeWritePage(props) {
                 <div css={s.buttonLayout}>
                     <button onClick={() => navigate("/owner/notice/list")}><IoCloseOutline /></button>
                     <h1>공지사항</h1>
-                    <button onClick={handleWriteSubmitOnClick}>등록하기</button>
+                    <button
+                        onClick={handleWriteSubmitOnClick}
+                        disabled={board?.title.trim() === '' || board?.content.trim() === ''}
+                    >
+                        등록하기
+                    </button>
                 </div>
                 <input type="text" name='title' onChange={handleTitleInputOnChange} value={board.title} placeholder='제목을 입력하세요.' />
             </div>

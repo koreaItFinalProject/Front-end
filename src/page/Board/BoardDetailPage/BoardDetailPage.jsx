@@ -11,6 +11,7 @@ import BackButton from "../../../components/BackButton/BackButton";
 import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
+import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
 
 function BoardDetailPage(props) {
     const navigate = useNavigate();
@@ -19,7 +20,7 @@ function BoardDetailPage(props) {
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const accessCheck = queryClient.getQueryData("accessTokenValidQuery");
-    const deleteBoard = useDeleteBoardMutation(boardId);
+    const deleteBoard = useDeleteBoardMutation(boardId, "boardListQuery");
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
     const [commentData, setCommentData] = useState({
@@ -56,7 +57,7 @@ function BoardDetailPage(props) {
             return await instance.post(`/board/${boardId}/like`);
         },
         {
-            onSuccess: response => {
+            onSuccess: () => {
                 boardLike.refetch();
             }
         }
@@ -67,18 +68,17 @@ function BoardDetailPage(props) {
             return await instance.delete(`/board/like/${boardLike.data?.data.boardLikeId}`);
         },
         {
-            onSuccess: response => {
+            onSuccess: () => {
                 boardLike.refetch();
             }
         }
     );
 
     const handleDeleteBoardOnClick = async () => {
-        const selection = window.confirm("게시글을 삭제하시겠습니까?");
+        const selection = await confirmCancelAlert("게시글을 삭제하시겠습니까?");
         if (selection) {
-            await deleteBoard.mutateAsync();
-            queryClient.invalidateQueries('boardListQuery');
-            navigate(`/board`);
+            deleteBoard.mutateAsync();
+            navigate("/board?page=1");
         } else {
             navigate(`/board/detail/${boardId}`);
         }

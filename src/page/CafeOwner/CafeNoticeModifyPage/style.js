@@ -52,6 +52,12 @@ export const buttonLayout = css`
         padding: 0;
         font-weight: 600;
         color: #f2780c;
+
+        &:disabled {
+            color: #aaaaaa;
+            cursor: default;
+        }
+        
         svg {
             width: 30px;
             height: 30px;

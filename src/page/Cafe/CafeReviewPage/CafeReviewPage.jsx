@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 const categories = [
     { value: 1, label: '인테리어가 멋져요' },
@@ -82,9 +83,9 @@ function CafeReviewPage(props) {
             return await instance.post("/review", reviewData);
         },
         {
-            onSuccess: response => {
-                alert("리뷰가 작성되었습니다");
-                queryClient.refetchQueries(['reviews', cafeId]);
+            onSuccess: () => {
+                confirmAlert("리뷰가 작성되었습니다");
+                queryClient.invalidateQueries("cafeDetailQuery");
                 navigate(`/cafe/detail/${cafeId}?selectMenu=review`);
             }
         }
@@ -92,16 +93,16 @@ function CafeReviewPage(props) {
 
     const handleSubmitOnClick = async () => {
         if (!reviewData.rating) {
-            alert("평점을 남겨주세요.");
+            confirmAlert("평점을 남겨주세요");
             return;
         } else if (reviewData.categoryIds.length === 0) {
-            alert("어떤점이 좋았는지 선택해주세요!");
+            confirmAlert("어떤점이 좋았는지 선택해주세요");
             return;
         } else if (reviewData.review.trim("") === "") {
-            alert("후기를 작성해주세요.");
+            confirmAlert("후기를 작성해주세요");
             return;
         }
-        reviewMutation.mutateAsync();
+        await reviewMutation.mutateAsync();
     };
 
     return (

@@ -26,6 +26,7 @@ export const boardHeader = css`
         width: 602px;
         height: 100%;
         font-size: 20px;
+        font-weight: 600;
         background: #eeeeee;
         outline: none;
         border: none;
@@ -33,6 +34,7 @@ export const boardHeader = css`
     }
 
     input::placeholder {
+        font-weight: 400;
         color: #616161ff;
     }
 `;
@@ -54,6 +56,12 @@ export const buttonLayout = css`
         padding: 0;
         font-weight: 600;
         color: #f2780c;
+
+        &:disabled {
+            color: #aaaaaa;
+            cursor: default;
+        }
+
         svg {
             width: 30px;
             height: 30px;
@@ -72,7 +80,7 @@ export const editorLayout = css`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 30px;
+        padding: 15px 30px 30px 30px;
         width: 100%;
         height: 100%;
         

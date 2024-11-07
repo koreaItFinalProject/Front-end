@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "./util/instance"
+import { confirmAlert } from "./util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 export const useWriteBoardMutation = (navigate) => {
     const queryClient = useQueryClient();
@@ -9,23 +10,22 @@ export const useWriteBoardMutation = (navigate) => {
             return response.data;
         },
         {
-            onSuccess: (data) => {
-                console.log(data);
-                alert("게시글 작성이 완료되었습니다.");
+            onSuccess: (boardId) => {
+                confirmAlert("작성 완료");
                 queryClient.invalidateQueries("boardListQuery");
-                navigate(`/board/detail/${data}`);
+                navigate(`/board/detail/${boardId}`);
             },
             onError: (error) => {
                 const fieldErrors = error.response.data;
                 for (let fieldError of fieldErrors) {
                     if (fieldError.field === "title") {
-                        alert(fieldError.defaultMessage);
+                        confirmAlert(fieldError.defaultMessage);
                         return;
                     }
                 }
                 for (let fieldError of fieldErrors) {
                     if (fieldError.field === "content") {
-                        alert(fieldError.defaultMessage);
+                        confirmAlert(fieldError.defaultMessage);
                         return;
                     }
                 }
