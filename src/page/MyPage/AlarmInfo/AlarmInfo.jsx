@@ -69,8 +69,8 @@ function AlramInfoPage({ alarm }) {
     return (
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
-                <h2 >공지사항</h2>
-                <h3> 마지막 공지사항 : {lastId}</h3>
+                <h2 >알림정보</h2>
+                <h3> 마지막 알림정보 : {lastId}</h3>
             </div>
             <ul css={s.AlramList}>
                 {notices.map((alarm, index) => (
