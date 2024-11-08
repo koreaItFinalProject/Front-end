@@ -45,13 +45,7 @@ function MyPage(props) {
 
     };
     console.log(infoBoard)
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setAlarm(prevAlarm => !prevAlarm);
-        }, 1000);
 
-        return () => clearInterval(timer);
-    }, []);
 
     const userManagement = useQuery(
         ["userManagementInfo"],
