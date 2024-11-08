@@ -34,8 +34,6 @@ function AlramInfoPage({ alarm }) {
             // SSE 연결 설정
             const es = new EventSource(`http://localhost:8080/message/events?lastId=${lastId || 0}&userId=${userId}`);
 
-            // const es = new EventSource(instance.('/message/events?lastId=${lastId || 0}'));
-
             es.onmessage = (event) => {
                 try {
                     // 받아온 데이터 처리
