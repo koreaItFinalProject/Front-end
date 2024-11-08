@@ -9,6 +9,7 @@ import UserInfo from '../../../../components/Info/UserInfo/UserInfo';
 import BoardInfo from '../../../../components/Info/BoardInfo/BoardInfo';
 import CommentInfo from '../../../../components/Info/CommentInfo/CommentInfo';
 import ReviewInfo from '../../../../components/Info/ReviewInfo/ReviewInfo';
+import { confirmAlert } from '../../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function ManagerManagementPage(props) {
     const [role, setRole] = useState("user");
@@ -44,7 +45,7 @@ function ManagerManagementPage(props) {
         async (id) => await instance.delete(`/manager/${id}`),
         {
             onSuccess: () => {
-                alert("해당 유저를 삭제하였습니다.");
+                confirmAlert("해당 유저를 삭제하였습니다.");
                 AllList.refetch();
             }
         }

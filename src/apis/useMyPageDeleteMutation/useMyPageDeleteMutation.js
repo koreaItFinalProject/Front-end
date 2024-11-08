@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "../util/instance";
+import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 export const useMyPageDeleteMutation = (search) => {
     const queryClient = useQueryClient();
@@ -9,12 +10,12 @@ export const useMyPageDeleteMutation = (search) => {
         },
         {
             onSuccess: response => {
-                alert("삭제 성공");
+                confirmAlert("삭제 성공");
                 console.log(response);
                 queryClient.invalidateQueries(`userManagementInfo`);
             },
             onError: (error) => {
-                alert(error.response.data);
+                confirmAlert(error.response.data);
             }
         }
     );

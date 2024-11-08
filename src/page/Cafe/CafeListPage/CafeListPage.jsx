@@ -7,6 +7,7 @@ import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
 import { MdRateReview } from "react-icons/md";
 import { IoMdHeart } from "react-icons/io";
 import { IoIosSearch } from "react-icons/io";
+import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();

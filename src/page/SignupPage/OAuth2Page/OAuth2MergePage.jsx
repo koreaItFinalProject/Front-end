@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { instance } from '../../../apis/util/instance';
 import { handleloginInputOnChange } from '../../../apis/util/handleloginInputOnChange/handleloginInputOnChange';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function OAuth2MergePage(props) {
     const navigate = useNavigate();
@@ -18,6 +19,32 @@ function OAuth2MergePage(props) {
         password: <></>,
     });
 
+    useEffect(() => {
+        const oAuth2Name = searchParams.get("oAuth2Name");
+        const provider = searchParams.get("provider");
+        const data = {
+            username:'',
+            password:'',
+            oauth2Name:oAuth2Name,
+            provider:provider
+        }
+        if(oAuth2Name && provider) {
+            const checkOAuth2User = async () => {
+                console.log("시작");
+                const response = await oauth2MergeApi(data);
+                if(response.isSuccess){
+                    localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
+                    instance.interceptors.request.use((config) => {
+                        config.headers['Authorization'] = localStorage.getItem('accessToken');
+                        return config;
+                    });
+                    navigate("/mypage");
+                }
+            }
+            checkOAuth2User();
+        }
+    },[searchParams , navigate])
+
     const handleMergepageOnClick = async () => {
         const mergeData = {
             username: inputUser.username,
@@ -28,12 +55,12 @@ function OAuth2MergePage(props) {
 
         const response = await oauth2MergeApi(mergeData);
         if (!response.isSuccess) {
-            alert(response.error);
+            confirmAlert(response.error);
             setFieldErrorMessages(response.error);
             return;
         }
         if (response.isSuccess) {
-            alert("통합 완료");
+            confirmAlert("통합 완료");
             localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
             instance.interceptors.request.use((config) => {
                 config.headers['Authorization'] = localStorage.getItem('accessToken');

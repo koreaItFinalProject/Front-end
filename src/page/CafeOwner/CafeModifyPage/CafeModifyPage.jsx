@@ -17,6 +17,7 @@ import { instance } from "../../../apis/util/instance";
 import NoticeList from "../../../components/NoticeList/NoticeList";
 import { useCafeNoticeListQuery } from "../../../apis/CafeApis/getCafeNoticeListApi";
 import { useCafeLikeQuery } from "../../../apis/CafeApis/CafeLikeApi";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function CafeModifyPage(props) {
     const navigate = useNavigate();
@@ -49,12 +50,12 @@ function CafeModifyPage(props) {
         },
         {
             onSuccess: () => {
-                alert("카페 정보 수정 완료");
+                confirmAlert("카페 정보 수정 완료");
                 refetch();
                 setViewMode('user');
             },
             onError: () => {
-                alert("카페 정보 수정 실패");
+                confirmAlert("카페 정보 수정 실패");
                 setModifyCafeInfo(({
                     cafeName: modifyCafeInfo.cafeName,
                     address: modifyCafeInfo.address,
@@ -122,7 +123,7 @@ function CafeModifyPage(props) {
             img: modifyCafeInfo.img
         }))
         if (response.status === 200) {
-            alert("이미지 변경 성공");
+            confirmAlert("이미지 변경 성공");
         }
     }
 

@@ -65,7 +65,7 @@ function CafeOwnerMyPage(props) {
                 setInfoBoard(response.data);
             },
             onError: response => {
-                alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
+                confirmAlert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
             }
         }
     )

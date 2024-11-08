@@ -10,9 +10,9 @@ export const useWriteBoardMutation = (navigate) => {
             return response.data;
         },
         {
-            onSuccess: (boardId) => {
-                confirmAlert("작성 완료");
+            onSuccess: async (boardId) => {
                 queryClient.invalidateQueries("boardListQuery");
+                await confirmAlert("작성 완료");
                 navigate(`/board/detail/${boardId}`);
             },
             onError: (error) => {

@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { instance } from '../../../apis/util/instance';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import StarRating from '../../../components/StarRating/StarRating';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation, useQueryClient } from 'react-query';
-import { instance } from '../../../apis/util/instance';
-import BackButton from '../../../components/BackButton/BackButton';
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import StarRating from '../../../components/StarRating/StarRating';
+import BackButton from '../../../components/BackButton/BackButton';
 
 const categories = [
     { value: 1, label: '인테리어가 멋져요' },
@@ -20,7 +20,7 @@ const categories = [
     { value: 8, label: '아이와 가기 좋아요' },
 ];
 
-function CafeReviewPage(props) {
+function CafeReviewWritePage(props) {
     const navigate = useNavigate();
     const params = useParams();
     const cafeId = params.cafeId;
@@ -105,10 +105,15 @@ function CafeReviewPage(props) {
         await reviewMutation.mutateAsync();
     };
 
+    console.log(cafeDetail);
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeId}?&selectMenu=review`} />
             <div css={s.rating}>
+                <div css={s.cafeImg}>
+                    <img src={cafeDetail?.img} alt="" />
+                </div>
                 <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating
                     score={score}
@@ -156,4 +161,4 @@ function CafeReviewPage(props) {
     );
 }
 
-export default CafeReviewPage;
+export default CafeReviewWritePage;

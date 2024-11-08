@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import 'swiper/css'
 import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,8 @@ import { useQueryClient } from "react-query";
 import BoardList from "../../../components/Board/BoardList/BoardList";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
 
 function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue, category, setCategory }) {
     const loadMoreRef = useRef(null);
@@ -55,11 +57,12 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
 
     const handleNavButtonClick = (category) => {
         setCategory(category);
+        showToast(category);
     }
 
     const handleWriteOnClick = () => {
         if (!accessCheck?.data) {
-            alert("로그인 후 작성해주세요.");
+            confirmAlert("로그인 후 작성해주세요.");
             navigate("/user/signin");
             return;
         }
@@ -85,14 +88,14 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
                     <option name="writer" value={"writer"}>작성자</option>
                 </select>
             </div>
-            <div css={s.boardNavigater}>
+            <div css={s.boardSelector}>
                 <button
-                    css={category === '공지사항' ? s.activeButton : s.button}
+                    css={[s.baseButtonStyle, category === '공지사항' && s.activeButton]}
                     onClick={() => handleNavButtonClick('공지사항')}
                 >공지사항
                 </button>
                 <button
-                    css={category === '자유글' ? s.activeButton : s.button}
+                    css={[s.baseButtonStyle, category === '자유글' && s.activeButton]}
                     onClick={() => handleNavButtonClick('자유글')}
                 >자유
                 </button>

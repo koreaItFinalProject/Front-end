@@ -14,7 +14,9 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
     const cafeId = params.cafeId;
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
-
+    const totalCount = cafeDetail?.reviewCount || 1; // 전체 리뷰 개수
+    const maxCount = cafeDetail?.reviewCategoryCounts ? Math.max(...cafeDetail.reviewCategoryCounts.map(category => category.categoryCount)) : 0;
+    const sortedCategories = cafeDetail?.reviewCategoryCounts ? [...cafeDetail.reviewCategoryCounts].sort((a, b) => b.categoryCount - a.categoryCount) : [];
     const deleteReviewMutation = useMutation(
         async (reviewId) => await instance.delete(`/review/${reviewId}`),
         {
@@ -31,19 +33,19 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
 
     const handleWriteReviewClick = () => {
         if (!userInfoData?.data) {
-            alert("로그인 후 작성 가능합니다.");
+            confirmAlert("로그인 후 작성 가능합니다.");
             return;
         }
         navigate(`/cafe/review/${cafeId}`, { state: { cafeDetail } });
-    };
+    }
 
     const handleModifyReviewClick = (reviewItem) => {
         navigate(`/cafe/review/modify/${reviewItem.id}`, { state: { reviewItem, cafeDetail } });
-    };
+    }
 
     const handleDeleteReviewOnClick = (reviewId) => {
         deleteReviewMutation.mutateAsync(reviewId);
-    };
+    }
 
     return (
         <div css={s.layout}>
@@ -66,9 +68,9 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
             </div>
             <div css={s.category}>
                 {
-                    cafeDetail?.reviewCategoryCounts.map((category, index) => (
-                        <div key={index}>
-                            {category.category.categoryNameKor} {category.categoryCount}
+                    sortedCategories.map((category, index) => (
+                        <div key={index} css={s.categoryItem(category.categoryCount, totalCount)}>
+                            {category.category.categoryNameKor} · {category.categoryCount}
                         </div>
                     ))
                 }

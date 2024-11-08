@@ -23,6 +23,7 @@ function CafeDetailPage() {
     const queryClient = useQueryClient();
     const authCheck = queryClient.getQueryData("userInfoQuery");
     const [selectMenu, setSelectMenu] = useState(initialSelectMenu);
+    const [isAnimating, setIsAnimating] = useState(false);
 
     const { data: cafeDetail, refetch: refetchCafeDetail } = useCafeDetailQuery(cafeId);
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
@@ -47,6 +48,18 @@ function CafeDetailPage() {
         dislikeMutation.mutateAsync();
     }
 
+    const handleLikeClick = () => {
+        setIsAnimating(true);
+        handleLikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
+
+    const handleDislikeClick = () => {
+        setIsAnimating(true);
+        handleDislikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={'카페 리스트'} prevPageUrl={'/cafe/list'} />
@@ -66,11 +79,17 @@ function CafeDetailPage() {
                                     {
                                         !!cafeLike?.cafeLikeId
                                             ?
-                                            <button onClick={handleDislikeOnClick}>
+                                            <button
+                                                onClick={handleDislikeClick}
+                                                className={isAnimating ? 'animate' : ''}
+                                            >
                                                 <IoMdHeart style={{ fill: '#f2780c' }} />
                                             </button>
                                             :
-                                            <button onClick={handleLikeOnClick}>
+                                            <button
+                                                onClick={handleLikeClick}
+                                                className={isAnimating ? 'animate' : ''}
+                                            >
                                                 <IoMdHeartEmpty />
                                             </button>
                                     }
@@ -98,19 +117,19 @@ function CafeDetailPage() {
                 <div css={s.detailContent}>
                     <div css={s.menuButtons}>
                         <button
-                            css={selectMenu === 'menu' ? s.activeButton : null}
+                            css={[s.baseButtonStyle, selectMenu === 'menu' && s.activeButton]}
                             onClick={handleMenuOnClick}
                             value={"menu"}>
                             메뉴
                         </button>
                         <button
-                            css={selectMenu === 'review' ? s.activeButton : null}
+                            css={[s.baseButtonStyle, selectMenu === 'review' && s.activeButton]}
                             onClick={handleMenuOnClick}
                             value={"review"}>
                             리뷰
                         </button>
                         <button
-                            css={selectMenu === 'notice' ? s.activeButton : null}
+                            css={[s.baseButtonStyle, selectMenu === 'notice' && s.activeButton]}
                             onClick={handleMenuOnClick}
                             value={"notice"}>
                             공지사항

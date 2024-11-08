@@ -170,6 +170,7 @@ export const alarm = css`
 
 export const modalStyles = {
     overlay: {
+        zIndex: '99',
         backgroundColor: 'rgba(0, 0, 0, 0.3)', // 어두운 반투명 배경
     },
     content: {

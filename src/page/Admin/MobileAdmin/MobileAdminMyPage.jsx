@@ -20,6 +20,7 @@ import CommentBoard from "../../MyPage/CommentBoard/CommentBoard";
 import ReviewState from "../../MyPage/ReviewState/ReviewState";
 import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
 import AdminCafeList from "./AdminCafeList/AdminCafeList";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function MobileAdminMyPage(props) {
     const navigate = useNavigate();
@@ -60,7 +61,7 @@ function MobileAdminMyPage(props) {
                 setCount(response.data);
             },
             onError: response => {
-                alert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
+                confirmAlert(`${response.data?.user?.username} 의 정보를 가져오지 못했습니다.`);
             }
         }
     );

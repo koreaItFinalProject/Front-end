@@ -12,6 +12,7 @@ import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
 import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function BoardDetailPage(props) {
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ function BoardDetailPage(props) {
     const deleteBoard = useDeleteBoardMutation(boardId, "boardListQuery");
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
+    const [isAnimating, setIsAnimating] = useState(false);
     const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
@@ -118,7 +120,7 @@ function BoardDetailPage(props) {
 
     const handleReplyButtonOnClick = (commentId, nickname) => {
         if (!accessCheck) {
-            alert("로그인 후 작성 가능합니다.");
+            confirmAlert("로그인 후 작성 가능합니다.");
             return;
         }
         setMode('reply');
@@ -138,7 +140,17 @@ function BoardDetailPage(props) {
         setReplyTo("");
     };
 
-    console.log(board);
+    const handleLikeClick = () => {
+        setIsAnimating(true);
+        handleLikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
+
+    const handleDislikeClick = () => {
+        setIsAnimating(true);
+        handleDislikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
 
     return (
         <div css={s.layout}>
@@ -188,11 +200,15 @@ function BoardDetailPage(props) {
                             {
                                 !!boardLike?.data?.data?.boardLikeId
                                     ?
-                                    <button onClick={handleDislikeOnClick}>
+                                    <button onClick={handleDislikeClick}
+                                        className={isAnimating ? 'animate' : ''}
+                                    >
                                         <IoMdHeart style={{ fill: '#f2780c' }} />
                                     </button>
                                     :
-                                    <button onClick={handleLikeOnClick}>
+                                    <button onClick={handleLikeClick}
+                                        className={isAnimating ? 'animate' : ''}
+                                    >
                                         <IoMdHeartEmpty />
                                     </button>
                             }
