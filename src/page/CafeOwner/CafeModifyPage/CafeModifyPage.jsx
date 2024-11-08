@@ -24,7 +24,7 @@ function CafeModifyPage(props) {
     const params = useParams();
     const cafeId = params.cafeId;
     const inputRef = useRef(null);
-    const [selectMenu, setSelectMenu] = useState('review');
+    const [selectMenu, setSelectMenu] = useState('menu');
     const [viewMode, setViewMode] = useState('user');
     const [imageModify, setImageModify] = useState(false);
     const [modifyCafeInfo, setModifyCafeInfo] = useState({});
@@ -304,7 +304,9 @@ function CafeModifyPage(props) {
                 {
                     selectMenu === 'menu'
                         ?
-                        <CafeMenu />
+                        <CafeMenu
+                            viewMode={viewMode}
+                        />
                         :
                         selectMenu === 'review'
                             ?

@@ -12,10 +12,37 @@ export const layout = css`
     }
 `;
 
-export const menuList = css`
+export const header = css`
     display: flex;
-    flex-direction: column;
-    padding-bottom: 3px;
-    border-bottom: 1px solid #f2780c;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+
+        svg {
+            margin-left: 5px;
+            width: 18px;
+            height: 18px;
+        }
+    }
+`;
+
+export const imgContainer = css`
+    display: flex;
+    flex-direction: row;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+`;
+
+export const menuImg = css`
 
 `;

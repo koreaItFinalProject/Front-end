@@ -84,7 +84,7 @@ function MyPage(props) {
 
     const handleLogoutClick = () => {
         localStorage.removeItem("accessToken");
-        window.location.replace("/user/select/signup");
+        window.location.replace("/user/signin");
     }
 
     return (
