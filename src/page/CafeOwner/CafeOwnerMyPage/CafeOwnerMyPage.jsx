@@ -20,6 +20,7 @@ import { VscMegaphone } from "react-icons/vsc";
 import { FiLogOut } from "react-icons/fi";
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
@@ -89,12 +90,11 @@ function CafeOwnerMyPage(props) {
             setCheck(value);
             setIsOpen(true);
         }
-        console.log(check);
     }
 
     const handleLogoutClick = () => {
         localStorage.removeItem("accessToken");
-        window.location.replace("/user/select/signup");
+        window.location.replace("/user/signin");
     }
 
     return (
