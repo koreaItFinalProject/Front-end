@@ -18,6 +18,7 @@ import ReviewState from './ReviewState/ReviewState';
 import AlramInfo from './AlarmInfo/AlarmInfo';
 import NoticeBoard from './NoticeBoard/NoticeBoard';
 import { FiLogOut } from "react-icons/fi";
+import { confirmAlert } from '../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function MyPage(props) {
     const [alarm, setAlarm] = useState(false);

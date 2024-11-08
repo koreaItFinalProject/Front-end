@@ -7,6 +7,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
 import mypageProfileApi from '../../../apis/mypageApis/mypageProfileApi';
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function ModifyProfilePage({ handleOnModalClick, value }) {
     const user = useRecoilValue(State);
