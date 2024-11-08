@@ -1,31 +1,20 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    padding: 10px;
-`;
-
-export const subLayout = css`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 140px;
     background-color: #191919;
-    * {
-        color: #ffffff;
-    }
 `;
 
 export const login = css`
     box-sizing: border-box;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
@@ -33,13 +22,15 @@ export const login = css`
     border-radius: 0px 0px 10px 10px;
     margin-bottom: 10px;
     padding: 0px 140px;
+`;
 
-    * p{
-        display: flex;
-        justify-content: center;
-        font-size: 12px;
-        width: 100%;
-        color: #E94334;
+export const loginTitle = css`
+    h1 {
+        margin: 0;
+        margin-bottom: 20px;
+        color: #F2780C;
+        font-size: 60px;
+        font-weight: 700;
     }
 `;
 
@@ -49,16 +40,17 @@ export const loginInput = css`
     justify-content: center;
     align-items: center;
 
-    & input{
+    & input {
         margin: 10px 0px;
     }
+
     & button {
         display: flex;
         align-items: center;
         width: 100%;
         box-sizing: border-box;
         border-radius: 10px;
-        margin: 10px 0px;
+        margin: 20px 0px;
         color: #ffffff;
         font-weight: 600;
         background-color: #F2780C;
@@ -67,20 +59,12 @@ export const loginInput = css`
         align-items: center;
         justify-content: center;
     }
-    & input p {
-        display: flex;
-        justify-content: center;
-    }
-`;
 
-
-export const loginTitle =css`
-    & p {
+    * p{
+        font-size: 14px;
+        width: 100%;
         margin: 0;
-        margin-bottom: 20px;
-        color: #F2780C;
-        font-size: 60px;
-        font-weight: 700;
+        color: #E94334;
     }
 `;
 
@@ -99,6 +83,7 @@ export const foundInfo = css`
     width: 100%;
     height: 40px;
     box-sizing: border-box;
+    margin-bottom: 20px;
     
     & ol {
         display: flex;
@@ -111,11 +96,56 @@ export const foundInfo = css`
             border-right: 1px solid #F2780C;
             font-weight: 600;
             cursor: pointer;
+
             & button {
                 color: #F2780C;
                 font-size: 12px;
             }
         }
     }
+`;
 
+export const selectMember = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+`;
+
+export const oAuthButton = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 30px;
+    padding: 0;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+    }
+`;
+
+export const ownerButton = css`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px 0;
+    font-size: 18px;
+    color: #ffffff;
+    background-color: #f2780c;
+   
+   svg {
+    width: 30px;
+    height: 30px;
+    margin-left: 10px;
+    fill: #ffffff;
+   }
 `;

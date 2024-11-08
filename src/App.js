@@ -36,7 +36,6 @@ import CafeNoticeWritePage from './page/CafeOwner/CafeNoticeWritePage/CafeNotice
 import CafeNoticeDetailPage from './page/CafeOwner/CafeNoticeDetailPage/CafeNoticeDetailPage';
 import CafeNoticeModifyPage from './page/CafeOwner/CafeNoticeModifyPage/CafeNoticeModifyPage';
 import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
-import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
 import { pageCounter } from './atom/pageCount';
 import { useRecoilState } from 'recoil';
 import { confirmAlert } from './apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
@@ -231,7 +230,6 @@ function App() {
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
               <Route path='/owner/signup' element={<OwnerSignupPage />} />
-              <Route path='/select/signup' element={<UserSignupSelectPage />} />
             </Routes>
           </MainLayout>
         } />
