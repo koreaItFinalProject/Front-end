@@ -60,13 +60,7 @@ function UserSigninPage(props) {
                     <button onClick={handleOnLoginClick}>로그인</button>
                 </div>
             </div>
-            <div css={s.foundInfo}>
-                <ol>
-                    <li><button onClick={() => navigate("/user/find", { state: { mode: "findId" } })}>아이디 찾기</button></li>
-                    <li><button onClick={() => navigate("/user/find", { state: { mode: "findPassword" } })}>비밀번호 찾기</button></li>
-                    <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
-                </ol>
-            </div>
+            <button onClick={() => navigate("/user/owner/signup")} css={s.ownerButton}>점주 회원가입<FaArrowRightLong /></button>
             <div css={s.selectMember}>
                 <button css={s.oAuthButton} onClick={() => window.location.href = naverLocation}>
                     <img src={naver} alt="Naver Logo" />
@@ -78,7 +72,13 @@ function UserSigninPage(props) {
                     <img src={google} alt="kakao Logo" />
                 </button>
             </div>
-            <button onClick={() => navigate("/user/owner/signup")} css={s.ownerButton}>점주 회원가입<FaArrowRightLong /></button>
+            <div css={s.foundInfo}>
+                <ol>
+                    <li><button onClick={() => navigate("/user/find", { state: { mode: "findId" } })}>아이디 찾기</button></li>
+                    <li><button onClick={() => navigate("/user/find", { state: { mode: "findPassword" } })}>비밀번호 찾기</button></li>
+                    <li><button onClick={() => navigate("/user/signup")}>회원가입</button></li>
+                </ol>
+            </div>
         </div>
     );
 }

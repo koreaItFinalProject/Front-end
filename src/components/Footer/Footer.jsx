@@ -1,7 +1,7 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaList } from "react-icons/fa";
 import { FaMap } from "react-icons/fa";
 import { BsChatLeftTextFill } from "react-icons/bs";
@@ -11,6 +11,8 @@ import { pageCounter } from '../../atom/pageCount';
 import { useSetRecoilState } from 'recoil';
 
 function Footer({ setCheck, setInputvalue }) {
+    const location = useLocation();
+    const pathname = location.pathname;
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const loginCheck = queryClient.getQueryData("accessTokenValidQuery");
@@ -58,10 +60,10 @@ function Footer({ setCheck, setInputvalue }) {
 
     return (
         <div css={s.layout}>
-            <button onClick={handleMapClick}><FaMap /></button>
-            <button onClick={handleListClick}><FaList /></button>
-            <button onClick={handleBoardClick}><BsChatLeftTextFill /></button>
-            <button onClick={handleMyPageOnClick}><FaUserLarge /></button>
+            <button css={s.menuButton(pathname.startsWith("/map"))} onClick={handleMapClick}><FaMap /></button>
+            <button css={s.menuButton(pathname.startsWith("/cafe"))} onClick={handleListClick}><FaList /></button>
+            <button css={s.menuButton(pathname.startsWith("/board"))} onClick={handleBoardClick}><BsChatLeftTextFill /></button>
+            <button css={s.menuButton(pathname.includes("/mypage"))} onClick={handleMyPageOnClick}><FaUserLarge /></button>
         </div>
     );
 }

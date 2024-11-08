@@ -92,7 +92,7 @@ export const children = (isNoFooter) => css`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-bottom: ${isNoFooter ? '0' : '60px'};
+    padding-bottom: 0px;
     height: 100%;
     border-radius: 20px;
     
@@ -100,11 +100,16 @@ export const children = (isNoFooter) => css`
 
 export const footer = css`
     box-sizing: border-box;
-    width: 100%;
-    height: 60px;
+    width: 98%;
+    height: 85px;
     background-color: #000000;
-    border-radius: 0px 0px 10px 10px;
+    border: 2px solid #ffffff;
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px 4px #00000044;
     position: absolute;
-    bottom: 0;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: 10px;
     z-index: 1;
+    overflow: hidden;
 `;

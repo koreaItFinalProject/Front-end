@@ -10,62 +10,90 @@ export const layout = css`
     flex-direction: column;
 `;
 
-export const title = css`
-    margin-bottom: 15px;
-    font-size: 34px;
-    color: #f2780c;
+export const header = css`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const box = css`
+    display: flex;
+    box-sizing: border-box;
+    height: 60px;
+    width: 631px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 4px #00000044;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    
+    h2 {
+        margin: 2px;
+        border-radius: 19px;
+        background-color: #ff675b;
+        padding: 0px 20px;
+        padding-top: 8px;
+        color: #ffffff;
+        font-family: 'Kulim Park';
+        font-style: normal;
+        font-weight: 'Bold', 600;
+        font-size: 24px;
+        line-height: 34px;
+        cursor: default;
+    }
+`;
+
+export const inputbox = css`
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    padding: 0px;
+
+    input {
+        
+        height: 100%;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px 15px;
+        font-size: 18px;
+        width: 100%;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        background-color: #ffffff;
+
+        &::placeholder{
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 23px;
+        color: #B4B4B4;
+        }
+    }
+`;
+
+export const selectbutton = css`
+    display: flex;
+    z-index: 100;
+    margin-left: 2px;
 `;
 
 export const searchContainer = css`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    position: relative;
-    width: 100%;
     height: 40px;
-    margin-bottom: 15px;
-
-    input {
-        width: 550px;
-        padding: 10px 50px 10px 20px;
-        border: none;
-        border-radius: 20px;
-        background-color: #ffffff;
-    }
-
-    input::placeholder {
-        color: #b4b4b4;
-    }
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 10px;
-        position: absolute;
-        right: 87px;
-        top: 50%;
-        transform: translateY(-50%);
-
-        svg {
-            width: 30px;
-            height: 30px;
-        }
-    }
+    margin: 10px;
 
     select {
         height: 100%;
         border: none;
         border-radius: 20px;
         text-align: center;
+        align-items: center;
         padding: 7px;
     }
-`;
-
-export const selectbutton = css`
-    height: 30px;
-    margin-bottom: 15px;
 `;
 
 export const listContainer = css`

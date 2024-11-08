@@ -8,7 +8,7 @@ export const layout = css`
     width: 100%;
     height: 100%;
     padding: 0 140px;
-    background-color: #191919;
+    background-color: #fafafa;
 `;
 
 export const login = css`
@@ -28,7 +28,7 @@ export const loginTitle = css`
     h1 {
         margin: 0;
         margin-bottom: 20px;
-        color: #F2780C;
+        color: #ff675b;
         font-size: 60px;
         font-weight: 700;
     }
@@ -41,8 +41,13 @@ export const loginInput = css`
     align-items: center;
 
     & input {
-        color: #ffffff;
+        color: #222222;
         margin: 10px 0px;
+
+        &::-webkit-input-placeholder {
+            color: #222222;
+            font-weight: 500;
+        }
     }
 
     & button {
@@ -54,7 +59,7 @@ export const loginInput = css`
         margin: 20px 0px;
         color: #ffffff;
         font-weight: 600;
-        background-color: #F2780C;
+        background-color: #ff675b;
         height: 40px;
         display: flex;
         align-items: center;
@@ -65,7 +70,7 @@ export const loginInput = css`
         font-size: 14px;
         width: 100%;
         margin: 0;
-        color: #E94334;
+        color: #ff675b;
     }
 `;
 
@@ -84,7 +89,7 @@ export const foundInfo = css`
     width: 100%;
     height: 40px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     
     & ol {
         display: flex;
@@ -94,13 +99,13 @@ export const foundInfo = css`
 
         & li {
             padding: 0px 15px;
-            border-right: 1px solid #F2780C;
+            border-right: 1px solid #222222;
             font-weight: 600;
             cursor: pointer;
 
             & button {
-                color: #F2780C;
-                font-size: 12px;
+                color: #222222;
+                font-size: 14px;
             }
         }
     }
@@ -112,7 +117,7 @@ export const selectMember = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 `;
 
 export const oAuthButton = css`
@@ -121,15 +126,18 @@ export const oAuthButton = css`
     align-items: center;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 15px;
     margin: 0 30px;
     padding: 0;
+    overflow: hidden;
+    &:nth-of-type(1) {
+        background-color: #53C758;
+    }
 
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 30px;
     }
 `;
 
@@ -141,7 +149,7 @@ export const ownerButton = css`
     padding: 5px 0;
     font-size: 18px;
     color: #ffffff;
-    background-color: #f2780c;
+    background-color: #ff675b;
    
    svg {
     width: 30px;

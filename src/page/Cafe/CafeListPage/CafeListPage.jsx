@@ -58,24 +58,28 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
 
     return (
         <div css={s.layout}>
-            <h1 css={s.title}>Cafe List</h1>
-            <div css={s.searchContainer}>
-                <input type="text"
-                    value={inputdata}
-                    onChange={handleInputOnChange}
-                    onKeyDown={handleInputKeyPress}
-                    spellCheck="false"
-                    placeholder='카페를 검색하세요'
-                    required
-                />
-                <button onClick={handleSearchOnClick}><IoIosSearch /></button>
-                <select onChange={handleSortChange}>
-                    <option value="like">인기순</option>
-                    <option value="review">리뷰순</option>
-                </select>
-            </div>
-            <div css={s.selectbutton}>
-                <SelectCategory check={check} setCheck={setCheck} />
+            <div css={s.header}>
+                <div css={s.box}>
+                    <h2>CafeInBusan</h2>
+                    <div css={s.inputbox}>
+                        <input type="text"
+                            value={inputdata}
+                            onChange={handleInputOnChange}
+                            onKeyDown={handleInputKeyPress}
+                            spellCheck="false"
+                            placeholder='카페를 검색하세요'
+                        />
+                    </div>
+                    <div css={s.searchContainer}>
+                        <select onChange={handleSortChange}>
+                            <option value="like">인기순</option>
+                            <option value="review">리뷰순</option>
+                        </select>
+                    </div>
+                </div>
+                <div css={s.selectbutton}>
+                    <SelectCategory check={check} setCheck={setCheck} />
+                </div>
             </div>
             <div css={s.listContainer}>
                 {

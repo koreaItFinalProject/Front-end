@@ -35,14 +35,19 @@ export const header = css`
 export const imgContainer = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+`;
+
+export const menuImg = css`
+    width: 50%;
+    height: 100%;
 
     img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-`;
-
-export const menuImg = css`
-
 `;

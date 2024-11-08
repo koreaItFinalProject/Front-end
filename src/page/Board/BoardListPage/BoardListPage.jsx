@@ -57,7 +57,6 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
 
     const handleNavButtonClick = (category) => {
         setCategory(category);
-        showToast(category);
     }
 
     const handleWriteOnClick = () => {

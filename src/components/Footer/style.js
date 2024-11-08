@@ -7,20 +7,22 @@ export const layout = css`
   align-items: center;
   width: 100%;
   height: 100%;
+  background-color: #222222;
+`;
 
-  & button {
+export const menuButton = (isSelected) => css`
+  box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
-    width: 30px;
-    height: 30px;
-  }
+    border-radius: 50%;
+    padding: 15px;
   
   & svg {
     width: 100%;
     height: 100%;
-    fill: #f2780c;
+    fill: ${isSelected ? "#ff675b" : "#ffffff"};
+    font-size: 25px;
   }
-  
 `;

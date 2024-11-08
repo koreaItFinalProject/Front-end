@@ -15,23 +15,28 @@ export const box = css`
     z-index: 100;
     top: 20px;
     left: 15px;
-    height: 50px;
+    height: 60px;
     width: 631px;
-    background-color: #111111;
-    border-radius: 10px;
+    background-color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 4px #00000044;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     
     h2 {
-        margin: 0px;
-        padding: 0px 10px;
+        margin: 2px;
+        border-radius: 19px;
+        background-color: #ff675b;
+        padding: 0px 20px;
         padding-top: 8px;
         align-items: center;
-        color: #F2780C;
+        color: #ffffff;
         font-family: 'Kulim Park';
         font-style: normal;
         font-weight: 'Bold', 600;
-        font-size: 30px;
+        font-size: 24px;
         line-height: 34px;
+        cursor: default;
     }
 `;
 
@@ -66,7 +71,7 @@ export const selectbutton = css`
     display: flex;
     position: absolute;
     z-index: 100;
-    margin-top: 60px;
+    margin-top: 70px;
 `;
 
 export const icon = css`
@@ -85,7 +90,7 @@ export const cafeContainer = css`
     align-items: center;
     justify-content: space-between; // 버튼을 양 끝으로 배치
     position: absolute;
-    bottom: 5px;
+    bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
     padding: 10px 20px;

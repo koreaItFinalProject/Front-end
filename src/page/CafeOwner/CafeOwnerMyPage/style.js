@@ -35,7 +35,8 @@ export const menuContainer = css`
     align-items: center;
     flex-grow: 1;
     width: 100%;
-    padding: 0 20px 20px 20px;
+    padding: 0 20px 100px 20px;
+    overflow-y: auto;
     background-color: #ffffff;
 `;
 
@@ -78,19 +79,22 @@ export const modalStyles = {
         background: 'white', // 모달 내부 배경색
         boxSizing: 'border-box',
         transform: 'translate(-50%, -50%)',
-        top: '50%',
+        borderRadius: '20px',
+        border: '2px solid #cacaca',
+        boxShadow: '0px 0px 10px 4px #00000036',
+        top: '45%',
         left: '50%',
         padding: '20px',
         width: '600px',
-        height: '750px',
+        height: '650px',
         overflow: 'hidden',
     },
 };
 
 export const closeButton = css`
-    width: 80px;
-    height: 30px;
-    font-size: 16px;
+    padding: 5px 20px;
+    font-size: 14px;
+    font-weight: 500;
     margin-bottom: 10px;
     border-radius: 20px;
     border: 1px solid #1c1c1b;
