@@ -73,7 +73,7 @@ function CafeNoticeListPage(props) {
 
     const handleWriteOnClick = () => {
         if (!accessCheck?.data) {
-            alert("로그인 후 작성해주세요.");
+            confirmAlert("로그인 후 작성해주세요.");
             navigate("/user/signin");
             return;
         }

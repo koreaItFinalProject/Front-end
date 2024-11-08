@@ -120,7 +120,7 @@ function CafeNoticeDetailPage(props) {
 
     const handleReplyButtonOnClick = (commentId, nickname) => {
         if (!accessCheck) {
-            alert("로그인 후 작성 가능합니다.");
+            confirmAlert("로그인 후 작성 가능합니다.");
             return;
         }
         setCommentData(comment => ({

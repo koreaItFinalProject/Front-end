@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 
 function SelectCategory({ check, setCheck }) {
+    
     const handleClick = (category) => {
         setCheck(check === category ? "전체" : category);
     };
+
     return (
         <>
             <button

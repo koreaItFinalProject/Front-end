@@ -4,6 +4,7 @@ import * as s from './style';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../../apis/util/instance';
 import { useCafeQuery } from '../../../../apis/CafeApis/getCafeListApi';
+import { confirmAlert } from '../../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue }) {
     const queryClient = useQueryClient();
@@ -35,7 +36,7 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
         async (id) => await instance.delete(`/manager/cafe/${id}`),
         {
             onSuccess: response => {
-                alert("해당 카페를 삭제하였습니다.");
+                confirmAlert("해당 카페를 삭제하였습니다.");
                 queryClient.invalidateQueries(["cafeQuery", check, inputvalue]);
             }
         }

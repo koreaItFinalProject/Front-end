@@ -1,0 +1,39 @@
+.custom-toast {
+    position: absolute;
+    top: 50px;
+    z-index: 9999;
+    border-radius: 20px !important;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.custom-hideClass {
+    animation: fadeOut 0.3s ease-in-out;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.custom-container {
+    width: 600px !important;
+}
+
+.custom-title {
+    text-align: center !important;
+}

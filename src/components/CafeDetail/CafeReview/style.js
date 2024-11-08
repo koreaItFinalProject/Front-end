@@ -42,7 +42,7 @@ export const title = css`
     p {
         margin: 0;
         margin-left: 10px;
-        font-size: 24px;
+        font-size: 20px;
         color: #aaaaaa;
     }
 `;
@@ -81,18 +81,17 @@ export const category = css`
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;
-
-    div {
-        padding: 5px 10px;
-        width: fit-content;
-        border: 1px solid #f2780c;
-        border-radius: 36px;
-        font-weight: 500;
-        cursor: default;
-    }
 `;
 
-
+export const categoryItem = (count, totalCount) => css`
+    background-color: rgba(242, 120, 12, ${Math.min((count / totalCount) * 0.95, 0.95)});
+    padding: 5px 10px;
+    width: fit-content;
+    border: 1px solid #f2780c;
+    border-radius: 36px;
+    font-weight: 500;
+    cursor: default;
+`;
 
 export const review = css`
     display: flex;

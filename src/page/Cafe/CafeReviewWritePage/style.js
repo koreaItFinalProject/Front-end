@@ -6,16 +6,17 @@ export const layout = css`
     width: 100%;
     height: 100%;
     background-color: #191919;
+    overflow: auto;
 `;
 
 export const rating = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px 10px;
+    padding: 20px 20px 10px;
     gap: 10px;
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     background-color: #ffffff;
 
     h1 {
@@ -24,12 +25,24 @@ export const rating = css`
     }
 `;
 
+export const cafeImg = css`
+    width: 100%;
+    height: 220px;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+`;
+
 export const category = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px;
+    padding: 10px 20px;
     height: fit-content;
     gap: 10px;
     background-color: #ffffff;
@@ -38,6 +51,7 @@ export const category = css`
 export const buttons = css`
     display: flex;
     flex-direction: row;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 
@@ -45,13 +59,11 @@ export const buttons = css`
         padding: 5px 10px;
         border: 1px solid #f2780c;
         border-radius: 36px;
-        font-weight: 600;
+        font-weight: 500;
     }
 `;
 
 export const activeButton = css`
-    color: #111111;
-    border: none;
     background-color: #f2780c;
 `;
 
@@ -61,7 +73,7 @@ export const review = css`
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    padding: 10px 10px;
+    padding: 10px 20px;
     gap: 10px;
     background-color: #ffffff;
 

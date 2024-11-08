@@ -5,6 +5,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { oauth2MergeApi } from '../../../apis/signInApis/oauth2MergeApi';
 import { instance } from '../../../apis/util/instance';
 import { handleloginInputOnChange } from '../../../apis/util/handleloginInputOnChange/handleloginInputOnChange';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function OAuth2MergePage(props) {
     const navigate = useNavigate();
@@ -54,12 +55,12 @@ function OAuth2MergePage(props) {
 
         const response = await oauth2MergeApi(mergeData);
         if (!response.isSuccess) {
-            alert(response.error);
+            confirmAlert(response.error);
             setFieldErrorMessages(response.error);
             return;
         }
         if (response.isSuccess) {
-            alert("통합 완료");
+            confirmAlert("통합 완료");
             localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
             instance.interceptors.request.use((config) => {
                 config.headers['Authorization'] = localStorage.getItem('accessToken');

@@ -1,5 +1,6 @@
 import { instance } from "../util/instance";
 import { useEffect, useState } from "react";
+import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 
 const useCheckInputValueApi = () => {
@@ -13,7 +14,7 @@ const useCheckInputValueApi = () => {
 
   useEffect(() => {
     if (errorData.isError) {
-      alert(errorData.errorMessage);
+      confirmAlert(errorData.errorMessage);
     }
   }, [errorData])
 
@@ -24,7 +25,7 @@ const useCheckInputValueApi = () => {
     try {
       getResponse = await instance.get(`/user/duplicated/${fieldName}?value=${value}`);
       if (getResponse.status === 200) {
-        alert("중복 확인 완료");
+        confirmAlert("중복 확인 완료");
         setComplete((checkValue) => ({
           ...checkValue,
           [fieldName]: true

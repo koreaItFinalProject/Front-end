@@ -3,8 +3,8 @@ import * as s from "./style";
 import { useState } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import { useCafeQuery } from "../../apis/CafeApis/getCafeListApi";
-import SelectCategory from "../../components/SelectCategory/SelectCategory";
 import { useNavigate } from "react-router-dom";
+import SelectCategory from "../../components/SelectCategory/SelectCategory";
 
 function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
@@ -84,21 +84,21 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                             <path d="M20.5 7.47475V12.5253H9.13636L13.5556 16.9444L10.5 20L0.5 10L10.5 0L13.5556 3.05556L9.13636 7.47475H20.5Z" fill="#F2780C" />
                         </svg>
                     </button>
-                    <div css={s.cafeInfo(slide)} onClick={() => handleCafeSlideClick(cafe[currentCafeIndex].id)}>
+                    <div css={s.cafeInfo(slide)} onClick={() => handleCafeSlideClick(cafe[currentCafeIndex]?.id)}>
                         {cafe?.length > 0 ? (
                             <>
                                 <div css={s.pictureBox}>
-                                    <img src={cafe[currentCafeIndex].img} alt="" />
+                                    <img src={cafe[currentCafeIndex]?.img} alt="" />
                                 </div>
                                 <div css={s.listBox}>
-                                    <h3>{cafe[currentCafeIndex].cafeName}</h3>
-                                    <p>{cafe[currentCafeIndex].address}</p>
-                                    <p>{cafe[currentCafeIndex].category}</p>
+                                    <h3>{cafe[currentCafeIndex]?.cafeName}</h3>
+                                    <p>{cafe[currentCafeIndex]?.address}</p>
+                                    <p>{cafe[currentCafeIndex]?.category}</p>
                                 </div>
                                 <MapMarker
                                     position={{
-                                        lat: cafe[currentCafeIndex].lat,
-                                        lng: cafe[currentCafeIndex].lng
+                                        lat: cafe[currentCafeIndex]?.lat,
+                                        lng: cafe[currentCafeIndex]?.lng
                                     }}
                                 />
                             </>
