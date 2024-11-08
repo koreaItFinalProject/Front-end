@@ -65,7 +65,7 @@ export const loginInput = css`
 `;
 
 
-export const loginTitle =css`
+export const loginTitle = css`
     & p {
         margin: 0;
         margin-bottom: 20px;
@@ -109,4 +109,27 @@ export const foundInfo = css`
         }
     }
 
+`;
+
+export const emailTimer = css`
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    border-bottom: 1px solid #F2780C;
+    width: 380px;
+    & input {
+        width: 120px;
+        border: none;
+    }
+    & button {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 10px;
+        margin: 10px 0px 10px 5px;
+        font-weight: 600;
+        height: 30px;
+    }
+    
 `;
