@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { BsPencilSquare } from "react-icons/bs";
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import { confirmCancelAlert } from '../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert';
 
 function CafeReview({ cafeDetail, refetchCafeDetail }) {
     const navigate = useNavigate();
@@ -31,6 +32,15 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
         }
     );
 
+    const reportMutation = useMutation(
+        async(report) => await instance.post("/report", report),
+        {
+            onSuccess: (response) => {
+                confirmAlert(response.data);
+            }
+        }
+    )
+
     const handleWriteReviewClick = () => {
         if (!userInfoData?.data) {
             confirmAlert("로그인 후 작성 가능합니다.");
@@ -45,6 +55,24 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
 
     const handleDeleteReviewOnClick = (reviewId) => {
         deleteReviewMutation.mutateAsync(reviewId);
+    }
+
+    const handleReportOnClick = async(review) => {
+        if (!userInfoData?.data) {
+            confirmAlert("로그인을 하신 후 이용해 주시기 바랍니다.");
+            return;
+        }
+
+        if(await confirmCancelAlert("정말 신고하시겠습니까?")){
+            const requstBody = {
+                contentId: review?.id,
+                content: review?.review,
+                reportId: userInfoData?.data?.userId,
+                reportType: "리뷰",
+            }
+            reportMutation.mutateAsync(requstBody);
+        }
+        return;
     }
 
     return (
@@ -102,7 +130,7 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
                                         <button onClick={() => handleDeleteReviewOnClick(reviewItem.id)}>삭제</button>
                                     </div>
                                     :
-                                    <></>
+                                    <button onClick={() => handleReportOnClick(reviewItem)}>신고</button>
                             }
                         </div>
                     </div>

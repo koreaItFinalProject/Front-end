@@ -30,7 +30,6 @@ export const commentListContainer = (level) => css`
 
 export const userInfo = css`
     display: flex;
-    flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
 
@@ -49,7 +48,19 @@ export const userInfo = css`
     span {
         font-size: 12px;
     }
+
+    button {
+        display: flex;
+        justify-content: flex-end;
+        flex-grow: 1;
+    }
 `;
+
+export const reportbutton = css`
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+`
 
 export const commentDetail = css`
     display: flex;

@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import useGetComments from "../../apis/CommentApis/getCommentsApi";
 import { instance } from "../../apis/util/instance";
 import { confirmCancelAlert } from "../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
+import { confirmAlert } from "../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyCommentCancelButtonOnClick, handleReplyButtonOnClick, handleCancelReplyOnClick }) {
     const params = useParams();
@@ -23,6 +24,14 @@ function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyC
             }
         }
     );
+    const reportMutation = useMutation(
+        async(report) => await instance.post("/report", report),
+        {
+            onSuccess: (response) => {
+                confirmAlert(response.data);
+            }
+        }
+    )
 
     const handleDeleteCommentButtonOnClick = (commentId) => {
         const selection = confirmCancelAlert("댓글을 삭제하시겠습니까?");
@@ -31,6 +40,25 @@ function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyC
             deleteCommentMutation.mutateAsync(commentId);
         }
     };
+
+    const handleReportOnClick = async(comment) => {
+        if (!userInfoData?.data) {
+            confirmAlert("로그인을 하신 후 이용해 주시기 바랍니다.");
+            return;
+        }
+
+        if(await confirmCancelAlert("정말 신고하시겠습니까?")){
+            const requstBody = {
+                contentId: comment?.id,
+                content: comment?.content,
+                reportId: userInfoData?.data?.userId,
+                reportType: "댓글",
+            }
+            reportMutation.mutateAsync(requstBody);
+        }
+        return;
+        
+    }
 
     return (
         <>
@@ -48,6 +76,7 @@ function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyC
                                         <img src={comment.img} alt="" />
                                         <div>{comment.nickname}</div>
                                         <span>{new Date(comment.writeDate).toLocaleString()}</span>
+                                        <button onClick={() => handleReportOnClick(comment)}>신고</button>
                                     </div>
                                     <div css={s.commentDetail}>
                                         <pre css={s.detailContent}>{comment.content}</pre>
