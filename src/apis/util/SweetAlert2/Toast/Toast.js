@@ -4,11 +4,11 @@ import './style.css';
 const Toast = Swal.mixin({
     toast: true,
     showConfirmButton: false,
-    timer: 1000,
+    timer: 2000,
     timerProgressBar: false,
     didOpen: (toast) => {
         toast.addEventListener('click', () => {
-            Swal.close(); 
+            Swal.close();
         });
     },
     customClass: {

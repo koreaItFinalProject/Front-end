@@ -41,6 +41,7 @@ export const loginInput = css`
     align-items: center;
 
     & input {
+        color: #ffffff;
         margin: 10px 0px;
     }
 

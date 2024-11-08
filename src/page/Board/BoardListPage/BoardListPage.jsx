@@ -9,6 +9,7 @@ import BoardList from "../../../components/Board/BoardList/BoardList";
 import { FaPlus } from "react-icons/fa6";
 import { IoIosSearch } from "react-icons/io";
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
 
 function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSearchFilter, searchValue, setSearchValue, category, setCategory }) {
     const loadMoreRef = useRef(null);
@@ -56,6 +57,7 @@ function BoardListPage({ boardList, fetchNextPage, hasNextPage, refetch, setSear
 
     const handleNavButtonClick = (category) => {
         setCategory(category);
+        showToast(category);
     }
 
     const handleWriteOnClick = () => {

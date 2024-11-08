@@ -12,4 +12,7 @@ export const confirmAlert = (title) => Swal.fire({
         title: 'title-class',
         confirmButton: 'button-class',
     },
+    showClass: {
+        popup: '' // 기본 애니메이션을 비활성화
+    },
 });
