@@ -12,6 +12,7 @@ import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
 import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function CafeNoticeDetailPage(props) {
     const navigate = useNavigate();

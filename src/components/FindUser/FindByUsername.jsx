@@ -19,24 +19,24 @@ function FindByUsername() {
   }
 
   const handleUsernameCheck = async () => {
-    
+
     if (!valueDuplicateCheckValue(inputUser)) {
     } else {
       confirmAlert("해당 이메일로 찾을 수가 없습니다.");
       return;
     }
-    const response = await DuplicateCheckValue("email", inputUser);
+    const response = await DuplicateCheckValue("FindUser", inputUser);
     console.log(response.data.email);
     console.log(response.data.username);
 
-    if(response.status === 200){
-      const sendEmail = await sendEmailFindUsernameApi("email",response.data.email , response.data.username);
+    if (response.status === 200) {
+      const sendEmail = await sendEmailFindUsernameApi("FindUser", response.data.email, response.data.username);
       console.log(sendEmail);
-    }else{
+    } else {
       confirmAlert("다시 시도해주세요");
       return
     }
-    
+
   }
   return (
     <div css={s.login}>
@@ -44,13 +44,13 @@ function FindByUsername() {
         <div css={s.loginTitle}>
           <p>아이디 찾기</p>
         </div>
-        <input 
-        type="email" 
-        name="email" 
-        autoComplete="off" 
-        onChange={handleInputOnChange} 
-        value={inputUser.email} 
-        placeholder='이메일 입력' />
+        <input
+          type="email"
+          name="email"
+          autoComplete="off"
+          onChange={handleInputOnChange}
+          value={inputUser.email}
+          placeholder='이메일 입력' />
         <button onClick={handleUsernameCheck}>찾기</button>
       </div>
     </div>

@@ -7,11 +7,11 @@ import { useQueryClient } from 'react-query';
 function AlramInfoPage({ alarm }) {
     const queryClient = useQueryClient();
     const accessCheck = queryClient.getQueryData("userInfoQuery");
-    console.log(accessCheck.data.userId);
+    const userId = accessCheck.data.userId;
+    console.log(userId);
     const [notices, setNotices] = useState([]);
     const [lastId, setLastId] = useState(null);
     const [eventSource, setEventSource] = useState(null);
-
     console.log(alarm);
 
     // 처음 렌더링 시에만 초기 메시지 가져오기
@@ -23,16 +23,16 @@ function AlramInfoPage({ alarm }) {
             setLastId(response.data[response.data.length - 1]?.id);  // 마지막 메시지 ID 설정
         };
 
-        if (accessCheck.data.userId) {
+        if (userId) {
             fetchMessage();
         }
-    }, [accessCheck.data.userId]);
+    }, [userId]);
 
     // SSE로 실시간 메시지 받기
     useEffect(() => {
         if (accessCheck && accessCheck.data.userId) {
             // SSE 연결 설정
-            const es = new EventSource(`http://localhost:8080/message/events?lastId=${lastId || 0}`);
+            const es = new EventSource(`http://localhost:8080/message/events?lastId=${lastId || 0}&userId=${userId}`);
 
             es.onmessage = (event) => {
                 try {
@@ -66,7 +66,7 @@ function AlramInfoPage({ alarm }) {
                 es.close();
             };
         }
-    }, [accessCheck, lastId]);  // accessCheck와 lastId 변경 시마다 실행
+    }, [userId, lastId]);  // accessCheck와 lastId 변경 시마다 실행
 
     return (
         <div css={s.mainLayout}>

@@ -12,6 +12,7 @@ import BoardFooter from "../../../components/Board/BoardFooter/BoardFooter";
 import { useState } from "react";
 import useGetComments from "../../../apis/CommentApis/getCommentsApi";
 import useDeleteBoardMutation from "../../../apis/mutation/useDeleteBoardMutation/useDeleteBoardMutation";
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function NoticeDetailPage(props) {
     const navigate = useNavigate();

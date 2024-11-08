@@ -5,9 +5,9 @@ import { FaPlus } from "react-icons/fa6";
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
-import { useParams } from 'next/navigation';
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 import modifyCafeBannerApi from '../../../apis/CafeApis/modifyCafeBannerApi';
+import { useParams } from 'react-router-dom';
 
 function CafeMenu({ viewMode }) {
     const params = useParams();
