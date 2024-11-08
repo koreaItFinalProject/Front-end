@@ -4,8 +4,10 @@ import * as s from './style';
 import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../../apis/util/instance';
 import { useCafeQuery } from '../../../../apis/CafeApis/getCafeListApi';
+import { useNavigate } from 'react-router-dom';
 
 function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue }) {
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [cafelistUp, setCafelistUp] = useState([]);
     const { data: cafeList } = useCafeQuery(check, inputvalue, {
@@ -70,12 +72,11 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
                         cafeList?.map((result, index) => (
                             <>
                                 <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{result.cafeName}</td>
-                                    {/* <input type="text" /> */}
-                                    <td>{result.address}</td>
-                                    <td>{result.category}</td>
-                                    <td>{result.id}</td>
+                                    <td onClick={() => navigate(`/cafe/detail/${result.id}`)}>{index + 1}</td>
+                                    <td onClick={() => navigate(`/cafe/detail/${result.id}`)}>{result.cafeName}</td>
+                                    <td onClick={() => navigate(`/cafe/detail/${result.id}`)}>{result.address}</td>
+                                    <td onClick={() => navigate(`/cafe/detail/${result.id}`)}>{result.category}</td>
+                                    <td onClick={() => navigate(`/cafe/detail/${result.id}`)}>{result.id}</td>
                                     <td onClick={() => handleDeleteOnclick(result.id)}>삭제</td>
                                 </tr>
                             </>

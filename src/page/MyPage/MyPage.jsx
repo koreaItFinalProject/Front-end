@@ -152,7 +152,7 @@ function MyPage(props) {
                                     <ReviewState review={infoBoard.review} />
                                     :
                                     check === "alarm" ?
-                                        <AlramInfo alaram={infoBoard.alarm} />
+                                        <AlramInfo alarm={infoBoard.alarm} />
                                         : <></>
                 }
             </ReactModal>
