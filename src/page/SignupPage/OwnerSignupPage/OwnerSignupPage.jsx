@@ -15,6 +15,7 @@ import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckI
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 import { ownerDeleteApi } from '../../../apis/signUpApis/ownerDeleteApi';
 import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function OwnerSignupPage(props) {
     const navigate = useNavigate();

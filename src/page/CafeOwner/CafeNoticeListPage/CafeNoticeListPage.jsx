@@ -7,6 +7,7 @@ import { useInfiniteQuery, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { FaPlus } from "react-icons/fa6";
 import NoticeList from '../../../components/NoticeList/NoticeList';
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function CafeNoticeListPage(props) {
     const loadMoreRef = useRef(null);
