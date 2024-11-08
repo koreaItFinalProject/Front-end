@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { useNavigate } from 'react-router-dom';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
 import { AiOutlineExclamationCircle } from "react-icons/ai";
 import { CiUnlock, CiMail } from "react-icons/ci";
 import useCheckInputApi from '../../../apis/useCheckInputApi/useCheckInputApi';
 import isEmptyAndIsEqualsCheckFieldValue from '../../../apis/EmptyDuplicateCheckValue/EmptyDuplicateCheckValue';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function UserProfileModify({ user }) {
     const [isTimerRunning, setIsTimerRunning] = useState(false);

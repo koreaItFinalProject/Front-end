@@ -33,7 +33,7 @@ function Footer({ setCheck, setInputvalue }) {
     const handleMyPageOnClick = () => {
         if (!loginCheck?.data) {
             setPageCount(0);
-            navigate('/user/select/signup', { replace: true });
+            navigate('/user/signin', { replace: true });
         } else if (loginCheck?.data) {
             if (accessCheck?.data.role === "USER") {
                 setPageCount(0);
