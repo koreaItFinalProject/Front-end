@@ -25,6 +25,8 @@ const useCheckInputApi = () => {
   );
 
   const duplicatedCheck = async (fieldName, value) => {
+    console.log(fieldName);
+    console.log(value);
     let getResponse;
     let putResponse;
 

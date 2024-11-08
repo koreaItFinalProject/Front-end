@@ -200,7 +200,7 @@ function UserSignupPage(props) {
                     <div>
                         <div css={s.emailcert}>
                             <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputEmailCheck} readOnly={!emailCheckState} />
+                                <input type="text" name='emailCheck' autoComplete="off" value={emailCheck} onChange={handleInputEmailCheck} readOnly={!emailCheckState} />
                                 <div>
                                     {isTimerRunning && <p>시간: {Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
