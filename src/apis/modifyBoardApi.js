@@ -10,8 +10,8 @@ export const useModifyBoardMutation = (navigate) => {
             return response.data;
         },
         {
-            onSuccess: (data) => {
-                confirmAlert("게시글 수정 완료");
+            onSuccess: async (data) => {
+                await confirmAlert("게시글 수정 완료");
                 queryClient.invalidateQueries("boardListQuery");
                 navigate(`/board/detail/${data}`);
             },

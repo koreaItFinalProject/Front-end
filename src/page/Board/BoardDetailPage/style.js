@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 export const layout = css`
     position: relative;
@@ -120,6 +120,21 @@ export const contentBox = css`
     }  
 `;
 
+const heartBeat = keyframes`
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.8);
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+`;
+
 export const likeContainer = css`
     display: flex;
     flex-direction: row;
@@ -134,6 +149,10 @@ export const likeContainer = css`
         align-items: center;
         margin-right: 10px;
         padding: 0;
+
+        &.animate {
+        animation: ${heartBeat} 0.3s ease-in-out;
+    }
 
         svg {
             width: 30px;

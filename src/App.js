@@ -63,13 +63,11 @@ function App() {
     }
 
     setPageCount(pageCount + 1);
-    console.log("히스토리" + window.history.length);
   }, [location.pathname]);
 
   useEffect(() => {
     setHistoryStack(prevStack => [...prevStack, location.pathname])
   }, [location.pathname])
-  console.log("히스토리 스택" + historyStack);
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery", category],
     async ({ pageParam = 1 }) => await instance.get('/board/list', {

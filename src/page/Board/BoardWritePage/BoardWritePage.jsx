@@ -40,7 +40,7 @@ function BoardWritePage(props) {
     }
 
     const handleWriteSubmitOnClick = () => {
-        writeBoardMutation.mutate(board);
+        writeBoardMutation.mutateAsync(board);
     }
 
     const handleImageLoad = useCallback(() => {

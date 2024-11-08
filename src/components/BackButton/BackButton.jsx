@@ -13,9 +13,6 @@ function BackButton({ prevPage }) {
     const [direction, setDirection] = useRecoilState(animationDirectionState);
     const [pageCount, setPageCount] = useRecoilState(pageCounter);
 
-    console.log(pageCount);
-
-
     const handleBackClick = () => {
         setDirection('right-to-left')
         let page = pageCount <= 3 ? pageCount - 1 : pageCount;
