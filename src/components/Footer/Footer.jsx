@@ -31,6 +31,7 @@ function Footer({ setCheck, setInputvalue }) {
     }
 
     const handleMyPageOnClick = () => {
+        console.log(loginCheck?.data);
         if (!loginCheck?.data) {
             setPageCount(0);
             navigate('/user/signin', { replace: true });

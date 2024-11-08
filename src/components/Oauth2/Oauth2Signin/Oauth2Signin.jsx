@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { instance } from '../../../apis/util/instance';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function Oauth2Signin(props) {
   const [searchParams] = useSearchParams();

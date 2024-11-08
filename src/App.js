@@ -40,6 +40,7 @@ import { pageCounter } from './atom/pageCount';
 import { useRecoilState } from 'recoil';
 import { confirmAlert } from './apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 import CafeReviewWritePage from './page/Cafe/CafeReviewWritePage/CafeReviewWritePage';
+import Oauth2Signin from './components/Oauth2/Oauth2Signin/Oauth2Signin';
 
 ReactModal.setAppElement('#root');
 
@@ -224,6 +225,7 @@ function App() {
             <Routes location={location} key={location.pathname}>
               <Route path='/oauth/oauth2' element={<OAuth2MergePage />} />
               <Route path='/oauth/oauth2/signup' element={<OAuth2Signup />} />
+              <Route path='/signin/oauth2' element={<Oauth2Signin />} />
               <Route path='/find' element={<UserFindPage />} />
               <Route path='/signup' element={<UserSignupPage />} />
               <Route path='/signin' element={<UserSigninPage />} />
