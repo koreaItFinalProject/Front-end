@@ -1,4 +1,5 @@
 import { instance } from "../util/instance";
+import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 export const ownerDeleteApi = async (userId) => {
     let DeleteData = {
@@ -18,7 +19,7 @@ export const ownerDeleteApi = async (userId) => {
         console.log(error);
         const response = error.response;
         console.log(response.data);
-        alert("삭제실패");
+        confirmAlert("삭제실패");
     }
 
     return ownerDeleteApi;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
+import { useEffect, useState } from 'react';
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { useNavigate } from 'react-router-dom';
 import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
@@ -10,6 +10,7 @@ import BackButton from '../../../components/BackButton/BackButton';
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
+import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 function UserSignupPage(props) {
     const navigate = useNavigate();
@@ -49,7 +50,7 @@ function UserSignupPage(props) {
     const handleInputEmailCheck = (e) => {
         const { name, value } = e.target;
         if (name === 'emailCheck' && !/^\d*$/.test(value)) {
-            alert("숫자만 입력가능합니다")
+            confirmAlert("숫자만 입력가능합니다");
             return; // 숫자가 아닌 입력은 무시 
         }
         setEmailCheck(value);
@@ -59,35 +60,30 @@ function UserSignupPage(props) {
         const isComplete = !Object.values(complete).some(value => value === false);
 
         if (!isComplete) {
-            alert("인증을 안받은 값이 존재합니다");
+            confirmAlert("인증을 안받은 값이 존재합니다");
             return;
         }
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
             if (inputUser.password !== inputUser.checkPassword) {
-                alert("비밀번호가 일치하지 않습니다")
+                confirmAlert("비밀번호가 일치하지 않습니다");
                 return;
             }
         }
         const signupData = await usersignupApi(inputUser);
-        console.log(signupData);
         if (!signupData.isSuccess) {
             const newFieldErrors = showFieldErrorMessage(signupData);
-            console.log(signupData.fieldErrors);
-            console.log(newFieldErrors);
             setFieldErrorMessages(newFieldErrors);
-            alert(`회원가입 실패`);
+            confirmAlert("회원가입 실패");
         } else {
-            alert("가입 성공");
+            confirmAlert("가입 성공");
             navigate("/user/signin");
         }
     }
 
     const handleOnEmailCheckClick = () => {
-        console.log("이메일 넘버" + emailNumber);
-        console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
             if (emailNumber == emailCheck) {
-                alert("인증성공");
+                confirmAlert("인증성공");
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
@@ -98,7 +94,7 @@ function UserSignupPage(props) {
                 });
             }
             if (emailNumber != emailCheck) {
-                alert("인증번호가 일치하지 않습니다.");
+                confirmAlert("인증번호가 일치하지 않습니다");
             }
         }
     }
@@ -112,7 +108,7 @@ function UserSignupPage(props) {
         } else if (timer === 0 && emailCheckState) {
             setIsTimerRunning(false);
             setEmailCheckState(false);
-            alert("인증시간을 초과하였습니다.");
+            confirmAlert("인증시간을 초과하였습니다.");
         }
         return () => clearInterval(interval);
     }, [isTimerRunning, timer, isTimerStopped]);
@@ -120,12 +116,12 @@ function UserSignupPage(props) {
     const startTimer = async (email) => {
         try {
             if (email.trim() === '') {
-                alert('빈 값은 입력할 수 없습니다.');
+                confirmAlert("빈 값은 입력할 수 없습니다.");
                 return;
             }
             const emailCheck = await EmailDuplicateCheckValue(email);
             if (!emailCheck.isSucceses) {
-                alert('이메일 중복되었습니다.');
+                confirmAlert("이메일 중복되었습니다.");
                 return;
             } else if (emailCheck.isSucceses) {
                 setIsTimerStopped(false);
@@ -138,21 +134,20 @@ function UserSignupPage(props) {
             }
         } catch (error) {
             console.error("Error occurred:", error);
-            alert("이메일 인증 요청 중 오류가 발생했습니다.");
+            confirmAlert("이메일 인증 요청 중 오류가 발생했습니다.");
         }
     }
 
     const handleCheckUser = (e) => {
         const { name } = e.target;
-        console.log(inputUser[name]);
         if (name === 'password' || name === 'checkPassword') {
             if (inputUser.password && inputUser.checkPassword) {
                 if (inputUser.password !== inputUser.checkPassword) {
-                    alert("비밀번호와 확인번호 다시 확인해주세요.")
+                    confirmAlert("비밀번호와 확인번호 다시 확인해주세요.");
                     return;
                 }
             } else {
-                alert("빈 값입니다.");
+                confirmAlert("빈 값입니다.");
                 return
             }
         }

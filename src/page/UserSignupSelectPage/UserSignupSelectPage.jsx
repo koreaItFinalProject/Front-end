@@ -39,7 +39,7 @@ function UserSignupSelectPage(props) {
                     </div>
                     <div css={s.emailbutton}>
                         <button onClick={() => navigate("/user/signin")}>
-                            아이디로 게속하기
+                            아이디로 계속하기
                         <p>
                             <IoIosArrowForward/>
                         </p>

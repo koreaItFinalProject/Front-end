@@ -2,7 +2,7 @@
 import * as s from "./style";
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useRecoilState } from "recoil";
 import { animationDirectionState } from "../../atom/animationDirection";
@@ -18,6 +18,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
     const [pageCount, setPageCount] = useRecoilState(pageCounter);
     const [historyStack, setHistoryStack] = useState([]);
     const [select, setSelect] = useState(false);
+
     useEffect(() => {
         setHistoryStack(prevStack => [...prevStack, location.pathname])
         setSelect(false);
@@ -34,16 +35,10 @@ function MainLayout({ children, setCheck, setInputvalue }) {
         return regex.test(location.pathname);
     });
 
-
     const resetAnimationDirection = () => {
         setanimationDirection('right-to-left');
     }
-    // console.log(animationDirection);
 
-    console.log(location.pathname);
-    console.log(pageCount);
-    console.log(historyStack.length);
-    console.log(select);
     return (
         <div css={s.background}>
             <div css={s.layout}>
@@ -79,7 +74,6 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                                     // onAnimationComplete={resetAnimationDirection}
                                     style={{ position: 'absolute', width: '100%', top: 0, zIndex: 1 }}
                                     onClick={(resetAnimationDirection, console.log(historyStack))}
-
                                 >
                                     {children}
                                 </motion.div>

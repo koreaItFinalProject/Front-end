@@ -105,20 +105,20 @@ function OwnerSignupPage(props) {
         const isComplete = !Object.values(complete).some(value => value === false);
 
         if (!isComplete) {
-            alert("인증을 안받은 값이 존재합니다");
+            confirmAlert("인증을 안받은 값이 존재합니다");
             return;
         }
         if (isAddress.address === '') {
-            alert("주소가 빈 값입니다");
+            confirmAlert("주소가 빈 값입니다");
             return
         }
         if (isSelect === null) {
-            alert("카테고리를 선택해주세요");
+            confirmAlert("카테고리를 선택해주세요");
             return
         }
         if (inputUser.password !== '' && inputUser.checkPassword !== '') {
             if (inputUser.password !== inputUser.checkPassword) {
-                alert("비밀번호가 일치하지 않습니다")
+                confirmAlert("비밀번호가 일치하지 않습니다")
                 return;
             }
         }
@@ -142,10 +142,10 @@ function OwnerSignupPage(props) {
                 console.log(data);
                 const CafeData = await ownercheckApi(data);
                 if (CafeData.isSuccess) {
-                    alert("가입 성공");
+                    confirmAlert("가입 성공");
                     navigate("/user/signin");
                 } else if (!CafeData.isSuccess) {
-                    alert("회원가입을 다시 진행해주세요");
+                    confirmAlert("회원가입을 다시 진행해주세요");
                     const DeleteData = await ownerDeleteApi(data.ownerId)
                     console.log(DeleteData);
                     return;
@@ -164,7 +164,7 @@ function OwnerSignupPage(props) {
             }, 1000);
         } else if (timer === 0 && emailCheckState) {
             setIsTimerRunning(false);
-            alert("인증시간을 초과하였습니다.");
+            confirmAlert("인증시간을 초과하였습니다.");
         }
         return () => clearInterval(interval);
     }, [isTimerRunning, timer, isTimerStopped]);
@@ -172,12 +172,12 @@ function OwnerSignupPage(props) {
     const startTimer = async (email) => {
         try {
             if (email.trim() === '') {
-                alert('빈 값은 입력할 수 없습니다.');
+                confirmAlert('빈 값은 입력할 수 없습니다.');
                 return;
             }
             const emailCheck = await EmailDuplicateCheckValue(email);
             if (!emailCheck.isSucceses) {
-                alert('이메일 중복되었습니다.');
+                confirmAlert('이메일 중복되었습니다.');
                 return;
             } else if (emailCheck.isSucceses) {
                 setTimer(180);
@@ -190,7 +190,7 @@ function OwnerSignupPage(props) {
             }
         } catch (error) {
             console.error("Error occurred:", error);
-            alert("이메일 인증 요청 중 오류가 발생했습니다.");
+            confirmAlert("이메일 인증 요청 중 오류가 발생했습니다.");
         }
     }
 
@@ -199,7 +199,7 @@ function OwnerSignupPage(props) {
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
             if (emailNumber == emailCheck) {
-                alert("인증성공");
+                confirmAlert("인증성공");
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
@@ -210,7 +210,7 @@ function OwnerSignupPage(props) {
                 });
             }
             if (emailNumber != emailCheck) {
-                alert("인증번호가 일치하지 않습니다.");
+                confirmAlert("인증번호가 일치하지 않습니다.");
             }
         }
     }
@@ -235,9 +235,9 @@ function OwnerSignupPage(props) {
                                 ...complete,
                                 ownerImage: true
                             });
-                            alert("사업자등록번호 인증을 완료하였습니다.")
+                            confirmAlert("사업자등록번호 인증을 완료하였습니다.")
                         } else if (number !== businessNumber) {
-                            alert("일치하지 않습니다");
+                            confirmAlert("일치하지 않습니다");
                             setProccess(true);
                         }
                     })
@@ -246,7 +246,7 @@ function OwnerSignupPage(props) {
                     })
             } else {
                 console.log('이미지를 선택해 주세요.');
-                alert("이미지를 선택해 주세요.")
+                confirmAlert("이미지를 선택해 주세요.")
                 setProccess(true);
             }
         }
@@ -258,11 +258,11 @@ function OwnerSignupPage(props) {
         if (name === 'password' || name === 'checkPassword') {
             if (inputUser.password && inputUser.checkPassword) {
                 if (inputUser.password !== inputUser.checkPassword) {
-                    alert("비밀번호와 확인번호 다시 확인해주세요.")
+                    confirmAlert("비밀번호와 확인번호 다시 확인해주세요.")
                     return;
                 }
             } else {
-                alert("빈 값입니다.");
+                confirmAlert("빈 값입니다.");
                 return
             }
         }

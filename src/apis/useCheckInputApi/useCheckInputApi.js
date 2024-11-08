@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "react-query";
 import { instance } from "../util/instance";
 import { useEffect, useState } from "react";
+import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 
 const useCheckInputApi = () => {
@@ -15,7 +16,7 @@ const useCheckInputApi = () => {
 
   useEffect(() => {
     if (errorData.isError) {
-      alert(errorData.errorMessage);
+      confirmAlert(errorData.errorMessage);
     }
   }, [errorData])
 
@@ -32,7 +33,7 @@ const useCheckInputApi = () => {
       getResponse = await instance.get(`/user/duplicated/${fieldName}?value=${value}`);
       try {
         putResponse = await mutation.mutateAsync({ fieldName, value });
-        alert("변경완료");
+        confirmAlert("변경완료");
         setErrorData({
           idError: false,
           errorField: "",
@@ -42,7 +43,7 @@ const useCheckInputApi = () => {
         })
         queryClient.invalidateQueries("userManagementInfo");
       } catch (e) {
-        alert("변경실패");
+        confirmAlert("변경실패");
       }
     } catch (e) {
       console.log("중복!!!")

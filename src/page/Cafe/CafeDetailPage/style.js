@@ -1,4 +1,4 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
 
 export const layout = css`
     display: flex;
@@ -57,6 +57,21 @@ export const titleLike = css`
     position: relative;
 `;
 
+const heartBeat = keyframes`
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(0.8);
+    }
+    60% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+`;
+
 export const heart = css`
     display: flex;
     flex-direction: row;
@@ -75,6 +90,10 @@ export const heart = css`
         align-items: center;
         margin-right: 10px;
         padding: 0;
+
+        &.animate {
+        animation: ${heartBeat} 0.3s ease-in-out;
+    }
     }
 
     svg {
@@ -135,43 +154,24 @@ export const menuButtons = css`
     flex-direction: row;
     padding: 10px;
     border-bottom: 1px solid #f2780c;
-
-    button {
-        border: 1px solid #f2780c;
-        border-radius: 20px;
-        margin-left: 10px;
-        padding: 5px 20px;
-        font-weight: 600;
-    }
-
-    button:nth-of-type(1) {
-        margin: 0;
-    }
 `;
 
-export const activeButton = (status) => css`
-    ${baseButtonStyle(status)};
-    background-color: ${status ? '#f2780c' : '#ffffff'};
-    color: #111111;
-`;
-
-const baseButtonStyle = (status) => css`
+export const baseButtonStyle = css`
+    margin-right: 15px;
     border-radius: 20px;
-    border: none;
-    color: black;
-    margin: 0 10px 0 0;
-    padding: 5px 13px;
-    cursor: pointer;
-    transition: transform 0.1s ease, background-color 0.1s ease; /* 트랜지션 추가 */
+    border: 1px solid #f2780c;
+    padding: 5px 20px;
     font-size: 14px;
     font-weight: 600;
-    line-height: normal;
-    text-indent: 0;
-    white-space: nowrap;
-    outline: none;  /* 포커스 아웃라인 제거 */
-    transform: ${status ? 'scale(1.13)' : 'scale(1)'}; /* 기본 상태에서의 크기 조정 */
+    transition: transform 0.1s ease, background-color 0.1s ease; /* 트랜지션 추가 */
+    cursor: pointer;
     
     &:active {
-        transform: ${status ? 'scale(1.2)' : 'scale(1.1)'}; /* Active 시 크기 변화 */
+        transform: scale(0.9); /* Active 시 크기 변화 */
     }
+`;
+
+export const activeButton = css`
+    background-color: #f2780c;
+    transform: scale(1);
 `;

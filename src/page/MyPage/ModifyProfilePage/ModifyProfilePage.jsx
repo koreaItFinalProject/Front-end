@@ -74,7 +74,7 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
             img: modifyUserInfo.img
         }));
         if (response.status === 200) {
-            alert("이미지 변경 성공");
+            confirmAlert("이미지 변경 성공");
         }
     }
 

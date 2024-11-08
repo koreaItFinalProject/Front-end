@@ -28,14 +28,14 @@ function UserProfileModify({ user }) {
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
             if (emailNumber == emailCheck) {
-                alert("인증성공");
+                confirmAlert("인증성공");
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
             }
             if (emailNumber != emailCheck) {
-                alert("인증번호가 일치하지 않습니다.");
+                confirmAlert("인증번호가 일치하지 않습니다.");
             }
         }
     }
@@ -47,12 +47,12 @@ function UserProfileModify({ user }) {
         if (name === 'password' || name === 'checkPassword') {
             if (modifyUser.password && modifyUser.checkPassword) {
                 if (modifyUser.password !== modifyUser.checkPassword) {
-                    alert("비밀번호와 확인번호 다시 확인해주세요.")
+                    confirmAlert("비밀번호와 확인번호 다시 확인해주세요.")
                     return;
                 }
             }
             else {
-                alert("빈 값입니다.");
+                confirmAlert("빈 값입니다.");
                 return
             }
         }
@@ -78,7 +78,7 @@ function UserProfileModify({ user }) {
         } else if (timer === 0 && emailCheckState) {
             setIsTimerRunning(false);
             setEmailCheckState(false);
-            alert("인증시간을 초과하였습니다.");
+            confirmAlert("인증시간을 초과하였습니다.");
         } else if (isTimerStopped === false && isTimerRunning === true) {
             setTimer(0);
         }
@@ -101,7 +101,7 @@ function UserProfileModify({ user }) {
 
         } catch (error) {
             console.error("Error occurred:", error);
-            alert("이메일 인증 요청 중 오류가 발생했습니다.");
+            confirmAlert("이메일 인증 요청 중 오류가 발생했습니다.");
         }
     }
 

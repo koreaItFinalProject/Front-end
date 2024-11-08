@@ -1,5 +1,4 @@
 import { css } from "@emotion/react";
-import { logo } from "../../assets/image";
 
 export const layout = css`
     position: relative;
@@ -41,30 +40,28 @@ export const inputbox = css`
     position: relative;
     width: 100%;
     padding: 0px;
+
     input {
         height: 100%;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         padding: 10px 15px;
-        font-size: 15px;
+        font-size: 18px;
         width: 100%;
         outline: none;
         border: none;
         font-size: 20px;
         background-color: #ffffff;
 
-
         &::placeholder{
-        font-family: 'Kulim Park';
-        font-style: normal;
         font-weight: 300;
-        font-size: 20px;
+        font-size: 18px;
         line-height: 23px;
         color: #B4B4B4;
-        
         }
     }
 `;
+
 export const selectbutton = css`
     display: flex;
     position: absolute;
@@ -75,7 +72,7 @@ export const selectbutton = css`
 export const icon = css`
     position: relative;
     top: 2px;
-`
+`;
 
 export const map = css`
     display: flex;
@@ -91,20 +88,24 @@ export const cafeContainer = css`
     bottom: 5px;
     left: 50%;
     transform: translateX(-50%);
-    
     padding: 10px 20px;
     border-radius: 20px;
-    
     z-index: 100;
     width: calc(100% - 40px); // 전체 너비에서 패딩을 뺀 너비 설정
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
     button {
         padding: 0px;
         padding-top: 5px;
         height: 50px;
         width: 50px;
-        border: 1px solid #bbbbbb;
+        border: 1px solid #f2780c;
         background-color: #ffffff;
         border-radius: 100%;
+
+        :active {
+            background-color: #eeeeee;
+        }
     }
 `;
 
@@ -129,16 +130,16 @@ export const cafeInfo = (slide) => css`
     padding: 15px;
     background: #ffffff;
     border-radius: 10px;
-    border: 1px solid #bbbbbb;
+    border: 1px solid #eeeeee;
     cursor: pointer;
-    `;
+`;
 
 export const listBox = css`
     display: flex;
     flex-direction: column;
     gap: 10px;
     height: 100%;
-    margin-left: 10px;
+    margin-left: 15px;
     
     h3 {
         margin: 0;

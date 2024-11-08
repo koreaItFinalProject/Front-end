@@ -1,4 +1,5 @@
 import { instance } from "../util/instance";
+import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
 const modifyCafeBannerApi = async (cafeId, img) => {
     let response = null;
@@ -7,7 +8,7 @@ const modifyCafeBannerApi = async (cafeId, img) => {
         return response;
     } catch (error) {
         console.error(error);
-        alert("이미지 교체 실패")
+        confirmAlert("이미지 교체 실패")
     }
 }
 

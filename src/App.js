@@ -14,7 +14,6 @@ import MyPage from './page/MyPage/MyPage';
 import CafeListPage from './page/Cafe/CafeListPage/CafeListPage';
 import CafeDetailPage from './page/Cafe/CafeDetailPage/CafeDetailPage';
 import BoardListPage from './page/Board/BoardListPage/BoardListPage';
-import CafeReviewPage from './page/Cafe/CafeReviewPage/CafeReviewPage';
 import CafeReviewModifyPage from './page/Cafe/CafeReviewModifyPage/CafeReviewModifyPage';
 import OAuth2Signup from './page/SignupPage/OAuth2Signup/OAuth2Signup';
 import ModifyProfilePage from './page/MyPage/ModifyProfilePage/ModifyProfilePage';
@@ -40,6 +39,8 @@ import NoticeDetailPage from './page/Cafe/NoticeDetailPage/NoticeDetailPage';
 import UserSignupSelectPage from './page/UserSignupSelectPage/UserSignupSelectPage';
 import { pageCounter } from './atom/pageCount';
 import { useRecoilState } from 'recoil';
+import { confirmAlert } from './apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import CafeReviewWritePage from './page/Cafe/CafeReviewWritePage/CafeReviewWritePage';
 
 ReactModal.setAppElement('#root');
 
@@ -63,7 +64,6 @@ function App() {
     }
 
     setPageCount(pageCount + 1);
-    console.log(pageCount);
     console.log("히스토리" + window.history.length);
   }, [location.pathname]);
 
@@ -113,7 +113,7 @@ function App() {
         const blockPaths = ["/user"];
         for (let blockPath of blockPaths) {
           if (location.pathname.startsWith(blockPath)) {
-            alert("잘못된 요청입니다.");
+            confirmAlert("잘못된 요청입니다.");
             navigate(-1);
             break;
           }
@@ -123,7 +123,7 @@ function App() {
         const authPaths = ["/mypage", "/owner", "/admin", "/manager"];
         for (let authPath of authPaths) {
           if (location.pathname.startsWith(authPath)) {
-            alert("로그인 후 이용해주세요")
+            confirmAlert("로그인 후 이용해주세요")
             navigate('/user/select/signup');
             break;
           }
@@ -193,7 +193,7 @@ function App() {
               <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='detail/:cafeId' element={<CafeDetailPage />} />
               <Route path='notice/detail/:boardId' element={<NoticeDetailPage />} />
-              <Route path='review/:cafeId' element={<CafeReviewPage />} />
+              <Route path='review/:cafeId' element={<CafeReviewWritePage />} />
               <Route path='review/modify/:cafeId' element={<CafeReviewModifyPage />} />
             </Routes>
           </MainLayout>
