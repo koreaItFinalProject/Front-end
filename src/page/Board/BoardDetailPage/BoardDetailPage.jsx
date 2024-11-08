@@ -24,6 +24,7 @@ function BoardDetailPage(props) {
     const deleteBoard = useDeleteBoardMutation(boardId, "boardListQuery");
     const [mode, setMode] = useState("comment");
     const [replyTo, setReplyTo] = useState("");
+    const [isAnimating, setIsAnimating] = useState(false);
     const [commentData, setCommentData] = useState({
         boardId,
         parentId: null,
@@ -139,7 +140,17 @@ function BoardDetailPage(props) {
         setReplyTo("");
     };
 
-    console.log(board);
+    const handleLikeClick = () => {
+        setIsAnimating(true);
+        handleLikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
+
+    const handleDislikeClick = () => {
+        setIsAnimating(true);
+        handleDislikeOnClick();
+        setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
+    };
 
     return (
         <div css={s.layout}>
@@ -189,11 +200,15 @@ function BoardDetailPage(props) {
                             {
                                 !!boardLike?.data?.data?.boardLikeId
                                     ?
-                                    <button onClick={handleDislikeOnClick}>
+                                    <button onClick={handleDislikeClick}
+                                        className={isAnimating ? 'animate' : ''}
+                                    >
                                         <IoMdHeart style={{ fill: '#f2780c' }} />
                                     </button>
                                     :
-                                    <button onClick={handleLikeOnClick}>
+                                    <button onClick={handleLikeClick}
+                                        className={isAnimating ? 'animate' : ''}
+                                    >
                                         <IoMdHeartEmpty />
                                     </button>
                             }

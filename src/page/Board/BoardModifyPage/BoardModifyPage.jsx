@@ -12,7 +12,6 @@ import { useModifyBoardMutation } from '../../../apis/modifyBoardApi';
 import { useQueryClient } from 'react-query';
 import { RingLoader } from "react-spinners";
 import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
-import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 Quill.register("modules/imageResize", ImageResize);
 
 function BoardModifyPage(props) {
