@@ -17,13 +17,12 @@ function MainLayout({ children, setCheck, setInputvalue }) {
     const isNoFooter = noFooterPaths.some(path => location.pathname.includes(path));
     const [pageCount, setPageCount] = useRecoilState(pageCounter);
     const [historyStack, setHistoryStack] = useState([]);
-    const [select, setSelect] = useState(false);
 
     useEffect(() => {
         setHistoryStack(prevStack => [...prevStack, location.pathname])
-        setSelect(false);
+        console.log(location.pathname);
 
-        if (location.pathname !== "/user/select/signup" || '/owner/mypage' || '/mypage' && location.pathname !== "/user/signin") {
+        if (location.pathname !== "/user/sigin" && location.pathname !== "/user/signup" && location.pathname !== "/user/owner/signup" && location.pathname !== "/user/find") {
             setHistoryStack([]);
         }
     }, [location.pathname])
@@ -38,6 +37,8 @@ function MainLayout({ children, setCheck, setInputvalue }) {
     const resetAnimationDirection = () => {
         setanimationDirection('right-to-left');
     }
+
+    console.log(historyStack);
 
     return (
         <div css={s.background}>
@@ -63,7 +64,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                                     key={location.pathname}
                                     className="page"
                                     initial={{
-                                        opacity: 0.3, x: (location.pathname === "/user/select/signup" && historyStack.length === 0)
+                                        opacity: 0.3, x: (location.pathname === "/user/signin" && historyStack.length === 0)
                                             || pageCount != 0 ? '100%' : '-100%'
                                     }} // 들어오는 위치
                                     animate={{ opacity: 1, x: 0 }} // 새 페이지 위치
