@@ -26,13 +26,12 @@ function ManagerSetting(props) {
 );
 console.log(report)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (id, type) => {
 
     const requestBody = {
       type: type,
-      userId: userId ? userId : "",
-      content: content,
+      userId: id,
+      content: type === "공지사항"? content: type + " 수정해주세요.",
     };
     try {
       console.log(requestBody);
@@ -82,7 +81,7 @@ console.log(report)
                       <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.content}</td>
                       <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportDate}</td>
                       <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportCount}</td>
-                      <td>수정요청</td>
+                      <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
                       <td>삭제</td>
                       </>
                       :
@@ -92,7 +91,7 @@ console.log(report)
                       <td >{result.content}</td>
                       <td >{result.reportDate}</td>
                       <td >{result.reportCount}</td>
-                      <td>수정요청</td>
+                      <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
                       <td >삭제</td>
                     </>
                     }
@@ -117,7 +116,7 @@ console.log(report)
           메세지 타입:
           <input type="text" value={type} onChange={(e) => setType(e.target.value)} />
         </div>
-        <button type="submit">공지사항 보내기</button>
+        <button onClick={() => handleSubmit(userId, type)}>공지사항 보내기</button>
       </form>
       </div>
   );
