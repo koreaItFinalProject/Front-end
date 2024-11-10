@@ -5,8 +5,6 @@ import * as s from "./style";
 import { confirmAlert } from '../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 import EmailDuplicateCheckValue from '../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
 import emailApi from '../../apis/emailApis/emailApi';
-import useCheckInputApi from '../../apis/useCheckInputApi/useCheckInputApi';
-import { instance } from '../../apis/util/instance';
 import FindByUserPasswordChange from '../../apis/userFindByInfo/FindByUserPasswordChange';
 import { useNavigate } from 'react-router-dom';
 

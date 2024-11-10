@@ -78,6 +78,15 @@ function BoardDetailPage(props) {
         }
     );
 
+    const reportMutation = useMutation(
+        async(report) => await instance.post("/report", report),
+        {
+            onSuccess: (response) => {
+                confirmAlert(response.data);
+            }
+        }
+    )
+
     const handleDeleteBoardOnClick = async () => {
         const selection = await confirmCancelAlert("게시글을 삭제하시겠습니까?");
         if (selection) {
@@ -158,6 +167,26 @@ function BoardDetailPage(props) {
         setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
     };
 
+    const handleReportOnClick = async(board) => {
+        if (!userInfoData?.data) {
+            confirmAlert("로그인을 하신 후 이용해 주시기 바랍니다.");
+            return;
+        }
+
+        if(await confirmCancelAlert("정말 신고하시겠습니까?")){
+            const requstBody = {
+                contentId: board?.id,
+                content: board?.title,
+                reportId: userInfoData?.data?.userId,
+                reportType: "게시글",
+            }
+            reportMutation.mutateAsync(requstBody);
+        }
+        console.log(board)
+        return;
+        
+    }
+
     return (
         <div css={s.layout}>
             <BackButton prevPage={"게시판"} prevPageUrl={"/board"} />
@@ -190,6 +219,7 @@ function BoardDetailPage(props) {
                                             <button onClick={handleDeleteBoardOnClick}>삭제</button>
                                         </>
                                     }
+                                    <button onClick={() => handleReportOnClick(board?.data?.data)}>신고</button>
                                 </div>
                             </div>
                         </div>

@@ -3,20 +3,35 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import { instance } from '../../../../apis/util/instance';
 import { confirmAlert } from '../../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import { useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 function ManagerSetting(props) {
+  const navigate = useNavigate();
   const [content, setNotice] = useState('');
   const [userId, setUserId] = useState("");
   const [type, setType] = useState("");
   const [sendToAll, setSendToAll] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+
+  const report = useQuery(
+    ["reportQuery"],
+    async () => {
+        return await instance.get("/report/get");
+    },
+    {
+        refetchOnWindowFocus: false,
+        retry: 0,
+    }
+);
+console.log(report)
+
+  const handleSubmit = async (id, type) => {
 
     const requestBody = {
       type: type,
-      userId: userId ? userId : "",
-      content: content,
+      userId: id,
+      content: type === "공지사항"? content: type + " 수정해주세요.",
     };
     try {
       console.log(requestBody);
@@ -39,23 +54,71 @@ function ManagerSetting(props) {
     }
   };
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        공지사항:
-        <textarea
-          value={content}
-          onChange={(e) => setNotice(e.target.value)}
-          required
-        />
-        <div>
-          유저 아이디:
-          <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
+      <div css={s.mainLayout}>
+        <div css={s.listContainer}>
+          <table css={s.cafeListTable}>
+            <tr>
+              <th>순번</th>
+              <th>신고 유형</th>
+              <th>내용</th>
+              <th>날짜</th>
+              <th>신고 수</th>
+              <th>수정요청</th>
+              <th>삭제</th>
+            </tr>
+            <tr>
+              
+            </tr>
+            {
+              report?.data?.data?.map((result, index) => (
+                <>
+                  <tr key={index}>
+                    {
+                      result.reportType === "게시글"?
+                      <>
+                      <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{index + 1}</td>
+                      <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportType}</td>
+                      <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.content}</td>
+                      <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportDate}</td>
+                      <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportCount}</td>
+                      <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
+                      <td>삭제</td>
+                      </>
+                      :
+                      <>
+                      <td >{index + 1}</td>
+                      <td >{result.reportType}</td>
+                      <td >{result.content}</td>
+                      <td >{result.reportDate}</td>
+                      <td >{result.reportCount}</td>
+                      <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
+                      <td >삭제</td>
+                    </>
+                    }
+                  </tr>
+                </>
+              ))
+            }
+          </table>
         </div>
-        메세지 타입:
-        <input type="text" value={type} onChange={(e) => setType(e.target.value)} />
+      <form onSubmit={handleSubmit}>
+        <div>
+          공지사항:
+          <textarea
+            value={content}
+            onChange={(e) => setNotice(e.target.value)}
+            required
+          />
+          <div>
+            유저 아이디:
+            <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
+          </div>
+          메세지 타입:
+          <input type="text" value={type} onChange={(e) => setType(e.target.value)} />
+        </div>
+        <button onClick={() => handleSubmit(userId, type)}>공지사항 보내기</button>
+      </form>
       </div>
-      <button type="submit">공지사항 보내기</button>
-    </form>
   );
 }
 
