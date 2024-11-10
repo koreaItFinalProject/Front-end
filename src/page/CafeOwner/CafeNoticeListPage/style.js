@@ -5,185 +5,152 @@ export const layout = css`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    padding: 0 10px;
     width: 100%;
     height: 100%;
-    background-color: #191919;
+    background-color: #ffffff;
     overflow: hidden;
 `;
 
-export const searchContainer = css`
+export const header = css`
+    display: flex;
+    flex-direction: column;
+    padding: 0px 15px 0;
+    border-bottom: 1px solid #eeeeee;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const inputHeader = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    position: relative;
+    gap: 20px;
+`;
+
+export const box = css`
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
     width: 100%;
-    height: 40px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
+    border: 2px solid #ffffff;
+    border-radius: 20px;
+    padding: 2px 10px 2px 2px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    
+    h2 {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        padding: 0 20px;
+        height: 100%;
+        border-radius: 20px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #ff675b;
+        cursor: default;
+    }
 
     input {
-        width: 530px;
-        padding: 10px 70px 10px 20px;
+        height: 100%;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px 15px;
+        font-size: 18px;
+        width: 100%;
+        outline: none;
         border: none;
-        border-radius: 20px;
+        font-size: 20px;
         background-color: #ffffff;
+
+        &::placeholder{
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 23px;
+        color: #B4B4B4;
+        }
     }
 
-    input::placeholder {
-        color: #b4b4b4;
-    }
-
-    button:nth-of-type(1) {
-        position: absolute;
-        right: 117px;
-        top: 50%;
-        transform: translateY(-50%);
-        padding: 5px 15px;
-        border-radius: 20px;
-        font-weight: 600;
-        background-color: #f2780c;
-    }
-
-    button:nth-of-type(2) {
+    button {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 100px;
         height: 100%;
-        border-radius: 25px;
-        background-color: #f2780c;
-        font-weight: 600;
+        border: none;
+        border-radius: 20px;
+        padding: 0;
+        text-align: center;
+        outline: none;
 
         svg {
-            width: 15px;
-            height: 15px;
-            margin-left: 5px;
-            fill: #191919;
+            width: 100%;
+            height: 100%;
         }
     }
 `;
 
 export const boardNavigater = css`
-    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-bottom: 15px;
+
+    button {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    }
+`;
+
+export const writeButton = css`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 7px 20px;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #2f4858;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+
+    svg {
+        margin-top: 2px;
+        margin-left: 5px;
+        fill: #ffffff;
+        width: 20px;
+        height: 20px;
+    }
 `;
 
 export const sortButton = css`
-    border-radius: 20px;
-    border: none;
-    color: black;
     margin: 0 10px 0 0;
-    padding: 5px 13px;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    outline: none;
-    background-color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 `;
 
 export const activeButton = css`
-    border-radius: 20px;
-    border: none;
-    color: black;
     margin: 0 10px 0 0;
-    padding: 5px 13px;
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-    outline: none;
-    background-color: #f2780c;
+    border: none;
+    border-radius: 20px;
+    padding: 7px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #2f4858;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-`;
-
-export const boardListLayout = css`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-grow: 1;
-    overflow-y: auto;
-`;
-
-export const noticeLayout = css`
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    cursor: pointer;
-`;
-
-export const noticeInfoLayout = css`
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    h1 {
-        font-size: 18px;
-        font-weight: 600;
-    }
-
-    p {
-        margin: 0;
-        margin-right: 10px;
-        color: #aaaaaa;
-    }
-
-`;
-
-export const writerAndWriteDate = css`
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 5px;
-
-    p {
-        font-size: 14px;
-    }
-`;
-
-export const counts = css`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    p {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 14px;
-    }
-
-    svg {
-        padding-top: 2px;
-        margin-right: 3px;
-    }
-    
-`;
-
-export const noticeImgContainer = css`
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px;
-    height: 130px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    overflow: hidden;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 10px;
-    }
 `;
 
 export const ref = css`

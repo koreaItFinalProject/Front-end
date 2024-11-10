@@ -3,5 +3,7 @@
     "editor.insertSpaces": true,
     "editor.renderLineHighlight": "none",
     "editor.renderLineHighlightOnlyWhenFocus": false,
-    "editor.selectionHighlight": true
+    "editor.selectionHighlight": true,
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.preferredDarkColorTheme": "One Dark Pro"
 }

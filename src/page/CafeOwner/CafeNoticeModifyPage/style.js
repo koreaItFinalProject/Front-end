@@ -51,7 +51,7 @@ export const buttonLayout = css`
     button {
         padding: 0;
         font-weight: 600;
-        color: #f2780c;
+        color: #ff675b;
 
         &:disabled {
             color: #aaaaaa;

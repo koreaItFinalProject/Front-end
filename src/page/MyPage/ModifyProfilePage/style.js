@@ -71,7 +71,7 @@ export const userInfo = css`
     margin-left: 50px;
 
     button {
-        padding: 5px 10px;
+        padding: 5px 20px;
         border: 1px solid #111111;
         border-radius: 20px;
     }
@@ -95,7 +95,7 @@ export const userDetailInfo = css`
     p:nth-of-type(2) {
         font-size: 18px;
         font-weight: 600;
-        border-bottom: 1px solid #f2780c;
+        border-bottom: 1px solid #ff675b;
     }
 `;
 

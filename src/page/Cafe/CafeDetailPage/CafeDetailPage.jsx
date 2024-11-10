@@ -83,7 +83,7 @@ function CafeDetailPage() {
                                                 onClick={handleDislikeClick}
                                                 className={isAnimating ? 'animate' : ''}
                                             >
-                                                <IoMdHeart style={{ fill: '#f2780c' }} />
+                                                <IoMdHeart style={{ fill: '#ff675b' }} />
                                             </button>
                                             :
                                             <button

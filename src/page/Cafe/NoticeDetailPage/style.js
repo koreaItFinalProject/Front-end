@@ -23,8 +23,6 @@ export const header = css`
     display: flex;
     flex-direction: column;
     padding: 10px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     background-color: #ffffff;
 `;
 
@@ -97,7 +95,7 @@ export const contentBox = css`
     box-sizing: border-box;
     background-color: #ffffff;
     cursor: default;
-    border-bottom: 5px solid #f2780c;
+    border-bottom: 5px solid #ff675b;
 
     img {
         border-radius: 20px;

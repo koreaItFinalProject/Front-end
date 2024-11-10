@@ -25,7 +25,7 @@ export const commentListContainer = (level) => css`
     flex-direction: column;
     margin-bottom: 15px;
     margin-left: ${level * 3}%;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
 `;
 
 export const userInfo = css`
@@ -74,7 +74,7 @@ export const replyButton = css`
         padding: 5px 5px;
         font-size: 12px;
         font-weight: 600;
-        color: #f2780c;
+        color: #ff675b;
     }
 `;
 
@@ -115,7 +115,7 @@ export const commentWriteBox = css`
         position: relative;
         z-index: 99;
         right: 100px;
-        background-color: #f2780c;
+        background-color: #ff675b;
         cursor: pointer;
     }
 `;

@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 function MainLayout({ children, setCheck, setInputvalue }) {
     const location = useLocation();
-    const noFooterPaths = ['/board/detail', '/cafe/modify'];
+    const noFooterPaths = ['/board/detail', '/cafe/modify', '/cafe/review', '/board/write', '/board/modify', '/owner/notice'];
     const [animationDirection, setanimationDirection] = useRecoilState(animationDirectionState);
     const isNoFooter = noFooterPaths.some(path => location.pathname.includes(path));
     const [pageCount, setPageCount] = useRecoilState(pageCounter);
@@ -20,7 +20,6 @@ function MainLayout({ children, setCheck, setInputvalue }) {
 
     useEffect(() => {
         setHistoryStack(prevStack => [...prevStack, location.pathname])
-        console.log(location.pathname);
 
         if (location.pathname !== "/user/sigin" && location.pathname !== "/user/signup" && location.pathname !== "/user/owner/signup" && location.pathname !== "/user/find") {
             setHistoryStack([]);
@@ -37,8 +36,6 @@ function MainLayout({ children, setCheck, setInputvalue }) {
     const resetAnimationDirection = () => {
         setanimationDirection('right-to-left');
     }
-
-    console.log(historyStack);
 
     return (
         <div css={s.background}>
@@ -74,7 +71,7 @@ function MainLayout({ children, setCheck, setInputvalue }) {
                                     transition={{ duration: 0.7 }}
                                     // onAnimationComplete={resetAnimationDirection}
                                     style={{ position: 'absolute', width: '100%', top: 0, zIndex: 1 }}
-                                    onClick={(resetAnimationDirection, console.log(historyStack))}
+                                    onClick={(resetAnimationDirection)}
                                 >
                                     {children}
                                 </motion.div>

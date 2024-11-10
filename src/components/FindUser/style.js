@@ -52,7 +52,7 @@ export const loginInput = css`
         margin: 10px 0px;
         color: #ffffff;
         font-weight: 600;
-        background-color: #F2780C;
+        background-color: #ff675b;
         height: 40px;
         display: flex;
         align-items: center;
@@ -69,7 +69,7 @@ export const loginTitle = css`
     & p {
         margin: 0;
         margin-bottom: 20px;
-        color: #F2780C;
+        color: #ff675b;
         font-size: 30px;
         font-weight: 700;
     }
@@ -99,11 +99,11 @@ export const foundInfo = css`
 
         & li {
             padding: 0px 15px;
-            border-right: 1px solid #F2780C;
+            border-right: 1px solid #ff675b;
             font-weight: 600;
             cursor: pointer;
             & button {
-                color: #F2780C;
+                color: #ff675b;
                 font-size: 12px;
             }
         }
@@ -115,7 +115,7 @@ export const emailTimer = css`
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    border-bottom: 1px solid #F2780C;
+    border-bottom: 1px solid #ff675b;
     width: 380px;
     & input {
         width: 120px;

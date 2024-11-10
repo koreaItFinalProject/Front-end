@@ -1,6 +1,10 @@
 import { css } from "@emotion/react";
 
 export const cardLayout = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0 100px;
     width: 100%;
     height: 100%;
     overflow-y: scroll;
@@ -12,8 +16,10 @@ export const card = css`
     flex-direction: column;
     margin-bottom: 10px;
     border-radius: 10px;
+    width: calc(100% - 30px);
     box-shadow: 0px 3px 5px #00000011;
     background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 `;
 
@@ -98,7 +104,7 @@ export const cardFooter = css`
             margin-right: 10px;
             font-size: 20px;
             font-weight: 600;
-            color: #f2780c;
+            color: #ff675b;
         }
 
         p {
@@ -114,7 +120,7 @@ export const cardFooter = css`
             width: 30px;
             height: 30px;
             margin-right: 5px;
-            fill: #f2780c;
+            fill: #ff675b;
             }
 
             span {

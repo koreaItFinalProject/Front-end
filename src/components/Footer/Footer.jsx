@@ -18,6 +18,7 @@ function Footer({ setCheck, setInputvalue }) {
     const loginCheck = queryClient.getQueryData("accessTokenValidQuery");
     const accessCheck = queryClient.getQueryData("userInfoQuery");
     const setPageCount = useSetRecoilState(pageCounter);
+    
     const handleListClick = () => {
         navigate('/cafe/list');
         setCheck("전체");

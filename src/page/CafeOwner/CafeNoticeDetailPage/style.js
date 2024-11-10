@@ -23,8 +23,6 @@ export const header = css`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     background-color: #ffffff;
 `;
 

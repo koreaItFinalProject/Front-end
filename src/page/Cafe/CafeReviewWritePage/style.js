@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
-    background-color: #191919;
+    background-color: #ffffff;
     overflow: auto;
 `;
 
@@ -13,10 +14,8 @@ export const rating = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 20px 10px;
+    padding: 0 20px 10px;
     gap: 10px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     background-color: #ffffff;
 
     h1 {
@@ -57,14 +56,14 @@ export const buttons = css`
 
     button {
         padding: 5px 10px;
-        border: 1px solid #f2780c;
+        border: 1px solid #ff675b;
         border-radius: 36px;
         font-weight: 500;
     }
 `;
 
 export const activeButton = css`
-    background-color: #f2780c;
+    background-color: #ff675b;
 `;
 
 export const review = css`
@@ -86,7 +85,7 @@ export const review = css`
         padding: 10px 250px;
         border-radius: 10px;
         color: #ffffff;
-        background-color: #f2780c;
+        background-color: #ff675b;
     }
 `;
 
@@ -110,6 +109,7 @@ export const count = css`
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    margin-bottom: 50px;
     
     span {
         font-size: 14px;

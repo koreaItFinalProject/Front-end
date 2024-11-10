@@ -6,6 +6,7 @@ import useWriteCommentMutation from '../../../apis/CommentApis/writeCommentApi';
 import useGetComments from '../../../apis/CommentApis/getCommentsApi';
 import useModifyCommentMutation from '../../../apis/CommentApis/modifyCommentApi';
 import { useQueryClient } from 'react-query';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function BoardFooter({ mode, setMode, boardId, commentData, setCommentData, replyTo, setReplyTo }) {
     const queryClient = useQueryClient();
@@ -29,7 +30,14 @@ function BoardFooter({ mode, setMode, boardId, commentData, setCommentData, repl
             modifyCommentMutation.mutateAsync();
         }
         setMode('comment')
-    };
+    }
+
+    const handleInputClick = () => {
+        if (!userInfo) {
+            confirmAlert('로그인 후 사용가능합니다.');
+            return;
+        }
+    }
 
     return (
         <div css={s.layout}>
@@ -40,13 +48,14 @@ function BoardFooter({ mode, setMode, boardId, commentData, setCommentData, repl
                 <input
                     value={commentData.content}
                     onChange={handleCommentInputOnChange}
+                    onClick={handleInputClick}
                     placeholder={replyTo ? `${replyTo}님에게 답글 작성` : '댓글 추가...'}
                 />
                 <button
                     onClick={handleCommentSubmitOnClick}
                     disabled={commentData.content.trim() === ''}
                 >
-                    <FaArrowCircleUp size={30} fill='#f2780c' />
+                    <FaArrowCircleUp size={30} fill='#ff675b' />
                 </button>
             </div>
         </div>

@@ -7,7 +7,7 @@ const baseButtonStyle = (status) => css`
     padding: 7px 20px;
     font-size: 16px;
     font-weight: 500;
-    box-shadow: 0px 0px 10px 4px #00000044;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
 `;
 

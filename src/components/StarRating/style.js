@@ -15,7 +15,7 @@ export const reviewStat = css`
 
 export const ratingStarOver = css`
     cursor: pointer;
-    fill: #f2780c;
+    fill: #ff675b;
 `;
 
 export const ratingStarOut = css`

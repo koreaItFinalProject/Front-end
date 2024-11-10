@@ -12,7 +12,7 @@ export const AllPost = css`
   & h2, h3 {
     margin-bottom: 10px;
   }
-  border-bottom: 3px solid #F2780C;
+  border-bottom: 3px solid #ff675b;
 `;
 
 export const AlramList = css`
@@ -35,7 +35,7 @@ export const AlramList = css`
 
 export const layout = css`
     position: relative;
-    border-bottom: 1px solid #F2780C;
+    border-bottom: 1px solid #ff675b;
     height: 100px;
     & tr{
         display: flex;
@@ -43,7 +43,7 @@ export const layout = css`
         cursor: pointer;
         width: 100%;
         & td:nth-last-child(2){
-            color: #f2780c;
+            color: #ff675b;
             text-decoration: underline;
             box-sizing: border-box;
         }

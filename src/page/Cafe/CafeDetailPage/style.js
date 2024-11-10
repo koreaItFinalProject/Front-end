@@ -21,8 +21,6 @@ export const bannerImg = css`
     width: 100%;
     height: 220px;
     padding: 20px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
     background-color: #ffffff;
 
     img {
@@ -137,7 +135,7 @@ export const detailInfo = css`
     }
 
     div:nth-of-type(1) {
-        color: #f2780c;
+        color: #ff675b;
     }
 `;
 
@@ -153,13 +151,13 @@ export const menuButtons = css`
     display: flex;
     flex-direction: row;
     padding: 10px;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
 `;
 
 export const baseButtonStyle = css`
     margin-right: 15px;
     border-radius: 20px;
-    border: 1px solid #f2780c;
+    border: 1px solid #ff675b;
     padding: 5px 20px;
     font-size: 14px;
     font-weight: 600;
@@ -172,6 +170,7 @@ export const baseButtonStyle = css`
 `;
 
 export const activeButton = css`
-    background-color: #f2780c;
+    color: #ffffff;
+    background-color: #ff675b;
     transform: scale(1);
 `;

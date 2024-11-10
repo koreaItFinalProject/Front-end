@@ -88,7 +88,7 @@ export const title = css`
 
 export const cafeNameInput = css`
     height: 45px;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
 `;
 
 export const editButton = css`
@@ -98,7 +98,7 @@ export const editButton = css`
     svg {
         width: 30px;
         height: 30px;
-        fill: #f2780c;
+        fill: #ff675b;
         cursor: pointer;
     }
 `;
@@ -141,7 +141,7 @@ export const detailInfo = css`
     }
 
     div:nth-of-type(1) {
-        color: #f2780c;
+        color: #ff675b;
     }
 
     select {
@@ -165,7 +165,7 @@ export const menuButtons = css`
     display: flex;
     flex-direction: row;
     padding: 10px;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
 
     button {
         border: 1px solid #000000;
@@ -181,6 +181,6 @@ export const menuButtons = css`
 `;
 
 export const activeButton = css`
-    background-color: #f2780c;
+    background-color: #ff675b;
     color: #111111;
 `;

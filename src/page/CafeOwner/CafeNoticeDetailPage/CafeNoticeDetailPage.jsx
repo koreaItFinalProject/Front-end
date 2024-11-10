@@ -190,7 +190,7 @@ function CafeNoticeDetailPage(props) {
                                 !!boardLike?.data?.data?.boardLikeId
                                     ?
                                     <button onClick={handleDislikeOnClick}>
-                                        <IoMdHeart style={{ fill: '#f2780c' }} />
+                                        <IoMdHeart style={{ fill: '#ff675b' }} />
                                     </button>
                                     :
                                     <button onClick={handleLikeOnClick}>

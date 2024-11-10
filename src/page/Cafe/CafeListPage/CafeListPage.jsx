@@ -6,8 +6,6 @@ import SelectCategory from '../../../components/SelectCategory/SelectCategory';
 import { useCafeQuery } from '../../../apis/CafeApis/getCafeListApi';
 import { MdRateReview } from "react-icons/md";
 import { IoMdHeart } from "react-icons/io";
-import { IoIosSearch } from "react-icons/io";
-import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
 
 function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
     const navigate = useNavigate();
@@ -54,30 +52,26 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
 
     const handleSortChange = (e) => {
         setSortOption(e.target.value);
-    };
+    }
 
     return (
         <div css={s.layout}>
             <div css={s.header}>
                 <div css={s.box}>
                     <h2>CafeInBusan</h2>
-                    <div css={s.inputbox}>
-                        <input type="text"
-                            value={inputdata}
-                            onChange={handleInputOnChange}
-                            onKeyDown={handleInputKeyPress}
-                            spellCheck="false"
-                            placeholder='카페를 검색하세요'
-                        />
-                    </div>
-                    <div css={s.searchContainer}>
-                        <select onChange={handleSortChange}>
-                            <option value="like">인기순</option>
-                            <option value="review">리뷰순</option>
-                        </select>
-                    </div>
+                    <input type="text"
+                        value={inputdata}
+                        onChange={handleInputOnChange}
+                        onKeyDown={handleInputKeyPress}
+                        spellCheck="false"
+                        placeholder='카페를 검색하세요'
+                    />
+                    <select onChange={handleSortChange}>
+                        <option value="like">인기순</option>
+                        <option value="review">리뷰순</option>
+                    </select>
                 </div>
-                <div css={s.selectbutton}>
+                <div>
                     <SelectCategory check={check} setCheck={setCheck} />
                 </div>
             </div>

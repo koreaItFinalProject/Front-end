@@ -18,7 +18,7 @@ export const AllPost = css`
 export const select = css`
   display: flex;
   justify-content: end;
-  border-bottom: 5px solid #F2780C;
+  border-bottom: 5px solid #ff675b;
   margin-bottom:10px;
   & button {
     font-size: 14px;
@@ -52,7 +52,7 @@ export const content = css`
 export const layout = css`
   position: relative;
   display: flex;
-  border-bottom: 1px solid #F2780C;
+  border-bottom: 1px solid #ff675b;
   margin-bottom: 15px;
   height: 110px;
 `;

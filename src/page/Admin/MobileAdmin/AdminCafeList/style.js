@@ -18,7 +18,7 @@ export const AllPost = css`
 export const select = css`
   display: flex;
   justify-content: end;
-  border-bottom: 5px solid #F2780C;
+  border-bottom: 5px solid #ff675b;
   margin-bottom:10px;
   & button {
     font-size: 14px;
@@ -38,7 +38,7 @@ export const select = css`
 export const layout = css`
   position: relative;
   display: flex;
-  border-bottom: 1px solid #F2780C;
+  border-bottom: 1px solid #ff675b;
   margin-bottom: 15px;
   height: 130px;
 `;
@@ -84,7 +84,7 @@ export const title = css`
     box-sizing: border-box;
     & p:nth-of-type(1){
       cursor: pointer;
-      color: #f2780c;
+      color: #ff675b;
       box-sizing: border-box;
       text-decoration: underline;
     }
@@ -95,7 +95,7 @@ export const title = css`
 `;
 
 export const category = css`
-  color:#f2780c;
+  color:#ff675b;
   font-size: 12px;
 `
 

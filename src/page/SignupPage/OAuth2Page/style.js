@@ -47,7 +47,7 @@ export const loginLayout = css`
         border-radius: 10px;
         color: #ffffff;
         font-weight: 600;
-        background-color: #F2780C;
+        background-color: #ff675b;
         height: 40px;
         width: 380px;
     }
@@ -60,7 +60,7 @@ export const logo = css`
         font-size: 30px;
         font-weight: 700;
         margin: 0;
-        color: #F2780C;
+        color: #ff675b;
     }
 `;
 

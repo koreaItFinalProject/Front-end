@@ -24,7 +24,7 @@ export const profileBox = css`
     justify-content: center;
     width: 100%;
     height: 225px;
-    border-bottom: 3px solid #f2780c;
+    border-bottom: 3px solid #ff675b;
     background-color: #ffffff;
 `;
 
@@ -48,7 +48,7 @@ export const menu = css`
     padding: 0 10px;
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
     cursor: pointer;
     
     svg {
@@ -66,7 +66,7 @@ export const menu = css`
 
     p:nth-of-type(2) {
         font-size: 16px;
-        color: #f2780c;
+        color: #ff675b;
         font-weight: 500;
     }
 `;
