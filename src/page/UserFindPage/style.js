@@ -17,7 +17,7 @@ export const Sublayout = css`
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
-    background-color: #191919;
+    background-color: #ffffff;
     * {
         color: #ffffff;
     }

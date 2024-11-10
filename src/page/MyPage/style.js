@@ -23,7 +23,7 @@ export const profileBox = css`
     align-items: center;
     justify-content: center;
     width: 100%;
-    border-bottom: 3px solid #f2780c;
+    border-bottom: 3px solid #ff675b;
     background-color: #ffffff;
 `;
 
@@ -47,7 +47,7 @@ export const menu = css`
     padding: 0 10px;
     width: 100%;
     height: 100%;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
     svg {
         margin-right: 10px;
         width: 25px;
@@ -61,7 +61,7 @@ export const menu = css`
     }
     p:nth-of-type(2) {
         font-size: 16px;
-        color: #f2780c;
+        color: #ff675b;
         font-weight: 500;
     }
     & button {
@@ -70,7 +70,7 @@ export const menu = css`
         width: 100%;
         height: 100%;
         font-size: 16px;
-        color: #f2780c;
+        color: #ff675b;
         font-weight: 500;
         cursor: pointer;
     }

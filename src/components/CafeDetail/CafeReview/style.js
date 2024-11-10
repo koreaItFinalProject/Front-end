@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const layout = css`
     display: flex;
     flex-direction: column;
-    padding: 10px 10px;
+    padding: 10px 10px 100px;
     gap: 10px;
 `;
 
@@ -25,7 +25,7 @@ export const titleAndWrite = css`
             width: 20px;
             height: 20px;
             margin-right: 5px;
-            fill: #f2780c;
+            fill: #ff675b;
         }
     }
 `;
@@ -84,10 +84,10 @@ export const category = css`
 `;
 
 export const categoryItem = (count, totalCount) => css`
-    background-color: rgba(242, 120, 12, ${Math.min((count / totalCount) * 0.95, 0.95)});
+    background-color: rgba(255, 103, 91, ${Math.min((count / totalCount) * 0.95, 0.95)});
     padding: 5px 10px;
     width: fit-content;
-    border: 1px solid #f2780c;
+    border: 1px solid #ff675b;
     border-radius: 36px;
     font-weight: 500;
     cursor: default;
@@ -97,7 +97,7 @@ export const review = css`
     display: flex;
     flex-direction: column;
     gap: 5px;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
     padding-bottom: 3px;
 `;
 

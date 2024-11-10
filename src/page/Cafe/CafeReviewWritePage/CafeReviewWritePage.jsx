@@ -105,8 +105,6 @@ function CafeReviewWritePage(props) {
         await reviewMutation.mutateAsync();
     };
 
-    console.log(cafeDetail);
-
     return (
         <div css={s.layout}>
             <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeId}?&selectMenu=review`} />
@@ -129,7 +127,7 @@ function CafeReviewWritePage(props) {
                             key={index}
                             onClick={() => handleCategoryOnClick(category.value)}
                             style={{
-                                backgroundColor: selectedCategory.includes(category.value) ? '#f2780c' : '#ffffff'
+                                backgroundColor: selectedCategory.includes(category.value) ? '#ff675b' : '#ffffff'
                             }}
                         >
                             {category.label}

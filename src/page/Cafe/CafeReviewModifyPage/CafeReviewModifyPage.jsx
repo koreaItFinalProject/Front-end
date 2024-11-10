@@ -119,6 +119,9 @@ function CafeReviewModifyPage(props) {
         <div css={s.layout}>
             <BackButton prevPage={cafeDetail?.cafeName} prevPageUrl={`/cafe/detail/${cafeDetail?.id}?&selectMenu=review`} />
             <div css={s.rating}>
+                <div css={s.cafeImg}>
+                    <img src={cafeDetail?.img} alt="" />
+                </div>
                 <h1>{cafeDetail?.cafeName}</h1>
                 <StarRating
                     score={score}
@@ -134,7 +137,7 @@ function CafeReviewModifyPage(props) {
                             key={index}
                             onClick={() => handleCategoryOnClick(category.value)}
                             style={{
-                                backgroundColor: selectedCategory.includes(category.value) ? '#f2780c' : '#ffffff'
+                                backgroundColor: selectedCategory.includes(category.value) ? '#ff675b' : '#ffffff'
                             }}
                         >
                             {category.label}

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BackButton from '../../../components/BackButton/BackButton';
 import { useNavigate } from 'react-router-dom';
 import { useInfiniteQuery, useQueryClient } from 'react-query';
@@ -8,6 +8,7 @@ import { instance } from '../../../apis/util/instance';
 import { FaPlus } from "react-icons/fa6";
 import NoticeList from '../../../components/NoticeList/NoticeList';
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { IoIosSearch } from "react-icons/io";
 
 function CafeNoticeListPage(props) {
     const loadMoreRef = useRef(null);
@@ -104,34 +105,39 @@ function CafeNoticeListPage(props) {
         setIsAscending(true);
     }
 
-    console.log(noticeList);
-
     return (
         <div css={s.layout}>
             <BackButton prevPage={'마이페이지'} prevPageUrl={'/owner/mypage'} />
-            <div css={s.searchContainer}>
-                <input
-                    type="text"
-                    placeholder='공지사항을 검색하세요'
-                    onChange={handleSearchInputOnChange}
-                    onKeyDown={handleEnterInput}
-                    name=""
-                    value={searchValue}
-                />
-                <button onClick={handleSearchOnClick}>검색</button>
-                <button onClick={handleWriteOnClick}>공지추가<FaPlus /></button>
-            </div>
-            <div css={s.boardNavigater}>
-                <button
-                    css={!isAscending ? s.activeButton : s.sortButton}
-                    onClick={handleOnRecentClick}
-                >최신순
-                </button>
-                <button
-                    css={isAscending ? s.activeButton : s.sortButton}
-                    onClick={handleOnOldClick}
-                >오래된순
-                </button>
+            <div css={s.header}>
+                <div css={s.box}>
+                    <h2>CafeInBusan</h2>
+                    <input
+                        type="text"
+                        placeholder='공지사항을 검색하세요'
+                        onChange={handleSearchInputOnChange}
+                        onKeyDown={handleEnterInput}
+                        name=""
+                        value={searchValue}
+                    />
+                    <button onClick={handleSearchOnClick}><IoIosSearch /></button>
+                </div>
+                <div css={s.boardNavigater}>
+                    <div>
+                        <button
+                            css={!isAscending ? s.activeButton : s.sortButton}
+                            onClick={handleOnRecentClick}
+                        >최신순
+                        </button>
+                        <button
+                            css={isAscending ? s.activeButton : s.sortButton}
+                            onClick={handleOnOldClick}
+                        >오래된순
+                        </button>
+                    </div>
+                    <button
+                        css={s.writeButton}
+                        onClick={handleWriteOnClick}>공지 작성<FaPlus /></button>
+                </div>
             </div>
             <NoticeList sortedNoticeList={sortedNoticeList} prevPage={'list'} />
             <div ref={loadMoreRef}></div>

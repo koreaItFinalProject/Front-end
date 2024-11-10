@@ -55,13 +55,13 @@ export const reset = css`
         padding-left: 10px;
         outline: none;
         border: none;
-        border-bottom: 1px solid #F2780C;
+        border-bottom: 1px solid #ff675b;
         box-sizing: border-box;
         height: 40px;
-        caret-color: #F2780C;
+        caret-color: #ff675b;
         width: 380px;
         &::placeholder{
-            color: #ffffff;
+            color: #222222;
         }
     }
 

@@ -30,6 +30,8 @@ function BoardDetailPage(props) {
         parentId: null,
         content: ""
     });
+
+    const userInfo = queryClient.getQueryData("userInfoQuery");
     const boardData = queryClient.getQueryData(['boardQuery', boardId]);
 
     const board = useQuery(
@@ -104,6 +106,10 @@ function BoardDetailPage(props) {
     }
 
     const handleLikeOnClick = () => {
+        if (!userInfo) {
+            confirmAlert("로그인 후 사용가능합니다.");
+            return;
+        }
         likeMutation.mutateAsync();
     }
 
@@ -233,7 +239,7 @@ function BoardDetailPage(props) {
                                     <button onClick={handleDislikeClick}
                                         className={isAnimating ? 'animate' : ''}
                                     >
-                                        <IoMdHeart style={{ fill: '#f2780c' }} />
+                                        <IoMdHeart style={{ fill: '#ff675b' }} />
                                     </button>
                                     :
                                     <button onClick={handleLikeClick}

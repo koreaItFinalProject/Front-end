@@ -6,7 +6,7 @@ export const layout = css`
     align-items: center;
     height: 65px;
     padding: 0 10px;
-    background-color: #191919;
+    background-color: #ffffff;
 
     button {
         padding: 6px 0;
@@ -16,14 +16,14 @@ export const layout = css`
         svg {
             width: 40px;
             height: 40px;
-            fill: #f2780c;
+            fill: #ff675b;
         }
     }
 
     p {
         margin: 0;
         font-size: 18px;
-        color: #f2780c;
+        color: #ff675b;
         font-weight: 600;
         cursor: default;
     }

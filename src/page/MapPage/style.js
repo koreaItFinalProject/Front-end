@@ -9,33 +9,35 @@ export const layout = css`
 `;
 
 export const box = css`
-    display: flex;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
     position: absolute;
     z-index: 100;
     top: 20px;
     left: 15px;
     height: 60px;
-    width: 631px;
+    width: 630px;
     background-color: #ffffff;
     border: 2px solid #ffffff;
     border-radius: 20px;
+    padding: 2px 10px 2px 2px;
     box-shadow: 0px 0px 10px 4px #00000044;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     
     h2 {
-        margin: 2px;
-        border-radius: 19px;
-        background-color: #ff675b;
-        padding: 0px 20px;
-        padding-top: 8px;
+        box-sizing: border-box;
+        display: flex;
         align-items: center;
-        color: #ffffff;
-        font-family: 'Kulim Park';
-        font-style: normal;
-        font-weight: 'Bold', 600;
+        justify-content: center;
+        margin: 0;
+        padding: 0 20px;
+        height: 100%;
+        border-radius: 20px;
         font-size: 24px;
-        line-height: 34px;
+        font-weight: 600;
+        color: #ffffff;
+        background-color: #ff675b;
         cursor: default;
     }
 `;
@@ -56,7 +58,6 @@ export const inputbox = css`
         outline: none;
         border: none;
         font-size: 20px;
-        background-color: #ffffff;
 
         &::placeholder{
         font-weight: 300;
@@ -71,7 +72,7 @@ export const selectbutton = css`
     display: flex;
     position: absolute;
     z-index: 100;
-    margin-top: 70px;
+    margin-top: 68px;
 `;
 
 export const icon = css`
@@ -104,9 +105,10 @@ export const cafeContainer = css`
         padding-top: 5px;
         height: 50px;
         width: 50px;
-        border: 1px solid #f2780c;
+        border: 1px solid #ff675b;
         background-color: #ffffff;
         border-radius: 100%;
+        box-shadow: 0px 0px 10px 4px #00000044;
 
         :active {
             background-color: #eeeeee;
@@ -137,6 +139,7 @@ export const cafeInfo = (slide) => css`
     border-radius: 10px;
     border: 1px solid #eeeeee;
     cursor: pointer;
+    box-shadow: 0px 0px 10px 4px #00000044;
 `;
 
 export const listBox = css`
@@ -160,7 +163,7 @@ export const listBox = css`
     
         :nth-last-of-type(1) {
             font-weight: 600;
-            color: #F2780C;
+            color: #ff675b;
         }
     }
 `;

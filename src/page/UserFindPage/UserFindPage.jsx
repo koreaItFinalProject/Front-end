@@ -12,7 +12,7 @@ function UserFindPage() {
     const mode = location.state?.mode;
     return (
         <div css={s.layout}>
-            <BackButton/>
+            <BackButton prevPage={'로그인'}/>
             <div css={s.Sublayout}>
                 {
                     mode === 'findId'?

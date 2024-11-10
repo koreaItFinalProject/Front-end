@@ -8,7 +8,7 @@ export const layout = css`
     
     *{
         & button {
-            background-color: #F2780C;
+            background-color: #ff675b;
             border: none;
             border-radius: 20px;
             margin-right: 8px;
@@ -32,12 +32,12 @@ export const Info = css`
     overflow-y: auto;
     & p{
         font-size: 14px;
-        /* color: #F2780C; */
+        /* color: #ff675b; */
         margin: 0;
     }
     & input {
         padding-left: 10px;
-        color: #F2780C;
+        color: #ff675b;
     }
 `;
 
@@ -45,7 +45,7 @@ export const logo = css`
     & h1 {
         font-weight: 700;
         font-size: 30px;
-        color: #F2780C;
+        color: #ff675b;
     }
     margin-bottom: 10px;
 `;
@@ -91,7 +91,7 @@ export const InputBox = css`
         width: 300px;
         font-size: 14px;
         border: none;
-        border-bottom: 1px solid #f2780c;
+        border-bottom: 1px solid #ff675b;
     }
     & button {
         box-sizing: border-box;

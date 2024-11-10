@@ -6,7 +6,6 @@ export const layout = css`
     flex-direction: column;
     width: 100%;
     height: 100%;
-    
 `;
 
 export const subLayout = css`
@@ -16,7 +15,7 @@ export const subLayout = css`
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background-color: #191919;
+    background-color: #ffffff;
     *{
         button:disabled {
         cursor: not-allowed;
@@ -34,11 +33,11 @@ export const subLayout = css`
         margin-bottom: 20px;
     }
     * input{
-        color: #ffffff;
+        color: #222222;
         padding-left: 10px;
     }
     & button {
-        background-color: #F2780C;
+        background-color: #ff675b;
         margin-left: 10px;
         color: #ffffff;
         border-radius: 20px;
@@ -49,14 +48,14 @@ export const logo = css`
     & h1 {
         font-weight: 700;
         font-size: 30px;
-        color: #F2780C;
+        color: #ff675b;
     }
 `;
 
 export const underlineInput = css`
     height: 40px;
     box-sizing: border-box;
-    border-bottom: 1px solid #F2780C;
+    border-bottom: 1px solid #ff675b;
     & input {
         height: 40px;
         width: 290px;
@@ -67,7 +66,7 @@ export const underlineInput = css`
         box-sizing: border-box;
         width: 80px;
         height: 35px;
-        background-color: #F2780C;
+        background-color: #ff675b;
         border: none;
         border-radius: 20px;
         margin-left: 10px;
@@ -140,7 +139,7 @@ export const emailTimer = css`
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    border-bottom: 1px solid #F2780C;
+    border-bottom: 1px solid #ff675b;
     width: 380px;
     & input {
         width: 245px;

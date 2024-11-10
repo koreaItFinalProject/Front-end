@@ -5,6 +5,7 @@ export const boardListLayout = css`
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
+    padding-bottom: 100px;
     overflow-y: auto;
 `;
 
@@ -16,7 +17,7 @@ export const noticeLayout = css`
     align-items: center;
     width: 100%;
     padding: 10px 15px;
-    border-bottom: 1px solid #f2780c;
+    border-bottom: 1px solid #ff675b;
     background-color: #ffffff;
     cursor: pointer;
 `;

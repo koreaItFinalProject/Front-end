@@ -56,7 +56,7 @@ export const loginInput = css`
         width: 100%;
         box-sizing: border-box;
         border-radius: 10px;
-        margin: 20px 0px;
+        margin: 10px 0px 20px;
         color: #ffffff;
         font-weight: 600;
         background-color: #ff675b;
@@ -117,7 +117,7 @@ export const selectMember = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
+    margin: 30px 0 20px;
 `;
 
 export const oAuthButton = css`
