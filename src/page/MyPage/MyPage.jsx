@@ -81,6 +81,8 @@ function MyPage(props) {
         window.location.replace("/user/signin");
     }
 
+    console.log(infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -132,7 +134,10 @@ function MyPage(props) {
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>
-                <button css={s.closeButton} onClick={closeModal}>Close</button>
+                <button css={s.closeButton} onClick={() => {
+                    closeModal();
+                    localStorage.setItem("lastId", infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
+                }}>Close</button>
                 {
                     check === "userinfo" ?
                         <UserProfileModify user={infoBoard.user} />

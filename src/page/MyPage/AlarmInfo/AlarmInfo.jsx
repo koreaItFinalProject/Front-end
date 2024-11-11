@@ -1,54 +1,91 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
-import { instance } from '../../../apis/util/instance';
 import { useQueryClient } from 'react-query';
+import { instance } from '../../../apis/util/instance';
+import { useNavigate } from 'react-router-dom';
 
 function AlramInfoPage({ alarm }) {
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
     const accessCheck = queryClient.getQueryData("userInfoQuery");
-    const userId = accessCheck.data.userId;
+    const userId = accessCheck?.data?.userId;
+    const [openIndex, setOpenIndex] = useState(null); // 수정 모드로 전환할 항목의 인덱스
+    const [inputValue, setInputValue] = useState("");
     console.log(userId);
-    const [notices, setNotices] = useState([]);
-    const [lastId, setLastId] = useState(null);
-    console.log(alarm);
 
-    // 처음 렌더링 시에만 초기 메시지 가져오기
-    useEffect(() => {
-        const fetchMessage = async () => {
-            const response = await instance.get(`/user/getMessage/${accessCheck.data.userId}`);
-            console.log(response);
-            setNotices(response?.data);
-            setLastId(response.data[response.data.length - 1]?.id);  // 마지막 메시지 ID 설정
-        };
+    // 알림을 역순으로 저장한 배열
+    const reversedAlarm = Array.isArray(alarm) ? [...alarm]?.reverse() : [];
 
-        if (userId) {
-            fetchMessage();
+    const handleInputKeyPress = async (e) => {
+        if (e.key === "Enter") {
+            setOpenIndex(null); // 수정 완료 후 닫기
+            console.log(reversedAlarm[openIndex]);
+            if (reversedAlarm[openIndex].type === "댓글수정 요청") {
+                await instance.put(`/comment/${reversedAlarm[openIndex].contentId}`, { commentId: reversedAlarm[openIndex].contentId, content: inputValue });
+            }
+            else if (reversedAlarm[openIndex].type === "리뷰수정 요청") {
+                await instance.put(`/review/${reversedAlarm[openIndex].contentId}`, { reviewId: reversedAlarm[openIndex].contentId, review: inputValue });
+            }
+            setInputValue("");
+            await instance.delete(`/message/${reversedAlarm[openIndex].id}`);
+            await queryClient.invalidateQueries("userManagementInfo"); // 알림 리스트 쿼리 무효화로 새로고침
         }
-    }, [userId]);
+    };
 
-    
+    const handleInputOnChange = (e) => {
+        setInputValue(e.target.value);
+    };
 
-    // SSE로 실시간 메시지 받기
-    
+    const handleGetBoard = async (title, boardId, id) => {
+        const response = await instance.get(`/board/${boardId}/content`);
+        console.log(response);
+        if (response.data) {
+            navigate(`/board/modify/${boardId}`, { state: { title: title, content: response.data, reportId: id } });
+        }
+    };
 
     return (
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
-                <h2 >알림정보</h2>
-                <h3> 마지막 알림정보 : {lastId}</h3>
+                <h2>알림정보</h2>
+                <h3>새로운 알림: {reversedAlarm.filter(al => al.id > localStorage.getItem("lastId")).length}</h3>
             </div>
             <ul css={s.AlramList}>
-                {notices.map((alarm, index) => (
+                {reversedAlarm?.map((alarmItem, index) => (
                     <div key={index} css={s.layout}>
                         <tr>
-                            <td>{alarm.type}</td>
-                            <td >{alarm.content}</td>
+                            <td>{alarmItem.type}</td>
+                            {alarmItem.type === "댓글수정 요청" || alarmItem.type === "리뷰수정 요청" ? (
+                                // "게시물" 타입의 알림은 수정 불가능하도록 처리
+                                openIndex === index ? (
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={inputValue}
+                                            onKeyDown={handleInputKeyPress}
+                                            onChange={handleInputOnChange}
+                                        />
+                                    </td>
+                                ) : (
+                                    <td onClick={() => { setOpenIndex(index); setInputValue(alarmItem.content); console.log(alarmItem.contentId); }}>
+                                        {alarmItem.content}
+                                    </td>
+                                )
+                            ) :
+                                alarmItem.type === "게시글수정 요청" ? (
+                                    <td onClick={() => { handleGetBoard(alarmItem.content, alarmItem.contentId, alarmItem.id) }}>{alarmItem.content}</td>
+                                )
+                                    :
+                                    <td>{alarmItem.content}</td>
+                            }
+                            <td>{alarmItem.messageDate}</td>
                         </tr>
                     </div>
-                ))}
-            </ul>
-        </div>
+                ))
+                }
+            </ul >
+        </div >
     );
 }
 

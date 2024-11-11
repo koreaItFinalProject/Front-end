@@ -37,6 +37,7 @@ function BoardDetailPage(props) {
     const board = useQuery(
         ["boardQuery", boardId],
         async () => {
+            console.log(boardId);
             return await instance.get(`/board/${boardId}`);
         },
         {
@@ -79,7 +80,7 @@ function BoardDetailPage(props) {
     );
 
     const reportMutation = useMutation(
-        async(report) => await instance.post("/report", report),
+        async (report) => await instance.post("/report", report),
         {
             onSuccess: (response) => {
                 confirmAlert(response.data);
@@ -167,13 +168,13 @@ function BoardDetailPage(props) {
         setTimeout(() => setIsAnimating(false), 300); // 애니메이션 시간 후에 클래스 제거
     };
 
-    const handleReportOnClick = async(board) => {
+    const handleReportOnClick = async (board) => {
         if (!userInfoData?.data) {
             confirmAlert("로그인을 하신 후 이용해 주시기 바랍니다.");
             return;
         }
 
-        if(await confirmCancelAlert("정말 신고하시겠습니까?")){
+        if (await confirmCancelAlert("정말 신고하시겠습니까?")) {
             const requstBody = {
                 contentId: board?.id,
                 content: board?.title,
@@ -184,7 +185,7 @@ function BoardDetailPage(props) {
         }
         console.log(board)
         return;
-        
+
     }
 
     return (
@@ -213,13 +214,14 @@ function BoardDetailPage(props) {
                                 </div>
                                 <div css={s.buttonLayout}>
                                     {
-                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                        <>
-                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                        </>
+                                        board?.data?.data?.writerId === userInfoData?.data?.userId ?
+                                            <>
+                                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                            </>
+                                            :
+                                            <button onClick={() => handleReportOnClick(board?.data?.data)}>신고</button>
                                     }
-                                    <button onClick={() => handleReportOnClick(board?.data?.data)}>신고</button>
                                 </div>
                             </div>
                         </div>

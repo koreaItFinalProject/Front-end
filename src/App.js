@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import { useEffect, useState } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { QueryClient, useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
@@ -46,6 +46,7 @@ import { showToast } from './apis/util/SweetAlert2/Toast/Toast';
 ReactModal.setAppElement('#root');
 
 function App() {
+  const queryClient = useQueryClient();
   const location = useLocation();
   const navigate = useNavigate();
   const [authRefresh, setAuthRefresh] = useState(true);
@@ -145,32 +146,33 @@ function App() {
 
   useEffect(() => {
     if (userInfo?.data?.data?.userId) {
-        // SSE 연결 설정
-        const es = new EventSource(`http://localhost:8080/message/events?lastId=${0}&userId=${userInfo?.data?.data?.userId}`);
+      // SSE 연결 설정
+      const es = new EventSource(`http://localhost:8080/message/events?lastId=${0}&userId=${userInfo?.data?.data?.userId}`);
 
-        es.onmessage = (event) => {
-            try {
-                // 받아온 데이터 처리
-                const parsedData = JSON.parse(event.data);
-                console.log(parsedData);
+      es.onmessage = async (event) => {
+        try {
+          // 받아온 데이터 처리
+          const parsedData = JSON.parse(event.data);
+          console.log(parsedData);
 
-                // 기존 알림에 새 메시지 추가
-                showToast(parsedData.type);
-                // setLastId(parsedData.lastId); 
-            } catch (error) {
-                console.error("알림 처리 중 오류 발생", error);
-            }
-        };
+          // 기존 알림에 새 메시지 추가
+          showToast(parsedData.type);
+          await queryClient.invalidateQueries("userManagementInfo");
+          // setLastId(parsedData.lastId); 
+        } catch (error) {
+          console.error("알림 처리 중 오류 발생", error);
+        }
+      };
 
-        es.onerror = (err) => {
-            console.error("SSE 연결 실패", err);
-            es.close();  // 연결 실패 시 종료
-        };
+      es.onerror = (err) => {
+        console.error("SSE 연결 실패", err);
+        es.close();  // 연결 실패 시 종료
+      };
 
-        // 컴포넌트 언마운트 시 SSE 종료
-        return () => {
-            es.close();
-        };
+      // 컴포넌트 언마운트 시 SSE 종료
+      return () => {
+        es.close();
+      };
     }
   }, [userInfo?.data?.data?.userId]);  // accessCheck와 lastId 변경 시마다 실행
 
