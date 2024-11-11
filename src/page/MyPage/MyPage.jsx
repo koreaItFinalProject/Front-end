@@ -82,7 +82,6 @@ function MyPage(props) {
         localStorage.removeItem("accessToken");
         window.location.replace("/user/signin");
     }
-
     const handleOnWithdrawClick = async () => {
         const selet = await confirmCancelAlert("정말 탈퇴하시겠습니까?");
 
@@ -99,10 +98,7 @@ function MyPage(props) {
                 console.log(response);
                 confirmAlert("회원탈퇴 실패")
             }
-        } else {
-            return
         }
-
     }
 
     return (
@@ -162,7 +158,10 @@ function MyPage(props) {
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>
-                <button css={s.closeButton} onClick={closeModal}>Close</button>
+                <button css={s.closeButton} onClick={() => {
+                    closeModal();
+                    localStorage.setItem("lastId", infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
+                }}>Close</button>
                 {
                     check === "userinfo" ?
                         <UserProfileModify user={infoBoard.user} />

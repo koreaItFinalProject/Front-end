@@ -36,6 +36,22 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
         });
     }
 
+    const handleOnClickMarker = (marker) => {
+        const markerPosition = marker.getPosition();
+
+        // 좌표의 차이가 0.000001 이내일 경우 동일한 위치로 간주
+        const foundCafe = cafe.find(
+            (cafeItem) =>
+                Math.abs(cafeItem.lat - markerPosition.Ma) < 0.000001 &&
+                Math.abs(cafeItem.lng - markerPosition.La) < 0.000001
+        );
+
+        if (foundCafe) {
+            setCenter({ lat: foundCafe.lat, lng: foundCafe.lng });
+            setCurrentCafeIndex(cafe.indexOf(foundCafe));
+        }
+    };
+
     const handleInputOnChange = (e) => {
         setInputData(e.target.value);
     }
@@ -76,6 +92,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                     <MapMarker
                         key={result.id}
                         position={{ lat: result.lat, lng: result.lng }}
+                        onClick={(marker) => (console.log(marker.getPosition(), center), handleOnClickMarker(marker))}
                     />
                 ))}
                 <div css={s.cafeContainer}>

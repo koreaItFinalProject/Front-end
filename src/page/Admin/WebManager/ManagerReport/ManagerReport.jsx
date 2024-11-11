@@ -3,16 +3,12 @@ import React, { useState } from 'react';
 import * as s from "./style";
 import { instance } from '../../../../apis/util/instance';
 import { confirmAlert } from '../../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { confirmCancelAlert } from '../../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert';
 
 function ManagerReport(props) {
   const navigate = useNavigate();
-  const [content, setNotice] = useState('');
-  const [userId, setUserId] = useState("");
-  const [type, setType] = useState("");
-  const [sendToAll, setSendToAll] = useState(false);
-
 
   const report = useQuery(
     ["reportQuery"],
@@ -25,25 +21,33 @@ function ManagerReport(props) {
     }
   );
   console.log(report)
+  const deleteReportMutation = useMutation(
+    async (id) => {
+      return await instance.delete(`/report/${id}`);
+    },
+    {
+      onSuccess: () => {
+        confirmAlert("수정요청이 삭제완료되었습니다.");
+        report.refetch();
+      }
+    }
+  )
 
-  const handleSubmit = async (id, type) => {
+  const handleSubmit = async (id, type, Content, deleteid) => {
 
     const requestBody = {
       type: type,
       userId: id,
-      content: type === "공지사항" ? content : type + " 수정해주세요.",
+      content: Content,
     };
     try {
       console.log(requestBody);
       const response = await instance.post('/message', requestBody); // POST 요청
       console.log(response);
       if (response.status === 200) {
-        setNotice(''); // 입력 필드 초기화
         confirmAlert('공지사항이 전송되었습니다.');
-        // 연결 해제
-        // 이 부분은 클라이언트 측에서 연결을 해제하는 로직이 필요함
-        // 예: EventSource.close() 호출
-        // 하지만 여기서는 연결 해제를 위해서 어떤 상태 관리가 필요할 수 있습니다.
+        await instance.delete(`/report/${type}/${Content}`);
+        report.refetch();
 
       } else {
         confirmAlert('공지사항 전송에 실패했습니다.');
@@ -52,6 +56,14 @@ function ManagerReport(props) {
       console.error('Error:', error);
       confirmAlert('서버와의 연결에 실패했습니다.');
     }
+  };
+
+  const handleReportDeleteOnClick = async (id) => {
+    console.log(id);
+    if (await confirmCancelAlert("정말 삭제하시겠습니까?")) {
+      deleteReportMutation.mutateAsync(id);
+    }
+    return;
   };
   return (
     <div css={s.mainLayout}>
@@ -81,8 +93,8 @@ function ManagerReport(props) {
                         <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.content}</td>
                         <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportDate}</td>
                         <td onClick={() => navigate(`/board/detail/${result.contentId}`)}>{result.reportCount}</td>
-                        <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
-                        <td>삭제</td>
+                        <td onClick={() => handleSubmit(result.contentId, result.reportType, result.content, result.id)}>수정요청</td>
+                        <td onClick={() => handleReportDeleteOnClick(result.id)}>삭제</td>
                       </>
                       :
                       <>
@@ -91,8 +103,8 @@ function ManagerReport(props) {
                         <td >{result.content}</td>
                         <td >{result.reportDate}</td>
                         <td >{result.reportCount}</td>
-                        <td onClick={() => handleSubmit(result.contentId, result.reportType)}>수정요청</td>
-                        <td >삭제</td>
+                        <td onClick={() => handleSubmit(result.contentId, result.reportType, result.content, result.id)}>수정요청</td>
+                        <td onClick={() => handleReportDeleteOnClick(result.id)}>삭제</td>
                       </>
                   }
                 </tr>
