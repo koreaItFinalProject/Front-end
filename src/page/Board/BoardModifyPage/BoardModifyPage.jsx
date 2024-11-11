@@ -34,7 +34,7 @@ function BoardModifyPage(props) {
         const selection = await confirmCancelAlert("게시글을 수정 하시겠습니까?");
         if (selection) {
             modifyBoardMutation.mutate({ modifyBoard, boardId });
-        } else if(selection === false) {
+        } else if (selection === false) {
             navigate(`/board/modify/${boardId}`);
         }
     }
