@@ -4,7 +4,7 @@ import './style.css';
 const Toast = Swal.mixin({
     toast: true,
     showConfirmButton: false,
-    timer: 2000,
+    timer: 3000,
     timerProgressBar: false,
     didOpen: (toast) => {
         toast.addEventListener('click', () => {
@@ -25,8 +25,9 @@ const Toast = Swal.mixin({
     },
 });
 
-export const showToast = (title) => {
+export const showToast = (title, content) => {
     Toast.fire({
-        title: title
+        title: title,
+        html: content
     });
 };
