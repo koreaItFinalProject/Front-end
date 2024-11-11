@@ -24,7 +24,6 @@ import CafeModifyPage from './page/CafeOwner/CafeModifyPage/CafeModifyPage';
 import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
 import BoardModifyPage from './page/Board/BoardModifyPage/BoardModifyPage';
 import BoardWritePage from './page/Board/BoardWritePage/BoardWritePage';
-import ManagerProfilePage from './page/Admin/WebManager/ManagerProfilePage/ManagerProfilePage';
 import ManagerDashBoardPage from './page/Admin/WebManager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Admin/WebManager/ManagerManagementPage/ManagerManagementPage';
 import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreManagementPage/ManagerStoreManagementPage';
@@ -184,7 +183,6 @@ function App() {
           <ManagerMainLayout>
             <Routes>
               <Route path='/home' element={<ManagerDashBoardPage />} />
-              <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/report' element={<ManagerReport />} />
