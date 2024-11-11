@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 
 function MainLayout({ children, setCheck, setInputvalue }) {
     const location = useLocation();
-    const noFooterPaths = ['/board/detail', '/cafe/detail', '/cafe/modify', '/cafe/review', '/board/write', '/board/modify', '/owner/notice'];
+    const noFooterPaths = ['/board/detail', '/cafe/detail', '/cafe/modify', '/cafe/review', '/cafe/notice', '/board/write', '/board/modify', '/owner/notice'];
     const [animationDirection, setanimationDirection] = useRecoilState(animationDirectionState);
     const isNoFooter = noFooterPaths.some(path => location.pathname.includes(path));
     const [pageCount, setPageCount] = useRecoilState(pageCounter);
