@@ -28,7 +28,6 @@ import ManagerProfilePage from './page/Admin/WebManager/ManagerProfilePage/Manag
 import ManagerDashBoardPage from './page/Admin/WebManager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Admin/WebManager/ManagerManagementPage/ManagerManagementPage';
 import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreManagementPage/ManagerStoreManagementPage';
-import ManagerSetting from './page/Admin/WebManager/ManagerSetting/ManagerSetting';
 import MobileAdminMyPage from './page/Admin/MobileAdmin/MobileAdminMyPage';
 import CafeOwnerMyPage from './page/CafeOwner/CafeOwnerMyPage/CafeOwnerMyPage';
 import CafeNoticeListPage from './page/CafeOwner/CafeNoticeListPage/CafeNoticeListPage';
@@ -42,6 +41,8 @@ import { confirmAlert } from './apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert'
 import CafeReviewWritePage from './page/Cafe/CafeReviewWritePage/CafeReviewWritePage';
 import Oauth2Signin from './components/Oauth2/Oauth2Signin/Oauth2Signin';
 import { showToast } from './apis/util/SweetAlert2/Toast/Toast';
+import ManageAnnouncement from './page/Admin/WebManager/ManageAnnouncement/ManageAnnouncement';
+import ManagerReport from './page/Admin/WebManager/ManagerReport/ManagerReport';
 
 ReactModal.setAppElement('#root');
 
@@ -144,32 +145,32 @@ function App() {
 
   useEffect(() => {
     if (userInfo?.data?.data?.userId) {
-        // SSE 연결 설정
-        const es = new EventSource(`http://localhost:8080/message/events?lastId=${0}&userId=${userInfo?.data?.data?.userId}`);
+      // SSE 연결 설정
+      const es = new EventSource(`http://localhost:8080/message/events?lastId=${0}&userId=${userInfo?.data?.data?.userId}`);
 
-        es.onmessage = (event) => {
-            try {
-                // 받아온 데이터 처리
-                const parsedData = JSON.parse(event.data);
-                console.log(parsedData);
+      es.onmessage = (event) => {
+        try {
+          // 받아온 데이터 처리
+          const parsedData = JSON.parse(event.data);
+          console.log(parsedData);
 
-                // 기존 알림에 새 메시지 추가
-                showToast(parsedData.type);
-                // setLastId(parsedData.lastId); 
-            } catch (error) {
-                console.error("알림 처리 중 오류 발생", error);
-            }
-        };
+          // 기존 알림에 새 메시지 추가
+          showToast(parsedData.type);
+          // setLastId(parsedData.lastId); 
+        } catch (error) {
+          console.error("알림 처리 중 오류 발생", error);
+        }
+      };
 
-        es.onerror = (err) => {
-            console.error("SSE 연결 실패", err);
-            es.close();  // 연결 실패 시 종료
-        };
+      es.onerror = (err) => {
+        console.error("SSE 연결 실패", err);
+        es.close();  // 연결 실패 시 종료
+      };
 
-        // 컴포넌트 언마운트 시 SSE 종료
-        return () => {
-            es.close();
-        };
+      // 컴포넌트 언마운트 시 SSE 종료
+      return () => {
+        es.close();
+      };
     }
   }, [userInfo?.data?.data?.userId]);  // accessCheck와 lastId 변경 시마다 실행
 
@@ -186,7 +187,8 @@ function App() {
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/setting' element={<ManagerSetting />} />
+              <Route path='/report' element={<ManagerReport />} />
+              <Route path='/announcement' element={<ManageAnnouncement />} />
             </Routes>
           </ManagerMainLayout>
         } />

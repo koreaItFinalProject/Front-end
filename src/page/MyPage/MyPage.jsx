@@ -21,6 +21,7 @@ import { FiLogOut } from "react-icons/fi";
 import { confirmAlert } from '../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 import { ImExit } from "react-icons/im";
 import { userDeleteApi } from '../../apis/signUpApis/userDeleteApi';
+import { confirmCancelAlert } from '../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert';
 
 function MyPage(props) {
     const [user, setUser] = useRecoilState(State);
@@ -83,18 +84,25 @@ function MyPage(props) {
     }
 
     const handleOnWithdrawClick = async () => {
-        try {
-            const response = await userDeleteApi(infoBoard.user.id);
-            console.log(infoBoard.user.id);
-            console.log(response);
-            localStorage.removeItem("accessToken");
-            window.location.replace("/user/signin");
-            confirmAlert("회원탈퇴 완료")
-        } catch (error) {
-            const response = error.response;
-            console.log(response);
-            confirmAlert("회원탈퇴 실패")
+        const selet = await confirmCancelAlert("정말 탈퇴하시겠습니까?");
+
+        if (selet) {
+            try {
+                const response = await userDeleteApi(infoBoard.user.id);
+                console.log(infoBoard.user.id);
+                console.log(response);
+                localStorage.removeItem("accessToken");
+                window.location.replace("/user/signin");
+                confirmAlert("회원탈퇴 완료")
+            } catch (error) {
+                const response = error.response;
+                console.log(response);
+                confirmAlert("회원탈퇴 실패")
+            }
+        } else {
+            return
         }
+
     }
 
     return (
