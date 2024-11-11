@@ -9,6 +9,7 @@ export const layout = css`
     height: 100%;
     padding: 0 140px;
     background-color: #fafafa;
+    
 `;
 
 export const login = css`

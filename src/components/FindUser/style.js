@@ -42,6 +42,7 @@ export const loginInput = css`
 
     & input{
         margin: 10px 0px;
+        color: #1c1c1b;
     }
     & button {
         display: flex;

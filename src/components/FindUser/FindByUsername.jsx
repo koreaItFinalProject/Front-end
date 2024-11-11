@@ -26,8 +26,9 @@ function FindByUsername() {
       return;
     }
     const response = await DuplicateCheckValue("FindUser", inputUser);
-    console.log(response.data.email);
-    console.log(response.data.username);
+    console.log(response.email);
+    console.log(response.username);
+    console.log(response);
 
     if (response.status === 200) {
       const sendEmail = await sendEmailFindUsernameApi("FindUser", response.data.email, response.data.username);
@@ -44,13 +45,13 @@ function FindByUsername() {
         <div css={s.loginTitle}>
           <p>아이디 찾기</p>
         </div>
-            <input
-            type="email"
-            name="email"
-            autoComplete="off"
-            onChange={handleInputOnChange}
-            value={inputUser.email}
-            placeholder='이메일 입력' />
+        <input
+          type="email"
+          name="email"
+          autoComplete="off"
+          onChange={handleInputOnChange}
+          value={inputUser.email}
+          placeholder='이메일 입력' />
         <button onClick={handleUsernameCheck}>찾기</button>
       </div>
     </div>
