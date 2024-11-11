@@ -37,6 +37,7 @@ function BoardDetailPage(props) {
     const board = useQuery(
         ["boardQuery", boardId],
         async () => {
+            console.log(boardId);
             return await instance.get(`/board/${boardId}`);
         },
         {
@@ -213,13 +214,14 @@ function BoardDetailPage(props) {
                                 </div>
                                 <div css={s.buttonLayout}>
                                     {
-                                        board?.data?.data?.writerId === userInfoData?.data?.userId &&
-                                        <>
-                                            <button onClick={() => handleModifyBoardOnClick()}>수정</button>
-                                            <button onClick={handleDeleteBoardOnClick}>삭제</button>
-                                        </>
+                                        board?.data?.data?.writerId === userInfoData?.data?.userId ?
+                                            <>
+                                                <button onClick={() => handleModifyBoardOnClick()}>수정</button>
+                                                <button onClick={handleDeleteBoardOnClick}>삭제</button>
+                                            </>
+                                            :
+                                            <button onClick={() => handleReportOnClick(board?.data?.data)}>신고</button>
                                     }
-                                    <button onClick={() => handleReportOnClick(board?.data?.data)}>신고</button>
                                 </div>
                             </div>
                         </div>
