@@ -26,6 +26,7 @@ function OAuth2Signup(props) {
         nickname: false,
         email: false,
     });
+    console.log(complete);
     const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [inputUser, setInputUser] = useState({
         username: '',
@@ -116,6 +117,10 @@ function OAuth2Signup(props) {
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
+                setComplete((data) => ({
+                    ...data,
+                    email: true
+                }))
             }
             if (emailNumber != emailCheck) {
                 confirmAlert("인증번호가 일치하지 않습니다.");
