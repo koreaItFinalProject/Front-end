@@ -32,22 +32,30 @@ export const ibBox = css`
 `;
 
 export const inputSection = css`
-    margin-bottom: 1px;
-
+    margin: 20px 0px 20px 20px;
+    display: flex;
+    width: 100%;
+    & p {
+        margin: 0;
+        margin-right: 30px;
+        font-size: 24px;
+    }
     & > span {
         font-size: 24px;
     }
 
     & > input {
         box-sizing: border-box;
-        height: 40px;
+        height: 38px;
         border: none;
         outline: none;
         color: black;
-        width: 90%;
+        width: 300px;
         font-size: 40px;    
         background-color: white;
         border-bottom: 1px solid #8f8282;
+        border-bottom:none ;
+        margin-right: 30px;
     }
 
 `;
