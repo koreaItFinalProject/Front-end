@@ -306,6 +306,8 @@ function CafeModifyPage(props) {
                         ?
                         <CafeMenu
                             viewMode={viewMode}
+                            menu1={cafeDetail?.menu1}
+                            menu2={cafeDetail?.menu2}
                         />
                         :
                         selectMenu === 'review'

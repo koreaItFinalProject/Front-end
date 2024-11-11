@@ -141,7 +141,6 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
-  console.log(userInfo)
 
   useEffect(() => {
     if (userInfo?.data?.data?.userId) {

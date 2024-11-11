@@ -19,8 +19,8 @@ export const subLayout = css`
 export const bannerImg = css`
     box-sizing: border-box;
     width: 100%;
-    height: 220px;
-    padding: 20px;
+    height: 200px;
+    padding: 0 20px 5px;
     background-color: #ffffff;
 
     img {
@@ -36,7 +36,7 @@ export const detailHeader = css`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px 10px;
+    padding: 0 10px;
     background-color: #ffffff;
 
     h1 {

@@ -33,7 +33,7 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
     );
 
     const reportMutation = useMutation(
-        async(report) => await instance.post("/report", report),
+        async (report) => await instance.post("/report", report),
         {
             onSuccess: (response) => {
                 confirmAlert(response.data);
@@ -57,13 +57,13 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
         deleteReviewMutation.mutateAsync(reviewId);
     }
 
-    const handleReportOnClick = async(review) => {
+    const handleReportOnClick = async (review) => {
         if (!userInfoData?.data) {
             confirmAlert("로그인을 하신 후 이용해 주시기 바랍니다.");
             return;
         }
 
-        if(await confirmCancelAlert("정말 신고하시겠습니까?")){
+        if (await confirmCancelAlert("정말 신고하시겠습니까?")) {
             const requstBody = {
                 contentId: review?.id,
                 content: review?.review,

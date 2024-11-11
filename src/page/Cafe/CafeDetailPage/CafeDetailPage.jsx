@@ -138,7 +138,10 @@ function CafeDetailPage() {
                     {
                         selectMenu === 'menu'
                             ?
-                            <CafeMenu />
+                            <CafeMenu
+                                menu1={cafeDetail?.menu1}
+                                menu2={cafeDetail?.menu2}
+                            />
                             :
                             selectMenu === 'review'
                                 ?

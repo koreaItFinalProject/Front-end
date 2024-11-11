@@ -53,17 +53,34 @@ export const buttons = css`
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
+`;
 
-    button {
-        padding: 5px 10px;
-        border: 1px solid #ff675b;
-        border-radius: 36px;
-        font-weight: 500;
+export const baseButtonStyle = css`
+    border-radius: 20px;
+    border: 1px solid #ff675b;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: transform 0.1s ease, background-color 0.1s ease; 
+    
+    &:active {
+        transform: scale(0.9); 
     }
 `;
 
 export const activeButton = css`
+    border-radius: 20px;
+    border: 1px solid #ff675b;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
     background-color: #ff675b;
+    transform: scale(1);
+
+    &:active {
+        transform: scale(0.9); 
+    }
 `;
 
 export const review = css`
