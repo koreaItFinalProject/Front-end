@@ -10,23 +10,8 @@ function ManageAnnouncement(props) {
   const navigate = useNavigate();
   const [content, setNotice] = useState('');
   const [userId, setUserId] = useState("");
-  const [type, setType] = useState("");
-  const [sendToAll, setSendToAll] = useState(false);
 
-
-  const report = useQuery(
-    ["reportQuery"],
-    async () => {
-      return await instance.get("/report/get");
-    },
-    {
-      refetchOnWindowFocus: false,
-      retry: 0,
-    }
-  );
-  console.log(report)
-
-  const handleSubmit = async (id, type) => {
+  const handleSubmit = async (id) => {
 
     const requestBody = {
       type: "공지사항",
@@ -74,7 +59,7 @@ function ManageAnnouncement(props) {
           </div>
         </div>
         <div css={s.button}>
-          <button onClick={() => handleSubmit(userId, type)}>공지사항 보내기</button>
+          <button onClick={() => handleSubmit(userId)}>공지사항 보내기</button>
         </div>
       </form>
     </div>
