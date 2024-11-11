@@ -7,15 +7,17 @@ import ImageResize from 'quill-image-resize';
 import { v4 as uuid } from "uuid";
 import { storage } from '../../../firebase/firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useModifyBoardMutation } from '../../../apis/modifyBoardApi';
 import { useQueryClient } from 'react-query';
 import { RingLoader } from "react-spinners";
 import { confirmCancelAlert } from "../../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert";
+import { instance } from "../../../apis/util/instance";
 Quill.register("modules/imageResize", ImageResize);
 
 function BoardModifyPage(props) {
     const params = useParams();
+    const location = useLocation();
     const boardId = params.boardId;
     const queryClient = useQueryClient();
     const boardData = queryClient.getQueryData(['boardQuery', boardId]);
@@ -24,9 +26,10 @@ function BoardModifyPage(props) {
     const [isUploading, setUploading] = useState(false);
     const [modifyBoard, setModifyBoard] = useState({
         boardId,
-        title: boardData?.data?.title,
-        content: boardData?.data?.content,
+        title: boardData ? boardData?.data?.title : location.state.title,
+        content: boardData ? boardData?.data?.content : location.state.title,
     });
+    const reportId = location.state.reportId ? location.state.reportId : 0;
 
     const modifyBoardMutation = useModifyBoardMutation(navigate);
 
@@ -34,6 +37,9 @@ function BoardModifyPage(props) {
         const selection = await confirmCancelAlert("게시글을 수정 하시겠습니까?");
         if (selection) {
             modifyBoardMutation.mutate({ modifyBoard, boardId });
+            if (reportId > 0) {
+                await instance.delete(`/message/${reportId}`);
+            }
         } else if (selection === false) {
             navigate(`/board/modify/${boardId}`);
         }
@@ -106,7 +112,7 @@ function BoardModifyPage(props) {
                         수정하기
                     </button>
                 </div>
-                <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard.title} placeholder='제목을 입력하세요.' />
+                <input type="text" name='title' onChange={handleTitleInputOnChange} value={modifyBoard?.title} placeholder='제목을 입력하세요.' />
             </div>
             <div css={s.editorLayout}>
                 {

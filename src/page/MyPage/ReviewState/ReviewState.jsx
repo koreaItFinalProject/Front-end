@@ -61,7 +61,7 @@ function ReviewState({ review }) {
                                     />
                                 </div>
                                 <div>
-                                    <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.cafeName} </p>
+                                    <p onClick={() => navigate(`/cafe/detail/${result.cafeId}`)}>{result.cafeName} </p>
                                 </div>
                                 <div>
                                     {result.review}

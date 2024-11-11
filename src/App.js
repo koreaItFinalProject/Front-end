@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import { useEffect, useState } from 'react';
-import { useInfiniteQuery, useQuery } from 'react-query';
+import { useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
@@ -24,7 +24,6 @@ import CafeModifyPage from './page/CafeOwner/CafeModifyPage/CafeModifyPage';
 import BoardDetailPage from './page/Board/BoardDetailPage/BoardDetailPage';
 import BoardModifyPage from './page/Board/BoardModifyPage/BoardModifyPage';
 import BoardWritePage from './page/Board/BoardWritePage/BoardWritePage';
-import ManagerProfilePage from './page/Admin/WebManager/ManagerProfilePage/ManagerProfilePage';
 import ManagerDashBoardPage from './page/Admin/WebManager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Admin/WebManager/ManagerManagementPage/ManagerManagementPage';
 import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreManagementPage/ManagerStoreManagementPage';
@@ -47,6 +46,7 @@ import ManagerReport from './page/Admin/WebManager/ManagerReport/ManagerReport';
 ReactModal.setAppElement('#root');
 
 function App() {
+  const queryClient = useQueryClient();
   const location = useLocation();
   const navigate = useNavigate();
   const [authRefresh, setAuthRefresh] = useState(true);
@@ -81,7 +81,6 @@ function App() {
         searchValue: searchValue,
         category: category
       }
-      // await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`), url 파라미터가 너무 길어져서 param 객체로 묶어서 요청 보냄
     }),
     {
       getNextPageParam: (lastPage, allPage) => {
@@ -148,7 +147,7 @@ function App() {
       // SSE 연결 설정
       const es = new EventSource(`http://localhost:8080/message/events?lastId=${0}&userId=${userInfo?.data?.data?.userId}`);
 
-      es.onmessage = (event) => {
+      es.onmessage = async (event) => {
         try {
           // 받아온 데이터 처리
           const parsedData = JSON.parse(event.data);
@@ -156,7 +155,7 @@ function App() {
 
           // 기존 알림에 새 메시지 추가
           showToast(parsedData.type);
-          // setLastId(parsedData.lastId); 
+          await queryClient.invalidateQueries("userManagementInfo");
         } catch (error) {
           console.error("알림 처리 중 오류 발생", error);
         }
@@ -184,7 +183,6 @@ function App() {
           <ManagerMainLayout>
             <Routes>
               <Route path='/home' element={<ManagerDashBoardPage />} />
-              <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/report' element={<ManagerReport />} />
