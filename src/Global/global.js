@@ -60,6 +60,7 @@ export const reset = css`
         height: 40px;
         caret-color: #ff675b;
         width: 380px;
+        color: #222222;
         &::placeholder{
             color: #222222;
         }
