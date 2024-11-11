@@ -26,6 +26,7 @@ function OAuth2Signup(props) {
         nickname: false,
         email: false,
     });
+    console.log(complete);
     const { duplicatedCheckValue, errorData } = useCheckInputValueApi();
     const [inputUser, setInputUser] = useState({
         username: '',
@@ -116,6 +117,10 @@ function OAuth2Signup(props) {
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
+                setComplete((data) => ({
+                    ...data,
+                    email: true
+                }))
             }
             if (emailNumber != emailCheck) {
                 confirmAlert("인증번호가 일치하지 않습니다.");
@@ -193,7 +198,7 @@ function OAuth2Signup(props) {
                 </div>
                 <div>
                     <div css={s.duplicateinput}>
-                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#ffffff' }} />
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
                         <button name='username' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}

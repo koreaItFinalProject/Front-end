@@ -19,9 +19,11 @@ import AlramInfo from './AlarmInfo/AlarmInfo';
 import NoticeBoard from './NoticeBoard/NoticeBoard';
 import { FiLogOut } from "react-icons/fi";
 import { confirmAlert } from '../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import { ImExit } from "react-icons/im";
+import { userDeleteApi } from '../../apis/signUpApis/userDeleteApi';
+import { confirmCancelAlert } from '../../apis/util/SweetAlert2/ConfirmCancelAlert/ConfirmCancelAlert';
 
 function MyPage(props) {
-    const [alarm, setAlarm] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
     const [infoBoard, setInfoBoard] = useState({
@@ -80,8 +82,24 @@ function MyPage(props) {
         localStorage.removeItem("accessToken");
         window.location.replace("/user/signin");
     }
+    const handleOnWithdrawClick = async () => {
+        const selet = await confirmCancelAlert("정말 탈퇴하시겠습니까?");
 
-    console.log(infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
+        if (selet) {
+            try {
+                const response = await userDeleteApi(infoBoard.user.id);
+                console.log(infoBoard.user.id);
+                console.log(response);
+                localStorage.removeItem("accessToken");
+                window.location.replace("/user/signin");
+                confirmAlert("회원탈퇴 완료")
+            } catch (error) {
+                const response = error.response;
+                console.log(response);
+                confirmAlert("회원탈퇴 실패")
+            }
+        }
+    }
 
     return (
         <div css={s.layout}>
@@ -130,6 +148,12 @@ function MyPage(props) {
                     <button onClick={handleLogoutClick}>
                         <FiLogOut />
                         <p>로그아웃</p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnWithdrawClick}>
+                        <ImExit />
+                        <p>회원 탈퇴</p>
                     </button>
                 </div>
             </div>

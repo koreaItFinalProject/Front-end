@@ -5,7 +5,6 @@ export const boardListLayout = css`
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
-    padding-bottom: 100px;
     overflow-y: auto;
 `;
 

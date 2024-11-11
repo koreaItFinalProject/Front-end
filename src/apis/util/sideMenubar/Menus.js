@@ -1,42 +1,45 @@
 import { HiOutlineHome } from "react-icons/hi2";
-import { RxDashboard } from "react-icons/rx";
 import { CgProfile } from "react-icons/cg";
 import { MdManageAccounts } from "react-icons/md";
 import { FaWindowRestore } from "react-icons/fa6";
-import { GiArchiveRegister } from "react-icons/gi";
-import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
-import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { IoNotifications } from "react-icons/io5";
+import { TbMessageReport } from "react-icons/tb";
 
 export const Menus = [
   {
     title: '메인',
-    icon:<HiOutlineHome/>,
+    icon: <HiOutlineHome />,
     path: 'home'
   },
   {
     title: '프로필',
-    icon:<CgProfile/>,
+    icon: <CgProfile />,
     path: 'profile'
   },
   {
     title: '사용자 관리',
-    icon:<MdManageAccounts/>,
+    icon: <MdManageAccounts />,
     path: 'management'
   },
   {
     title: '점포 관리',
-    icon:<FaWindowRestore/>,
+    icon: <FaWindowRestore />,
     path: "storemanagement"
   },
   {
-    title: '설정',
-    icon:<IoMdSettings/>,
-    path: "setting"
+    title: '신고 내역',
+    icon: <TbMessageReport />,
+    path: "report"
+  },
+  {
+    title: '알림 전송',
+    icon: <IoNotifications />,
+    path: "announcement"
   },
   {
     title: '로그아웃',
-    icon:<RiLogoutBoxLine/>,
+    icon: <RiLogoutBoxLine />,
     path: "login"
   },
 

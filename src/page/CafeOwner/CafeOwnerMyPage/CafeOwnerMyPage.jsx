@@ -21,6 +21,8 @@ import { FiLogOut } from "react-icons/fi";
 import NoticeBoard from "../../MyPage/NoticeBoard/NoticeBoard";
 import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { ImExit } from "react-icons/im";
+import { userDeleteApi } from "../../../apis/signUpApis/userDeleteApi";
 
 function CafeOwnerMyPage(props) {
     const navigate = useNavigate();
@@ -97,6 +99,21 @@ function CafeOwnerMyPage(props) {
         window.location.replace("/user/signin");
     }
 
+    const handleOnWithdrawClick = async () => {
+        try {
+            const response = await userDeleteApi(infoBoard.user.id);
+            console.log(infoBoard.user.id);
+            console.log(response);
+            localStorage.removeItem("accessToken");
+            window.location.replace("/user/signin");
+            confirmAlert("회원탈퇴 완료")
+        } catch (error) {
+            const response = error.response;
+            console.log(response);
+            confirmAlert("회원탈퇴 실패")
+        }
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -142,6 +159,12 @@ function CafeOwnerMyPage(props) {
                 <div css={s.menu} onClick={handleLogoutClick}>
                     <FiLogOut />
                     <p>로그아웃</p>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnWithdrawClick}>
+                        <ImExit />
+                        <p>회원 탈퇴</p>
+                    </button>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>

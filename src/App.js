@@ -2,7 +2,7 @@ import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-
 import { Global } from '@emotion/react';
 import { reset } from './Global/global';
 import { useEffect, useState } from 'react';
-import { QueryClient, useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
+import { useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
 import { instance } from './apis/util/instance';
 import MainLayout from './components/MainLayout/MainLayout';
 import MapPage from './page/MapPage/MapPage';
@@ -28,7 +28,6 @@ import ManagerProfilePage from './page/Admin/WebManager/ManagerProfilePage/Manag
 import ManagerDashBoardPage from './page/Admin/WebManager/ManagerDashBoardPage/ManagerDashBoardPage';
 import ManagerManagementPage from './page/Admin/WebManager/ManagerManagementPage/ManagerManagementPage';
 import ManagerStoreManagementPage from './page/Admin/WebManager/ManagerStoreManagementPage/ManagerStoreManagementPage';
-import ManagerSetting from './page/Admin/WebManager/ManagerSetting/ManagerSetting';
 import MobileAdminMyPage from './page/Admin/MobileAdmin/MobileAdminMyPage';
 import CafeOwnerMyPage from './page/CafeOwner/CafeOwnerMyPage/CafeOwnerMyPage';
 import CafeNoticeListPage from './page/CafeOwner/CafeNoticeListPage/CafeNoticeListPage';
@@ -42,6 +41,8 @@ import { confirmAlert } from './apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert'
 import CafeReviewWritePage from './page/Cafe/CafeReviewWritePage/CafeReviewWritePage';
 import Oauth2Signin from './components/Oauth2/Oauth2Signin/Oauth2Signin';
 import { showToast } from './apis/util/SweetAlert2/Toast/Toast';
+import ManageAnnouncement from './page/Admin/WebManager/ManageAnnouncement/ManageAnnouncement';
+import ManagerReport from './page/Admin/WebManager/ManagerReport/ManagerReport';
 
 ReactModal.setAppElement('#root');
 
@@ -81,7 +82,6 @@ function App() {
         searchValue: searchValue,
         category: category
       }
-      // await instance.get(`/board/list?page=${pageParam}&limit=${limit}&searchFilter=${searchFilter}&searchValue=${searchValue}`), url 파라미터가 너무 길어져서 param 객체로 묶어서 요청 보냄
     }),
     {
       getNextPageParam: (lastPage, allPage) => {
@@ -142,7 +142,6 @@ function App() {
       refetchOnWindowFocus: false
     }
   );
-  console.log(userInfo)
 
   useEffect(() => {
     if (userInfo?.data?.data?.userId) {
@@ -158,7 +157,6 @@ function App() {
           // 기존 알림에 새 메시지 추가
           showToast(parsedData.type);
           await queryClient.invalidateQueries("userManagementInfo");
-          // setLastId(parsedData.lastId); 
         } catch (error) {
           console.error("알림 처리 중 오류 발생", error);
         }
@@ -189,7 +187,8 @@ function App() {
               <Route path='/profile' element={<ManagerProfilePage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
-              <Route path='/setting' element={<ManagerSetting />} />
+              <Route path='/report' element={<ManagerReport />} />
+              <Route path='/announcement' element={<ManageAnnouncement />} />
             </Routes>
           </ManagerMainLayout>
         } />

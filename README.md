@@ -36,11 +36,10 @@
 - Cafe In Busan
 ### 🚀 목적
 - 커뮤니티 플랫폼 개발
-- 팀 프로젝트를 통한 협업 능력 향상
 ### 🤝 참여 인원
 - 팀원 3명
 ### 📆 제작 기간
--   2024.10.01 ~ 2024.10.14
+-   2024.10.01 ~ 2024.11.14
 ### 🔎 주요 기능
 - Kakao Map Api를 활용한 지도 페이지
 - 공공데이터 API를 활용한 사업자 등록번호 조회
@@ -71,7 +70,7 @@
 ### etc.
 - 프로젝트 진행상황 점검 및 일정 조율
 - 전체적인 페이지 CSS 디자인
-- ReadMe 작성
+- GitHub ReadMe 작성
 - PPT 제작
   
 <h3> 팀원: 김병규 </h3>
@@ -125,12 +124,7 @@
 <br/>
 
 ## 📚 프로젝트 진행 상황 관리
-
--   <a href="https://github.com/compositivePetProject/compositive_pet_project_front/issues?q=is%3Aissue+is%3Aclosed">📋 GitHub Issues(Front) & </a>
-    <a href="https://github.com/compositivePetProject/compositive_pet_project_back/issues?q=is%3Aissue+is%3Aclosed"> GitHub Issues(Back) </a>
-    -   간편한 이슈 생성을 위해 이슈 템플릿을 만들어 사용했습니다. + 팀원이 현재 어떤 작업을 진행하고 있는지를 바로 알 수 있어 의사소통 비용을 줄일 수 있었습니다.
--   <a href="https://github.com/orgs/compositivePetProject/projects/8">📁 GitHub Projects(Front) & </a>
-    <a href="https://github.com/orgs/compositivePetProject/projects/7">GitHub Project(back)</a>
+-   <a href="https://github.com/orgs/koreaItFinalProject/projects/1/views/1">📁 GitHub Projects</a>
     -   칸반 보드로 프로젝트 진행 상황을 한 눈에 확인할 수 있어 일정을 관리하기 수월했습니다.
 </p>
     

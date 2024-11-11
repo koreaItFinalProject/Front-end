@@ -23,16 +23,16 @@ function OAuth2MergePage(props) {
         const oAuth2Name = searchParams.get("oAuth2Name");
         const provider = searchParams.get("provider");
         const data = {
-            username:'',
-            password:'',
-            oauth2Name:oAuth2Name,
-            provider:provider
+            username: '',
+            password: '',
+            oauth2Name: oAuth2Name,
+            provider: provider
         }
-        if(oAuth2Name && provider) {
+        if (oAuth2Name && provider) {
             const checkOAuth2User = async () => {
                 console.log("시작");
                 const response = await oauth2MergeApi(data);
-                if(response.isSuccess){
+                if (response.isSuccess) {
                     localStorage.setItem("accessToken", "bearer " + response.token.accessToken);
                     instance.interceptors.request.use((config) => {
                         config.headers['Authorization'] = localStorage.getItem('accessToken');
@@ -43,7 +43,7 @@ function OAuth2MergePage(props) {
             }
             checkOAuth2User();
         }
-    },[searchParams , navigate])
+    }, [searchParams, navigate])
 
     const handleMergepageOnClick = async () => {
         const mergeData = {

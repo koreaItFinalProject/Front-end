@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import BackButton from '../../../components/BackButton/BackButton';
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
 
 const categories = [
     { value: 1, label: '인테리어가 멋져요' },
@@ -95,8 +96,8 @@ function CafeReviewModifyPage(props) {
             return await instance.put(`/review/${reviewItem.id}`, reviewData);
         },
         {
-            onSuccess: () => {
-                confirmAlert("리뷰가 수정되었습니다");
+            onSuccess: async () => {
+                showToast("리뷰가 수정되었습니다");
                 queryClient.invalidateQueries("cafeDetailQuery");
                 navigate(`/cafe/detail/${cafeDetail?.id}?selectMenu=review`);
             }
@@ -137,10 +138,8 @@ function CafeReviewModifyPage(props) {
                     {categories.map((category, index) => (
                         <button
                             key={index}
+                            css={selectedCategory.includes(category.value) ? s.activeButton : s.baseButtonStyle}
                             onClick={() => handleCategoryOnClick(category.value)}
-                            style={{
-                                backgroundColor: selectedCategory.includes(category.value) ? '#ff675b' : '#ffffff'
-                            }}
                         >
                             {category.label}
                         </button>

@@ -3,7 +3,7 @@ import { css } from "@emotion/react";
 export const layout = css`
     display: flex;
     flex-direction: column;
-    padding: 10px 10px 100px;
+    padding: 10px 0 0;
     gap: 10px;
 `;
 
@@ -148,5 +148,6 @@ export const contentBox = css`
 
     button {
         font-size: 14px;
+        font-weight: 600;
     }
 `;

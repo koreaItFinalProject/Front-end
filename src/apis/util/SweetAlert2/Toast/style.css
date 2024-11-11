@@ -1,8 +1,17 @@
 .custom-toast {
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 400px !important;
+    height: 80px !important;
     position: absolute;
     top: 50px;
     z-index: 9999;
     border-radius: 20px !important;
+    background-color: #eeeeee !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important; 
     animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -10,7 +19,7 @@
     from {
         opacity: 0;
     }
-
+    
     to {
         opacity: 1;
     }
@@ -24,16 +33,23 @@
     from {
         opacity: 1;
     }
-
+    
     to {
         opacity: 0;
     }
 }
 
 .custom-container {
-    width: 600px !important;
+    width: 100% !important;
 }
 
 .custom-title {
+    margin: 0 !important;
+    color: #ff675b;
+    font-size: 22px !important;
     text-align: center !important;
+}
+
+.custom-html {
+    margin: 0 !important;
 }

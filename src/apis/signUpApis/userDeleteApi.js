@@ -1,14 +1,14 @@
 import { instance } from "../util/instance";
 import { confirmAlert } from "../util/SweetAlert2/ConfirmAlert/ConfirmAlert";
 
-export const ownerDeleteApi = async (userId) => {
+export const userDeleteApi = async (userId) => {
     let DeleteData = {
         isSuccess: false,
         ok: {}
     }
     console.log(userId);
     try {
-        const response = await instance.delete(`/user/owner/delete/${userId}`);
+        const response = await instance.delete(`/user/delete/${userId}`);
         console.log(response);
         DeleteData = {
             isSuccess: true,
@@ -22,5 +22,5 @@ export const ownerDeleteApi = async (userId) => {
         confirmAlert("삭제실패");
     }
 
-    return ownerDeleteApi;
+    return userDeleteApi;
 }

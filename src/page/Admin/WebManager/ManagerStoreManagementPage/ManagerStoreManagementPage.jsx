@@ -52,10 +52,10 @@ function ManagerStoreManagementPage({ check, setCheck, inputvalue, setInputvalue
         <div css={s.mainLayout}>
             <div css={s.ibBox}>
                 <div css={s.inputSection}>
-                    <p>조회:</p>
+                    <p>조회</p>
                     <input type="text" value={inputdata} onChange={handleInputOnChange} onKeyDown={handleInputKeyPress} />
+                    <button css={s.button} onClick={() => setInputvalue(inputdata)}>검색</button>
                 </div>
-                <button css={s.button} onClick={() => setInputvalue(inputdata)}>검색</button>
             </div>
             <div css={s.listContainer}>
                 <table css={s.cafeListTable}>

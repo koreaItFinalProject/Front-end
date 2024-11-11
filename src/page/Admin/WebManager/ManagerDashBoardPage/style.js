@@ -1,40 +1,51 @@
 import { css } from "@emotion/react";
 
 export const layout = css`
+    box-sizing: border-box;
     display: flex;
-    height: 100%;
-`;
-
-export const innerlayout = css`
-    height: 100%;
+    flex-direction: column;
+    padding: 20px;
     width: 100%;
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    
-`;
-export const contentlayout = css`
-        width: 100%;
-        height: 880px;
-        display: flex;
-        background-color: #EFECE8;
-        justify-content: center;
-        align-items: center;
+    height: 100%;
 `;
 
-export const contentBox = css`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-template-rows: repeat(2, 1fr);   
-    justify-content: space-between;
-    align-items: center;
-    justify-content: center;
-    place-items: center;
-    & div{
-        width: 95%;
-        height: 95%;
-        border: 1px solid #dbdbdb;
-        border-radius: 10px;
-        background-color: #E3E2DE;
+export const row = css`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #191919;
+`;
+
+export const column = css`
+    box-sizing: border-box;
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid #191919;
+    padding: 10px;
+
+    h3 {
+        margin: 0 0 5px 5px;
     }
+`;
+
+export const cafeListTable = css`
+    width: 100%;
+    height: 28px;
+    border-collapse: collapse;
+    border: 1px solid #dbdbdb;
+    border-top: none;
+
+    tr:nth-child(1){
+        position: sticky;
+        top: -1px;
+        background-color: #EFECE8;
+    }
+    th, td {
+        border: 1px solid #dbdbdb;
+        padding: 10px; // 패딩 추가
+        text-align: center; // 중앙 정렬
+        white-space : nowrap;
+    }
+
 `;

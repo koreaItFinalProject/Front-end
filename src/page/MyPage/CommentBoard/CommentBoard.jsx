@@ -63,7 +63,7 @@ function CommentBoard({ comment }) {
                             </div>
                             <div css={s.title} >
                                 <div>
-                                    <p onClick={() => navigate(`/board/detail/${result.commentId}`)}>{result.boardTitle} </p>
+                                    <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.boardTitle} </p>
                                     <p>에 단 댓글 내용</p>
                                 </div>
                                 <p>{result.commentContent}</p>
