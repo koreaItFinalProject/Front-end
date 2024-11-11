@@ -168,7 +168,7 @@ function UserSignupPage(props) {
                 </div>
                 <div>
                     <div css={s.duplicateinput}>
-                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#ffffff' }} />
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#dbdbdb' : '#1c1c1b' }} />
                         <button name='username' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}

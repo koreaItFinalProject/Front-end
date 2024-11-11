@@ -21,6 +21,9 @@ import ReviewState from "../../MyPage/ReviewState/ReviewState";
 import AlramInfoPage from "../../MyPage/AlarmInfo/AlarmInfo";
 import AdminCafeList from "./AdminCafeList/AdminCafeList";
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { ImExit } from "react-icons/im";
+import { userDeleteApi } from "../../../apis/signUpApis/userDeleteApi";
+
 
 function MobileAdminMyPage(props) {
     const navigate = useNavigate();
@@ -76,6 +79,21 @@ function MobileAdminMyPage(props) {
     };
     console.log(isCount);
 
+    const handleOnWithdrawClick = async () => {
+        try {
+            const response = await userDeleteApi(isCount.user.id);
+            console.log(isCount.user.id);
+            console.log(response);
+            localStorage.removeItem("accessToken");
+            window.location.replace("/user/signin");
+            confirmAlert("회원탈퇴 완료")
+        } catch (error) {
+            const response = error.response;
+            console.log(response);
+            confirmAlert("회원탈퇴 실패")
+        }
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -116,6 +134,12 @@ function MobileAdminMyPage(props) {
                     <RiAlarmWarningFill />
                     <p>알림</p>
                     <p>{isCount.alarm.length === 0 ? '0' : isCount.alarm.length}</p>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnWithdrawClick}>
+                        <ImExit />
+                        <p>회원 탈퇴</p>
+                    </button>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>

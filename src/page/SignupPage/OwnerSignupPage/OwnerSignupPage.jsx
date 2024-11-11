@@ -13,7 +13,7 @@ import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
 import EmailDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/EmailDuplicateCheckValue';
-import { ownerDeleteApi } from '../../../apis/signUpApis/ownerDeleteApi';
+import { userDeleteApi } from '../../../apis/signUpApis/userDeleteApi';
 import valueDuplicateCheckValue from '../../../apis/EmptyDuplicateCheckValue/valueDuplicateCheckValue';
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
@@ -147,7 +147,7 @@ function OwnerSignupPage(props) {
                     navigate("/user/signin");
                 } else if (!CafeData.isSuccess) {
                     confirmAlert("회원가입을 다시 진행해주세요");
-                    const DeleteData = await ownerDeleteApi(data.ownerId)
+                    const DeleteData = await userDeleteApi(data.ownerId)
                     console.log(DeleteData);
                     return;
                 }
@@ -282,7 +282,7 @@ function OwnerSignupPage(props) {
                 </div>
                 <div>
                     <div css={s.underlineInput}>
-                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#ffffff' }} />
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
                         <button name='username' onClick={handleCheckUser}>확인</button>
                         {fieldErrorMessages.username}
                     </div>

@@ -19,9 +19,10 @@ import AlramInfo from './AlarmInfo/AlarmInfo';
 import NoticeBoard from './NoticeBoard/NoticeBoard';
 import { FiLogOut } from "react-icons/fi";
 import { confirmAlert } from '../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import { ImExit } from "react-icons/im";
+import { userDeleteApi } from '../../apis/signUpApis/userDeleteApi';
 
 function MyPage(props) {
-    const [alarm, setAlarm] = useState(false);
     const [user, setUser] = useRecoilState(State);
     const [check, setCheck] = useState("user");
     const [infoBoard, setInfoBoard] = useState({
@@ -81,6 +82,21 @@ function MyPage(props) {
         window.location.replace("/user/signin");
     }
 
+    const handleOnWithdrawClick = async () => {
+        try {
+            const response = await userDeleteApi(infoBoard.user.id);
+            console.log(infoBoard.user.id);
+            console.log(response);
+            localStorage.removeItem("accessToken");
+            window.location.replace("/user/signin");
+            confirmAlert("회원탈퇴 완료")
+        } catch (error) {
+            const response = error.response;
+            console.log(response);
+            confirmAlert("회원탈퇴 실패")
+        }
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -128,6 +144,12 @@ function MyPage(props) {
                     <button onClick={handleLogoutClick}>
                         <FiLogOut />
                         <p>로그아웃</p>
+                    </button>
+                </div>
+                <div css={s.menu}>
+                    <button onClick={handleOnWithdrawClick}>
+                        <ImExit />
+                        <p>회원 탈퇴</p>
                     </button>
                 </div>
             </div>
