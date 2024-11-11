@@ -33,20 +33,20 @@
 ## ✨ 프로젝트 소개
 - 카페를 좋아하는 사람들을 위한 카페 커뮤니티 플랫폼
 ### 🌟 제목
-- Cafe In Busan
+- Cafe In Busan
 ### 🚀 목적
 - 커뮤니티 플랫폼 개발
 ### 🤝 참여 인원
 - 팀원 3명
 ### 📆 제작 기간
--   2024.10.01 ~ 2024.11.14
+- 2024.10.01 ~ 2024.11.14
 ### 🔎 주요 기능
 - Kakao Map Api를 활용한 지도 페이지
 - 공공데이터 API를 활용한 사업자 등록번호 조회
 - OCR API를 활용하여 사업자 등록번호 추출
 - SSE를 활용한 실시간 알림 기능 구현
 ## 👥 팀원 소개 및 역할 분담
-<h3> 팀장: 김동인 </h3>
+<h3> 팀장: 김동인 </h3>
 
 ### 🔧 Back-End
 - 카페 리스트 CRUD
@@ -73,7 +73,7 @@
 - GitHub ReadMe 작성
 - PPT 제작
   
-<h3> 팀원: 김병규 </h3>
+<h3> 팀원: 김병규 </h3>
 
 ### 🔧 Back-End
 - 회원가입/로그인
@@ -88,7 +88,7 @@
 ### etc.
 - API 명세서 작성
 
-- <h3> 팀원: 김정현 </h3>
+- <h3> 팀원: 김정현 </h3>
 
 ### 🔧 Back-End
 - 카페 카테고리별 리스트
@@ -114,7 +114,7 @@
 
 ## 🤝 협업 방식
 
-1. 개발하는 기능에 대해 GitHub Issue를 생성하고 브랜치를 생성합니다.
+1. 개발하는 기능에 대해 GitHub Issue를 생성하고 브랜치를 생성합니다.
 2. 생성한 브랜치로 전환하여 해당하는 업무를 진행합니다.
 3. 개발을 완료하면 각자 브랜치에서 코드를 push합니다.
 4. PR(Pull Request) 을 오픈합니다.
@@ -316,23 +316,24 @@
 <img src="https://img.shields.io/badge/Emotion-cb0096?style=for-the-badge&logo=react&logoColor=white">
 </p>
 
-### ⛓️ pom.xml(Back-end)
+### <img src="https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white"/> pom.xml(Back-end)
 
 | 라이브러리                          | 용도                                  |
 | ----------------------------------- | ------------------------------------- |
-| lombok                              | 어노테이션(@)으로 코드 자동 생성      |
+| lombok                              | 어노테이션(@)으로 코드 자동 생성         |
 | spring-boot-starter-security        | spring security 적용                  |
 | spring-boot-starter-validation      | 입력 값 검증                          |
-| spring-boot-starter-web             | Spring Web 프로젝트에 필수 라이브러리 |
-| spring-boot-starter-test            | 프로젝트 작동을 테스트하는 역할       |
-| mybatis-spring-boot-starter         | 백엔드에서 MyBatis 문법 적용          |
+| spring-boot-starter-web             | Spring Web 프로젝트에 필수 라이브러리  |
+| spring-boot-starter-test            | 프로젝트 작동을 테스트하는 역할         |
+| mybatis-spring-boot-starter         | 백엔드에서 MyBatis 문법 적용           |
 | spring-boot-devtools                | 빠른 재시작                           |
 | mysql-connector-java                | DB인 MySQL과 연결                     |
 | jjwt-api / jjwt-impl / jjwt-jackson | JWT(JSON Web Token) 활용              |
-| spring-boot-starter-oauth2-client   | Oauth2 인증(Naver, Kakao, Google)                           |
+| spring-boot-starter-oauth2-client   | Oauth2 인증(Naver, Kakao, Google)     |
 | spring-boot-starter-aop             | spring aop 적용                       |
+| spring-boot-starter-mail            | JavaMailSender를 활용하여 이메일 전송  |
 
-### ⛓️ node_modules(Front-end)
+### node_modules(Front-end)
 
 | 모듈 이름                                                                   | 용도                                       |
 | --------------------------------------------------------------------------- | ------------------------------------------ |
