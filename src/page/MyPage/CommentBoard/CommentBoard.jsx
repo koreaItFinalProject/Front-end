@@ -62,8 +62,8 @@ function CommentBoard({ comment }) {
                                 {extractImageTags(result?.boardContent)}
                             </div>
                             <div css={s.title} >
-                                <div>
-                                    <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.boardTitle} </p>
+                                <div css={s.content}>
+                                    <p onClick={() => navigate(`/board/detail/${result.boardId}`)}>{result.boardTitle}</p>
                                     <p>에 단 댓글 내용</p>
                                 </div>
                                 <p>{result.commentContent}</p>

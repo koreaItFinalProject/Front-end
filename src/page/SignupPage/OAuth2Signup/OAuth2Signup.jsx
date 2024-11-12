@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from "../UserSignupPage/style";
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
+import { handleInputDuplicateOnChange } from '../../../apis/util/handleInputOnChange/handleInputDuplicateOnChange';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
 import { oAuth2SignupApi } from '../../../apis/signUpApis/oauth2SignupApi';
 import emailApi from '../../../apis/emailApis/emailApi';
@@ -198,26 +198,26 @@ function OAuth2Signup(props) {
                 </div>
                 <div>
                     <div css={s.duplicateinput}>
-                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
                         <button name='username' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                     {fieldErrorMessages.username}
                 </div>
                 <div css={s.widthinput}>
-                    <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                    <input type="password" name='password' value={inputUser.password} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='비밀번호' />
                     {fieldErrorMessages.password}
                 </div>
                 <div>
-                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
+                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='비밀번호 확인' />
                     {fieldErrorMessages.checkPassword}
                     {fieldErrorMessages.passwordMatching}
                 </div>
                 <div>
-                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='이름' />
                     {fieldErrorMessages.name}
                 </div>
                 <div css={s.duplicateinput}>
-                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
+                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
                     {fieldErrorMessages.email}
                 </div>
@@ -244,7 +244,7 @@ function OAuth2Signup(props) {
                 </div>
                 <div>
                     <div css={s.duplicateinput}>
-                        <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='닉네임' />
+                        <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='닉네임' />
                         <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                     </div>
                 </div>
@@ -254,7 +254,7 @@ function OAuth2Signup(props) {
                         type="text"
                         name='phoneNumber'
                         value={inputUser.phoneNumber}
-                        onChange={handleInputOnChange(setInputUser)} autoComplete="off" placeholder='전화번호' />
+                        onChange={handleInputDuplicateOnChange(setInputUser)} autoComplete="off" placeholder='전화번호' />
                     {fieldErrorMessages.phoneNumber}
                 </div>
                 <div css={s.signupbutton}>

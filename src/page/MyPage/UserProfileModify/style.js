@@ -24,6 +24,7 @@ export const layout = css`
 `;
 
 export const Info = css`
+    margin-bottom: 50px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -157,4 +158,3 @@ export const emailPhoneCheck = css`
     padding: 15px;
     margin-bottom: 10px;
 `;
-

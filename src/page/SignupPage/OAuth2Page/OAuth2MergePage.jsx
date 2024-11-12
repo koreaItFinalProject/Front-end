@@ -38,7 +38,7 @@ function OAuth2MergePage(props) {
                         config.headers['Authorization'] = localStorage.getItem('accessToken');
                         return config;
                     });
-                    navigate("/mypage");
+                    navigate("/map");
                 }
             }
             checkOAuth2User();
