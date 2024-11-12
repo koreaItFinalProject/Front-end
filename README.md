@@ -406,8 +406,17 @@ react-daum-postcode | 다음 주소 API |
 ![네이버 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/6e75d112-1dd6-4700-9d6b-7b5eba69c9f4)
 
 ### 지도 페이지
-#### 카카오 지도 API를 이용한 주변 애완업 관련 업체 검색 페이지
-![지도 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/0d82ffdc-a6ca-489b-8454-4e131e0cfda0)
+#### 지도 페이지 검색
+![지도 페이지 검색](https://github.com/user-attachments/assets/eef2f386-a342-4aa5-9b83-6b42550a8175)
+
+#### 지도 페이지 카테고리 필터
+![지도 페이지 카테고리 필터](https://github.com/user-attachments/assets/4e8a245d-e7cd-406e-9c37-a67590809919)
+
+#### 지도 페이지에서 카페 상세 페이지 이동
+![지도 페이지에서 카페 상세 페이지 이동](https://github.com/user-attachments/assets/8e1f81ec-2827-47a3-8887-f5d4d6d67618)
+
+#### 지도페이지 슬라이더
+![지도페이지 슬라이더](https://github.com/user-attachments/assets/63257a1c-bcb7-4a03-9783-6a26373c361e)
 
 ### 메인 페이지
 #### 여러 컨텐츠들을 간략적으로 보여주는 메인 페이지
