@@ -23,6 +23,10 @@ function UserProfileModify({ user }) {
     const [emailCheckState, setEmailCheckState] = useState(false);
     const { duplicatedCheck, errorData } = useCheckInputApi();
     console.log(user);
+    const handleInputCheckChange = (e) => {
+        setEmailCheck(e.target.value);
+    }
+
     const handleOnEmailCheckClick = async () => {
         console.log("이메일 넘버" + emailNumber);
         console.log("이메일 체크" + emailCheck);
@@ -148,13 +152,13 @@ function UserProfileModify({ user }) {
                         <CiMail />
                     </div>
                     <div css={s.emailCheck}>
-                        <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' disabled={emailCheckState} />
+                        <input type="email" name='email' value={modifyUser.email} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일' />
                         <button name="email" onClick={startTimer}>이메일 인증</button>
                     </div>
                     <div>
                         <div>
                             <div css={s.emailTimer}>
-                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputOnChange(setModifyUser)} placeholder='이메일 확인' readOnly={!emailCheckState} />
+                                <input type="text" name='emailCheck' value={emailCheck} onChange={handleInputCheckChange} placeholder='이메일 확인' readOnly={!emailCheckState} />
                                 <div>
                                     {isTimerRunning && <p>{Math.floor(timer / 60)}분 {timer % 60}초</p>}
                                 </div>
@@ -172,13 +176,13 @@ function UserProfileModify({ user }) {
                                 }
                             </div>
                         </div>
-                        <div>
+                        <div css={s.InputBox}>
                             <input
                                 type="text"
                                 name='phoneNumber'
                                 value={modifyUser.phoneNumber}
                                 onChange={handleInputOnChange(setModifyUser)} placeholder='전화번호' />
-                            <button onClick={handleModifyFiledValue}>확인</button>
+                            <button name='phoneNumber'onClick={handleModifyFiledValue}>확인</button>
                         </div>
                     </div>
                 </div>

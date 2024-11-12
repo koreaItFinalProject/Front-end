@@ -43,7 +43,6 @@ export const menuContainer = css`
 export const menu = css`
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
     align-items: center;
     padding: 0 10px;
     width: 100%;
@@ -69,7 +68,15 @@ export const menu = css`
         color: #ff675b;
         font-weight: 500;
     }
+    
 `;
+
+export const memberButton = css`
+    display: flex;
+    padding-left: 0;
+`
+
+
 
 export const modalStyles = {
     overlay: {
@@ -82,11 +89,11 @@ export const modalStyles = {
         borderRadius: '20px',
         border: '2px solid #cacaca',
         boxShadow: '0px 0px 10px 4px #00000036',
-        top: '45%',
+        top: '50%',
         left: '50%',
-        padding: '20px',
+        padding: '10px',
         width: '600px',
-        height: '650px',
+        height: '750px',
         overflow: 'hidden',
     },
 };

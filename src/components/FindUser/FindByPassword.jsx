@@ -34,7 +34,7 @@ function FindByPassword(props) {
   const handleInputEmailCheck = (e) => {
     const { name, value } = e.target;
     if (name === 'emailCheck' && !/^\d*$/.test(value)) {
-      alert("숫자만 입력가능합니다")
+      confirmAlert("숫자만 입력가능합니다")
       return; // 숫자가 아닌 입력은 무시 
     }
     setEmailCheck(value);
@@ -45,7 +45,7 @@ function FindByPassword(props) {
     console.log("이메일 체크" + emailCheck);
     if (emailCheck !== '') {
       if (emailNumber == emailCheck) {
-        alert("인증성공");
+        confirmAlert("인증성공");
         setTimer(0);
         setEmailCheckState(false);
         setIsTimerStopped(true);
@@ -53,7 +53,7 @@ function FindByPassword(props) {
         setUsernameCheck(true);
       }
       if (emailNumber != emailCheck) {
-        alert("인증번호가 일치하지 않습니다.");
+        confirmAlert("인증번호가 일치하지 않습니다.");
       }
     }
   }
@@ -67,7 +67,7 @@ function FindByPassword(props) {
     } else if (timer === 0 && emailCheckState) {
       setIsTimerRunning(false);
       setEmailCheckState(false);
-      alert("인증시간을 초과하였습니다.");
+      confirmAlert("인증시간을 초과하였습니다.");
     }
     return () => clearInterval(interval);
   }, [isTimerRunning, timer, isTimerStopped]);
@@ -77,7 +77,7 @@ function FindByPassword(props) {
     console.log(email);
     try {
       if (email.trim() === '') {
-        alert('빈 값은 입력할 수 없습니다.');
+        confirmAlert('빈 값은 입력할 수 없습니다.');
         return;
       }
       const emailCheck = await EmailDuplicateCheckValue(email);
@@ -95,7 +95,7 @@ function FindByPassword(props) {
       }
     } catch (error) {
       console.error("Error occurred:", error);
-      alert("이메일 인증 요청 중 오류가 발생했습니다.");
+      confirmAlert("이메일 인증 요청 중 오류가 발생했습니다.");
     }
   }
 

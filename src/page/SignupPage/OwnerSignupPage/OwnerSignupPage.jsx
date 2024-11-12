@@ -8,7 +8,7 @@ import Ocr from '../../../apis/Ocr/Ocr';
 import Businessregistration from '../../../apis/BusinessregistrationApi/Businessregistration';
 import { usersignupApi } from '../../../apis/signUpApis/usersignupApi';
 import { showFieldErrorMessage } from '../../../apis/util/showFieldErrorMessage/showFieldErrorMessage';
-import { handleInputOnChange } from '../../../apis/util/handleInputOnChange/handleInputOnChange';
+import { handleInputDuplicateOnChange } from '../../../apis/util/handleInputOnChange/handleInputDuplicateOnChange';
 import emailApi from '../../../apis/emailApis/emailApi';
 import BackButton from '../../../components/BackButton/BackButton';
 import useCheckInputValueApi from '../../../apis/useCheckInputValueApi/useCheckInputValueApi';
@@ -22,7 +22,7 @@ function OwnerSignupPage(props) {
     const [isTimerRunning, setIsTimerRunning] = useState(false);
     const [isTimerStopped, setIsTimerStopped] = useState();
     const [timer, setTimer] = useState(0);
-    const [businessNumber, setBusinessNumber] = useState('2148813306');
+    const [businessNumber, setBusinessNumber] = useState('');
     const [ocrBusinessNumber, setOcrBusinessNumber] = useState('');
     const [proccess, setProccess] = useState(true);
     const [image, setImage] = useState();
@@ -282,22 +282,22 @@ function OwnerSignupPage(props) {
                 </div>
                 <div>
                     <div css={s.underlineInput}>
-                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
+                        <input type="text" name='username' autoComplete="off" value={inputUser.username} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='아이디' style={{ color: complete.username ? '#adadad' : '#1c1c1b' }} />
                         <button name='username' onClick={handleCheckUser}>확인</button>
                         {fieldErrorMessages.username}
                     </div>
                 </div>
                 <div>
-                    <input type="password" name='password' value={inputUser.password} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호' />
+                    <input type="password" name='password' value={inputUser.password} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='비밀번호' />
                     {fieldErrorMessages.password}
                     {fieldErrorMessages.passwordMatching}
                 </div>
                 <div>
-                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputOnChange(setInputUser)} placeholder='비밀번호 확인' />
+                    <input type="password" name='checkPassword' value={inputUser.checkPassword} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='비밀번호 확인' />
                 </div>
                 {fieldErrorMessages.checkPassword}
                 <div css={s.duplicateinput}>
-                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
+                    <input type="email" name='email' autoComplete="off" value={inputUser.email} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='이메일' disabled={emailCheckState} />
                     <button onClick={() => startTimer(inputUser.email)}>이메일 인증</button>
                 </div>
                 {fieldErrorMessages.email}
@@ -323,20 +323,20 @@ function OwnerSignupPage(props) {
                     </div>
                 </div>
                 <div>
-                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputOnChange(setInputUser)} placeholder='이름' />
+                    <input type="text" name='name' autoComplete="off" value={inputUser.name} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='이름' />
                 </div>
                 {fieldErrorMessages.name}
                 <div css={s.duplicateinput}>
-                    <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputOnChange(setInputUser, setComplete)} placeholder='닉네임' />
+                    <input type="text" name='nickname' autoComplete="off" value={inputUser.nickname} onChange={handleInputDuplicateOnChange(setInputUser, setComplete)} placeholder='닉네임' />
                     <button name='nickname' onClick={handleCheckUser}>중복 확인</button>
                 </div>
                 {fieldErrorMessages.nickname}
                 <div>
-                    <input type="text" name='phoneNumber' autoComplete="off" value={inputUser.phoneNumber} onChange={handleInputOnChange(setInputUser)} placeholder='전화번호' />
+                    <input type="text" name='phoneNumber' autoComplete="off" value={inputUser.phoneNumber} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='전화번호' />
                     {fieldErrorMessages.phoneNumber}
                 </div>
                 <div>
-                    <input type="text" name='cafename' autoComplete="off" value={inputUser.cafename} onChange={handleInputOnChange(setInputUser)} placeholder='카페명' />
+                    <input type="text" name='cafename' autoComplete="off" value={inputUser.cafename} onChange={handleInputDuplicateOnChange(setInputUser)} placeholder='카페명' />
                 </div>
                 <p>
                     {

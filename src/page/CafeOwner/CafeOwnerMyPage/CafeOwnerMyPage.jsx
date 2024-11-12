@@ -161,7 +161,7 @@ function CafeOwnerMyPage(props) {
                     <p>로그아웃</p>
                 </div>
                 <div css={s.menu}>
-                    <button onClick={handleOnWithdrawClick}>
+                    <button css={s.memberButton}onClick={handleOnWithdrawClick}>
                         <ImExit />
                         <p>회원 탈퇴</p>
                     </button>

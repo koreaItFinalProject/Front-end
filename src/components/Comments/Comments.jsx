@@ -33,8 +33,8 @@ function Comments({ commentData, handleModifyCommentButtonOnClick, handleModifyC
         }
     )
 
-    const handleDeleteCommentButtonOnClick = (commentId) => {
-        const selection = confirmCancelAlert("댓글을 삭제하시겠습니까?");
+    const handleDeleteCommentButtonOnClick = async(commentId) => {
+        const selection = await confirmCancelAlert("댓글을 삭제하시겠습니까?");
         confirmCancelAlert("댓글을 삭제하시겠습니까?");
         if (selection) {
             deleteCommentMutation.mutateAsync(commentId);
