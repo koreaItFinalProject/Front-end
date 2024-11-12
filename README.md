@@ -393,9 +393,9 @@ react-daum-postcode | 다음 주소 API |
 
 ## 📋 메뉴 구조도
 ### 메인페이지(사용자)
-![CafeInBusan 메뉴 구조도 (1)](https://github.com/user-attachments/assets/a1faa2ef-610a-4585-9d8b-cf8f6ed3b301)
+![CafeInBusan 메뉴 구조도(일반 페이지)](https://github.com/user-attachments/assets/c31fed64-cb59-44e4-b520-9132d60d17f6)
 ### 관리자 페이지(관리자)
-
+![CafeInBusan 메뉴 구조도(관리자 페이지)](https://github.com/user-attachments/assets/79a33f42-34a6-4c6e-b6bc-947036ea468d)
 
 ## 🖥 화면 구현
 ### 로그인/회원가입 페이지
