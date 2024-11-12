@@ -41,34 +41,32 @@ function ManagerDashBoardPage(props) {
     )
 
 
-
+    console.log(info.userList.length);
     return (
         <div css={s.layoutStyle}>
             {
                 ManagementInfo.isLoading
                     ?
                     <></> :
-                    ManagementInfo.isSuccess
-                        ?
-                        <>
-                            <div css={s.twinboard}>
-                                <div css={s.rowStyle}>
-                                    <ManagerUser user={info?.userList} />
-                                </div>
-                                <div css={s.rowStyle}>
-                                    <ManagerBoard board={info?.boardList} />
-                                </div>
+                    info.userList.length &&
+                    <>
+                        <div css={s.twinboard}>
+                            <div css={s.rowStyle}>
+                                <ManagerUser user={info?.userList} />
                             </div>
-                            <div css={s.twinboard}>
-                                <div css={s.rowStyle}>
-                                    <ManagerComment comment={info?.commentList} />
-                                </div>
-                                <div css={s.rowStyle}>
-                                    <ManagerReview review={info?.reviewList} />
-                                </div>
+                            <div css={s.rowStyle}>
+                                <ManagerBoard board={info?.boardList} />
                             </div>
-                        </>
-                        : <></>
+                        </div>
+                        <div css={s.twinboard}>
+                            <div css={s.rowStyle}>
+                                <ManagerComment comment={info?.commentList} />
+                            </div>
+                            <div css={s.rowStyle}>
+                                <ManagerReview review={info?.reviewList} />
+                            </div>
+                        </div>
+                    </>
             }
         </div>
     );

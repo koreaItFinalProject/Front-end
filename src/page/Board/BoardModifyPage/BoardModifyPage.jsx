@@ -26,10 +26,10 @@ function BoardModifyPage(props) {
     const [isUploading, setUploading] = useState(false);
     const [modifyBoard, setModifyBoard] = useState({
         boardId,
-        title: boardData ? boardData?.data?.title : location.state.title,
-        content: boardData ? boardData?.data?.content : location.state.title,
+        title: boardData !== undefined ? boardData?.data.title : location.state.title,
+        content: boardData !== undefined ? boardData?.data.content : location.state.title,
     });
-    const reportId = location.state.reportId ? location.state.reportId : 0;
+    const reportId = location?.state?.reportId ? location.state.reportId : 0;
 
     const modifyBoardMutation = useModifyBoardMutation(navigate);
 

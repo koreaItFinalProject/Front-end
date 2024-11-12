@@ -138,7 +138,21 @@ function App() {
     },
     {
       enabled: accessTokenValid.isSuccess && accessTokenValid.data?.data,
-      refetchOnWindowFocus: false
+      refetchOnWindowFocus: false,
+      onSuccess: (response) => {
+        console.log(response.data)
+        let blockPaths = [""];
+        if (response?.data.role !== "admin") {
+          blockPaths = [...blockPaths, "/manager"];
+        }
+        for (let blockPath of blockPaths) {
+          if (location.pathname.startsWith(blockPath)) {
+            confirmAlert("잘못된 요청입니다.");
+            navigate("/map");
+            break;
+          }
+        }
+      },
     }
   );
 
@@ -182,7 +196,7 @@ function App() {
         <Route path='/manager/web/*' element={
           <ManagerMainLayout>
             <Routes>
-              <Route path='/home' element={<ManagerDashBoardPage />} />
+              <Route path='' element={<ManagerDashBoardPage />} />
               <Route path='/management' element={<ManagerManagementPage />} />
               <Route path='/storemanagement' element={<ManagerStoreManagementPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
               <Route path='/report' element={<ManagerReport />} />

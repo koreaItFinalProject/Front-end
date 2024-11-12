@@ -10,12 +10,7 @@ export const Menus = [
   {
     title: '메인',
     icon: <HiOutlineHome />,
-    path: 'home'
-  },
-  {
-    title: '프로필',
-    icon: <CgProfile />,
-    path: 'profile'
+    path: ''
   },
   {
     title: '사용자 관리',
