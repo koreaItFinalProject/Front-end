@@ -1,7 +1,6 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './style';
-import Header from '../../../components/Header/Header';
 import { Link } from 'react-router-dom';
 
 function ParticularRequestPage(props) {

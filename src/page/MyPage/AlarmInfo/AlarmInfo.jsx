@@ -4,6 +4,7 @@ import * as s from "./style";
 import { useQueryClient } from 'react-query';
 import { instance } from '../../../apis/util/instance';
 import { useNavigate } from 'react-router-dom';
+import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
 
 function AlramInfoPage({ alarm }) {
     const queryClient = useQueryClient();
@@ -30,6 +31,7 @@ function AlramInfoPage({ alarm }) {
             setInputValue("");
             await instance.delete(`/message/${reversedAlarm[openIndex].id}`);
             await queryClient.invalidateQueries("userManagementInfo"); // 알림 리스트 쿼리 무효화로 새로고침
+            confirmAlert("수정 완료했습니다.");
         }
     };
 
@@ -57,7 +59,6 @@ function AlramInfoPage({ alarm }) {
                         <tr>
                             <td>{alarmItem.type}</td>
                             {alarmItem.type === "댓글수정 요청" || alarmItem.type === "리뷰수정 요청" ? (
-                                // "게시물" 타입의 알림은 수정 불가능하도록 처리
                                 openIndex === index ? (
                                     <td>
                                         <input
