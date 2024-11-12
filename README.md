@@ -400,23 +400,46 @@ react-daum-postcode | 다음 주소 API |
 ## 🖥 화면 구현
 ### 로그인/회원가입 페이지
 #### 일반 로그인/회원가입 페이지
-![일반 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c3087c7a-fa9b-4739-93e8-e039ed5053d0)
-![일반 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/a0ca9483-b0f4-4ee9-a6db-06305fff9fa1)
+![일반 회원가입](https://github.com/user-attachments/assets/52e3f219-e109-460b-8b43-0f9b17e7fa43)
+![일반 로그인](https://github.com/user-attachments/assets/e6beb80a-f926-4d45-b212-225608ff6739)
+
+### 점주 로그인/회원가입 페이지
+![오너로그인](https://github.com/user-attachments/assets/9d4c3b62-ca0f-4b32-b2a3-b47793cd50d1)
+![점주회원가입](https://github.com/user-attachments/assets/a5b06986-b703-4600-aaff-9f4abea559b4)
 
 #### OAuth2 소셜 로그인/회원가입 페이지(구글)
-![구글 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/cb8ae8e7-c641-4f50-831e-60985d8748f9)
-![구글 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/2af6215a-1605-42cb-b920-1bf2d24fc421)
-![구글 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/79acd74a-92fd-4d4d-b248-fe7ac2ea8814)
+
 
 #### OAuth2 소셜 로그인/회원가입 페이지(카카오)
-![카카오 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/ea9d372e-ae02-4d15-a552-810ae98becc8)
-![카카오 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/61b6bbae-533d-4356-b576-32af69b5fc50)
-![카카오 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/0e2e210e-c278-4633-8fde-f05fe3d1b407)
+
 
 #### OAuth2 소셜 로그인/회원가입 페이지(네이버)
-![네이버 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/0102cdbf-4b4e-4db5-833c-203006beaf90)
-![네이버 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/68110d6f-eff0-4a04-a8ab-0894819f533b)
-![네이버 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/6e75d112-1dd6-4700-9d6b-7b5eba69c9f4)
+![oauth2로그인](https://github.com/user-attachments/assets/992bfaa0-fb2f-4e50-b927-537d1bd637b1)
+![oauth2통합회원가입](https://github.com/user-attachments/assets/d7fa6dd8-51f1-4699-9d33-f5064be57d68)
+
+## 비밀번호 찾기/아이디 찾기
+### 아이디
+![아이디찾기](https://github.com/user-attachments/assets/88acba40-9062-4505-8a97-cf0a988b865b)
+
+### 비밀번호 찾기
+![비밀번호 찾기-수정](https://github.com/user-attachments/assets/87de8876-320e-437c-affe-e0d4ca8593e0)
+
+## 마이페이지
+
+### 프로필 수정 
+
+#### 일반 정보
+![프로필-일반정보](https://github.com/user-attachments/assets/acef40eb-d565-42df-b20f-8b9e960eedda)
+
+#### 보안 정보, 비밀번호 수정
+![프로필 수정 - 보안정보,비밀번호수정](https://github.com/user-attachments/assets/30e70cf0-7176-47df-a977-b9db348ea073)
+
+### 일반 - 마이페이지 메뉴 
+![마이페이지 - 버튼](https://github.com/user-attachments/assets/088fd7cd-4ce7-4d71-8fb8-9bbd78cb16af)
+
+### 점주 - 마이페이지 메뉴
+![오너 마이페이지](https://github.com/user-attachments/assets/eb34e7d1-acba-451b-95a3-6f26a0285116)
+
 
 ### 지도 페이지
 #### 지도 페이지 검색
