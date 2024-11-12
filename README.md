@@ -380,14 +380,6 @@ react-daum-postcode | 다음 주소 API |
 ### 신고
 ![API 명세서](https://github.com/user-attachments/assets/44fbadc4-7f20-4fa5-ad94-b91b7daba382)
 
-
-
-(https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c0362e07-83c5-459d-999b-a3bcb9eacc65)
-![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/58d7c496-85ff-4dda-9e36-a195dc2984bb)
-![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/064a2aa4-85a6-4251-b0ee-1cf40246af93)
-### 관리자 관련 API
-![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/7720be4f-c156-4d58-99d0-a83a1b10fcca)
-
 ### 📐 ERD 설계도
 ### 메인 ERD
 ![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c801a0ff-7d47-47dd-9575-d18b380a7062)
