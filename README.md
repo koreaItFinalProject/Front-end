@@ -1,4 +1,4 @@
-
+![image](https://github.com/user-attachments/assets/c9e946e3-1ff3-4036-b15f-83def6181fd0)
 # 🔖 목차
 
 > ## ✨[프로젝트 소개](#-프로젝트-소개)
@@ -360,7 +360,7 @@ react-daum-postcode | 다음 주소 API |
 ## 📄 API 명세서 ERD 설계도
 ### 🛰 API 명세서
 ### 사용자 관련 API
-![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/3aee6468-6b99-447e-aca5-305c3acf567e)
+![API 명세서](https://github.com/user-attachments/assets/497bbcf3-2875-4b2d-aaba-a887b28943be)
 ![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c0362e07-83c5-459d-999b-a3bcb9eacc65)
 ![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/58d7c496-85ff-4dda-9e36-a195dc2984bb)
 ![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/064a2aa4-85a6-4251-b0ee-1cf40246af93)
