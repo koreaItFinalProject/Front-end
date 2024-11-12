@@ -1,4 +1,4 @@
-# 🔖 목차
+![신고 기능](https://github.com/user-attachments/assets/93008ce7-4ca0-49cd-b3ee-fe11bf2ca4a9)# 🔖 목차
 
 > ## ✨[프로젝트 소개](#-프로젝트-소개)
 >
@@ -424,21 +424,7 @@ react-daum-postcode | 다음 주소 API |
 ### 비밀번호 찾기
 ![비밀번호 찾기-수정](https://github.com/user-attachments/assets/87de8876-320e-437c-affe-e0d4ca8593e0)
 
-## 마이페이지
 
-### 프로필 수정 
-
-#### 일반 정보
-![프로필-일반정보](https://github.com/user-attachments/assets/acef40eb-d565-42df-b20f-8b9e960eedda)
-
-#### 보안 정보, 비밀번호 수정
-![프로필 수정 - 보안정보,비밀번호수정](https://github.com/user-attachments/assets/30e70cf0-7176-47df-a977-b9db348ea073)
-
-### 일반 - 마이페이지 메뉴 
-![마이페이지 - 버튼](https://github.com/user-attachments/assets/088fd7cd-4ce7-4d71-8fb8-9bbd78cb16af)
-
-### 점주 - 마이페이지 메뉴
-![오너 마이페이지](https://github.com/user-attachments/assets/eb34e7d1-acba-451b-95a3-6f26a0285116)
 
 
 ### 지도 페이지
@@ -453,6 +439,48 @@ react-daum-postcode | 다음 주소 API |
 
 #### 지도페이지 슬라이더
 ![지도 페이지 슬라이더](https://github.com/user-attachments/assets/94676029-266b-4a16-a250-f6ef67768c2b)
+
+###카페 리스트 페이지
+#### 카페 카테고리 필터
+![카페 리스트 카테고리 필터](https://github.com/user-attachments/assets/4db07076-4b32-406f-a0e0-efb6a53e69a9)
+
+#### 카페 리스트 검색
+![카페 리스트 검색](https://github.com/user-attachments/assets/cb43201c-6ecc-4252-b118-6127cd4f071a)
+
+#### 카페 상세페이지
+![카페 상세페이지](https://github.com/user-attachments/assets/1ee66a88-3a02-457c-be66-d2782a2767fd)
+
+#### 카페 리뷰 작성
+![리뷰 작성](https://github.com/user-attachments/assets/ea09ad31-f46c-433f-96b6-f6c5e80d2bec)
+
+### 게시판
+#### 게시판 선택, 게시글 검색 기능
+![게시판 선택, 게시글 검색 기능](https://github.com/user-attachments/assets/542573f9-29d2-4652-91dc-a7f5452b5a68)
+
+#### 게시글 작성
+![게시글 작성](https://github.com/user-attachments/assets/7f10f083-7e74-40b9-8bbb-2bd1acbbca8b)
+
+#### 게시글 수정
+![게시글 수정](https://github.com/user-attachments/assets/bcea4a10-04a0-432a-a546-59f7c856c3cc)
+
+#### 댓글 작성, 수정, 삭제 기능
+![댓글 작성, 수정, 삭제](https://github.com/user-attachments/assets/83a3092a-8cb1-4c64-8c09-5edc0df4f06b)
+
+#### 신고 기능
+![신고 기능](https://github.com/user-attachments/assets/b9eaef39-3b1f-467e-90fe-cc46a21a001e)
+
+#### 일반 정보
+![프로필-일반정보](https://github.com/user-attachments/assets/acef40eb-d565-42df-b20f-8b9e960eedda)
+
+#### 보안 정보, 비밀번호 수정
+![프로필 수정 - 보안정보,비밀번호수정](https://github.com/user-attachments/assets/30e70cf0-7176-47df-a977-b9db348ea073)
+
+#### 일반 - 마이페이지 메뉴 
+![마이페이지 - 버튼](https://github.com/user-attachments/assets/088fd7cd-4ce7-4d71-8fb8-9bbd78cb16af)
+
+#### 점주 - 마이페이지 메뉴
+![오너 마이페이지](https://github.com/user-attachments/assets/eb34e7d1-acba-451b-95a3-6f26a0285116)
+
 
 ## 💡 느낀점
 ### 김동인
