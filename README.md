@@ -1,4 +1,3 @@
-![image](https://github.com/user-attachments/assets/c9e946e3-1ff3-4036-b15f-83def6181fd0)
 # 🔖 목차
 
 > ## ✨[프로젝트 소개](#-프로젝트-소개)
@@ -360,8 +359,30 @@ react-daum-postcode | 다음 주소 API |
 ## 📄 API 명세서 ERD 설계도
 ### 🛰 API 명세서
 ### 사용자 관련 API
-![API 명세서](https://github.com/user-attachments/assets/497bbcf3-2875-4b2d-aaba-a887b28943be)
-![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c0362e07-83c5-459d-999b-a3bcb9eacc65)
+### 유저
+![API 명세서](https://github.com/user-attachments/assets/bbe5fab5-8e94-403a-9db4-c956efefb920)
+### 관리자
+![API 명세서](https://github.com/user-attachments/assets/c10b6f14-d737-421e-9184-ecc4214431a0)
+### Oauth2
+![API 명세서](https://github.com/user-attachments/assets/922b6e8f-859c-4d5e-85a4-a6bbc683ec42)
+### 리뷰
+![API 명세서](https://github.com/user-attachments/assets/6137613f-f66d-4f5f-9963-a144f1725c47)
+### 게시판
+![API 명세서](https://github.com/user-attachments/assets/c3b1835f-427e-4c03-998f-2b4834d5e163)
+### 카페
+![API 명세서](https://github.com/user-attachments/assets/645e4ad2-df60-40ec-a84d-b45fad30b7a5)
+### 댓글
+![API 명세서](https://github.com/user-attachments/assets/16efa3a6-eedb-4f60-9305-4d211112a497)
+### 메일
+![API 명세서](https://github.com/user-attachments/assets/b671f401-c57d-456f-975e-185d5596a617)
+### 공지사항
+![API 명세서](https://github.com/user-attachments/assets/5bcf9b73-70aa-4ff5-918f-4c7375463195)
+### 신고
+![API 명세서](https://github.com/user-attachments/assets/44fbadc4-7f20-4fa5-ad94-b91b7daba382)
+
+
+
+(https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c0362e07-83c5-459d-999b-a3bcb9eacc65)
 ![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/58d7c496-85ff-4dda-9e36-a195dc2984bb)
 ![API 명세서](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/064a2aa4-85a6-4251-b0ee-1cf40246af93)
 ### 관리자 관련 API
