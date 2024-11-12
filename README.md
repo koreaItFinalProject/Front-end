@@ -393,9 +393,9 @@ react-daum-postcode | 다음 주소 API |
 
 ## 📋 메뉴 구조도
 ### 메인페이지(사용자)
-![메인페이지(사용자)](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/b3b1e2b8-4148-4d15-812c-54ada67186b4)
+![CafeInBusan 메뉴 구조도 (1)](https://github.com/user-attachments/assets/a1faa2ef-610a-4585-9d8b-cf8f6ed3b301)
 ### 관리자 페이지(관리자)
-![관리자 페이지(관리자)](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/1d1d8a17-c735-40ad-816b-287029f05246)
+
 
 ## 🖥 화면 구현
 ### 로그인/회원가입 페이지
