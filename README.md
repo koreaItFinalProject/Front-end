@@ -443,7 +443,7 @@ react-daum-postcode | 다음 주소 API |
 
 ### 지도 페이지
 #### 지도 페이지 검색
-![지도 페이지 검색](https://github.com/user-attachments/assets/eef2f386-a342-4aa5-9b83-6b42550a8175)
+![지도 페이지 검색](https://github.com/user-attachments/assets/6dacd955-0655-480f-846a-45e4c91d4da2)
 
 #### 지도 페이지 카테고리 필터
 ![지도 페이지 카테고리 필터](https://github.com/user-attachments/assets/4e8a245d-e7cd-406e-9c37-a67590809919)
@@ -452,7 +452,7 @@ react-daum-postcode | 다음 주소 API |
 ![지도 페이지에서 카페 상세 페이지 이동](https://github.com/user-attachments/assets/8e1f81ec-2827-47a3-8887-f5d4d6d67618)
 
 #### 지도페이지 슬라이더
-![지도페이지 슬라이더](https://github.com/user-attachments/assets/63257a1c-bcb7-4a03-9783-6a26373c361e)
+![지도 페이지 슬라이더](https://github.com/user-attachments/assets/94676029-266b-4a16-a250-f6ef67768c2b)
 
 ## 💡 느낀점
 ### 김동인
