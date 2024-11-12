@@ -13,10 +13,19 @@ function AlramInfoPage({ alarm }) {
     const userId = accessCheck?.data?.userId;
     const [openIndex, setOpenIndex] = useState(null); // 수정 모드로 전환할 항목의 인덱스
     const [inputValue, setInputValue] = useState("");
+    const [filter, setFilter] = useState("all");
+
     console.log(userId);
 
     // 알림을 역순으로 저장한 배열
     const reversedAlarm = Array.isArray(alarm) ? [...alarm]?.reverse() : [];
+
+    const filteredAlarm = reversedAlarm.filter((alarmItem) => {
+        if (filter === "all") return true; // All alarms are shown
+        if (filter === "notice" && alarmItem.type === "공지사항") return true;
+        if (filter === "modify" && (alarmItem.type.includes("수정 요청"))) return true;
+        return false;
+    });
 
     const handleInputKeyPress = async (e) => {
         if (e.key === "Enter") {
@@ -47,14 +56,23 @@ function AlramInfoPage({ alarm }) {
         }
     };
 
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+    };
+
     return (
         <div css={s.mainLayout}>
             <div css={s.AllPost}>
                 <h2>알림정보</h2>
-                <h3>새로운 알림: {reversedAlarm.filter(al => al.id > localStorage.getItem("lastId")).length}</h3>
+                <h3>새로운 알림: {filteredAlarm.filter(al => al.id > localStorage.getItem("lastId")).length}</h3>
+                <select name="searchFilter" value={filter} onChange={handleFilterChange}>
+                    <option value="all">전체</option>
+                    <option value="notice">공지사항</option>
+                    <option value="modify">수정사항</option>
+                </select>
             </div>
             <ul css={s.AlramList}>
-                {reversedAlarm?.map((alarmItem, index) => (
+                {filteredAlarm?.map((alarmItem, index) => (
                     <div key={index} css={s.layout}>
                         <tr>
                             <td>{alarmItem.type}</td>
@@ -69,7 +87,7 @@ function AlramInfoPage({ alarm }) {
                                         />
                                     </td>
                                 ) : (
-                                    <td onClick={() => { setOpenIndex(index); setInputValue(alarmItem.content); console.log(alarmItem.contentId); }}>
+                                    <td onClick={() => { setOpenIndex(index); setInputValue(alarmItem.content); console.log(alarmItem.contentId); }} >
                                         {alarmItem.content}
                                     </td>
                                 )
@@ -83,10 +101,9 @@ function AlramInfoPage({ alarm }) {
                             <td>{alarmItem.messageDate}</td>
                         </tr>
                     </div>
-                ))
-                }
-            </ul >
-        </div >
+                ))}
+            </ul>
+        </div>
     );
 }
 

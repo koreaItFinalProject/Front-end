@@ -16,10 +16,11 @@ function BackButton({ prevPage }) {
     const handleBackClick = () => {
         setDirection('right-to-left')
         let page = pageCount <= 3 ? pageCount - 1 : pageCount;
-        if (pageCount <= 3&&location.pathname.includes("/board")) {
+        if (page <= 3 && location.pathname.includes("/board")) {
             page += 1;
         }
-        navigate((page - 1 <= 0 ? 1 : page - 1) * -1);
+        console.log(page);
+        navigate((page === 1 && location.pathname.includes === "detail") ? "/board" : (page - 1 <= 0 ? 1 : page - 1) * -1);
         setPageCount(0);
     };
 

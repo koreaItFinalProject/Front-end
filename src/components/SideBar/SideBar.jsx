@@ -10,9 +10,11 @@ import logo from '../../assets/logo.png';
 
 function SideBar(props) {
   const queryClient = useQueryClient();
-  const userInfoState = queryClient.getQueryState();
+  const userInfoState = queryClient.getQueryData("userInfoQuery");
   const [uploadPercent, setUploadPercent] = useState();
   const navigate = useNavigate();
+
+  console.log(userInfoState);
   return (
     <div css={s.layout}>
       <div css={s.profile}>
@@ -21,11 +23,10 @@ function SideBar(props) {
           <h1>CAFE DEV</h1>
         </div>
         <div>
-          <img onClick='' src="https://believesewoong.co.kr/images/sph_user.png" alt="프로필이미지" />
+          <img src={userInfoState?.data.img} alt="프로필이미지" />
         </div>
-        <div>사용자이름</div>
-        <div>관리자</div>
-        <button>로그아웃</button>
+        <div>{userInfoState?.data.name}</div>
+        <div>{userInfoState?.data.role}</div>
       </div>
       <div css={s.sidebox}>
         {Menus.map((menu, index) => (
