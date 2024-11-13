@@ -48,6 +48,7 @@ export const menu = css`
     width: 100%;
     height: 100%;
     border-bottom: 1px solid #ff675b;
+    cursor: pointer;
     svg {
         margin-right: 10px;
         width: 25px;

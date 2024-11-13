@@ -1,4 +1,4 @@
-# 🔖 목차
+![신고 기능](https://github.com/user-attachments/assets/93008ce7-4ca0-49cd-b3ee-fe11bf2ca4a9)# 🔖 목차
 
 > ## ✨[프로젝트 소개](#-프로젝트-소개)
 >
@@ -393,34 +393,43 @@ react-daum-postcode | 다음 주소 API |
 
 ## 📋 메뉴 구조도
 ### 메인페이지(사용자)
-![CafeInBusan 메뉴 구조도 (1)](https://github.com/user-attachments/assets/a1faa2ef-610a-4585-9d8b-cf8f6ed3b301)
+![CafeInBusan 메뉴 구조도(일반 페이지)](https://github.com/user-attachments/assets/c31fed64-cb59-44e4-b520-9132d60d17f6)
 ### 관리자 페이지(관리자)
-
+![CafeInBusan 메뉴 구조도(관리자 페이지)](https://github.com/user-attachments/assets/79a33f42-34a6-4c6e-b6bc-947036ea468d)
 
 ## 🖥 화면 구현
 ### 로그인/회원가입 페이지
 #### 일반 로그인/회원가입 페이지
-![일반 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c3087c7a-fa9b-4739-93e8-e039ed5053d0)
-![일반 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/a0ca9483-b0f4-4ee9-a6db-06305fff9fa1)
+![일반 회원가입](https://github.com/user-attachments/assets/52e3f219-e109-460b-8b43-0f9b17e7fa43)
+![일반 로그인](https://github.com/user-attachments/assets/e6beb80a-f926-4d45-b212-225608ff6739)
+
+### 점주 로그인/회원가입 페이지
+![오너로그인](https://github.com/user-attachments/assets/9d4c3b62-ca0f-4b32-b2a3-b47793cd50d1)
+![점주회원가입](https://github.com/user-attachments/assets/a5b06986-b703-4600-aaff-9f4abea559b4)
 
 #### OAuth2 소셜 로그인/회원가입 페이지(구글)
-![구글 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/cb8ae8e7-c641-4f50-831e-60985d8748f9)
-![구글 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/2af6215a-1605-42cb-b920-1bf2d24fc421)
-![구글 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/79acd74a-92fd-4d4d-b248-fe7ac2ea8814)
+
 
 #### OAuth2 소셜 로그인/회원가입 페이지(카카오)
-![카카오 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/ea9d372e-ae02-4d15-a552-810ae98becc8)
-![카카오 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/61b6bbae-533d-4356-b576-32af69b5fc50)
-![카카오 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/0e2e210e-c278-4633-8fde-f05fe3d1b407)
+
 
 #### OAuth2 소셜 로그인/회원가입 페이지(네이버)
-![네이버 회원가입 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/0102cdbf-4b4e-4db5-833c-203006beaf90)
-![네이버 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/68110d6f-eff0-4a04-a8ab-0894819f533b)
-![네이버 이미 회원인 사용자 로그인 영상](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/6e75d112-1dd6-4700-9d6b-7b5eba69c9f4)
+![oauth2로그인](https://github.com/user-attachments/assets/992bfaa0-fb2f-4e50-b927-537d1bd637b1)
+![oauth2통합회원가입](https://github.com/user-attachments/assets/d7fa6dd8-51f1-4699-9d33-f5064be57d68)
+
+## 비밀번호 찾기/아이디 찾기
+### 아이디
+![아이디찾기](https://github.com/user-attachments/assets/88acba40-9062-4505-8a97-cf0a988b865b)
+
+### 비밀번호 찾기
+![비밀번호 찾기-수정](https://github.com/user-attachments/assets/87de8876-320e-437c-affe-e0d4ca8593e0)
+
+
+
 
 ### 지도 페이지
 #### 지도 페이지 검색
-![지도 페이지 검색](https://github.com/user-attachments/assets/eef2f386-a342-4aa5-9b83-6b42550a8175)
+![지도 페이지 검색](https://github.com/user-attachments/assets/6dacd955-0655-480f-846a-45e4c91d4da2)
 
 #### 지도 페이지 카테고리 필터
 ![지도 페이지 카테고리 필터](https://github.com/user-attachments/assets/4e8a245d-e7cd-406e-9c37-a67590809919)
@@ -429,105 +438,58 @@ react-daum-postcode | 다음 주소 API |
 ![지도 페이지에서 카페 상세 페이지 이동](https://github.com/user-attachments/assets/8e1f81ec-2827-47a3-8887-f5d4d6d67618)
 
 #### 지도페이지 슬라이더
-![지도페이지 슬라이더](https://github.com/user-attachments/assets/63257a1c-bcb7-4a03-9783-6a26373c361e)
+![지도 페이지 슬라이더](https://github.com/user-attachments/assets/94676029-266b-4a16-a250-f6ef67768c2b)
 
-### 메인 페이지
-#### 여러 컨텐츠들을 간략적으로 보여주는 메인 페이지
-![메인페이지 수정본](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/3be15e32-165d-44ba-aeb7-e67a2488ac7d)
+###카페 리스트 페이지
+#### 카페 카테고리 필터
+![카페 리스트 카테고리 필터](https://github.com/user-attachments/assets/4db07076-4b32-406f-a0e0-efb6a53e69a9)
 
-### 쇼핑몰 페이지
-#### 쇼핑몰 리스트 페이지
-![쇼핑몰 리스트 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/3be15e32-165d-44ba-aeb7-e67a2488ac7d)
-#### 쇼핑몰 리스트 카테고리 조회 페이지
-![쇼핑몰 리스트 카테고리 조회 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/f1ad2359-1803-4e4b-a5b5-0de391d75fd5)
-#### 쇼핑몰 상품 상세 페이지
-![쇼핑몰 상품 상세 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/29bfeb28-e3f9-49d5-bc2a-cd9c95762034)
-#### 쇼핑몰 상품 결제 페이지
-![쇼핑몰 상품 결제 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/9018bf26-3a39-4a77-b9ad-f26d3acf20ef)
-#### 쇼핑몰 장바구니 추가 및 결제 페이지
-![쇼핑몰 장바구니 추가 및 결제 페이지1](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/484c6da3-7b5d-4713-9662-7e9c8dfbe8c3)
-![쇼핑몰 장바구니 추가 및 결제 페이지2](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/3aada6c1-51dd-4317-bc04-24f3edbe1468)
-![쇼핑몰 장바구니 추가 및 결제 페이지3](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/317470a2-ff34-478e-9e54-75a1d994ffd0)
-![쇼핑몰 장바구니 추가 및 결제 페이지4](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/9ac04641-008e-4d67-b084-ea1da7d11a16)
-![쇼핑몰 장바구니 추가 및 결제 페이지5](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/aebec7ea-023e-4255-a03a-8944f4e7f7f3)
-#### 쇼핑몰 관리자 상품 관리 페이지
-![쇼핑몰 관리자 상품 관리 페이지1](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/8f5e3bc0-6505-4a36-9620-ff3ac98e2345)
-![쇼핑몰 관리자 상품 관리 페이지2](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/3c9b67b5-758e-4c49-918e-677d89503052)
-![쇼핑몰 관리자 상품 관리 페이지3](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/d1d340a4-0324-42c2-b9f4-0f90228ed578)
-#### 쇼핑몰 관리자 재고 관리 페이지
-![쇼핑몰 관리자 재고 관리 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/29b822df-2fee-428d-9842-0db5be5f11ef)
-#### 쇼핑몰 관리자 가입고 관리 페이지
-![쇼핑몰 관리자 가입고 관리 페이지1](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/84e8510c-c7d1-41ea-830a-ad37b4480968)
-![쇼핑몰 관리자 가입고 관리 페이지2](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c358da59-d87a-49cd-aea2-20350f7e9be9)
-![쇼핑몰 관리자 가입고 관리 페이지3](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/49c50f01-c318-4570-b063-2ab935f6f441)
-![쇼핑몰 관리자 가입고 관리 페이지4](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/9903d746-458a-42ee-bba1-a590f5721b4c)
-#### 쇼핑몰 관리자 출고 관리 페이지
-![쇼핑몰 관리자 출고 관리 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/2d91bc0a-1fd6-4bf4-9277-124713920fc7)
-#### 쇼핑몰 관리자 주문 관리 페이지
-![쇼핑몰 관리자 주문 관리 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/816c1d77-6929-4876-a67d-0c4dfcccc40d)
+#### 카페 리스트 검색
+![카페 리스트 검색](https://github.com/user-attachments/assets/cb43201c-6ecc-4252-b118-6127cd4f071a)
 
-### 분양 커뮤니티 게시판 페이지
-#### 분양 커뮤니티 리스트 페이지
-![분양 커뮤니티 리스트 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/e2be0f1d-59f0-47bd-9bc1-854a9655bbea)
-#### 분양 커뮤니티 상세 페이지
-![분양 커뮤니티 상세 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/44b07403-db79-44b8-a2f4-60f2d199b51b)
-#### 분양 커뮤니티 상세 댓글 관련 페이지
-![분양 커뮤니티 상세 댓글 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/0e10e5fa-3a55-45ec-8341-64ebd9474e2f)
-#### 분양 커뮤니티 게시글 작성 페이지
-![분양 커뮤니티 게시글 작성 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/0877c97b-6ce9-4189-bb95-d137320b56b1)
+#### 카페 상세페이지
+![카페 상세페이지](https://github.com/user-attachments/assets/1ee66a88-3a02-457c-be66-d2782a2767fd)
 
-### 커뮤니티 게시판 페이지
-#### 커뮤니티 리스트 페이지
-![커뮤니티 리스트 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/e8baab06-2d1c-491c-a1c9-c5279c80a336)
-#### 커뮤니티 리스트 상세 페이지
-![커뮤니티 리스트 상세 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/ce80ba90-cfe7-424e-82ef-6da0d78d5d0d)
-#### 커뮤니티 리스트 상세 댓글 관련 페이지
-![커뮤니티 리스트 상세 댓글 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/32ce8e26-0c7b-4ae6-bd8a-edb3006df10c)
-#### 커뮤니티 리스트 게시글 작성 페이지
-![커뮤니티 리스트 게시글 작성 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/bd474bf5-aa94-49b5-9cc6-3590d0b014ac)
+#### 카페 리뷰 작성
+![리뷰 작성](https://github.com/user-attachments/assets/ea09ad31-f46c-433f-96b6-f6c5e80d2bec)
 
-### 마이페이지
-#### 사용자 정보 수정 관련 페이지
-![사용자 정보 수정 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/520ecc86-7932-447f-8843-56d3ce89d4b3)
-![사용자 정보 수정 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c51fc0c2-cdcd-45dd-b281-c5b1efb99a40)
-#### 사용자 주문 내역 및 장바구니 관련 페이지
-![사용자 주문 내역 및 장바구니 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/f4a3c45c-876a-4eac-894f-72e8fe7ba8bd)
-#### 사용자 리뷰 관리 관련 페이지
-![사용자 리뷰 관리 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/23b2aae5-342d-41da-9cbf-276ab11958b6)
-#### 사용자 커뮤니티 게시판 관련 페이지
-![사용자 커뮤니티 게시판 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/ff005e94-d1af-4879-a90f-21076d4e0937)
-#### 사용자 분양 커뮤니티 게시판 관련 페이지
-![사용자 분양 커뮤니티 게시판 관련 페이지](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c9115efe-90d5-4c38-a9e6-5c743b826e84)
+### 게시판
+#### 게시판 선택, 게시글 검색 기능
+![게시판 선택, 게시글 검색 기능](https://github.com/user-attachments/assets/542573f9-29d2-4652-91dc-a7f5452b5a68)
 
-### etc
-#### 퀵메뉴
-![퀵메뉴](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/50a2d6cd-a1d2-4b03-9255-e0decd69d91d)
-#### 비로그인 제어
-![비로그인 제어](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/fb8fd44c-959c-4d1f-b2aa-6fe324c3264d)
+#### 게시글 작성
+![게시글 작성](https://github.com/user-attachments/assets/7f10f083-7e74-40b9-8bbb-2bd1acbbca8b)
 
-## 🙋‍♂️ 주요 기능 및 코드 리뷰
-### 게시판 TOP 3 기능
-![TOP3](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/87314dcc-8d70-4605-bf1a-db49751c8e6f)
-### 장바구니 결제
-#### 백엔드
-![장바구니결제(백엔드)](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/39bce939-6d93-404d-878b-9418f493b57e)
-#### 프론트
-![장바구니결제(프론트)](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/7b150ab7-7661-472b-bd92-17c4bc75d96d)
-### 상품 사진 확대 기능
-![상품사진확대기능](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/d3dab8a4-6fe9-4b44-a805-76d53a9e8130)
-### 관리자 매출 현황 조회
-![관리자매출현황조회](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/d9fbeffb-ac7a-478e-ab57-45d0e9234682)
-### 지도 api 기능 구현
-![지도api기능](https://github.com/compositivePetProject/compositive_pet_project_back/assets/118997608/3180d6d0-e492-4f41-ad76-2367f3420080)
+#### 게시글 수정
+![게시글 수정](https://github.com/user-attachments/assets/bcea4a10-04a0-432a-a546-59f7c856c3cc)
+
+#### 댓글 작성, 수정, 삭제 기능
+![댓글 작성, 수정, 삭제](https://github.com/user-attachments/assets/83a3092a-8cb1-4c64-8c09-5edc0df4f06b)
+
+#### 신고 기능
+![신고 기능](https://github.com/user-attachments/assets/b9eaef39-3b1f-467e-90fe-cc46a21a001e)
+
+#### 일반 정보
+![프로필-일반정보](https://github.com/user-attachments/assets/acef40eb-d565-42df-b20f-8b9e960eedda)
+
+#### 보안 정보, 비밀번호 수정
+![프로필 수정 - 보안정보,비밀번호수정](https://github.com/user-attachments/assets/30e70cf0-7176-47df-a977-b9db348ea073)
+
+#### 일반 - 마이페이지 메뉴 
+![마이페이지 - 버튼](https://github.com/user-attachments/assets/088fd7cd-4ce7-4d71-8fb8-9bbd78cb16af)
+
+#### 점주 - 마이페이지 메뉴
+![오너 마이페이지](https://github.com/user-attachments/assets/eb34e7d1-acba-451b-95a3-6f26a0285116)
+
 
 ## 💡 느낀점
-### 도경록
+### 김동인
 - 팀 프로젝트에서 팀장으로 참여하면서 프로젝트의 전반적인 이해도를 갖추며 팀원들의 작업 분담 및 개발 프로세스의 원할한 진행을 위한 커뮤니케이션의 중요성에 생각해 보게 되었습니다. 이러한 과정에서 발생하는 다양한 이슈들을 효과적으로 관리하고 해결하기 위해 팀원들과 지속적으로 소통하고 협력하였습니다. 이를 통해 커뮤니케이션의 중요성과 효과적인 의사소통이 팀의 성과에 큰 영향을 미치는 것을 몸소 체험하였습니다.
 - 개발 간 코드의 유지보수성과 확장성을 향상시키는 모듈화 및 클린코드에 대해 깊이 생각해보게 되는 경험이 되었고, 다음 프로젝트 때에는 더 효율적인 코드작성으로 개발자로써의 역량을 더욱 높이겠다는 다짐을 하였습니다.
 - 이번 프로젝트에서 관리자의 쇼핑몰 재고관련 기능을 담당하여 코드 로직을 구성하면서 개발 역량 이외에도 프로젝트 주제에 관련한 여러 배경지식들에 대한 공부들도 필요하다고 느꼈습니다.
 ---
 
-### 서창현
+### 김병규
 - 팀 프로젝트는 개인 프로젝트와 많은 부분에서 다르다는 것을 크게 느꼈다.  우리 조는 효율성을 중시해 커뮤니티, 분양 커뮤니티, 쇼핑몰, 쇼핑몰 어드민 페이지 및 DB를 기준으로 철저한 분업을 꾀했다. 철저한 분업은 맡은 기능에 대한 전문성을 강화하고 책임감과 의욕을 고취하는 데 큰 장점이 있었지만 팀원 간 소통의 필요성을 잊게했다. 소통의 부족은 코드 리뷰를 하거나 피드백을 주고받는 지식 공유의 시간을 감소시켰고  이는 협업에서의 가장 큰 장점인 집단지성을 활용하지 못하는 결과를 낳았다.
 주기적인 미팅과 코드 리뷰와 같은 협업 시스템 내지 협업 규칙의 중요성, 그리고 비록 사소해 보이는 루틴일지라도 개개인이 이러한 체계를 지키려는 노력이 정말 중요하다는 것을 깨닫게 되었다. 또한 역할분담 내지 개발론과 같은 협업 방식을 채택할 때에는 프로젝트의 목적 및 규모, 팀원의 역량 및 경험 등을 종합적으로 고려해야 하고, 채택 후에는 채택한 방식의 리스크를 최소화 할 수 있는 시스템을 반드시 마련해야 함을 느꼈다.
 
@@ -537,16 +499,9 @@ react-daum-postcode | 다음 주소 API |
 - 게시판에서 분양 게시판과 커뮤니티 게시판의 Top3을 조회할 때 처음에는 데이터 많지않아 문제 없지만 나중에 데이터가 많아지면서 DB에서 조회할때 성능 문제가 발생했다. 문제를 찾아보니 첫번째, 문제는 table join이 많이해서였고 두번째 문제는 distinct을 사용하면서 중복제거 할 때 데이터 양이 많아서 느려지는 문제를 파악하고  OOP에 대한 이해와 개발 언어 및 SQL의 기본기, 클린코드, 알고리즘과 자료구조 등 CS 공부가 필수적임을 깨닫게 되었다.
 ---
 
-### 권기범
+### 김정현
 - 팀 프로젝트를 수행하면서, 게시판 CRUD와 관리자 게시판 CRUD를 구현하는 작업을 맡았습니다. 처음에는 게시판 CRUD를 쉬운 작업으로 생각했지만, 실제로는 생각보다 많은 기능을 구현해야 했고 여러 오류가 발생하여 작업 속도가 늦어졌습니다. 결과적으로 관리자 대시보드를 구현하지 못하고 프로젝트 전체의 진도가 늦어졌습니다. 다행히도 팀원이 코드 작성 절차와 요령을 알려주어 프로젝트를 무사히 마무리할 수 있었습니다.
 - 이번 프로젝트를 통해 프로그래밍은 끊임없이 개인의 역량을 쌓아야 함을 깨달았습니다. 또한, 팀원 간의 커뮤니케이션이 프로젝트의 핵심이라는 것을 알게 되었습니다. 프로젝트를 진행하면서 수업 내용이 점차 이해되고, 모듈화와 클린 코드의 중요성을 깨달았습니다.
 - 앞으로는 이번 팀 프로젝트에서 얻은 경험을 살려 개인 프로젝트를 꾸준히 수행하고, 개인의 역량을 키우며 커뮤니케이션을 적극적으로 하여 다음 프로젝트에 더 많은 기여를 할 것입니다.
 ---
-
-### 이평원
-- 이번 프로젝트를 하면서 제가 부족한 능력이 무엇인지 다시한번 현실적으로 깨닫고 앞으로 다른 프로젝트를 준비하면서 생각나게 될 가장 큰 동기부여가 되는 것 같았습니다 . 프로젝트를 수행하면서 커뮤니티 게시판 기능 CRUD를 개발하면서 능력이 부족한데가 진도가 굉장히 느려 기획하고자 했던 다른 기능들을 구현하지 못했습니다.  다른 프로젝트 담당 업무를 수행하는 팀원들에게 많은 미안함이 느껴졌습니다. 
-
-- 팀장님과 부팀장님께서 가이드라인을 만들어주시면서 제가 담당하는 커뮤니티 게시판의 코드 작성 절차와 코드를 개발하면서 어떤식으로 코드를 짜야하는지 유의사항을 알려주었습니다. 어떻게든 프로젝트를 마무리까지 이끌어준 팀장님과 부팀장, 그리고 팀원분께 정말 감사드립니다. 
-
-- 이번 프로젝트 과정의 경험을 통하며 취업을 위해 개인 프로젝트를 준비를 하면서 제가 부족한 능력을 다시 채우고 만약 다른 팀 프로젝트를 수행할 시 이번 프로젝트를 경험을 토대로  내가 담당받은 업무를 성실히 수행을 할 것 같습니다. 
 

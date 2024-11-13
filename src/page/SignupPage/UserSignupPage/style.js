@@ -12,6 +12,7 @@ export const subLayout = css`
     display: flex;
     flex-direction: column; 
     align-items: center;
+    padding-bottom: 140px;
     width: 100%;
     height: 100%;
     overflow-y: auto;

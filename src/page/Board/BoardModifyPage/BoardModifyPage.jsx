@@ -35,6 +35,7 @@ function BoardModifyPage(props) {
 
     const handleModifySubmitOnClick = async () => {
         const selection = await confirmCancelAlert("게시글을 수정 하시겠습니까?");
+        console.log(""+boardId);
         if (selection) {
             modifyBoardMutation.mutate({ modifyBoard, boardId });
             if (reportId > 0) {

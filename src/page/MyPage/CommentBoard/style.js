@@ -103,6 +103,11 @@ export const title = css`
   }
 `;
 
+export const content = css`
+  display: flex;
+  flex-direction:column;
+`
+
 export const button = css`
   position: absolute;
   right: 7px;
