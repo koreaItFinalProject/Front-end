@@ -26,7 +26,7 @@ function CafeListPage({ check, setCheck, inputvalue, setInputvalue }) {
                 } else if (sortOption === 'review') {
                     return b.reviewCount - a.reviewCount; // 리뷰순 정렬
                 }
-                return 0;
+                return 0; // 두 값이 동일할 때 순서를 변경하지 않음
             });
             setSortedCafeList(sortedList);
         }

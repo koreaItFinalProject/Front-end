@@ -15,27 +15,27 @@ export const Menus = [
   {
     title: '사용자 관리',
     icon: <MdManageAccounts />,
-    path: 'management'
+    path: '/management'
   },
   {
     title: '점포 관리',
     icon: <FaWindowRestore />,
-    path: "storemanagement"
+    path: "/storemanagement"
   },
   {
     title: '신고 내역',
     icon: <TbMessageReport />,
-    path: "report"
+    path: "/report"
   },
   {
     title: '알림 전송',
     icon: <IoNotifications />,
-    path: "announcement"
+    path: "/announcement"
   },
   {
-    title: '로그아웃',
+    title: '모바일 버전 이동',
     icon: <RiLogoutBoxLine />,
-    path: "login"
+    path: "mypage"
   },
 
 ]

@@ -137,38 +137,6 @@ export const moveRightToLeft = keyframes`
     }
 `;
 
-export const noticeAlarm = css`
-    animation: ${moveRightToLeft} 1s ease-in-out;
-    position: absolute;
-    top: 50px;
-    right: 5px;
-    & svg {
-        width: 30px;
-        height: 30px;
-    }
-    .alarm-icon > path{
-        animation: ${blinkIcon} 1.5s infinite;
-        transform-origin: center;
-    }
-    & p {
-        font-size: 14px;
-    }
-`;
-
-export const alarm = css`
-    background-color: #ffebb0;
-    height: 40px;
-    width: 200px;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    & p {
-        font-size: 16px !important;
-    }
-`;
-
-
 export const modalStyles = {
     overlay: {
         zIndex: '99',

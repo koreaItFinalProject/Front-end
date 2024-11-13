@@ -8,8 +8,11 @@ import { storage } from '../../../firebase/firebase';
 import { v4 as uuid } from 'uuid';
 import mypageProfileApi from '../../../apis/mypageApis/mypageProfileApi';
 import { confirmAlert } from "../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ModifyProfilePage({ handleOnModalClick, value }) {
+    const location = useLocation();
+    const navigate = useNavigate();
     const user = useRecoilValue(State);
     const [userInfoProfile, setUserInfoProfile] = useState({});
     const inputRef = useRef(null);
@@ -120,7 +123,15 @@ function ModifyProfilePage({ handleOnModalClick, value }) {
                     <p>Email</p>
                     <p>{userInfoProfile?.email}</p>
                 </div>
+                <div>
                 <button onClick={handleOnModalClick} value={value}>프로필 관리</button>
+                {
+                    location.pathname.includes("admin") &&
+                        <button
+                                style={{marginLeft:"15px"}}
+                            onClick={() => navigate('/manager/web')} value={value}>PC 버전 이동</button>
+                }
+                </div>
             </div>
         </div>
     );

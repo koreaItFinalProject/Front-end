@@ -12,6 +12,7 @@ import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 import { FaRegCommentDots } from "react-icons/fa";
 import { MdOutlineRateReview } from "react-icons/md";
 import { PiCoffee } from "react-icons/pi";
+import { FiLogOut } from "react-icons/fi";
 import { VscMegaphone } from "react-icons/vsc";
 import ModifyProfilePage from "../../MyPage/ModifyProfilePage/ModifyProfilePage";
 import UserProfileModify from "../../MyPage/UserProfileModify/UserProfileModify";
@@ -94,6 +95,11 @@ function MobileAdminMyPage(props) {
         }
     }
 
+    const handleLogoutClick = () => {
+        localStorage.removeItem("accessToken");
+        window.location.replace("/user/signin");
+    }
+
     return (
         <div css={s.layout}>
             <div css={s.profileBox}>
@@ -135,11 +141,13 @@ function MobileAdminMyPage(props) {
                     <p>알림</p>
                     <p>{isCount.alarm.length === 0 ? '0' : isCount.alarm.length}</p>
                 </div>
-                <div css={s.menu}>
-                    <button onClick={handleOnWithdrawClick}>
-                        <ImExit />
-                        <p>회원 탈퇴</p>
-                    </button>
+                <div css={s.menu} onClick={handleLogoutClick}>
+                    <FiLogOut />
+                    <p>로그아웃</p>
+                </div>
+                <div css={s.menu} onClick={handleOnWithdrawClick}>
+                    <ImExit />
+                    <p>회원 탈퇴</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} isCount={isCount[check]} style={s.modalStyles}>

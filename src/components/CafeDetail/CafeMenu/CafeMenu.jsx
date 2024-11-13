@@ -12,12 +12,14 @@ Modal.setAppElement('#root');
 function CafeMenu({ viewMode, menu1, menu2 }) {
     const params = useParams();
     const cafeId = params.cafeId;
+    const inputRefs = [useRef(null), useRef(null)];
+
     const [images, setImages] = useState([null, null]);
     const [originalImages, setOriginalImages] = useState([null, null]);
     const [imageModify, setImageModify] = useState([false, false]);
-    const inputRefs = [useRef(null), useRef(null)];
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+
     const modifyCafeMenuMutation = useModifyCafeMenuMutation();
 
     useEffect(() => {
@@ -136,7 +138,7 @@ function CafeMenu({ viewMode, menu1, menu2 }) {
                     </div>
                 ))}
             </div>
-            <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={s.modalStyles} contentLabel="확대된 메뉴 이미지">
+            <Modal isOpen={isModalOpen} onRequestClose={closeModal} style={s.modalStyles} >
                 <div css={s.modalImageContainer}>
                     <button css={s.closeButton} onClick={closeModal}>닫기</button>
                     <img css={s.modalImage} src={selectedImage} alt="확대된 메뉴 이미지" />

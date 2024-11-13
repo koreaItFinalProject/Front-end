@@ -6,8 +6,8 @@ import * as s from "./style";
 function Menu({ title , icon , path }){
   const navigate = useNavigate();
   
-  const handleClick = () => {
-      navigate(`/manager/web/${path}`);
+    const handleClick = () => {
+      navigate(path.includes('mypage') ? '/admin/mobile/mypage' : `/manager/web${path}`);
   }
 
   return (

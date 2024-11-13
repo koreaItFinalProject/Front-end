@@ -36,6 +36,13 @@ function MyPage(props) {
     })
     const [isOpen, setIsOpen] = useState();
 
+    useEffect(() => {
+        console.log(localStorage.getItem("lastId"));
+        if (localStorage.getItem("lastId") === null) {
+            localStorage.setItem("lastId", 0);
+        }
+    }, [])
+
     const openModal = () => {
         setIsOpen(true)
         console.log(isOpen);
@@ -125,20 +132,6 @@ function MyPage(props) {
                     <p>리뷰관리</p>
                     <p>{infoBoard.review.length === 0 ? '0' : infoBoard.review.length}</p>
                 </div>
-                <div css={s.noticeAlarm} style={{ display: infoBoard?.alarm?.length > 0 ? 'none' : 'block' }}>
-                    {
-                        infoBoard?.alarm.length >= 1 ? (
-                            //일반
-                            <MdNotificationsActive />
-                        ) : (
-                            //알림
-                            <div css={s.alarm}>
-                                <MdNotificationsActive className='alarm-icon' />
-                                <p>알람이 왔습니다</p>
-                            </div>
-                        )
-                    }
-                </div>
                 <div css={s.menu} onClick={() => handleOnModalClick("alarm")}>
                     <AiOutlineNotification />
                     <p>알림정보</p>
@@ -150,17 +143,15 @@ function MyPage(props) {
                         <p>로그아웃</p>
                     </button>
                 </div>
-                <div css={s.menu}>
-                    <button onClick={handleOnWithdrawClick}>
-                        <ImExit />
-                        <p>회원 탈퇴</p>
-                    </button>
+                <div css={s.menu} onClick={handleOnWithdrawClick}>
+                    <ImExit />
+                    <p>회원 탈퇴</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>
                 <button css={s.closeButton} onClick={() => {
                     closeModal();
-                    localStorage.setItem("lastId", infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
+                    localStorage.setItem("lastId", check === "alarm" && infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id === undefined ? 0 : infoBoard?.alarm[infoBoard?.alarm?.length - 1]?.id);
                 }}>Close</button>
                 {
                     check === "userinfo" ?

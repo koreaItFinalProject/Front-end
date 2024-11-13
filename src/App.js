@@ -69,7 +69,7 @@ function App() {
   }, [location.pathname]);
 
   useEffect(() => {
-    setHistoryStack(prevStack => [...prevStack, location.pathname])
+    setHistoryStack(prevStack => [...prevStack, location.pathname]);
   }, [location.pathname])
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery", category],
@@ -141,9 +141,9 @@ function App() {
       refetchOnWindowFocus: false,
       onSuccess: (response) => {
         console.log(response.data)
-        let blockPaths = [""];
-        if (response?.data.role !== "admin") {
-          blockPaths = [...blockPaths, "/manager"];
+        let blockPaths = [];
+        if (response?.data.role !== "ADMIN") {
+          blockPaths = ["/manager"];
         }
         for (let blockPath of blockPaths) {
           if (location.pathname.startsWith(blockPath)) {
@@ -234,7 +234,13 @@ function App() {
         <Route path='/cafe/*' element={
           <MainLayout setCheck={setCheck} setInputvalue={setInputvalue} >
             <Routes>
-              <Route path='list' element={<CafeListPage check={check} setCheck={setCheck} inputvalue={inputvalue} setInputvalue={setInputvalue} />} />
+              <Route
+                path='list'
+                element={<CafeListPage
+                  check={check}
+                  setCheck={setCheck}
+                  inputvalue={inputvalue}
+                  setInputvalue={setInputvalue} />} />
               <Route path='detail/:cafeId' element={<CafeDetailPage />} />
               <Route path='notice/detail/:boardId' element={<NoticeDetailPage />} />
               <Route path='review/:cafeId' element={<CafeReviewWritePage />} />

@@ -6,9 +6,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { adjustTextareaHeight } from '../../../apis/util/textAreaUtil';
 import { useMutation, useQueryClient } from 'react-query';
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
-import StarRating from '../../../components/StarRating/StarRating';
-import BackButton from '../../../components/BackButton/BackButton';
 import { showToast } from "../../../apis/util/SweetAlert2/Toast/Toast";
+import BackButton from '../../../components/BackButton/BackButton';
+import StarRating from '../../../components/StarRating/StarRating';
 
 const categories = [
     { value: 1, label: '인테리어가 멋져요' },
@@ -26,10 +26,11 @@ function CafeReviewWritePage(props) {
     const params = useParams();
     const cafeId = params.cafeId;
     const location = useLocation();
-    const MAX_LENGTH = 400;
     const { cafeDetail } = location.state || {};
+    const MAX_LENGTH = 400;
     const textareaRef = useRef(null);
     const queryClient = useQueryClient();
+
     const [isClick, setisClick] = useState([false, false, false, false, false]);
     const [score, setScore] = useState(0);
     const [selectedCategory, setSelectedCategory] = useState([]);
@@ -71,10 +72,10 @@ function CafeReviewWritePage(props) {
 
     const handleCategoryOnClick = (category) => {
         setSelectedCategory(prevCategories => {
-            if (prevCategories.includes(category)) {
-                return prevCategories.filter(c => c !== category);
+            if (prevCategories.includes(category)) { // 기존 카테고리 배열에 지금 선택한 카테고리가 포함되어 있으면
+                return prevCategories.filter(c => c !== category); // 지금 선택한 카테고리를 제외한 카테고리 배열을 생성
             } else {
-                return [...prevCategories, category];
+                return [...prevCategories, category]; // 기존 카테고리 배열에 지금 선택한 카테고리가 포함되어 있지 않으면 배열에 추가
             }
         });
     };

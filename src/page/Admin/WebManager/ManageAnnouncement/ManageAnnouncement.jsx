@@ -59,7 +59,7 @@ function ManageAnnouncement(props) {
           </div>
         </div>
         <div css={s.button}>
-          <button onClick={() => handleSubmit(userId)}>공지사항 보내기</button>
+          <button onClick={() => handleSubmit(userId)}>알림 보내기</button>
         </div>
       </form>
     </div>

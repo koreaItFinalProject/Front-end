@@ -4,14 +4,16 @@ export const layoutStyle = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 10px;
     width: 100%;
     height: 100%;
 `;
 
 export const twinboard = css`
-    width: 100%;
     display: flex;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 100%;
 `;
 
 export const rowStyle = css`
@@ -19,6 +21,8 @@ export const rowStyle = css`
     flex-direction: row;
     width: 100%;
     height: 100%;
+    margin-right: 10px;
     border: 1px solid #191919;
+    border-radius: 20px;
 `;
 
