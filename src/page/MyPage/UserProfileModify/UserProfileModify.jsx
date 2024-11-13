@@ -32,12 +32,16 @@ function UserProfileModify({ user }) {
         console.log("이메일 체크" + emailCheck);
         if (emailCheck !== '') {
             if (emailNumber == emailCheck) {
-                confirmAlert("인증성공");
                 setTimer(0);
                 setEmailCheckState(false);
                 setIsTimerStopped(true);
                 setIsTimerRunning(false);
+                if (isEmptyAndIsEqualsCheckFieldValue(inputUser.email, modifyUser.email)) {
+                    return;
+                }
+                duplicatedCheck("email", modifyUser.email);
             }
+            confirmAlert("변경 성공");
             if (emailNumber != emailCheck) {
                 confirmAlert("인증번호가 일치하지 않습니다.");
             }
@@ -182,7 +186,7 @@ function UserProfileModify({ user }) {
                                 name='phoneNumber'
                                 value={modifyUser.phoneNumber}
                                 onChange={handleInputOnChange(setModifyUser)} placeholder='전화번호' />
-                            <button name='phoneNumber'onClick={handleModifyFiledValue}>확인</button>
+                            <button name='phoneNumber' onClick={handleModifyFiledValue}>확인</button>
                         </div>
                     </div>
                 </div>

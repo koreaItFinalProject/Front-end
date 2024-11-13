@@ -1,11 +1,11 @@
 import { useQuery } from "react-query"
 import { instance } from "../util/instance"
 
-export const useCafeNoticeListQuery = (ownerId) => {
+export const useCafeNoticeListQuery = () => {
     return useQuery(
         ["cafeNoticeListQuery"],
         async () => {
-            const noticeList = await instance.get(`/board/notice/${ownerId}`);
+            const noticeList = await instance.get(`/board/notice`);
             return noticeList.data;
         },
         {

@@ -172,7 +172,7 @@ function CafeOwnerMyPage(props) {
                         <UserProfileModify user={infoBoard?.user} />
                         :
                         check === "post" ?
-                            <NoticeBoard board={infoBoard?.board} />
+                            <NoticeBoard board={freePosts} />
                             :
                             check === "comment" ?
                                 <CommentBoard comment={infoBoard?.boardComment} />
