@@ -380,6 +380,7 @@ react-daum-postcode | 다음 주소 API |
 ![API 명세서](https://github.com/user-attachments/assets/44fbadc4-7f20-4fa5-ad94-b91b7daba382)
 
 ### 📐 ERD 설계도
+![CafeInBusan ERD](https://github.com/user-attachments/assets/0e98cf92-58bd-48c9-aebd-4b46a9a5c362)
 
 
 ## 📋 메뉴 구조도
