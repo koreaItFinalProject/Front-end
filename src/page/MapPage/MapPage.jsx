@@ -102,7 +102,7 @@ function MapPage({ check, setCheck, inputvalue, setInputvalue }) {
                         </svg>
                     </button>
                     <div css={s.cafeInfo(slide)} onClick={() => handleCafeSlideClick(cafe[currentCafeIndex]?.id)}>
-                        {cafe?.length > 0 ? (
+                        {cafe?.length > 0 && cafe[currentCafeIndex]?.img ? (
                             <>
                                 <div css={s.pictureBox}>
                                     <img src={cafe[currentCafeIndex]?.img} alt="" />

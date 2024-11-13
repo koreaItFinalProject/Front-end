@@ -104,7 +104,7 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
                 }
             </div>
             {
-                cafeDetail?.reviews.map((reviewItem, index) =>
+                cafeDetail?.reviewCount > 0 && cafeDetail?.reviews.map((reviewItem, index) =>
                     <div key={index} css={s.review}>
                         <div css={s.reviewInfo}>
                             <div css={s.profileImg}>

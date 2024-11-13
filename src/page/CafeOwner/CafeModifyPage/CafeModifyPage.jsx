@@ -32,9 +32,9 @@ function CafeModifyPage(props) {
 
     const { data: cafeDetail, refetch } = useCafeDetailQuery(cafeId);
     const { data: cafeLike, refetch: refetchCafeLike } = useCafeLikeQuery(cafeId);
-    const { data: cafeNoticeList } = useCafeNoticeListQuery(cafeDetail?.ownerId, {
-        enabled: !!cafeDetail?.ownerId, // ownerId가 존재할 때만 쿼리 실행
-    });
+    let { data: cafeNoticeList } = useCafeNoticeListQuery();
+
+    console.log(cafeDetail);
 
     useEffect(() => {
         if (cafeDetail) {
