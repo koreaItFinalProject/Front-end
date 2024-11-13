@@ -70,7 +70,6 @@
 - 프로젝트 진행상황 점검 및 일정 조율
 - 전체적인 페이지 CSS 디자인
 - GitHub ReadMe 작성
-- PPT 제작
   
 <h3> 팀원: 김병규 </h3>
 
@@ -107,6 +106,7 @@
 - ERD 명세서 작성
 - 팀원 작업 백업
 - 프로젝트 최종 발표
+- PPT 제작
 
 <br/>
 <br/>
@@ -337,7 +337,6 @@
 | 모듈 이름                                                                   | 용도                                       |
 | --------------------------------------------------------------------------- | ------------------------------------------ |
 | emotion/react, emotion/styled                                               | 리액트 내 css 적용                         |
-| react-google-maps/api                                                       | 구글 맵을 불러와 화면에 구현               |
 | testing-library/jest-dom, testing-library/react, testing-library/user-event | 리액트 dom 테스트                          |
 | axios                                                                       | 서버로 요청을 보내 통신                    |
 | firebase                                                                    | 저장된 이미지를 업로드                     |
@@ -381,15 +380,7 @@ react-daum-postcode | 다음 주소 API |
 ![API 명세서](https://github.com/user-attachments/assets/44fbadc4-7f20-4fa5-ad94-b91b7daba382)
 
 ### 📐 ERD 설계도
-### 메인 ERD
-![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/c801a0ff-7d47-47dd-9575-d18b380a7062)
-### 쇼핑몰 사용자 & 관리자 ERD
-![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/6d0b087e-9c72-464c-9f4e-000d6512dbba)
-![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/8aae4322-5ed7-4465-9026-a9313bd69d9a)
-### 분양 게시판 ERD
-![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/fc913ef8-ddc1-469a-b09e-6df0da7479e0)
-### 커뮤니티 게시판 ERD
-![ERD 설계도](https://github.com/compositivePetProject/compositive_pet_project_front/assets/118997608/2a082a4b-d374-42de-affc-dc0784735860)
+
 
 ## 📋 메뉴 구조도
 ### 메인페이지(사용자)
@@ -423,7 +414,6 @@ react-daum-postcode | 다음 주소 API |
 
 ### 비밀번호 찾기
 ![비밀번호 찾기-수정](https://github.com/user-attachments/assets/87de8876-320e-437c-affe-e0d4ca8593e0)
-
 
 
 
@@ -484,9 +474,8 @@ react-daum-postcode | 다음 주소 API |
 
 ## 💡 느낀점
 ### 김동인
-- 팀 프로젝트에서 팀장으로 참여하면서 프로젝트의 전반적인 이해도를 갖추며 팀원들의 작업 분담 및 개발 프로세스의 원할한 진행을 위한 커뮤니케이션의 중요성에 생각해 보게 되었습니다. 이러한 과정에서 발생하는 다양한 이슈들을 효과적으로 관리하고 해결하기 위해 팀원들과 지속적으로 소통하고 협력하였습니다. 이를 통해 커뮤니케이션의 중요성과 효과적인 의사소통이 팀의 성과에 큰 영향을 미치는 것을 몸소 체험하였습니다.
-- 개발 간 코드의 유지보수성과 확장성을 향상시키는 모듈화 및 클린코드에 대해 깊이 생각해보게 되는 경험이 되었고, 다음 프로젝트 때에는 더 효율적인 코드작성으로 개발자로써의 역량을 더욱 높이겠다는 다짐을 하였습니다.
-- 이번 프로젝트에서 관리자의 쇼핑몰 재고관련 기능을 담당하여 코드 로직을 구성하면서 개발 역량 이외에도 프로젝트 주제에 관련한 여러 배경지식들에 대한 공부들도 필요하다고 느꼈습니다.
+- 프로젝트를 하면서 가장 크게 느낀점은 프로젝트 초반에 요구사항, 디자인, API, ERD 등의 프로젝트 전반적인 기초를 단단히 잡고 시작해야 한다는 점이었습니다.  이번 프로젝트는 기획이 충분히 되지 않은 상태로 기능 개발을 시작해서 프로젝트 중간에 헤메고 다시 요구사항을 정리하며 시간을 많이 낭비한 것 같습니다.  다음 프로젝트는 기획단계에서 충분한 시간을 가지고 프로젝트 기초를 더 탄탄하게 다지고 개발에 들어가야 한다는 것을 배웠습니다.
+- 프로젝트를 진행하면서 코드를 수정할때 너무 복잡하고 가독성이 떨어지는 코드를 작성해서 불편한 점이 많았기 때문에 유지 보수성과 확장성이 좋은 효율적인 코드를 쓸 수 있도록 더 신경쓰고 노력해야겠다고 느꼈습니다.
 ---
 
 ### 김병규
