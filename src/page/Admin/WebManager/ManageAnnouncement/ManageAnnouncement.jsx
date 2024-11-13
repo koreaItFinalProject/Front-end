@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 function ManageAnnouncement(props) {
   const navigate = useNavigate();
   const [content, setNotice] = useState('');
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(0);
 
   const handleSubmit = async (id) => {
 
