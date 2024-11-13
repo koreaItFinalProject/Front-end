@@ -71,6 +71,7 @@ function App() {
   useEffect(() => {
     setHistoryStack(prevStack => [...prevStack, location.pathname]);
   }, [location.pathname])
+
   const { data: boardList, fetchNextPage, hasNextPage, refetch } = useInfiniteQuery(
     ["boardListQuery", category],
     async ({ pageParam = 1 }) => await instance.get('/board/list', {
@@ -84,10 +85,10 @@ function App() {
     }),
     {
       getNextPageParam: (lastPage, allPage) => {
-        const totalPageCount = lastPage.data.totalCount % limit === 0
-          ? lastPage.data.totalCount / limit
-          : Math.floor(lastPage.data.totalCount / limit) + 1
-        return totalPageCount !== allPage.length ? allPage.length + 1 : null;
+        const totalPageCount = lastPage.data.totalCount % limit === 0 // totalCount를 limit로 나눴을때 나머지가 0인지 아닌지 판별하여 전체 페이지수가 정해진다.
+          ? lastPage.data.totalCount / limit // 나머지가 0일때 전체 페이지수는 totalCount를 limit로 나눈 수
+          : Math.floor(lastPage.data.totalCount / limit) + 1 // 나머지가 0이 아닐때 전체 페이지수는 totalCount에서 1을 더한 수
+        return totalPageCount !== allPage.length ? allPage.length + 1 : null; // 현재 allPage 배열의 길이가 전체 페이지의 길이보다 작으면 allPage에 1을 더하고 아닌경우 null을 리턴하여 무한스크롤이 구현됨
       },
       retry: 0,
       refetchOnWindowFocus: false,
