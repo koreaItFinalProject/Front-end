@@ -38,8 +38,6 @@ function CafeReviewModifyPage(props) {
         review: ""
     });
 
-    console.log(reviewItem, cafeDetail);
-
     useEffect(() => {
         adjustTextareaHeight(textareaRef.current);
     }, []);

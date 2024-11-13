@@ -77,7 +77,6 @@ export const stat = css`
 export const category = css`
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
     margin-bottom: 10px;

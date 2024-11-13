@@ -29,12 +29,12 @@ function ManagerDashBoardPage(props) {
         },
         {
             retry: 0,
-            refetchOnWindowFocus: true,
+            refetchOnWindowFocus: false,
             onSuccess: response => {
                 setInfo(response.data);
                 console.log(response + "!!");
             },
-            onError: response => {
+            onError: () => {
                 confirmAlert("정보를 가져오지 못했습니다")
             }
         }

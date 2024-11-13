@@ -81,7 +81,7 @@ function ManagerManagementPage(props) {
         <div css={s.mainLayout}>
             <div css={s.selectbutton(role)}>
                 <button value={"user"} onClick={handleRoleOnClick}>일반 회원</button>
-                <button value={"owner"} onClick={handleRoleOnClick}>기업 회원</button>
+                <button value={"owner"} onClick={handleRoleOnClick}>점주 회원</button>
             </div>
             <div css={s.listContainer}>
                 <table css={s.userList}>

@@ -16,8 +16,8 @@ function CafeReview({ cafeDetail, refetchCafeDetail }) {
     const queryClient = useQueryClient();
     const userInfoData = queryClient.getQueryData("userInfoQuery");
     const totalCount = cafeDetail?.reviewCount || 1; // 전체 리뷰 개수
-    const maxCount = cafeDetail?.reviewCategoryCounts ? Math.max(...cafeDetail.reviewCategoryCounts.map(category => category.categoryCount)) : 0;
     const sortedCategories = cafeDetail?.reviewCategoryCounts ? [...cafeDetail.reviewCategoryCounts].sort((a, b) => b.categoryCount - a.categoryCount) : [];
+
     const deleteReviewMutation = useMutation(
         async (reviewId) => await instance.delete(`/review/${reviewId}`),
         {

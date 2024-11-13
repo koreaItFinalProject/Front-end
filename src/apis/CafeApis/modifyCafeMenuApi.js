@@ -7,7 +7,6 @@ export const useModifyCafeMenuMutation = () => {
     const queryClient = useQueryClient();
     return useMutation(
         async (menuImgData) => {
-            console.log(menuImgData);
             await instance.put(`/cafe/menu/${menuImgData.cafeId}`, menuImgData);
         },
         {
@@ -23,4 +22,4 @@ export const useModifyCafeMenuMutation = () => {
             }
         }
     )
- }
+}

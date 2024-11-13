@@ -160,11 +160,9 @@ function CafeOwnerMyPage(props) {
                     <FiLogOut />
                     <p>로그아웃</p>
                 </div>
-                <div css={s.menu}>
-                    <button onClick={handleOnWithdrawClick}>
-                        <ImExit />
-                        <p>회원 탈퇴</p>
-                    </button>
+                <div css={s.menu} onClick={handleOnWithdrawClick}>
+                    <ImExit />
+                    <p>회원 탈퇴</p>
                 </div>
             </div>
             <ReactModal isOpen={isOpen} check={check} infoBoard={infoBoard[check]} style={s.modalStyles}>

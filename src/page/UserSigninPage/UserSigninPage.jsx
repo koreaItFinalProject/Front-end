@@ -29,6 +29,7 @@ function UserSigninPage(props) {
     })
 
     const handleOnLoginClick = async () => {
+        console.log(inputUser);
         const signinData = await usersignInApi(inputUser);
         if (!signinData.isSuccess) {
             const newFieldErrors = showFieldErrorMessage(signinData.error);
