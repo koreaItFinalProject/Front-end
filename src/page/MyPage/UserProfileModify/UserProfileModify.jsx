@@ -39,7 +39,7 @@ function UserProfileModify({ user }) {
                 if (isEmptyAndIsEqualsCheckFieldValue(inputUser.email, modifyUser.email)) {
                     return;
                 }
-                duplicatedCheck("email", modifyUser.email);
+                await duplicatedCheck("email", modifyUser.email);
             }
             confirmAlert("변경 성공");
             if (emailNumber != emailCheck) {
