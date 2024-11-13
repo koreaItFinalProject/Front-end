@@ -65,7 +65,7 @@ function Footer({ setCheck, setInputvalue }) {
             <button css={s.menuButton(pathname.startsWith("/map"))} onClick={handleMapClick}><FaMap /></button>
             <button css={s.menuButton(pathname.startsWith("/cafe"))} onClick={handleListClick}><FaList /></button>
             <button css={s.menuButton(pathname.startsWith("/board"))} onClick={handleBoardClick}><BsChatLeftTextFill /></button>
-            <button css={s.menuButton(pathname.includes("/mypage"))} onClick={handleMyPageOnClick}><FaUserLarge /></button>
+            <button css={s.menuButton(pathname.includes("/user" ) || pathname.includes("/mypage"))} onClick={handleMyPageOnClick}><FaUserLarge /></button>
         </div>
     );
 }

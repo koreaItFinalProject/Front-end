@@ -7,13 +7,18 @@ import useGetComments from '../../../apis/CommentApis/getCommentsApi';
 import useModifyCommentMutation from '../../../apis/CommentApis/modifyCommentApi';
 import { useQueryClient } from 'react-query';
 import { confirmAlert } from '../../../apis/util/SweetAlert2/ConfirmAlert/ConfirmAlert';
+import { useParams } from 'react-router-dom';
 
-function BoardFooter({ mode, setMode, boardId, commentData, setCommentData, replyTo, setReplyTo }) {
+function BoardFooter({ mode, setMode, commentData, setCommentData, replyTo, setReplyTo }) {
+    const params = useParams();
+    const boardId = params.boardId;
     const queryClient = useQueryClient();
     const userInfo = queryClient.getQueryData("userInfoQuery");
     const comments = useGetComments(boardId);
     const writeCommentMutation = useWriteCommentMutation(commentData, setCommentData, comments, boardId);
     const modifyCommentMutation = useModifyCommentMutation(commentData, setCommentData, comments);
+
+    console.log(boardId);
 
     const handleCommentInputOnChange = (e) => {
         setCommentData(comment => ({

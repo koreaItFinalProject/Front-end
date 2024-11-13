@@ -11,7 +11,7 @@ export const layout = css`
 `;
 
 export const menuButton = (isSelected) => css`
-  box-sizing: border-box;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
