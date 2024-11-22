@@ -1,8 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import * as s from "./style";
 import { useEffect, useRef } from 'react';
-import 'swiper/css'
-import 'swiper/css/pagination';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient } from "react-query";
 import BoardList from "../../../components/Board/BoardList/BoardList";
