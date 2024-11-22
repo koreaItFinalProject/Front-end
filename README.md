@@ -331,6 +331,7 @@
 | spring-boot-starter-oauth2-client   | Oauth2 인증(Naver, Kakao, Google)     |
 | spring-boot-starter-aop             | spring aop 적용                       |
 | spring-boot-starter-mail            | JavaMailSender를 활용하여 이메일 전송  |
+| spring-boot-starter-oauth2-client   | 소셜 로그인(네이버, 카카오, 구글) 구현  |
 
 ### node_modules(Front-end)
 
