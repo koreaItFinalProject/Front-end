@@ -343,7 +343,6 @@
 | react-dom, react-router-dom                                                 | 주소 요청 발생 시 각 페이지로 이동         |
 | react-icons                                                                 | 리액트 아이콘을 불러와 사용                |
 | react-query                                                                 | 서버 데이터 동기화(fetching, caching) 지원 |
-| react-select                                                                | select 요소를 쉽게 사용                    |
 | react, react-scripts                                                        | 리액트 라이브러리 적용                     |
 | recoil                                                                      | 전역 상태 관리                             |
 | styled-reset                                                                | 초기 CSS 스타일 재설정                     |
